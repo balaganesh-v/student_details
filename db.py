@@ -42,7 +42,7 @@ def insert_student(student):
     connection = db_connection()
     if not connection:
         print("Database connection failed.")
-        return
+        return 0
 
     try:
         with connection.cursor() as cursor:
@@ -63,3 +63,60 @@ def insert_student(student):
         print(f"Error inserting student: {e}")
     finally:
         connection.close()
+
+
+def insert_studentDetails(exam):
+    query="""INSERT INTO exam_table 
+    (exam_name,exam_code,class) VALUES (%s,%s,%s) """
+
+    connection = db_connection()
+    if not connection:
+        print("Database connection failed.")
+        return 
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(query,(
+                exam.get('exam_name'),
+                exam.get('exam_code'),
+                exam.get('class_name')
+            ))
+        connection.commit()
+        print("Exam Info Details inserted Successfully.")
+    except Exception as e:
+        print(f"Error inseting info details:{e}")
+    finally:
+        connection.close()
+
+
+
+def publishdetails(exam_details, exam_name, exam_code, class_name):
+    connection = db_connection()  # Your function to get MySQL connection
+    if connection:
+        try:
+            with connection.cursor() as cursor:
+                # Insert into the main exam_table
+                query_exam = """
+                    INSERT INTO exam_table (exam_name, exam_code, class_name)
+                    VALUES (%s, %s, %s)
+                """
+                cursor.execute(query_exam, (exam_name, exam_code, class_name))
+
+                # Insert multiple rows into exam_subjects_table
+                query_subjects = """
+                    INSERT INTO exam_subjects_table (exam_code, subject_name, exam_date, exam_time, marks)
+                    VALUES (%s, %s, %s, %s, %s)
+                """
+                subjects_data = [
+                    (exam_code, item['subject_name'], item['exam_date'], item['exam_time'], item['marks'])
+                    for item in exam_details
+                ]
+                cursor.executemany(query_subjects, subjects_data)
+
+                connection.commit()
+
+        except Exception as e:
+            print(f"Error inserting exam details: {e}")
+            connection.rollback()
+        finally:
+            connection.close()
