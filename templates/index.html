@@ -98,21 +98,46 @@
                 </div>
                 <!-- <span class="badge bg-primary rounded-pill">{{ student.place }}</span> -->
                 <div>
-                  <a class="btn btn-sm btn-warning me-1">Edit</a>
-                  <a  class="btn btn-sm btn-danger">Delete</a>
+                  <form action="/edit_student/{{student.student_id}}" method="post"
+                    style="display:inline;">
+                    <button type="submit" class="btn btn-sm btn-success">Edit</button>
+                  </form>
+                  <form action="{{ url_for('delete_student', student_id=student.student_id) }}" method="post"
+                    style="display:inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                  </form>
                 </div>
               </li>
               {% else %}
               <li class="list-group-item text-muted">No students found.</li>
               {% endfor %}
+            </div>
           </ul>
         </div>
       </div>
 
-      <!-- Middle Section: Empty Box -->
+      <a href="/exam" >Exam results</a>
+      <!-- Middle Section: Student Details -->
       <div class="col-md-4">
-        <div class="equal-section empty-box">
-          Empty Section
+        <div class="equal-section">
+          {% if selected_student %}
+          <h5 class="text-primary mb-3">Student Details</h5>
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Name:</strong> {{ selected_student['student_name'] }}</li>
+            <li class="list-group-item"><strong>ID:</strong> {{ selected_student.student_id }}</li> </li>
+            <li class="list-group-item"><strong>Father's Name:</strong> {{ selected_student.father_name or '-' }}</li>
+            <li class="list-group-item"><strong>Mother's Name:</strong> {{ selected_student.mother_name or '-' }}</li>
+            <li class="list-group-item"><strong>Age:</strong> {{ selected_student.student_age or '-' }}</li>
+            <li class="list-group-item"><strong>Father's Phone:</strong> {{ selected_student.fatherphone or '-' }}</li>
+            <li class="list-group-item"><strong>Mother's Phone:</strong> {{ selected_student.motherphone or '-' }}</li>
+            <li class="list-group-item"><strong>Place:</strong> {{ selected_student.place or '-' }}</li>
+            <li class="list-group-item"><strong>Address:</strong> {{ selected_student.address or '-' }}</li>
+          </ul>
+          {% else %}
+          <div class="empty-box d-flex align-items-center justify-content-center h-100 text-muted fst-italic">
+            Select a student to view details.
+          </div>
+          {% endif %}
         </div>
       </div>
 
