@@ -91,7 +91,12 @@ def edit_student(student_id):
             print(f"Error fetching students: {e}")
         finally:
             connection.close()
-    return render_template("index.html",selected_student=selected_student,students=students)
+        print(selected_student)
+    if selected_student:
+        return jsonify(selected_student)
+    else:
+        return jsonify({'error': 'Student not found'}), 404
+
 
 
 @app.route('/exam')

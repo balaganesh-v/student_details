@@ -98,9 +98,8 @@
                 </div>
                 <!-- <span class="badge bg-primary rounded-pill">{{ student.place }}</span> -->
                 <div>
-                  <form action="/edit_student/{{student.student_id}}" method="post"
-                    style="display:inline;">
-                    <button type="submit" class="btn btn-sm btn-success">Edit</button>
+                  <form  method="post" style="display:inline;"></form>
+                    <button type="submit" onclick="selectStudent('{{ student.student_id }}')" class="btn btn-sm btn-success">Edit</button>
                   </form>
                   <form action="{{ url_for('delete_student', student_id=student.student_id) }}" method="post"
                     style="display:inline;">
@@ -119,25 +118,8 @@
       <a href="/exam" >Exam results</a>
       <!-- Middle Section: Student Details -->
       <div class="col-md-4">
-        <div class="equal-section">
-          {% if selected_student %}
-          <h5 class="text-primary mb-3">Student Details</h5>
-          <ul class="list-group">
-            <li class="list-group-item"><strong>Name:</strong> {{ selected_student['student_name'] }}</li>
-            <li class="list-group-item"><strong>ID:</strong> {{ selected_student.student_id }}</li> </li>
-            <li class="list-group-item"><strong>Father's Name:</strong> {{ selected_student.father_name or '-' }}</li>
-            <li class="list-group-item"><strong>Mother's Name:</strong> {{ selected_student.mother_name or '-' }}</li>
-            <li class="list-group-item"><strong>Age:</strong> {{ selected_student.student_age or '-' }}</li>
-            <li class="list-group-item"><strong>Father's Phone:</strong> {{ selected_student.fatherphone or '-' }}</li>
-            <li class="list-group-item"><strong>Mother's Phone:</strong> {{ selected_student.motherphone or '-' }}</li>
-            <li class="list-group-item"><strong>Place:</strong> {{ selected_student.place or '-' }}</li>
-            <li class="list-group-item"><strong>Address:</strong> {{ selected_student.address or '-' }}</li>
-          </ul>
-          {% else %}
-          <div class="empty-box d-flex align-items-center justify-content-center h-100 text-muted fst-italic">
-            Select a student to view details.
-          </div>
-          {% endif %}
+        <div id="editStudent" class="equal-section">
+          
         </div>
       </div>
 
@@ -206,6 +188,30 @@
 
     </div>
   </div>
+  <script> 
+    function selectStudent(student_id){
+      fetch(`/edit_student/${student_id}`)
+
+        .then(response => response.json())
+        .then(data => {
+          const select_student = document.getElementById('editStudent');
+          select_student.innerHTML = `
+          <h5 class="text-primary mb-3">Student Details</h5>
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Name:</strong> ${data['student_name']}</li>
+            <li class="list-group-item"><strong>ID:</strong> ${data['student_id'] }</li> </li>
+            <li class="list-group-item"><strong>Father's Name:</strong> ${data['father_name']}</li>
+            <li class="list-group-item"><strong>Mother's Name:</strong> ${data['mother_name']}</li>
+            <li class="list-group-item"><strong>Age:</strong> ${data['student_age']}</li>
+            <li class="list-group-item"><strong>Father's Phone:</strong>${data['fatherphone']}</li>
+            <li class="list-group-item"><strong>Mother's Phone:</strong>${data['motherphone']}</li>
+            <li class="list-group-item"><strong>Place:</strong>${data['place']}</li>
+            <li class="list-group-item"><strong>Address:</strong>${data['address']}</li>
+          </ul>`;
+        })
+        .catch(error => console.error('Error loading subjects:', error));
+      }
+  </script>
 </body>
 
 </html>
