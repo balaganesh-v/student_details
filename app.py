@@ -3,6 +3,7 @@ from db import students_information, delete_detail, select_student, get_subjects
 import cloudinary,cloudinary.uploader
 from dotenv import load_dotenv
 import os
+from sample_record.load_test_record import load_students_record
 
 load_dotenv()
 
@@ -15,7 +16,7 @@ def cloudinary_config():
         api_key=os.getenv('API_KEY'),
         api_secret=os.getenv('API_SECRET')
     )
-
+    
 cloudinary_config()
     
 @app.route('/')
@@ -90,4 +91,6 @@ def publish():
     return render_template("exam.html", exam_details=[])
 
 if __name__ == '__main__':
+    load_students_record()
     app.run(debug=True)
+    
