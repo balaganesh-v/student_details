@@ -1,0 +1,14 @@
+
+<------- Daily Tasks to Complete this Work ------->
+
+1. move all the db connections and query execution to db.py (3 hrs)
+
+2. upload image to a third party and store the image's url after storing it to cloud/third party. (6 hrs)
+
+3. Load sample records from json file. (6 hrs)
+
+4. Should have pass a argument while running app.py wehther to run with load_records or not. (2 hrs)
+
+5. Implement Pagination for students details. (2 days)
+
+6. Fix the edit student details(If you finish above tasks do it in this weekend)

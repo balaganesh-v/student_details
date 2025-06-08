@@ -127,9 +127,13 @@
       <div class="col-md-4">
         <div class="equal-section">
           <h4 class="text-primary mb-3">Register Student</h4>
-          <form action="/register" method="POST">
+          <form action="/register" method="POST" enctype="multipart/form-data">
 
             <div class="row mb-3">
+              <div class="col">
+                <label for="studentPhoto" class="form-label">Student Photo</label>
+                <input type="file" name="studentPhoto" class="form-control" required />
+              </div>
               <div class="col">
                 <label for="studentName" class="form-label">Student Name</label>
                 <input type="text" id="studentName" name="studentName" class="form-control" required />
@@ -198,8 +202,9 @@
           select_student.innerHTML = `
           <h5 class="text-primary mb-3">Student Details</h5>
           <ul class="list-group">
+            <li class="list-group-item"><strong>Studen Photo:</strong><img src="${data['image_url']}" width="300" ></li>
             <li class="list-group-item"><strong>Name:</strong> ${data['student_name']}</li>
-            <li class="list-group-item"><strong>ID:</strong> ${data['student_id'] }</li> </li>
+            <li class="list-group-item"><strong>ID:</strong> ${data['student_id'] }</li> 
             <li class="list-group-item"><strong>Father's Name:</strong> ${data['father_name']}</li>
             <li class="list-group-item"><strong>Mother's Name:</strong> ${data['mother_name']}</li>
             <li class="list-group-item"><strong>Age:</strong> ${data['student_age']}</li>
