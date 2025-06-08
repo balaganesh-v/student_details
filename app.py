@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from db import students_information, delete_detail, select_student, get_subjects, insert_student, publishdetails
+from sample_record.load_test_record import load_all_records
 import cloudinary,cloudinary.uploader
 from dotenv import load_dotenv
 import os
-from sample_record.load_test_record import load_students_record
+
 
 load_dotenv()
 
@@ -91,6 +92,6 @@ def publish():
     return render_template("exam.html", exam_details=[])
 
 if __name__ == '__main__':
-    load_students_record()
+    load_all_records()
     app.run(debug=True)
     
