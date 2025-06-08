@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 def db_connection():
     try:
         return pymysql.connect(
@@ -11,11 +12,12 @@ def db_connection():
             user=os.getenv("DB_USER"),
             password=os.getenv("DB_PASSWORD"),
             database=os.getenv("DB_NAME"),
-            cursorclass=pymysql.cursors.DictCursor
+            cursorclass=pymysql.cursors.DictCursor,
         )
     except Exception as e:
         print(f"Error connecting to DB: {e}")
         return None
+
 
 def students_information():
     connection = db_connection()
@@ -42,48 +44,60 @@ def insert_student(student):
                         student_age, fatherphone, motherphone, address, place, image_url )
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
-                cursor.execute(query, (
-                    student['student_name'],
-                    student['student_id'],
-                    student['father_name'],
-                    student['mother_name'],
-                    student['student_age'],
-                    student['fatherPhone'],
-                    student['motherPhone'],
-                    student['address'],
-                    student['place'],
-                    student['image_url']
-                ))
+                cursor.execute(
+                    query,
+                    (
+                        student["student_name"],
+                        student["student_id"],
+                        student["father_name"],
+                        student["mother_name"],
+                        student["student_age"],
+                        student["fatherPhone"],
+                        student["motherPhone"],
+                        student["address"],
+                        student["place"],
+                        student["image_url"],
+                    ),
+                )
                 connection.commit()
         except Exception as e:
             print(f"Error inserting student: {e}")
         finally:
             connection.close()
 
+
 def delete_detail(student_id):
     connection = db_connection()
     if connection:
         try:
             with connection.cursor() as cursor:
-                cursor.execute("DELETE FROM students_information WHERE student_id = %s", (student_id,))
+                cursor.execute(
+                    "DELETE FROM students_information WHERE student_id = %s",
+                    (student_id,),
+                )
                 connection.commit()
         except Exception as e:
             print(f"Error deleting student: {e}")
         finally:
             connection.close()
 
+
 def select_student(student_id):
     connection = db_connection()
     if connection:
         try:
             with connection.cursor() as cursor:
-                cursor.execute("SELECT * FROM students_information WHERE student_id = %s", (student_id,))
+                cursor.execute(
+                    "SELECT * FROM students_information WHERE student_id = %s",
+                    (student_id,),
+                )
                 return cursor.fetchone()
         except Exception as e:
             print(f"Error fetching student: {e}")
         finally:
             connection.close()
     return None
+
 
 def get_subjects():
     connection = db_connection()
@@ -92,7 +106,7 @@ def get_subjects():
             with connection.cursor() as cursor:
                 cursor.execute("SELECT subject_name FROM subjects_table")
                 result = cursor.fetchall()
-                return [row['subject_name'] for row in result]
+                return [row["subject_name"] for row in result]
         except Exception as e:
             print(f"Error fetching subjects: {e}")
         finally:
@@ -105,17 +119,26 @@ def publishdetails(exam_details, exam_name, exam_code, class_name):
     if connection:
         try:
             with connection.cursor() as cursor:
-                cursor.execute("""
+                cursor.execute(
+                    """
                     INSERT INTO exam_table (exam_name, exam_code, class_name)
                     VALUES (%s, %s, %s)
-                """, (exam_name, exam_code, class_name))
+                """,
+                    (exam_name, exam_code, class_name),
+                )
 
                 query_subjects = """
                     INSERT INTO exam_subjects_table (exam_code, subject_name, exam_date, exam_time, marks)
                     VALUES (%s, %s, %s, %s, %s)
                 """
                 subjects_data = [
-                    (exam_code, item['subject_name'], item['exam_date'], item['exam_time'], item['marks'])
+                    (
+                        exam_code,
+                        item["subject_name"],
+                        item["exam_date"],
+                        item["exam_time"],
+                        item["marks"],
+                    )
                     for item in exam_details
                 ]
                 cursor.executemany(query_subjects, subjects_data)
@@ -124,3 +147,74 @@ def publishdetails(exam_details, exam_name, exam_code, class_name):
             print(f"Error inserting exam details: {e}")
         finally:
             connection.close()
+
+
+# clear students data
+# load students data from json
+# insert students data to db
+
+def students_record(students):
+    connection = db_connection()
+    with connection.cursor() as cursor:
+        cursor.execute("TRUNCATE TABLE students_information")
+        connection.commit()
+        query = """
+            INSERT INTO students_information (student_name, student_id, father_name, mother_name,
+            student_age, fatherphone, motherphone, address, place, image_url )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        values = [
+            (
+                student["student_name"],
+                student["student_id"],
+                student["father_name"],
+                student["mother_name"],
+                student["student_age"],
+                student["fatherphone"],
+                student["motherphone"],
+                student["address"],
+                student["place"],
+                student["image_url"],
+            )
+            for student in students
+        ]
+        cursor.executemany(query, values)
+        connection.commit()
+
+
+# clear exams data
+# load exams data from json
+# insert exams data to db
+
+def exams_record(exam_lists):
+    connection = db_connection()
+    with connection.cursor() as cursor:
+        # Delete the previous values in the database
+        cursor.execute(" TRUNCATE TABLE exam_table;")
+        connection.commit()
+        # Insert the New values in the Database
+        exam_query = """ INSERT INTO exam_table (exam_name, exam_code, class_name) VALUES (%s, %s, %s)"""
+        exam_values = [
+            (item["exam_name"], item["exam_code"], item["class_name"])
+            for item in exam_lists.get("exam_table", [])
+        ]
+        cursor.executemany(exam_query, exam_values)
+        connection.commit()
+
+        # Delete the Previous values in the Database
+        cursor.execute(" TRUNCATE TABLE exam_subjects_table; ")
+        connection.commit()
+
+        # Insert the New values in the Database
+        exam_subjects_query = """ INSERT INTO exam_subjects_table (exam_code, subject_name, exam_date, exam_time, marks) VALUES (%s, %s, %s, %s, %s) """
+        exam_subjects_value = [
+            (
+                item["exam_code"],
+                item["subject_name"],
+                item["exam_date"],
+                item["exam_time"],
+                item["marks"],
+            )
+            for item in exam_lists.get("exam_subjects_table", [])
+        ]
+        cursor.executemany(exam_subjects_query, exam_subjects_value)
+        connection.commit()
