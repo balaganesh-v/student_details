@@ -98,9 +98,7 @@
                 </div>
                 <!-- <span class="badge bg-primary rounded-pill">{{ student.place }}</span> -->
                 <div>
-                  <form  method="post" style="display:inline;"></form>
-                    <button type="submit" onclick="selectStudent('{{ student.student_id }}')" class="btn btn-sm btn-success">Edit</button>
-                  </form>
+                  <button type="button" onclick="selectStudent('{{ student.student_id }}')" class="btn btn-sm btn-success">Edit</button>
                   <form action="{{ url_for('delete_student', student_id=student.student_id) }}" method="post"
                     style="display:inline;">
                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
@@ -110,16 +108,30 @@
               {% else %}
               <li class="list-group-item text-muted">No students found.</li>
               {% endfor %}
+              <div class="d-flex justify-content-center align-items-center gap-3 mt-4">
+                {% if page > 1 %}
+                <a href="{{ url_for('index', page=page-1) }}" class="btn btn-outline-primary btn-lg d-flex align-items-center">
+                  <span class="me-2 fs-4">&laquo;</span> Previous
+                </a>
+                {% endif %}
+                
+                <span class="fw-semibold">Page {{ page }} of {{ total_pages }}</span>
+                {% if page < total_pages %}
+                <a href="{{ url_for('index', page=page+1) }}" class="btn btn-outline-primary btn-lg d-flex align-items-center"> 
+                  Next <span class="ms-2 fs-4">&raquo;</span>
+                </a>
+                {% endif %}
+              </div>
             </div>
           </ul>
         </div>
       </div>
 
-      <a href="/exam" >Exam results</a>
+      <a href="/exam">Exam results</a>
       <!-- Middle Section: Student Details -->
       <div class="col-md-4">
         <div id="editStudent" class="equal-section">
-          
+
         </div>
       </div>
 
@@ -192,8 +204,8 @@
 
     </div>
   </div>
-  <script> 
-    function selectStudent(student_id){
+  <script>
+    function selectStudent(student_id) {
       fetch(`/edit_student/${student_id}`)
 
         .then(response => response.json())
@@ -204,7 +216,7 @@
           <ul class="list-group">
             <li class="list-group-item"><strong>Studen Photo:</strong><img src="${data['image_url']}" width="100" ></li>
             <li class="list-group-item"><strong>Name:</strong> ${data['student_name']}</li>
-            <li class="list-group-item"><strong>ID:</strong> ${data['student_id'] }</li> 
+            <li class="list-group-item"><strong>ID:</strong> ${data['student_id']}</li> 
             <li class="list-group-item"><strong>Father's Name:</strong> ${data['father_name']}</li>
             <li class="list-group-item"><strong>Mother's Name:</strong> ${data['mother_name']}</li>
             <li class="list-group-item"><strong>Age:</strong> ${data['student_age']}</li>
@@ -215,7 +227,7 @@
           </ul>`;
         })
         .catch(error => console.error('Error loading subjects:', error));
-      }
+    }
   </script>
 </body>
 

@@ -1,15 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from db import students_information, delete_detail, select_student, get_subjects, insert_student, publishdetails
 from sample_record.load_test_record import load_all_records
-import cloudinary,cloudinary.uploader
 from dotenv import load_dotenv
 import os
-
+import cloudinary,cloudinary.uploader
 
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
+
+exam_details = []  # ✅ Move this to the top before use
 
 def cloudinary_config():
     cloudinary.config(
@@ -17,21 +18,32 @@ def cloudinary_config():
         api_key=os.getenv('API_KEY'),
         api_secret=os.getenv('API_SECRET')
     )
-    
+
 cloudinary_config()
-    
+
 @app.route('/')
 def index():
     students = students_information() or []
-    return render_template("index.html", students=students)
+    page = request.args.get('page', 1, type=int)
+    per_page = 10
+    start = (page - 1) * per_page
+    end = start + per_page
+    total_pages = (len(students) + per_page - 1) // per_page
+    students = students[start:end]
+    
+    return render_template("index.html",students=students, total_pages=total_pages, page=page)
 
 @app.route('/register', methods=['POST'])
 def register():
     image = request.files.get('studentPhoto')
-    image_url=None
+    image_url = None
     if image:
-        upload_result=cloudinary.uploader.upload(image)
-        image_url=upload_result['secure_url']
+        try:
+            upload_result = cloudinary.uploader.upload(image)
+            image_url = upload_result.get('secure_url')
+        except Exception as e:
+            print(f"Image upload failed: {e}")
+            image_url = None
 
     student = {
         'student_name': request.form.get('studentName'),
@@ -68,7 +80,6 @@ def exam():
 def subjects():
     return jsonify(get_subjects())
 
-exam_details = []
 @app.route('/add', methods=['POST'])
 def add_exam():
     data = request.get_json()
@@ -94,4 +105,3 @@ def publish():
 if __name__ == '__main__':
     load_all_records()
     app.run(debug=True)
-    
