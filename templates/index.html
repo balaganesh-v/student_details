@@ -88,7 +88,7 @@
       <!-- Left Section: Student Info -->
       <div class="col-md-4">
         <div class="equal-section">
-          <h4 class="text-primary mb-3">Student Information</h4>
+          <h4 class="text-primary mb-3 text-center" style="font-size:23px; " >Student Information</h4>
           <ul class="list-group student-list">
             <div class="student_detail card-body p-0">
               {% for student in students %}
@@ -127,7 +127,10 @@
         </div>
       </div>
 
-      <a href="/exam">Exam results</a>
+      <div>
+        <a href="/exam" style="text-decoration: none;">Exam Registartion</a>
+      </div>
+
       <!-- Middle Section: Student Details -->
       <div class="col-md-4">
         <div id="editStudent" class="equal-section">
@@ -206,29 +209,100 @@
   </div>
   <script>
     function selectStudent(student_id) {
-      fetch(`/edit_student/${student_id}`)
-
+        fetch(`/edit_student/${student_id}`)
         .then(response => response.json())
         .then(data => {
-          const select_student = document.getElementById('editStudent');
-          select_student.innerHTML = `
-          <h5 class="text-primary mb-3">Student Details</h5>
-          <ul class="list-group">
-            <li class="list-group-item"><strong>Studen Photo:</strong><img src="${data['image_url']}" width="100" ></li>
-            <li class="list-group-item"><strong>Name:</strong> ${data['student_name']}</li>
-            <li class="list-group-item"><strong>ID:</strong> ${data['student_id']}</li> 
-            <li class="list-group-item"><strong>Father's Name:</strong> ${data['father_name']}</li>
-            <li class="list-group-item"><strong>Mother's Name:</strong> ${data['mother_name']}</li>
-            <li class="list-group-item"><strong>Age:</strong> ${data['student_age']}</li>
-            <li class="list-group-item"><strong>Father's Phone:</strong>${data['fatherphone']}</li>
-            <li class="list-group-item"><strong>Mother's Phone:</strong>${data['motherphone']}</li>
-            <li class="list-group-item"><strong>Place:</strong>${data['place']}</li>
-            <li class="list-group-item"><strong>Address:</strong>${data['address']}</li>
-          </ul>`;
+            const select_student = document.getElementById('editStudent');
+            select_student.innerHTML = `
+                <h4 class="text-primary mb-3 text-center" style="margin-top:20px;" >Edit Student Details</h3>
+                <form id="editForm" enctype="multipart/form-data" style="margin-top:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;" >
+                    <input type="hidden" name="student_id" value="${data['student_id']}">
+
+                    <!-- Display existing student photo -->
+                    <div class="mb-2  d-flex align-items-center" style="margin-left:-150px;">
+                        <label><strong>Student Photo : </strong></label>
+                        <img src="${data['image_url']}" width="150" height="150" style="border-radius: 10px;margin-left:10px">
+                        
+                    </div>
+                    <div class="mb-2 d-flex align-items-center"">
+                        <label><strong>Student Name : </strong></label>
+                        <input type="text" name="student_name" style="width:300px;margin-left:10px;" class="form-control" value="${data['student_name']}">
+                    </div>
+
+                    
+
+                    <div class="mb-2 d-flex align-items-center"">
+                        <label><strong>Father Name : </strong></label>
+                        <input type="text" name="father_name" style="width:300px;margin-left:20px;" class="form-control" value="${data['father_name']}">
+                    </div>
+
+                    <div class="mb-2 d-flex align-items-center"">
+                        <label><strong>Mother Name : </strong></label>
+                        <input type="text" name="mother_name" style="width:300px;margin-left:10px;" class="form-control" value="${data['mother_name']}">
+                    </div>
+
+                    <div class="mb-2 d-flex align-items-center"">
+                        <label><strong>student Age : </strong></label>
+                        <input type="number" name="student_age" style="width:300px;margin-left:22px;" class="form-control" value="${data['student_age']}">
+                    </div>
+
+                    <div class="mb-2 d-flex align-items-center"">
+                        <label><strong>Father Phone : </strong></label>
+                        <input type="text" name="fatherphone" style="width:300px;margin-left:15px;" class="form-control" value="${data['fatherphone']}">
+                    </div>
+
+                    <div class="mb-2 d-flex align-items-center"">
+                        <label><strong>Mother Phone : </strong></label>
+                        <input type="text" name="motherphone" style="width:300px;margin-left:6px;" class="form-control" value="${data['motherphone']}">
+                    </div>
+
+                    <div class="mb-2 d-flex align-items-center"">
+                        <label><strong>Place : </strong></label>
+                        <input type="text" name="place" style="width:300px;margin-left:74px;" class="form-control" value="${data['place']}">
+                    </div>
+
+                    <div class="mb-2 d-flex align-items-center"">
+                        <label><strong>Address : </strong></label>
+                        <input type="text" name="address" style="width:300px;margin-left:52px;" class="form-control" value="${data['address']}">
+                    </div>
+
+                    <div class="text-center">
+                        <button type="button" style="margin-top:15px;margin-bottom:15px " class="btn btn-primary" onclick="saveStudent()">Save</button>
+                    </div>
+                </form>
+            `;
         })
-        .catch(error => console.error('Error loading subjects:', error));
+        .catch(error => console.error('Error loading student:', error));
     }
-  </script>
+
+    function saveStudent() {
+      const form = document.getElementById('editForm');
+      const formData = new FormData(form);
+      const formObject = {};
+
+      formData.forEach((value, key) => {
+        formObject[key] = value;
+      });
+
+      fetch('/save_student', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formObject)
+      })
+      .then(response => {
+          if (!response.ok) {
+            alert("Error saving student");
+          }else{
+            return response.json();
+          }
+      })
+      .catch(error => console.error('Error saving student:', error));
+    }
+
+</script>
+
 </body>
 
 </html>

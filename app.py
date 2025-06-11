@@ -1,11 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-from db import students_information, delete_detail, select_student, get_subjects, insert_student, publishdetails
+from db import students_information, delete_detail, select_student, get_subjects, insert_student, publishdetails ,update
 from sample_record.load_test_record import load_all_records
-from dotenv import load_dotenv
-import os
 import cloudinary,cloudinary.uploader
-
-load_dotenv()
+import os
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'
@@ -18,7 +15,6 @@ def cloudinary_config():
         api_key=os.getenv('API_KEY'),
         api_secret=os.getenv('API_SECRET')
     )
-
 cloudinary_config()
 
 @app.route('/')
@@ -28,7 +24,7 @@ def index():
     per_page = 10
     start = (page - 1) * per_page
     end = start + per_page
-    total_pages = (len(students) + per_page - 1) // per_page
+    total_pages = (len(students) + per_page -1) // per_page
     students = students[start:end]
     
     return render_template("index.html",students=students, total_pages=total_pages, page=page)
@@ -101,6 +97,27 @@ def publish():
     publishdetails(exam_details, exam_name, exam_code, class_name)
     exam_details.clear()
     return render_template("exam.html", exam_details=[])
+
+
+@app.route('/save_student',methods=['PUT'])
+def Update_values():
+    try:
+        data = request.get_json()
+        student={
+            "student_name":data['student_name'],
+            "student_id":data['student_id'],
+            "father_name":data['father_name'],
+            "mother_name":data['mother_name'],
+            "student_age":data['student_age'],
+            "father_phone":data['fatherphone'],
+            "mother_phone":data['motherphone'],
+            "place":data['place'],
+            "address":data['address']
+        }
+        update(student)
+        return jsonify({"message": "Student updated successfully"}), 200  # <-- required
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     load_all_records()
