@@ -30,7 +30,7 @@ def students_information():
             print(f"Error fetching students: {e}")
         finally:
             connection.close()
-    return []
+    
 
 
 def insert_student(student):
@@ -158,7 +158,7 @@ def students_record(students):
     if connection:
         try:
             with connection.cursor() as cursor:
-                cursor.execute("TRUNCATE TABLE students_information")
+                cursor.execute("DELETE FROM students_information")
                 connection.commit()
                 query = """
                 INSERT INTO students_information (student_name, student_id, father_name, mother_name,
@@ -196,7 +196,7 @@ def exams_record(exam_lists):
         try:
             with connection.cursor() as cursor: 
                 #Delete the previous values in the database
-                cursor.execute(" TRUNCATE TABLE exam_table;")
+                cursor.execute(" DELETE FROM exam_table;")
                 connection.commit()
                 # Insert the New values in the Database
                 exam_query = """ INSERT INTO exam_table (exam_name, exam_code, class_name) VALUES (%s, %s, %s)"""
@@ -270,3 +270,21 @@ def update(student):
             print(f"Error : {e}")
         finally:
             connection.close()
+
+
+def reg_attendance(arr):
+    connection=db_connection()
+    if connection:
+        try:
+            with connection.cursor() as cursor:
+                query = """ INSERT INTO attendance ( student_id , attendance_date , attendance_status )
+                VALUES (%s , %s ,%s );"""
+                cursor.executemany(query,arr)
+                connection.commit()
+                print("Successfully Values are Updated")
+
+        except Exception as e:
+            print(f"Error:{e}")
+        finally:
+            connection.close()
+

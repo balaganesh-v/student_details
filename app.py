@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-from db import students_information, delete_detail, select_student, get_subjects, insert_student, publishdetails ,update
+from db import students_information, delete_detail, select_student, get_subjects, insert_student, publishdetails ,update,reg_attendance
 from sample_record.load_test_record import load_all_records
 import cloudinary,cloudinary.uploader
+from datetime import date
 import os
 
 app = Flask(__name__)
@@ -17,17 +18,22 @@ def cloudinary_config():
     )
 cloudinary_config()
 
-@app.route('/')
-def index():
-    students = students_information() or []
+def pagination(students):
     page = request.args.get('page', 1, type=int)
     per_page = 10
     start = (page - 1) * per_page
     end = start + per_page
     total_pages = (len(students) + per_page -1) // per_page
-    students = students[start:end]
-    
-    return render_template("index.html",students=students, total_pages=total_pages, page=page)
+    paginated_students = students[start:end]
+
+    return paginated_students,total_pages,page
+
+
+@app.route('/')
+def index():
+    students = students_information() or []
+    paginated_students, total_pages, page = pagination(students)
+    return render_template("index.html",students=paginated_students, total_pages=total_pages, page=page)
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -118,6 +124,47 @@ def Update_values():
         return jsonify({"message": "Student updated successfully"}), 200  # <-- required
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+
+@app.route('/attendance')
+def attendance():
+    students = students_information()
+    return render_template('attendance.html',students=students)
+
+
+@app.route('/register_attendance', methods=['POST', 'GET'])
+def register_attendance():
+    students = students_information()  # fetch students first
+
+    if request.method == 'POST':
+        try:
+            data = request.form.to_dict()
+            print(data)
+            arr = []
+            print(arr)
+            for key, value in data.items():
+                if key.startswith("attendance_"):
+                    student_id = int(key.replace("attendance_", ""))
+                    attendance_status = value
+                    today_date = date.today()
+                    today_date_str = today_date.strftime('%Y-%m-%d')
+                    arr.append((student_id, today_date_str, attendance_status))
+
+            # Call your function to insert attendance into DB
+            print(arr)
+            reg_attendance(arr)
+
+            # Optionally, you can show a success message here
+            return render_template("attendance.html", students=students)
+
+        except Exception as e:
+            print("Error:", e)
+            return "Something went wrong", 500
+
+    # For GET request
+    return render_template("attendance.html", students=students)
+
+
 
 if __name__ == '__main__':
     load_all_records()

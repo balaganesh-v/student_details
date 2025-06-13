@@ -116,6 +116,7 @@
                 {% endif %}
                 
                 <span class="fw-semibold">Page {{ page }} of {{ total_pages }}</span>
+
                 {% if page < total_pages %}
                 <a href="{{ url_for('index', page=page+1) }}" class="btn btn-outline-primary btn-lg d-flex align-items-center"> 
                   Next <span class="ms-2 fs-4">&raquo;</span>
@@ -131,6 +132,10 @@
         <a href="/exam" style="text-decoration: none;">Exam Registartion</a>
       </div>
 
+      <div>
+        <a href="/attendance" style="text-decoration:none;">Attendance</a>
+      </div>
+
       <!-- Middle Section: Student Details -->
       <div class="col-md-4">
         <div id="editStudent" class="equal-section">
@@ -143,7 +148,6 @@
         <div class="equal-section">
           <h4 class="text-primary mb-3">Register Student</h4>
           <form action="/register" method="POST" enctype="multipart/form-data">
-
             <div class="row mb-3">
               <div class="col">
                 <label for="studentPhoto" class="form-label">Student Photo</label>
@@ -200,11 +204,9 @@
             <div class="d-grid">
               <button type="submit" class="btn btn-primary">Save</button>
             </div>
-
           </form>
         </div>
       </div>
-
     </div>
   </div>
   <script>
@@ -220,39 +222,37 @@
 
                     <!-- Display existing student photo -->
                     <div class="mb-2  d-flex align-items-center" style="margin-left:-150px;">
-                        <label><strong>Student Photo : </strong></label>
+                        <label><strong>Student Photo: </strong></label>
                         <img src="${data['image_url']}" width="150" height="150" style="border-radius: 10px;margin-left:10px">
                         
                     </div>
                     <div class="mb-2 d-flex align-items-center"">
-                        <label><strong>Student Name : </strong></label>
+                        <label><strong>Student Name: </strong></label>
                         <input type="text" name="student_name" style="width:300px;margin-left:10px;" class="form-control" value="${data['student_name']}">
                     </div>
 
-                    
-
                     <div class="mb-2 d-flex align-items-center"">
-                        <label><strong>Father Name : </strong></label>
+                        <label><strong>Father Name: </strong></label>
                         <input type="text" name="father_name" style="width:300px;margin-left:20px;" class="form-control" value="${data['father_name']}">
                     </div>
 
                     <div class="mb-2 d-flex align-items-center"">
-                        <label><strong>Mother Name : </strong></label>
+                        <label><strong>Mother Name: </strong></label>
                         <input type="text" name="mother_name" style="width:300px;margin-left:10px;" class="form-control" value="${data['mother_name']}">
                     </div>
 
                     <div class="mb-2 d-flex align-items-center"">
-                        <label><strong>student Age : </strong></label>
+                        <label><strong>student Age: </strong></label>
                         <input type="number" name="student_age" style="width:300px;margin-left:22px;" class="form-control" value="${data['student_age']}">
                     </div>
 
                     <div class="mb-2 d-flex align-items-center"">
-                        <label><strong>Father Phone : </strong></label>
+                        <label><strong>Father Phone: </strong></label>
                         <input type="text" name="fatherphone" style="width:300px;margin-left:15px;" class="form-control" value="${data['fatherphone']}">
                     </div>
 
                     <div class="mb-2 d-flex align-items-center"">
-                        <label><strong>Mother Phone : </strong></label>
+                        <label><strong>Mother Phone: </strong></label>
                         <input type="text" name="motherphone" style="width:300px;margin-left:6px;" class="form-control" value="${data['motherphone']}">
                     </div>
 
@@ -262,7 +262,7 @@
                     </div>
 
                     <div class="mb-2 d-flex align-items-center"">
-                        <label><strong>Address : </strong></label>
+                        <label><strong>Address: </strong></label>
                         <input type="text" name="address" style="width:300px;margin-left:52px;" class="form-control" value="${data['address']}">
                     </div>
 

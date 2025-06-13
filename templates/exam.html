@@ -170,7 +170,7 @@
 
         function loadSubjects() {
             fetch('/subjects')
-                .then(res => res.json())
+                .then(response => res.json())
                 .then(data => {
                     const dropdown = document.getElementById('subjectsDropDown');
                     dropdown.innerHTML = '<option value="">Select a Subject</option>';
@@ -195,7 +195,7 @@
                 return;
             }
 
-            fetch('/add', {
+            fetch(`/add `, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
