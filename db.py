@@ -1,6 +1,7 @@
 import os
 import pymysql
 from dotenv import load_dotenv
+from datetime import date
 
 load_dotenv()
 
@@ -288,3 +289,27 @@ def reg_attendance(arr):
         finally:
             connection.close()
 
+def get_today_attendance():
+    connection=db_connection()
+    attendance_dict={}
+    if connection:
+        try:
+            with connection.cursor() as cursor:
+                query=""" SELECT student_id , attendance_status FROM attendance WHERE attendance_date = %s """
+                today_date=date.today().strftime('%Y-%m-%d')
+                cursor.execute(query,(today_date,))
+                results=cursor.fetchall()
+                print(results)
+                for row in results:
+                    student_id=row['student_id']
+                    status=row['attendance_status']
+                    attendance_dict[student_id]=status
+
+                print(attendance_dict)
+
+        except Exception as e:
+            print(f"Error:{e}")
+        finally:
+            connection.close()
+            
+    return attendance_dict

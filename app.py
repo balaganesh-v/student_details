@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
-from db import students_information, delete_detail, select_student, get_subjects, insert_student, publishdetails ,update,reg_attendance
+from db import students_information, delete_detail, select_student, get_subjects, insert_student, publishdetails ,update,reg_attendance,get_today_attendance
 from sample_record.load_test_record import load_all_records
 import cloudinary,cloudinary.uploader
 from datetime import date
@@ -128,14 +128,14 @@ def Update_values():
 
 @app.route('/attendance')
 def attendance():
-    students = students_information()
-    return render_template('attendance.html',students=students)
+    students = students_information() 
+    attendance=get_today_attendance() or {}
+    print(attendance)
+    return render_template('attendance.html',students=students,attendance=attendance)
 
 
 @app.route('/register_attendance', methods=['POST', 'GET'])
 def register_attendance():
-    students = students_information()  # fetch students first
-
     if request.method == 'POST':
         try:
             data = request.form.to_dict()
@@ -150,19 +150,15 @@ def register_attendance():
                     today_date_str = today_date.strftime('%Y-%m-%d')
                     arr.append((student_id, today_date_str, attendance_status))
 
-            # Call your function to insert attendance into DB
-            print(arr)
             reg_attendance(arr)
-
-            # Optionally, you can show a success message here
-            return render_template("attendance.html", students=students)
+            return redirect(url_for('attendance'))
 
         except Exception as e:
             print("Error:", e)
             return "Something went wrong", 500
 
     # For GET request
-    return render_template("attendance.html", students=students)
+    return redirect(url_for('attendance'))
 
 
 
