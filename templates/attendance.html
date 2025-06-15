@@ -6,14 +6,31 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .attendance-box {
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 800px;
+        }
+
         input[type="radio"] {
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             accent-color: #0d6efd;
             cursor: pointer;
             transition: transform 0.2s ease;
         }
-        
+
         table {
             border: 2px solid #0d6efd;
         }
@@ -24,44 +41,46 @@
     </style>
 </head>
 
-<body class="bg-light">
+<body>
 
-<div class="container my-5">
-    <h2 class="text-center mb-4">Student Attendance</h2>
+<div class="attendance-box">
+    <h2 class="text-center mb-4 text-primary">Student Attendance</h2>
 
     <form method="post" action="/register_attendance">
-        <table class="table table-bordered text-center">
-            <thead class="table-primary">
-                <tr>
-                    <th>Student Name</th>
-                    <th>Present</th>
-                    <th>Absent</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for student in students %}
-                {% set status = attendance.get(student.student_id) %}
-                <tr>
-                    <td>{{ student.student_name }}</td>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Present</th>
+                        <th>Absent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for student in students %}
+                    {% set status = attendance.get(student.student_id) %}
+                    <tr>
+                        <td>{{ student.student_name }}</td>
 
-                    <td>
-                        <input type="radio" name="attendance_{{ student.student_id }}" value="Present"
-                               {% if status == 'Present' %} checked disabled {% endif %}
-                               {% if status == 'Absent' %} disabled {% endif %} >
-                    </td>
+                        <td>
+                            <input type="radio" name="attendance_{{ student.student_id }}" value="Present"
+                                   {% if status == 'Present' %} checked disabled {% endif %}
+                                   {% if status == 'Absent' %} disabled {% endif %} >
+                        </td>
 
-                    <td>
-                        <input type="radio" name="attendance_{{ student.student_id }}" value="Absent"
-                               {% if status == 'Absent' %} checked disabled {% endif %}
-                               {% if status == 'Present' %} disabled {% endif %} >
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                        <td>
+                            <input type="radio" name="attendance_{{ student.student_id }}" value="Absent"
+                                   {% if status == 'Absent' %} checked disabled {% endif %}
+                                   {% if status == 'Present' %} disabled {% endif %} >
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-lg">Submit Attendance</button>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg px-5">Submit Attendance</button>
         </div>
     </form>
 
@@ -69,5 +88,3 @@
 
 </body>
 </html>
-
-
