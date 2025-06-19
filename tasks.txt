@@ -1,14 +1,17 @@
 
 <------- Daily Tasks to Complete this Work ------->
 
-1. move all the db connections and query execution to db.py (3 hrs)
+1. Make it the students information box Neatly and work properly.
 
-2. upload image to a third party and store the image's url after storing it to cloud/third party. (6 hrs)
+2. Make it the Exam registration box Neatly and work properly.
 
-3. Load sample records from json file. (6 hrs)
+3. Add the Home page and look Nice.
 
-4. Should have pass a argument while running app.py wehther to run with load_records or not. (2 hrs)
+4. Make it the Students Registartion Box  and center the box.
 
-5. Implement Pagination for students details. (2 days)
+5. In the Edit page Update the photo(Get the url from database delete and Update the New photo ).
 
-6. Fix the edit student details(If you finish above tasks do it in this weekend)
+6. Maintain the data structure clearly and properly.
+
+7. (Templates,controllers(routes),services(methods or Functions),Respository(database)) ,
+    Make this folders to handle the Projects.

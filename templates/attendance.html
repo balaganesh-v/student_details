@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Student Attendance</title>
@@ -34,7 +35,9 @@
         table {
             border: 2px solid #0d6efd;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #0d6efd !important;
             vertical-align: middle !important;
         }
@@ -43,48 +46,71 @@
 
 <body>
 
-<div class="attendance-box">
-    <h2 class="text-center mb-4 text-primary">Student Attendance</h2>
+    <div class="attendance-box">
+        <h2 class="text-center mb-4 text-primary">Student Attendance</h2>
 
-    <form method="post" action="/register_attendance">
-        <div class="table-responsive">
-            <table class="table table-bordered text-center">
-                <thead class="table-primary">
-                    <tr>
-                        <th>Student Name</th>
-                        <th>Present</th>
-                        <th>Absent</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for student in students %}
-                    {% set status = attendance.get(student.student_id) %}
-                    <tr>
-                        <td>{{ student.student_name }}</td>
+        <form method="post" action="/register_attendance">
+            <div class="table-responsive">
+                <table class="table table-bordered text-center">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Present</th>
+                            <th>Absent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        {% set status = attendance.get(student.student_id) %}
+                        <tr>
+                            <td>{{ student.student_name }}</td>
 
-                        <td>
-                            <input type="radio" name="attendance_{{ student.student_id }}" value="Present"
-                                   {% if status == 'Present' %} checked disabled {% endif %}
-                                   {% if status == 'Absent' %} disabled {% endif %} >
-                        </td>
+                            <td>
+                                <input type="radio" name="attendance_{{ student.student_id }}" value="Present" {% if
+                                    status=='Present' %} checked disabled {% endif %} {% if status=='Absent' %} disabled
+                                    {% endif %}>
+                            </td>
 
-                        <td>
-                            <input type="radio" name="attendance_{{ student.student_id }}" value="Absent"
-                                   {% if status == 'Absent' %} checked disabled {% endif %}
-                                   {% if status == 'Present' %} disabled {% endif %} >
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                            <td>
+                                <input type="radio" name="attendance_{{ student.student_id }}" value="Absent" {% if
+                                    status=='Absent' %} checked disabled {% endif %} {% if status=='Present' %} disabled
+                                    {% endif %}>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+               
+            <div class="d-flex justify-content-center align-items-center gap-3 mt-4">
+                {% if page > 1 %}
+                <a href="{{ url_for('attendance', page=page-1) }}"
+                    class="btn btn-outline-primary btn-lg d-flex align-items-center">
+                    <span class="me-2 fs-4">&laquo;</span> Previous
+                </a>
+                {% endif %}
 
-        <div class="text-center mt-4">
-            <button type="submit" class="btn btn-primary btn-lg px-5">Submit Attendance</button>
-        </div>
-    </form>
+                <span class="fw-semibold">Page {{ page }} of {{ total_pages }}</span>
 
-</div>
+                {% if page < total_pages %} 
+                <a href="{{ url_for('attendance', page=page+1) }}" class="btn btn-outline-primary btn-lg d-flex align-items-center">
+                Next <span class="ms-2 fs-4">&raquo;</span>
+                </a>
+                {% endif %}
+            </div>
+
+
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg px-5">Submit Attendance</button>
+            </div>
+
+            
+        </form>
+
+    </div>
 
 </body>
+
 </html>

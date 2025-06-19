@@ -105,14 +105,38 @@ def get_subjects():
     if connection:
         try:
             with connection.cursor() as cursor:
-                cursor.execute("SELECT subject_name FROM subjects_table")
+                cursor.execute("SELECT subject_name FROM subjects_table;")
                 result = cursor.fetchall()
                 return [row["subject_name"] for row in result]
         except Exception as e:
             print(f"Error fetching subjects: {e}")
         finally:
             connection.close()
-    return []
+    return None
+
+
+
+def get_exams():
+    try:
+        with db_connection() as connection:
+            with connection.cursor() as cursor:
+                arr=[]
+                query=""" SELECT * FROM exam_table ; """
+                cursor.execute(query)
+                dict_exams=cursor.fetchall()
+                print(dict_exams)
+
+                query=""" SELECT * FROM exam_subjects_table;"""
+                cursor.execute(query)
+                dict_subjects=cursor.fetchall()
+                print(dict_subjects)
+
+                return dict_exams,dict_subjects
+
+    except Exception as e:
+        print(f"Error : {e}")
+
+
 
 
 def publishdetails(exam_details, exam_name, exam_code, class_name):

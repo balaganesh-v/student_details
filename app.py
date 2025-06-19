@@ -3,6 +3,7 @@ from db import (
     students_information,
     delete_detail,
     select_student,
+    get_exams,
     get_subjects,
     insert_student,
     publishdetails,
@@ -46,11 +47,18 @@ def pagination(students):
 
 @app.route("/")
 def index():
-    students = students_information() or []
+    return render_template("index.html")
+
+@app.route("/students_info")
+def students_info():
+    students=students_information()
     paginated_students, total_pages, page = pagination(students)
-    return render_template(
-        "index.html", students=paginated_students, total_pages=total_pages, page=page
-    )
+    return render_template("students_info.html",students=paginated_students,total_pages=total_pages,page=page)
+
+
+@app.route("/students_reg")
+def students_reg():
+    return render_template("students_registration_page.html")
 
 
 @app.route("/register", methods=["POST"])
@@ -97,7 +105,15 @@ def edit_student(student_id):
 
 @app.route("/exam")
 def exam():
-    return render_template("exam.html", exam_details=exam_details)
+    result_exams, result_subjects = get_exams()
+    today_date = date.today().strftime("%Y-%m-%d")
+    return render_template(
+        "exam.html",
+        exam_details=exam_details,
+        schedule_exams=result_exams,
+        schedule_subjects=result_subjects,
+        today_date=today_date
+    )
 
 
 @app.route("/subjects")
@@ -155,8 +171,9 @@ def Update_values():
 @app.route("/attendance")
 def attendance():
     students = students_information()
+    paginated_students, total_pages, page = pagination(students)
     attendance = get_today_attendance() or {}
-    return render_template("attendance.html", students=students, attendance=attendance)
+    return render_template("attendance.html", students=paginated_students, attendance=attendance,_pages=total_pages,page=page)
 
 
 @app.route("/register_attendance", methods=["POST", "GET"])
