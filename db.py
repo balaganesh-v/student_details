@@ -53,8 +53,8 @@ def insert_student(student):
                         student["father_name"],
                         student["mother_name"],
                         student["student_age"],
-                        student["fatherPhone"],
-                        student["motherPhone"],
+                        student["father_phone"],
+                        student["mother_phone"],
                         student["address"],
                         student["place"],
                         student["image_url"],
@@ -65,6 +65,7 @@ def insert_student(student):
             print(f"Error inserting student: {e}")
         finally:
             connection.close()
+    return True
 
 
 def delete_detail(student_id):
@@ -258,43 +259,44 @@ def exams_record(exam_lists):
 
 def update(student):
     connection = db_connection()
-    if connection:
+    if not connection:
+        return None
+    with connection.cursor() as cursor:
+        query = """
+          UPDATE students_information
+          SET student_name=%s, father_name=%s, mother_name=%s,
+              student_age=%s, fatherphone=%s, motherphone=%s,
+              place=%s, address=%s, image_url=%s
+          WHERE student_id=%s """
+        values = (
+          student['student_name'],
+          student['father_name'],
+          student['mother_name'],
+          student['student_age'],
+          student['father_phone'],
+          student['mother_phone'],
+          student['place'],
+          student['address'],
+          student['image_url'],
+          student['student_id']
+        )
+        cursor.execute(query,values)
+        connection.commit()
+        connection.close()
+    return None
+
+
+def get_old_image(student_id):
+    with db_connection() as connection:
         try:
             with connection.cursor() as cursor:
-
-                query = """ UPDATE students_information
-                SET 
-                    student_name=%s,
-                    father_name=%s,
-                    mother_name=%s,
-                    student_age=%s,
-                    fatherphone=%s,
-                    motherphone=%s,
-                    place=%s,
-                    address=%s
-                    
-                    WHERE student_id=%s  """
-
-                values=(
-                    student['student_name'],
-                    student['father_name'],
-                    student['mother_name'],
-                    student['student_age'],
-                    student['father_phone'],
-                    student['mother_phone'],
-                    student['place'],
-                    student['address'],
-                    student['student_id']
-                    )
-                
-                cursor.execute(query,values)
-                connection.commit()
-                print("Successfully Values are Updated")
-
+                query = """ SELECT image_url FROM students_information WHERE student_id = %s """
+                cursor.execute(query,(student_id,))
+                result = cursor.fetchone()
+                return result['image_url'] if result else None
         except Exception as e:
             print(f"Error : {e}")
-        finally:
-            connection.close()
+    return None
 
 
 def reg_attendance(arr):

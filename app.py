@@ -10,7 +10,8 @@ from db import (
     update,
     reg_attendance,
     get_today_attendance,
-    students_attendance_average
+    students_attendance_average,
+    get_old_image
 )
 from sample_record.load_test_record import load_all_records
 import cloudinary, cloudinary.uploader
@@ -79,8 +80,8 @@ def register():
         "father_name": request.form.get("fatherName"),
         "mother_name": request.form.get("motherName"),
         "student_age": request.form.get("age"),
-        "fatherPhone": request.form.get("fatherPhone"),
-        "motherPhone": request.form.get("motherPhone"),
+        "father_phone": request.form.get("fatherPhone"),
+        "mother_phone": request.form.get("motherPhone"),
         "address": request.form.get("address"),
         "place": request.form.get("place"),
         "image_url": image_url,
@@ -147,25 +148,42 @@ def publish():
     return render_template("exam.html", exam_details=[])
 
 
-@app.route("/save_student", methods=["PUT"])
-def Update_values():
+@app.route("/save_student/<student_id>", methods=["POST"])
+def update_student(student_id):
+    new_image = request.files.get('image')
+    old_url = get_old_image(student_id)
+    image_url = old_url
+
+    if new_image and new_image.filename:
+        try:
+            if old_url:
+                pid = os.path.splitext(os.path.basename(old_url))[0]
+                cloudinary.uploader.destroy(pid)
+            res = cloudinary.uploader.upload(new_image)
+            image_url = res.get("secure_url")
+        except Exception as e:
+            return jsonify({"error": f"Image upload failed: {e}"})
+
+    data = request.form
+    student = {
+        "student_name": data.get("student_name"),
+        "student_id": student_id,
+        "father_name": data.get("father_name"),
+        "mother_name": data.get("mother_name"),
+        "student_age": data.get("student_age"),
+        "father_phone": data.get("fatherphone"),
+        "mother_phone": data.get("motherphone"),
+        "place": data.get("place"),
+        "address": data.get("address"),
+        "image_url": image_url
+    }
+
     try:
-        data = request.get_json()
-        student = {
-            "student_name": data["student_name"],
-            "student_id": data["student_id"],
-            "father_name": data["father_name"],
-            "mother_name": data["mother_name"],
-            "student_age": data["student_age"],
-            "father_phone": data["fatherphone"],
-            "mother_phone": data["motherphone"],
-            "place": data["place"],
-            "address": data["address"],
-        }
         update(student)
-        return jsonify({"message": "Student updated successfully"}), 200  # <-- required
+        return jsonify({"success": True})
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": str(e)})
+
 
 
 @app.route("/attendance")

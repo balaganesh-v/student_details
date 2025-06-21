@@ -58,7 +58,8 @@
             flex-direction: column;
             justify-content: space-between;
             height: 100%;
-            min-height: 700px; /* Increased height */
+            min-height: 700px;
+            /* Increased height */
         }
 
         .list-group-item {
@@ -94,7 +95,7 @@
             width: 100%;
         }
 
-        .card-container > div {
+        .card-container>div {
             flex: 1 1 48%;
         }
     </style>
@@ -137,13 +138,12 @@
                         <span></span>
                         {% endif %}
                         <span class="text-muted">Page {{ page }} of {{ total_pages }}</span>
-                        {% if page < total_pages %}
-                        <a href="{{ url_for('students_info', page=page+1) }}"
+                        {% if page < total_pages %} <a href="{{ url_for('students_info', page=page+1) }}"
                             class="btn btn-outline-secondary btn-sm">Next
                             &raquo;</a>
-                        {% else %}
-                        <span></span>
-                        {% endif %}
+                            {% else %}
+                            <span></span>
+                            {% endif %}
                     </div>
                 </div>
             </div>
@@ -164,90 +164,110 @@
                 .then(data => {
                     const select_student = document.getElementById('editStudent');
                     select_student.innerHTML = `
-                        <h5 class="card-title text-center mb-3">📝 Edit Student Details</h5>
-                        <form id="editForm" enctype="multipart/form-data">
-                            <input type="hidden" name="student_id" value="${data['student_id']}">
+                <h5 class="card-title text-center mb-3">📝 Edit Student Details</h5>
+                <form id="editForm" enctype="multipart/form-data">
+                    <input type="hidden" name="student_id" value="${data['student_id']}">
 
-                            <div class="mb-3 text-center">
-                                <label class="text-dark">Student Photo</label><br>
-                                <img src="${data['image_url']}" width="140" height="140" class="student-photo shadow border border-secondary" alt="Student Photo">
-                            </div>
+                    <div class="mb-3 text-center">
+                        <label class="text-dark d-block fw-semibold mb-2">Student Photo</label>
+                        <div class="position-relative d-inline-block">
+                            <img src="${data['image_url']}" name="old_image_url" id="studentImagePreview" width="140" height="140"
+                                class="student-photo shadow border border-secondary rounded-circle mb-3" alt="Student Photo">
+                            <label class="btn btn-light border shadow-sm position-absolute bottom-0 end-0 rounded-circle p-2" title="Change Photo" style="cursor: pointer;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#0d6efd" class="bi bi-camera" viewBox="0 0 16 16">
+                                    <path d="M10.5 6a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                                    <path d="M4.318 1a1 1 0 0 0-.894.553L2.382 3H1a1 1 0 0 0-1 1v9.5A1.5 1.5 0 0 0 1.5 15h13a1.5 1.5 0 0 0 1.5-1.5V4a1 1 0 0 0-1-1h-1.382l-1.042-1.447A1 1 0 0 0 11.682 1H4.318zM14 4l1 1v9.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V5l1-1h12z"/>
+                                </svg>
+                                <input type="file" name="image" id="studentImageInput" accept="image/*" hidden onchange="previewStudentImage(event)">
+                            </label>
+                        </div>
+                    </div>
 
-                            <div class="mb-3">
-                                <label class="text-dark">Student Name</label>
-                                <input type="text" class="form-control border-primary" name="student_name" value="${data['student_name']}">
-                            </div>
+                    <div class="mb-3">
+                        <label class="text-dark">Student Name</label>
+                        <input type="text" class="form-control border-primary" name="student_name" value="${data['student_name']}">
+                    </div>
 
-                            <div class="mb-3">
-                                <label class="text-dark">Father Name</label>
-                                <input type="text" class="form-control border-primary" name="father_name" value="${data['father_name']}">
-                            </div>
+                    <div class="mb-3">
+                        <label class="text-dark">Father Name</label>
+                        <input type="text" class="form-control border-primary" name="father_name" value="${data['father_name']}">
+                    </div>
 
-                            <div class="mb-3">
-                                <label class="text-dark">Mother Name</label>
-                                <input type="text" class="form-control border-primary" name="mother_name" value="${data['mother_name']}">
-                            </div>
+                    <div class="mb-3">
+                        <label class="text-dark">Mother Name</label>
+                        <input type="text" class="form-control border-primary" name="mother_name" value="${data['mother_name']}">
+                    </div>
 
-                            <div class="mb-3">
-                                <label class="text-dark">Student Age</label>
-                                <input type="number" class="form-control border-primary" name="student_age" value="${data['student_age']}">
-                            </div>
+                    <div class="mb-3">
+                        <label class="text-dark">Student Age</label>
+                        <input type="number" class="form-control border-primary" name="student_age" value="${data['student_age']}">
+                    </div>
 
-                            <div class="mb-3">
-                                <label class="text-dark">Father Phone</label>
-                                <input type="text" class="form-control border-primary" name="fatherphone" value="${data['fatherphone']}">
-                            </div>
+                    <div class="mb-3">
+                        <label class="text-dark">Father Phone</label>
+                        <input type="text" class="form-control border-primary" name="fatherphone" value="${data['fatherphone']}">
+                    </div>
 
-                            <div class="mb-3">
-                                <label class="text-dark">Mother Phone</label>
-                                <input type="text" class="form-control border-primary" name="motherphone" value="${data['motherphone']}">
-                            </div>
+                    <div class="mb-3">
+                        <label class="text-dark">Mother Phone</label>
+                        <input type="text" class="form-control border-primary" name="motherphone" value="${data['motherphone']}">
+                    </div>
 
-                            <div class="mb-3">
-                                <label class="text-dark">Place</label>
-                                <input type="text" class="form-control border-primary" name="place" value="${data['place']}">
-                            </div>
+                    <div class="mb-3">
+                        <label class="text-dark">Place</label>
+                        <input type="text" class="form-control border-primary" name="place" value="${data['place']}">
+                    </div>
 
-                            <div class="mb-3">
-                                <label class="text-dark">Address</label>
-                                <input type="text" class="form-control border-primary" name="address" value="${data['address']}">
-                            </div>
+                    <div class="mb-3">
+                        <label class="text-dark">Address</label>
+                        <input type="text" class="form-control border-primary" name="address" value="${data['address']}">
+                    </div>
 
-                            <div class="text-center">
-                                <button type="button" class="btn btn-info text-white" onclick="saveStudent()">💾 Save Changes</button>
-                            </div>
-                        </form>
-                    `;
+                    <div class="text-center">
+                        <button type="button" class="btn btn-info text-white" onclick="saveStudent('${data['student_id']}')">Save</button>
+                    </div>
+                </form>
+            `;
                 })
                 .catch(error => console.error('Error loading student:', error));
         }
 
-        function saveStudent() {
+
+        // Preview selected image
+        function previewStudentImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const preview = document.getElementById('studentImagePreview');
+                preview.src = URL.createObjectURL(file);
+            }
+        }
+
+        // Submit student data with image using FormData
+        function saveStudent(student_id) {
             const form = document.getElementById('editForm');
-            const formData = new FormData(form);
-            const formObject = {};
+            const formData = new FormData(form);  // Includes the image file if selected
 
-            formData.forEach((value, key) => {
-                formObject[key] = value;
-            });
-
-            fetch('/save_student', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formObject)
+            fetch(`/save_student/${student_id}`, {
+                method: 'POST',
+                body: formData
             })
                 .then(response => {
                     if (!response.ok) {
-                        alert("Error saving student");
-                    } else {
-                        return response.json();
+                        throw new Error("❌ Error saving student");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert("✅ Student updated successfully!");
+                        location.reload(); // Optionally reload the page
                     }
                 })
                 .catch(error => console.error('Error saving student:', error));
         }
+
     </script>
+
 </body>
 
 </html>
