@@ -85,21 +85,21 @@
                         <div class="form-section">
                             <div class="mb-3">
                                 <label for="examName" class="form-label">Exam Name</label>
-                                <input type="text" name="examName" class="form-control" required />
+                                <input type="text" name="examName" id="examName" class="form-control" required />
                             </div>
                             <div class="mb-3">
                                 <label for="examCode" class="form-label">Exam Code</label>
-                                <input type="text" name="examCode" class="form-control" required />
+                                <input type="text" name="examCode" id="examCode" class="form-control" required />
                             </div>
                             <div class="mb-3">
                                 <label for="className" class="form-label">Class</label>
-                                <input type="text" name="className" class="form-control" required />
+                                <input type="text" name="className" id="className" class="form-control" required />
                             </div>
                         </div>
 
                         <!-- Exam Details -->
                         <div class="form-section">
-                            <h3 class="text-center" >Exam Details</h3>
+                            <h3 class="text-center">Exam Details</h3>
                             <div class="table-responsive">
                                 <table class="table table-bordered mb-4">
                                     <thead>
@@ -128,24 +128,14 @@
                                 <!-- Dynamic rows added -->
                                 <table class="table table-bordered">
                                     <tbody id="exam-details-body">
-                                        {% if exam_details %}
-                                        {% for exam_detail in exam_details %}
-                                        <tr>
-                                            <td>{{ exam_detail['subject_name'] }}</td>
-                                            <td>{{ exam_detail['exam_date'] }}</td>
-                                            <td>{{ exam_detail['exam_time'] }}</td>
-                                            <td>{{ exam_detail['marks'] }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                        {% endif %}
+                                        
                                     </tbody>
                                 </table>
                             </div>
 
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary me-3" id="addExamBtn">Add</button>
-                                <button type="submit" class="btn btn-success" name="action" value="publish">Publish
-                                    Now</button>
+                                <button type="button" class="btn btn-success" id="publishBtn">Publish Now</button>
                             </div>
                         </div>
                     </form>
@@ -168,8 +158,7 @@
                             {% if subjects.exam_code == exam.exam_code %}
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <span>{{ subjects['subject_name'] }}</span>
-                                {% if subjects['exam_date'] < today_date %} <span
-                                    class="badge bg-primary status-badge">
+                                {% if subjects['exam_date'] < today_date %} <span class="badge bg-primary status-badge">
                                     Exam Completed</span>
                                     {% elif subjects['exam_date'] == today_date %}
                                     <span class="badge bg-warning text-dark status-badge">Exam Today</span>
@@ -223,34 +212,69 @@
                 return;
             }
 
-            fetch(`/add`, {
+            // Create and append the new row directly without fetch
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${subject}</td>
+                <td>${examDate}</td>
+                <td>${examTime}</td>
+                <td>${marks}</td>
+            `;
+            document.getElementById('exam-details-body').appendChild(row);
+
+            // Clear input fields
+            document.getElementById('subjectsDropDown').value = '';
+            document.getElementById('examDate').value = '';
+            document.getElementById('examTime').value = '';
+            document.getElementById('examMarks').value = '';
+        });
+
+        document.getElementById('publishBtn').addEventListener('click', function () {
+            const examName = document.getElementById('examName').value;
+            const examCode = document.getElementById('examCode').value;
+            const className = document.getElementById('className').value;
+
+            const tableBody = document.getElementById('exam-details-body');
+            const rows = tableBody.getElementsByTagName('tr');
+            const exams = [];
+
+            for (let row of rows) {
+                const cells = row.getElementsByTagName('td');
+                exams.push({
+                    subject_name: cells[0].textContent,
+                    exam_date: cells[1].textContent,
+                    exam_time: cells[2].textContent,
+                    marks: cells[3].textContent
+                });
+            }
+
+            if (!examName || !examCode || !className || exams.length === 0) {
+                alert("Please fill all exam info and add at least one subject.");
+                return;
+            }
+
+            fetch('/publish_now', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    subject_name: subject,
-                    exam_date: examDate,
-                    exam_time: examTime,
-                    marks: marks
+                    exam_name: examName,
+                    exam_code: examCode,
+                    class_name: className,
+                    exam_details: exams
                 })
             })
-                .then(response => response.json())
-                .then(data => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${data.subject_name}</td>
-                        <td>${data.exam_date}</td>
-                        <td>${data.exam_time}</td>
-                        <td>${data.marks}</td>
-                    `;
-                    document.getElementById('exam-details-body').appendChild(row);
-
-                    document.getElementById('subjectsDropDown').value = '';
-                    document.getElementById('examDate').value = '';
-                    document.getElementById('examTime').value = '';
-                    document.getElementById('examMarks').value = '';
+                .then(response => response.text())
+                .then(html => {
+                    document.open();
+                    document.write(html);
+                    document.close();
                 })
-                .catch(err => console.error('Error adding exam:', err));
+                .catch(err => {
+                    console.error('Publish error:', err);
+                    alert("Something went wrong while publishing.");
+                });
         });
+
     </script>
 </body>
 
