@@ -1,0 +1,3313 @@
+{
+    "exam_table": [
+        {
+            "exam_name": "Midterm 1",
+            "exam_code": "EXAM001",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 2",
+            "exam_code": "EXAM002",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 3",
+            "exam_code": "EXAM003",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 4",
+            "exam_code": "EXAM004",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 5",
+            "exam_code": "EXAM005",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 6",
+            "exam_code": "EXAM006",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 7",
+            "exam_code": "EXAM007",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 8",
+            "exam_code": "EXAM008",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 9",
+            "exam_code": "EXAM009",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 10",
+            "exam_code": "EXAM010",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 11",
+            "exam_code": "EXAM011",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 12",
+            "exam_code": "EXAM012",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 13",
+            "exam_code": "EXAM013",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 14",
+            "exam_code": "EXAM014",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 15",
+            "exam_code": "EXAM015",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 16",
+            "exam_code": "EXAM016",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 17",
+            "exam_code": "EXAM017",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 18",
+            "exam_code": "EXAM018",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 19",
+            "exam_code": "EXAM019",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 20",
+            "exam_code": "EXAM020",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 21",
+            "exam_code": "EXAM021",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 22",
+            "exam_code": "EXAM022",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 23",
+            "exam_code": "EXAM023",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 24",
+            "exam_code": "EXAM024",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 25",
+            "exam_code": "EXAM025",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 26",
+            "exam_code": "EXAM026",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 27",
+            "exam_code": "EXAM027",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 28",
+            "exam_code": "EXAM028",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 29",
+            "exam_code": "EXAM029",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 30",
+            "exam_code": "EXAM030",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 31",
+            "exam_code": "EXAM031",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 32",
+            "exam_code": "EXAM032",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 33",
+            "exam_code": "EXAM033",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 34",
+            "exam_code": "EXAM034",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 35",
+            "exam_code": "EXAM035",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 36",
+            "exam_code": "EXAM036",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 37",
+            "exam_code": "EXAM037",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 38",
+            "exam_code": "EXAM038",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 39",
+            "exam_code": "EXAM039",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 40",
+            "exam_code": "EXAM040",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 41",
+            "exam_code": "EXAM041",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 42",
+            "exam_code": "EXAM042",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 43",
+            "exam_code": "EXAM043",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 44",
+            "exam_code": "EXAM044",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 45",
+            "exam_code": "EXAM045",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 46",
+            "exam_code": "EXAM046",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 47",
+            "exam_code": "EXAM047",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 48",
+            "exam_code": "EXAM048",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 49",
+            "exam_code": "EXAM049",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 50",
+            "exam_code": "EXAM050",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 51",
+            "exam_code": "EXAM051",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 52",
+            "exam_code": "EXAM052",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 53",
+            "exam_code": "EXAM053",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 54",
+            "exam_code": "EXAM054",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 55",
+            "exam_code": "EXAM055",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 56",
+            "exam_code": "EXAM056",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 57",
+            "exam_code": "EXAM057",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 58",
+            "exam_code": "EXAM058",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 59",
+            "exam_code": "EXAM059",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 60",
+            "exam_code": "EXAM060",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 61",
+            "exam_code": "EXAM061",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 62",
+            "exam_code": "EXAM062",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 63",
+            "exam_code": "EXAM063",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 64",
+            "exam_code": "EXAM064",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 65",
+            "exam_code": "EXAM065",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 66",
+            "exam_code": "EXAM066",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 67",
+            "exam_code": "EXAM067",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 68",
+            "exam_code": "EXAM068",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 69",
+            "exam_code": "EXAM069",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 70",
+            "exam_code": "EXAM070",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 71",
+            "exam_code": "EXAM071",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 72",
+            "exam_code": "EXAM072",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 73",
+            "exam_code": "EXAM073",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 74",
+            "exam_code": "EXAM074",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 75",
+            "exam_code": "EXAM075",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 76",
+            "exam_code": "EXAM076",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 77",
+            "exam_code": "EXAM077",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 78",
+            "exam_code": "EXAM078",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 79",
+            "exam_code": "EXAM079",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 80",
+            "exam_code": "EXAM080",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 81",
+            "exam_code": "EXAM081",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 82",
+            "exam_code": "EXAM082",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 83",
+            "exam_code": "EXAM083",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 84",
+            "exam_code": "EXAM084",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 85",
+            "exam_code": "EXAM085",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 86",
+            "exam_code": "EXAM086",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 87",
+            "exam_code": "EXAM087",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 88",
+            "exam_code": "EXAM088",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 89",
+            "exam_code": "EXAM089",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 90",
+            "exam_code": "EXAM090",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 91",
+            "exam_code": "EXAM091",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 92",
+            "exam_code": "EXAM092",
+            "class_name": "Class 2"
+        },
+        {
+            "exam_name": "Midterm 93",
+            "exam_code": "EXAM093",
+            "class_name": "Class 4"
+        },
+        {
+            "exam_name": "Midterm 94",
+            "exam_code": "EXAM094",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 95",
+            "exam_code": "EXAM095",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 96",
+            "exam_code": "EXAM096",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 97",
+            "exam_code": "EXAM097",
+            "class_name": "Class 5"
+        },
+        {
+            "exam_name": "Midterm 98",
+            "exam_code": "EXAM098",
+            "class_name": "Class 1"
+        },
+        {
+            "exam_name": "Midterm 99",
+            "exam_code": "EXAM099",
+            "class_name": "Class 3"
+        },
+        {
+            "exam_name": "Midterm 100",
+            "exam_code": "EXAM100",
+            "class_name": "Class 4"
+        }
+    ],
+    "exam_subjects_table": [
+        {
+            "exam_code": "EXAM001",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-27",
+            "exam_time": "11:00 AM",
+            "marks": 66
+        },
+        {
+            "exam_code": "EXAM001",
+            "subject_name": "History",
+            "exam_date": "2025-06-27",
+            "exam_time": "03:00 PM",
+            "marks": 80
+        },
+        {
+            "exam_code": "EXAM001",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-22",
+            "exam_time": "03:00 PM",
+            "marks": 88
+        },
+        {
+            "exam_code": "EXAM002",
+            "subject_name": "Math",
+            "exam_date": "2025-06-27",
+            "exam_time": "11:00 AM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM002",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-05",
+            "exam_time": "03:00 PM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM002",
+            "subject_name": "Science",
+            "exam_date": "2025-06-06",
+            "exam_time": "01:00 PM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM003",
+            "subject_name": "Math",
+            "exam_date": "2025-06-24",
+            "exam_time": "01:00 PM",
+            "marks": 68
+        },
+        {
+            "exam_code": "EXAM003",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-27",
+            "exam_time": "01:00 PM",
+            "marks": 50
+        },
+        {
+            "exam_code": "EXAM003",
+            "subject_name": "English",
+            "exam_date": "2025-06-10",
+            "exam_time": "09:00 AM",
+            "marks": 84
+        },
+        {
+            "exam_code": "EXAM004",
+            "subject_name": "Science",
+            "exam_date": "2025-06-19",
+            "exam_time": "11:00 AM",
+            "marks": 63
+        },
+        {
+            "exam_code": "EXAM004",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-11",
+            "exam_time": "03:00 PM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM004",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-05",
+            "exam_time": "11:00 AM",
+            "marks": 57
+        },
+        {
+            "exam_code": "EXAM004",
+            "subject_name": "English",
+            "exam_date": "2025-06-25",
+            "exam_time": "01:00 PM",
+            "marks": 68
+        },
+        {
+            "exam_code": "EXAM004",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-11",
+            "exam_time": "09:00 AM",
+            "marks": 79
+        },
+        {
+            "exam_code": "EXAM005",
+            "subject_name": "English",
+            "exam_date": "2025-06-02",
+            "exam_time": "03:00 PM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM005",
+            "subject_name": "History",
+            "exam_date": "2025-06-03",
+            "exam_time": "01:00 PM",
+            "marks": 55
+        },
+        {
+            "exam_code": "EXAM005",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-13",
+            "exam_time": "11:00 AM",
+            "marks": 77
+        },
+        {
+            "exam_code": "EXAM005",
+            "subject_name": "Science",
+            "exam_date": "2025-06-06",
+            "exam_time": "03:00 PM",
+            "marks": 79
+        },
+        {
+            "exam_code": "EXAM005",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-20",
+            "exam_time": "09:00 AM",
+            "marks": 56
+        },
+        {
+            "exam_code": "EXAM006",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-24",
+            "exam_time": "09:00 AM",
+            "marks": 64
+        },
+        {
+            "exam_code": "EXAM006",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-28",
+            "exam_time": "11:00 AM",
+            "marks": 60
+        },
+        {
+            "exam_code": "EXAM006",
+            "subject_name": "Math",
+            "exam_date": "2025-06-04",
+            "exam_time": "09:00 AM",
+            "marks": 52
+        },
+        {
+            "exam_code": "EXAM006",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-26",
+            "exam_time": "01:00 PM",
+            "marks": 61
+        },
+        {
+            "exam_code": "EXAM007",
+            "subject_name": "English",
+            "exam_date": "2025-06-23",
+            "exam_time": "03:00 PM",
+            "marks": 51
+        },
+        {
+            "exam_code": "EXAM007",
+            "subject_name": "Math",
+            "exam_date": "2025-06-05",
+            "exam_time": "01:00 PM",
+            "marks": 51
+        },
+        {
+            "exam_code": "EXAM007",
+            "subject_name": "English",
+            "exam_date": "2025-06-28",
+            "exam_time": "11:00 AM",
+            "marks": 80
+        },
+        {
+            "exam_code": "EXAM007",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-13",
+            "exam_time": "11:00 AM",
+            "marks": 86
+        },
+        {
+            "exam_code": "EXAM008",
+            "subject_name": "Science",
+            "exam_date": "2025-06-08",
+            "exam_time": "03:00 PM",
+            "marks": 70
+        },
+        {
+            "exam_code": "EXAM008",
+            "subject_name": "Math",
+            "exam_date": "2025-06-05",
+            "exam_time": "09:00 AM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM008",
+            "subject_name": "Math",
+            "exam_date": "2025-06-28",
+            "exam_time": "11:00 AM",
+            "marks": 55
+        },
+        {
+            "exam_code": "EXAM008",
+            "subject_name": "History",
+            "exam_date": "2025-06-09",
+            "exam_time": "03:00 PM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM009",
+            "subject_name": "English",
+            "exam_date": "2025-06-13",
+            "exam_time": "01:00 PM",
+            "marks": 55
+        },
+        {
+            "exam_code": "EXAM009",
+            "subject_name": "Science",
+            "exam_date": "2025-06-05",
+            "exam_time": "09:00 AM",
+            "marks": 57
+        },
+        {
+            "exam_code": "EXAM009",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-10",
+            "exam_time": "03:00 PM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM009",
+            "subject_name": "English",
+            "exam_date": "2025-06-16",
+            "exam_time": "11:00 AM",
+            "marks": 70
+        },
+        {
+            "exam_code": "EXAM010",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-07",
+            "exam_time": "01:00 PM",
+            "marks": 82
+        },
+        {
+            "exam_code": "EXAM010",
+            "subject_name": "English",
+            "exam_date": "2025-06-14",
+            "exam_time": "03:00 PM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM010",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-15",
+            "exam_time": "09:00 AM",
+            "marks": 81
+        },
+        {
+            "exam_code": "EXAM010",
+            "subject_name": "English",
+            "exam_date": "2025-06-08",
+            "exam_time": "11:00 AM",
+            "marks": 80
+        },
+        {
+            "exam_code": "EXAM010",
+            "subject_name": "English",
+            "exam_date": "2025-06-21",
+            "exam_time": "11:00 AM",
+            "marks": 56
+        },
+        {
+            "exam_code": "EXAM011",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-07",
+            "exam_time": "03:00 PM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM011",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-28",
+            "exam_time": "01:00 PM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM011",
+            "subject_name": "English",
+            "exam_date": "2025-06-23",
+            "exam_time": "03:00 PM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM012",
+            "subject_name": "English",
+            "exam_date": "2025-06-29",
+            "exam_time": "11:00 AM",
+            "marks": 81
+        },
+        {
+            "exam_code": "EXAM012",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-23",
+            "exam_time": "11:00 AM",
+            "marks": 84
+        },
+        {
+            "exam_code": "EXAM012",
+            "subject_name": "English",
+            "exam_date": "2025-06-30",
+            "exam_time": "09:00 AM",
+            "marks": 70
+        },
+        {
+            "exam_code": "EXAM013",
+            "subject_name": "Math",
+            "exam_date": "2025-06-09",
+            "exam_time": "09:00 AM",
+            "marks": 59
+        },
+        {
+            "exam_code": "EXAM013",
+            "subject_name": "Science",
+            "exam_date": "2025-06-05",
+            "exam_time": "03:00 PM",
+            "marks": 62
+        },
+        {
+            "exam_code": "EXAM013",
+            "subject_name": "English",
+            "exam_date": "2025-06-11",
+            "exam_time": "11:00 AM",
+            "marks": 54
+        },
+        {
+            "exam_code": "EXAM014",
+            "subject_name": "History",
+            "exam_date": "2025-06-11",
+            "exam_time": "11:00 AM",
+            "marks": 77
+        },
+        {
+            "exam_code": "EXAM014",
+            "subject_name": "English",
+            "exam_date": "2025-06-27",
+            "exam_time": "09:00 AM",
+            "marks": 56
+        },
+        {
+            "exam_code": "EXAM014",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-15",
+            "exam_time": "01:00 PM",
+            "marks": 62
+        },
+        {
+            "exam_code": "EXAM015",
+            "subject_name": "English",
+            "exam_date": "2025-06-13",
+            "exam_time": "01:00 PM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM015",
+            "subject_name": "History",
+            "exam_date": "2025-06-08",
+            "exam_time": "09:00 AM",
+            "marks": 73
+        },
+        {
+            "exam_code": "EXAM015",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-03",
+            "exam_time": "09:00 AM",
+            "marks": 86
+        },
+        {
+            "exam_code": "EXAM015",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-24",
+            "exam_time": "03:00 PM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM016",
+            "subject_name": "Science",
+            "exam_date": "2025-06-05",
+            "exam_time": "03:00 PM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM016",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-18",
+            "exam_time": "01:00 PM",
+            "marks": 60
+        },
+        {
+            "exam_code": "EXAM016",
+            "subject_name": "Math",
+            "exam_date": "2025-06-26",
+            "exam_time": "01:00 PM",
+            "marks": 71
+        },
+        {
+            "exam_code": "EXAM016",
+            "subject_name": "Science",
+            "exam_date": "2025-06-18",
+            "exam_time": "01:00 PM",
+            "marks": 55
+        },
+        {
+            "exam_code": "EXAM016",
+            "subject_name": "Science",
+            "exam_date": "2025-06-26",
+            "exam_time": "03:00 PM",
+            "marks": 98
+        },
+        {
+            "exam_code": "EXAM017",
+            "subject_name": "English",
+            "exam_date": "2025-06-10",
+            "exam_time": "01:00 PM",
+            "marks": 76
+        },
+        {
+            "exam_code": "EXAM017",
+            "subject_name": "English",
+            "exam_date": "2025-06-27",
+            "exam_time": "01:00 PM",
+            "marks": 62
+        },
+        {
+            "exam_code": "EXAM017",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-06",
+            "exam_time": "01:00 PM",
+            "marks": 85
+        },
+        {
+            "exam_code": "EXAM017",
+            "subject_name": "Science",
+            "exam_date": "2025-06-15",
+            "exam_time": "01:00 PM",
+            "marks": 62
+        },
+        {
+            "exam_code": "EXAM018",
+            "subject_name": "History",
+            "exam_date": "2025-06-11",
+            "exam_time": "01:00 PM",
+            "marks": 97
+        },
+        {
+            "exam_code": "EXAM018",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-02",
+            "exam_time": "11:00 AM",
+            "marks": 68
+        },
+        {
+            "exam_code": "EXAM018",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-20",
+            "exam_time": "03:00 PM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM018",
+            "subject_name": "English",
+            "exam_date": "2025-06-11",
+            "exam_time": "03:00 PM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM018",
+            "subject_name": "History",
+            "exam_date": "2025-06-18",
+            "exam_time": "11:00 AM",
+            "marks": 65
+        },
+        {
+            "exam_code": "EXAM019",
+            "subject_name": "Science",
+            "exam_date": "2025-07-01",
+            "exam_time": "01:00 PM",
+            "marks": 55
+        },
+        {
+            "exam_code": "EXAM019",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-11",
+            "exam_time": "03:00 PM",
+            "marks": 88
+        },
+        {
+            "exam_code": "EXAM019",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-04",
+            "exam_time": "01:00 PM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM019",
+            "subject_name": "Science",
+            "exam_date": "2025-06-14",
+            "exam_time": "11:00 AM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM019",
+            "subject_name": "Science",
+            "exam_date": "2025-06-14",
+            "exam_time": "03:00 PM",
+            "marks": 59
+        },
+        {
+            "exam_code": "EXAM020",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-01",
+            "exam_time": "03:00 PM",
+            "marks": 87
+        },
+        {
+            "exam_code": "EXAM020",
+            "subject_name": "English",
+            "exam_date": "2025-06-07",
+            "exam_time": "11:00 AM",
+            "marks": 99
+        },
+        {
+            "exam_code": "EXAM020",
+            "subject_name": "History",
+            "exam_date": "2025-06-23",
+            "exam_time": "03:00 PM",
+            "marks": 60
+        },
+        {
+            "exam_code": "EXAM021",
+            "subject_name": "Math",
+            "exam_date": "2025-06-08",
+            "exam_time": "03:00 PM",
+            "marks": 79
+        },
+        {
+            "exam_code": "EXAM021",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-11",
+            "exam_time": "09:00 AM",
+            "marks": 84
+        },
+        {
+            "exam_code": "EXAM021",
+            "subject_name": "Science",
+            "exam_date": "2025-06-08",
+            "exam_time": "11:00 AM",
+            "marks": 76
+        },
+        {
+            "exam_code": "EXAM021",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-18",
+            "exam_time": "01:00 PM",
+            "marks": 52
+        },
+        {
+            "exam_code": "EXAM021",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-18",
+            "exam_time": "01:00 PM",
+            "marks": 76
+        },
+        {
+            "exam_code": "EXAM022",
+            "subject_name": "English",
+            "exam_date": "2025-06-29",
+            "exam_time": "03:00 PM",
+            "marks": 97
+        },
+        {
+            "exam_code": "EXAM022",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-25",
+            "exam_time": "11:00 AM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM022",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-07",
+            "exam_time": "03:00 PM",
+            "marks": 79
+        },
+        {
+            "exam_code": "EXAM022",
+            "subject_name": "Science",
+            "exam_date": "2025-06-20",
+            "exam_time": "11:00 AM",
+            "marks": 71
+        },
+        {
+            "exam_code": "EXAM023",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-10",
+            "exam_time": "03:00 PM",
+            "marks": 74
+        },
+        {
+            "exam_code": "EXAM023",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-16",
+            "exam_time": "01:00 PM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM023",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-20",
+            "exam_time": "01:00 PM",
+            "marks": 54
+        },
+        {
+            "exam_code": "EXAM023",
+            "subject_name": "English",
+            "exam_date": "2025-06-26",
+            "exam_time": "03:00 PM",
+            "marks": 57
+        },
+        {
+            "exam_code": "EXAM023",
+            "subject_name": "Math",
+            "exam_date": "2025-06-19",
+            "exam_time": "03:00 PM",
+            "marks": 73
+        },
+        {
+            "exam_code": "EXAM024",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-23",
+            "exam_time": "01:00 PM",
+            "marks": 67
+        },
+        {
+            "exam_code": "EXAM024",
+            "subject_name": "History",
+            "exam_date": "2025-06-11",
+            "exam_time": "11:00 AM",
+            "marks": 77
+        },
+        {
+            "exam_code": "EXAM024",
+            "subject_name": "Math",
+            "exam_date": "2025-06-24",
+            "exam_time": "11:00 AM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM024",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-13",
+            "exam_time": "09:00 AM",
+            "marks": 99
+        },
+        {
+            "exam_code": "EXAM024",
+            "subject_name": "English",
+            "exam_date": "2025-06-03",
+            "exam_time": "09:00 AM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM025",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-29",
+            "exam_time": "01:00 PM",
+            "marks": 93
+        },
+        {
+            "exam_code": "EXAM025",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-06",
+            "exam_time": "03:00 PM",
+            "marks": 56
+        },
+        {
+            "exam_code": "EXAM025",
+            "subject_name": "History",
+            "exam_date": "2025-06-05",
+            "exam_time": "03:00 PM",
+            "marks": 57
+        },
+        {
+            "exam_code": "EXAM026",
+            "subject_name": "Science",
+            "exam_date": "2025-06-04",
+            "exam_time": "01:00 PM",
+            "marks": 98
+        },
+        {
+            "exam_code": "EXAM026",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-01",
+            "exam_time": "09:00 AM",
+            "marks": 90
+        },
+        {
+            "exam_code": "EXAM026",
+            "subject_name": "English",
+            "exam_date": "2025-06-28",
+            "exam_time": "09:00 AM",
+            "marks": 60
+        },
+        {
+            "exam_code": "EXAM026",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-20",
+            "exam_time": "01:00 PM",
+            "marks": 68
+        },
+        {
+            "exam_code": "EXAM027",
+            "subject_name": "Science",
+            "exam_date": "2025-06-06",
+            "exam_time": "09:00 AM",
+            "marks": 80
+        },
+        {
+            "exam_code": "EXAM027",
+            "subject_name": "History",
+            "exam_date": "2025-06-18",
+            "exam_time": "11:00 AM",
+            "marks": 75
+        },
+        {
+            "exam_code": "EXAM027",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-17",
+            "exam_time": "09:00 AM",
+            "marks": 76
+        },
+        {
+            "exam_code": "EXAM027",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-24",
+            "exam_time": "11:00 AM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM027",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-23",
+            "exam_time": "09:00 AM",
+            "marks": 66
+        },
+        {
+            "exam_code": "EXAM028",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-17",
+            "exam_time": "03:00 PM",
+            "marks": 62
+        },
+        {
+            "exam_code": "EXAM028",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-28",
+            "exam_time": "09:00 AM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM028",
+            "subject_name": "Math",
+            "exam_date": "2025-06-04",
+            "exam_time": "09:00 AM",
+            "marks": 84
+        },
+        {
+            "exam_code": "EXAM028",
+            "subject_name": "History",
+            "exam_date": "2025-06-04",
+            "exam_time": "03:00 PM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM029",
+            "subject_name": "Math",
+            "exam_date": "2025-06-08",
+            "exam_time": "09:00 AM",
+            "marks": 57
+        },
+        {
+            "exam_code": "EXAM029",
+            "subject_name": "Science",
+            "exam_date": "2025-06-04",
+            "exam_time": "01:00 PM",
+            "marks": 78
+        },
+        {
+            "exam_code": "EXAM029",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-26",
+            "exam_time": "11:00 AM",
+            "marks": 72
+        },
+        {
+            "exam_code": "EXAM029",
+            "subject_name": "Science",
+            "exam_date": "2025-06-25",
+            "exam_time": "11:00 AM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM030",
+            "subject_name": "English",
+            "exam_date": "2025-06-01",
+            "exam_time": "09:00 AM",
+            "marks": 66
+        },
+        {
+            "exam_code": "EXAM030",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-14",
+            "exam_time": "01:00 PM",
+            "marks": 59
+        },
+        {
+            "exam_code": "EXAM030",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-05",
+            "exam_time": "09:00 AM",
+            "marks": 88
+        },
+        {
+            "exam_code": "EXAM031",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-13",
+            "exam_time": "03:00 PM",
+            "marks": 72
+        },
+        {
+            "exam_code": "EXAM031",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-05",
+            "exam_time": "03:00 PM",
+            "marks": 99
+        },
+        {
+            "exam_code": "EXAM031",
+            "subject_name": "English",
+            "exam_date": "2025-07-01",
+            "exam_time": "01:00 PM",
+            "marks": 59
+        },
+        {
+            "exam_code": "EXAM031",
+            "subject_name": "English",
+            "exam_date": "2025-07-01",
+            "exam_time": "11:00 AM",
+            "marks": 100
+        },
+        {
+            "exam_code": "EXAM032",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-02",
+            "exam_time": "03:00 PM",
+            "marks": 64
+        },
+        {
+            "exam_code": "EXAM032",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-09",
+            "exam_time": "09:00 AM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM032",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-29",
+            "exam_time": "03:00 PM",
+            "marks": 74
+        },
+        {
+            "exam_code": "EXAM033",
+            "subject_name": "Science",
+            "exam_date": "2025-06-21",
+            "exam_time": "09:00 AM",
+            "marks": 63
+        },
+        {
+            "exam_code": "EXAM033",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-30",
+            "exam_time": "01:00 PM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM033",
+            "subject_name": "Science",
+            "exam_date": "2025-06-13",
+            "exam_time": "03:00 PM",
+            "marks": 51
+        },
+        {
+            "exam_code": "EXAM033",
+            "subject_name": "English",
+            "exam_date": "2025-06-10",
+            "exam_time": "03:00 PM",
+            "marks": 87
+        },
+        {
+            "exam_code": "EXAM033",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-11",
+            "exam_time": "01:00 PM",
+            "marks": 74
+        },
+        {
+            "exam_code": "EXAM034",
+            "subject_name": "Math",
+            "exam_date": "2025-06-10",
+            "exam_time": "03:00 PM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM034",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-13",
+            "exam_time": "01:00 PM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM034",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-28",
+            "exam_time": "01:00 PM",
+            "marks": 79
+        },
+        {
+            "exam_code": "EXAM034",
+            "subject_name": "History",
+            "exam_date": "2025-06-06",
+            "exam_time": "01:00 PM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM034",
+            "subject_name": "History",
+            "exam_date": "2025-06-11",
+            "exam_time": "11:00 AM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM035",
+            "subject_name": "Math",
+            "exam_date": "2025-06-10",
+            "exam_time": "01:00 PM",
+            "marks": 50
+        },
+        {
+            "exam_code": "EXAM035",
+            "subject_name": "English",
+            "exam_date": "2025-06-14",
+            "exam_time": "09:00 AM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM035",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-07",
+            "exam_time": "01:00 PM",
+            "marks": 68
+        },
+        {
+            "exam_code": "EXAM035",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-08",
+            "exam_time": "03:00 PM",
+            "marks": 56
+        },
+        {
+            "exam_code": "EXAM035",
+            "subject_name": "Science",
+            "exam_date": "2025-06-14",
+            "exam_time": "03:00 PM",
+            "marks": 88
+        },
+        {
+            "exam_code": "EXAM036",
+            "subject_name": "Math",
+            "exam_date": "2025-06-05",
+            "exam_time": "03:00 PM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM036",
+            "subject_name": "History",
+            "exam_date": "2025-06-17",
+            "exam_time": "11:00 AM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM036",
+            "subject_name": "History",
+            "exam_date": "2025-06-28",
+            "exam_time": "11:00 AM",
+            "marks": 95
+        },
+        {
+            "exam_code": "EXAM036",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-15",
+            "exam_time": "11:00 AM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM037",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-18",
+            "exam_time": "03:00 PM",
+            "marks": 85
+        },
+        {
+            "exam_code": "EXAM037",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-17",
+            "exam_time": "01:00 PM",
+            "marks": 73
+        },
+        {
+            "exam_code": "EXAM037",
+            "subject_name": "Science",
+            "exam_date": "2025-06-23",
+            "exam_time": "09:00 AM",
+            "marks": 61
+        },
+        {
+            "exam_code": "EXAM038",
+            "subject_name": "Science",
+            "exam_date": "2025-06-13",
+            "exam_time": "03:00 PM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM038",
+            "subject_name": "Science",
+            "exam_date": "2025-06-16",
+            "exam_time": "09:00 AM",
+            "marks": 82
+        },
+        {
+            "exam_code": "EXAM038",
+            "subject_name": "Math",
+            "exam_date": "2025-06-13",
+            "exam_time": "01:00 PM",
+            "marks": 86
+        },
+        {
+            "exam_code": "EXAM039",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-21",
+            "exam_time": "09:00 AM",
+            "marks": 59
+        },
+        {
+            "exam_code": "EXAM039",
+            "subject_name": "Science",
+            "exam_date": "2025-06-18",
+            "exam_time": "03:00 PM",
+            "marks": 50
+        },
+        {
+            "exam_code": "EXAM039",
+            "subject_name": "Science",
+            "exam_date": "2025-06-24",
+            "exam_time": "11:00 AM",
+            "marks": 61
+        },
+        {
+            "exam_code": "EXAM040",
+            "subject_name": "Math",
+            "exam_date": "2025-06-14",
+            "exam_time": "11:00 AM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM040",
+            "subject_name": "Math",
+            "exam_date": "2025-06-14",
+            "exam_time": "03:00 PM",
+            "marks": 55
+        },
+        {
+            "exam_code": "EXAM040",
+            "subject_name": "History",
+            "exam_date": "2025-06-23",
+            "exam_time": "09:00 AM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM040",
+            "subject_name": "Math",
+            "exam_date": "2025-06-03",
+            "exam_time": "09:00 AM",
+            "marks": 87
+        },
+        {
+            "exam_code": "EXAM041",
+            "subject_name": "History",
+            "exam_date": "2025-06-29",
+            "exam_time": "03:00 PM",
+            "marks": 55
+        },
+        {
+            "exam_code": "EXAM041",
+            "subject_name": "English",
+            "exam_date": "2025-06-08",
+            "exam_time": "03:00 PM",
+            "marks": 98
+        },
+        {
+            "exam_code": "EXAM041",
+            "subject_name": "Math",
+            "exam_date": "2025-06-02",
+            "exam_time": "03:00 PM",
+            "marks": 78
+        },
+        {
+            "exam_code": "EXAM042",
+            "subject_name": "English",
+            "exam_date": "2025-06-16",
+            "exam_time": "03:00 PM",
+            "marks": 74
+        },
+        {
+            "exam_code": "EXAM042",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-19",
+            "exam_time": "03:00 PM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM042",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-21",
+            "exam_time": "11:00 AM",
+            "marks": 63
+        },
+        {
+            "exam_code": "EXAM043",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-29",
+            "exam_time": "11:00 AM",
+            "marks": 78
+        },
+        {
+            "exam_code": "EXAM043",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-28",
+            "exam_time": "11:00 AM",
+            "marks": 77
+        },
+        {
+            "exam_code": "EXAM043",
+            "subject_name": "English",
+            "exam_date": "2025-06-25",
+            "exam_time": "01:00 PM",
+            "marks": 66
+        },
+        {
+            "exam_code": "EXAM044",
+            "subject_name": "English",
+            "exam_date": "2025-06-13",
+            "exam_time": "09:00 AM",
+            "marks": 63
+        },
+        {
+            "exam_code": "EXAM044",
+            "subject_name": "History",
+            "exam_date": "2025-06-07",
+            "exam_time": "01:00 PM",
+            "marks": 60
+        },
+        {
+            "exam_code": "EXAM044",
+            "subject_name": "Math",
+            "exam_date": "2025-06-07",
+            "exam_time": "11:00 AM",
+            "marks": 75
+        },
+        {
+            "exam_code": "EXAM044",
+            "subject_name": "Math",
+            "exam_date": "2025-06-27",
+            "exam_time": "11:00 AM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM044",
+            "subject_name": "History",
+            "exam_date": "2025-06-27",
+            "exam_time": "11:00 AM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM045",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-03",
+            "exam_time": "09:00 AM",
+            "marks": 85
+        },
+        {
+            "exam_code": "EXAM045",
+            "subject_name": "Math",
+            "exam_date": "2025-06-28",
+            "exam_time": "11:00 AM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM045",
+            "subject_name": "History",
+            "exam_date": "2025-06-10",
+            "exam_time": "03:00 PM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM046",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-29",
+            "exam_time": "03:00 PM",
+            "marks": 74
+        },
+        {
+            "exam_code": "EXAM046",
+            "subject_name": "Science",
+            "exam_date": "2025-06-06",
+            "exam_time": "03:00 PM",
+            "marks": 59
+        },
+        {
+            "exam_code": "EXAM046",
+            "subject_name": "Math",
+            "exam_date": "2025-06-09",
+            "exam_time": "09:00 AM",
+            "marks": 80
+        },
+        {
+            "exam_code": "EXAM046",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-04",
+            "exam_time": "09:00 AM",
+            "marks": 57
+        },
+        {
+            "exam_code": "EXAM046",
+            "subject_name": "English",
+            "exam_date": "2025-06-07",
+            "exam_time": "09:00 AM",
+            "marks": 99
+        },
+        {
+            "exam_code": "EXAM047",
+            "subject_name": "English",
+            "exam_date": "2025-06-09",
+            "exam_time": "11:00 AM",
+            "marks": 63
+        },
+        {
+            "exam_code": "EXAM047",
+            "subject_name": "History",
+            "exam_date": "2025-06-06",
+            "exam_time": "11:00 AM",
+            "marks": 65
+        },
+        {
+            "exam_code": "EXAM047",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-26",
+            "exam_time": "09:00 AM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM047",
+            "subject_name": "English",
+            "exam_date": "2025-07-01",
+            "exam_time": "09:00 AM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM048",
+            "subject_name": "English",
+            "exam_date": "2025-06-12",
+            "exam_time": "09:00 AM",
+            "marks": 75
+        },
+        {
+            "exam_code": "EXAM048",
+            "subject_name": "Math",
+            "exam_date": "2025-06-15",
+            "exam_time": "11:00 AM",
+            "marks": 50
+        },
+        {
+            "exam_code": "EXAM048",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-20",
+            "exam_time": "03:00 PM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM048",
+            "subject_name": "Physics",
+            "exam_date": "2025-07-01",
+            "exam_time": "03:00 PM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM049",
+            "subject_name": "Math",
+            "exam_date": "2025-06-02",
+            "exam_time": "09:00 AM",
+            "marks": 98
+        },
+        {
+            "exam_code": "EXAM049",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-30",
+            "exam_time": "01:00 PM",
+            "marks": 86
+        },
+        {
+            "exam_code": "EXAM049",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-21",
+            "exam_time": "11:00 AM",
+            "marks": 72
+        },
+        {
+            "exam_code": "EXAM049",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-28",
+            "exam_time": "09:00 AM",
+            "marks": 68
+        },
+        {
+            "exam_code": "EXAM050",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-11",
+            "exam_time": "11:00 AM",
+            "marks": 50
+        },
+        {
+            "exam_code": "EXAM050",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-02",
+            "exam_time": "01:00 PM",
+            "marks": 51
+        },
+        {
+            "exam_code": "EXAM050",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-10",
+            "exam_time": "01:00 PM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM050",
+            "subject_name": "History",
+            "exam_date": "2025-06-25",
+            "exam_time": "01:00 PM",
+            "marks": 67
+        },
+        {
+            "exam_code": "EXAM051",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-20",
+            "exam_time": "09:00 AM",
+            "marks": 97
+        },
+        {
+            "exam_code": "EXAM051",
+            "subject_name": "Science",
+            "exam_date": "2025-06-16",
+            "exam_time": "03:00 PM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM051",
+            "subject_name": "Science",
+            "exam_date": "2025-07-01",
+            "exam_time": "09:00 AM",
+            "marks": 81
+        },
+        {
+            "exam_code": "EXAM052",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-09",
+            "exam_time": "09:00 AM",
+            "marks": 67
+        },
+        {
+            "exam_code": "EXAM052",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-18",
+            "exam_time": "11:00 AM",
+            "marks": 87
+        },
+        {
+            "exam_code": "EXAM052",
+            "subject_name": "Science",
+            "exam_date": "2025-06-01",
+            "exam_time": "09:00 AM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM052",
+            "subject_name": "English",
+            "exam_date": "2025-07-01",
+            "exam_time": "11:00 AM",
+            "marks": 100
+        },
+        {
+            "exam_code": "EXAM052",
+            "subject_name": "Math",
+            "exam_date": "2025-06-16",
+            "exam_time": "01:00 PM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM053",
+            "subject_name": "Science",
+            "exam_date": "2025-07-01",
+            "exam_time": "09:00 AM",
+            "marks": 75
+        },
+        {
+            "exam_code": "EXAM053",
+            "subject_name": "History",
+            "exam_date": "2025-06-05",
+            "exam_time": "11:00 AM",
+            "marks": 90
+        },
+        {
+            "exam_code": "EXAM053",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-27",
+            "exam_time": "11:00 AM",
+            "marks": 97
+        },
+        {
+            "exam_code": "EXAM053",
+            "subject_name": "History",
+            "exam_date": "2025-06-09",
+            "exam_time": "11:00 AM",
+            "marks": 63
+        },
+        {
+            "exam_code": "EXAM054",
+            "subject_name": "History",
+            "exam_date": "2025-06-20",
+            "exam_time": "09:00 AM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM054",
+            "subject_name": "History",
+            "exam_date": "2025-06-09",
+            "exam_time": "11:00 AM",
+            "marks": 86
+        },
+        {
+            "exam_code": "EXAM054",
+            "subject_name": "Math",
+            "exam_date": "2025-06-08",
+            "exam_time": "01:00 PM",
+            "marks": 98
+        },
+        {
+            "exam_code": "EXAM054",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-19",
+            "exam_time": "11:00 AM",
+            "marks": 66
+        },
+        {
+            "exam_code": "EXAM055",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-07-01",
+            "exam_time": "09:00 AM",
+            "marks": 52
+        },
+        {
+            "exam_code": "EXAM055",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-10",
+            "exam_time": "03:00 PM",
+            "marks": 75
+        },
+        {
+            "exam_code": "EXAM055",
+            "subject_name": "History",
+            "exam_date": "2025-06-04",
+            "exam_time": "01:00 PM",
+            "marks": 95
+        },
+        {
+            "exam_code": "EXAM055",
+            "subject_name": "Math",
+            "exam_date": "2025-06-09",
+            "exam_time": "01:00 PM",
+            "marks": 55
+        },
+        {
+            "exam_code": "EXAM055",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-10",
+            "exam_time": "09:00 AM",
+            "marks": 73
+        },
+        {
+            "exam_code": "EXAM056",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-24",
+            "exam_time": "11:00 AM",
+            "marks": 62
+        },
+        {
+            "exam_code": "EXAM056",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-09",
+            "exam_time": "11:00 AM",
+            "marks": 54
+        },
+        {
+            "exam_code": "EXAM056",
+            "subject_name": "Math",
+            "exam_date": "2025-06-27",
+            "exam_time": "03:00 PM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM056",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-07",
+            "exam_time": "03:00 PM",
+            "marks": 56
+        },
+        {
+            "exam_code": "EXAM056",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-25",
+            "exam_time": "11:00 AM",
+            "marks": 86
+        },
+        {
+            "exam_code": "EXAM057",
+            "subject_name": "History",
+            "exam_date": "2025-06-12",
+            "exam_time": "11:00 AM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM057",
+            "subject_name": "Science",
+            "exam_date": "2025-06-30",
+            "exam_time": "11:00 AM",
+            "marks": 93
+        },
+        {
+            "exam_code": "EXAM057",
+            "subject_name": "Math",
+            "exam_date": "2025-06-25",
+            "exam_time": "03:00 PM",
+            "marks": 89
+        },
+        {
+            "exam_code": "EXAM058",
+            "subject_name": "History",
+            "exam_date": "2025-07-01",
+            "exam_time": "01:00 PM",
+            "marks": 73
+        },
+        {
+            "exam_code": "EXAM058",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-22",
+            "exam_time": "01:00 PM",
+            "marks": 79
+        },
+        {
+            "exam_code": "EXAM058",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-29",
+            "exam_time": "01:00 PM",
+            "marks": 85
+        },
+        {
+            "exam_code": "EXAM059",
+            "subject_name": "History",
+            "exam_date": "2025-06-08",
+            "exam_time": "11:00 AM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM059",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-23",
+            "exam_time": "11:00 AM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM059",
+            "subject_name": "Science",
+            "exam_date": "2025-06-19",
+            "exam_time": "01:00 PM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM059",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-10",
+            "exam_time": "11:00 AM",
+            "marks": 56
+        },
+        {
+            "exam_code": "EXAM060",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-24",
+            "exam_time": "03:00 PM",
+            "marks": 87
+        },
+        {
+            "exam_code": "EXAM060",
+            "subject_name": "Math",
+            "exam_date": "2025-06-23",
+            "exam_time": "03:00 PM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM060",
+            "subject_name": "History",
+            "exam_date": "2025-06-04",
+            "exam_time": "01:00 PM",
+            "marks": 57
+        },
+        {
+            "exam_code": "EXAM060",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-06",
+            "exam_time": "03:00 PM",
+            "marks": 79
+        },
+        {
+            "exam_code": "EXAM061",
+            "subject_name": "English",
+            "exam_date": "2025-06-10",
+            "exam_time": "09:00 AM",
+            "marks": 50
+        },
+        {
+            "exam_code": "EXAM061",
+            "subject_name": "English",
+            "exam_date": "2025-06-27",
+            "exam_time": "03:00 PM",
+            "marks": 93
+        },
+        {
+            "exam_code": "EXAM061",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-14",
+            "exam_time": "09:00 AM",
+            "marks": 82
+        },
+        {
+            "exam_code": "EXAM062",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-09",
+            "exam_time": "11:00 AM",
+            "marks": 72
+        },
+        {
+            "exam_code": "EXAM062",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-21",
+            "exam_time": "03:00 PM",
+            "marks": 90
+        },
+        {
+            "exam_code": "EXAM062",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-15",
+            "exam_time": "03:00 PM",
+            "marks": 87
+        },
+        {
+            "exam_code": "EXAM063",
+            "subject_name": "Science",
+            "exam_date": "2025-06-30",
+            "exam_time": "03:00 PM",
+            "marks": 80
+        },
+        {
+            "exam_code": "EXAM063",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-14",
+            "exam_time": "03:00 PM",
+            "marks": 86
+        },
+        {
+            "exam_code": "EXAM063",
+            "subject_name": "English",
+            "exam_date": "2025-06-30",
+            "exam_time": "03:00 PM",
+            "marks": 64
+        },
+        {
+            "exam_code": "EXAM063",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-08",
+            "exam_time": "09:00 AM",
+            "marks": 85
+        },
+        {
+            "exam_code": "EXAM063",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-07",
+            "exam_time": "09:00 AM",
+            "marks": 81
+        },
+        {
+            "exam_code": "EXAM064",
+            "subject_name": "Science",
+            "exam_date": "2025-06-10",
+            "exam_time": "09:00 AM",
+            "marks": 66
+        },
+        {
+            "exam_code": "EXAM064",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-04",
+            "exam_time": "09:00 AM",
+            "marks": 50
+        },
+        {
+            "exam_code": "EXAM064",
+            "subject_name": "Math",
+            "exam_date": "2025-06-19",
+            "exam_time": "09:00 AM",
+            "marks": 95
+        },
+        {
+            "exam_code": "EXAM064",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-26",
+            "exam_time": "09:00 AM",
+            "marks": 95
+        },
+        {
+            "exam_code": "EXAM064",
+            "subject_name": "English",
+            "exam_date": "2025-06-16",
+            "exam_time": "03:00 PM",
+            "marks": 61
+        },
+        {
+            "exam_code": "EXAM065",
+            "subject_name": "Math",
+            "exam_date": "2025-06-03",
+            "exam_time": "03:00 PM",
+            "marks": 84
+        },
+        {
+            "exam_code": "EXAM065",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-15",
+            "exam_time": "09:00 AM",
+            "marks": 81
+        },
+        {
+            "exam_code": "EXAM065",
+            "subject_name": "English",
+            "exam_date": "2025-06-09",
+            "exam_time": "03:00 PM",
+            "marks": 50
+        },
+        {
+            "exam_code": "EXAM066",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-24",
+            "exam_time": "11:00 AM",
+            "marks": 55
+        },
+        {
+            "exam_code": "EXAM066",
+            "subject_name": "Physics",
+            "exam_date": "2025-07-01",
+            "exam_time": "09:00 AM",
+            "marks": 65
+        },
+        {
+            "exam_code": "EXAM066",
+            "subject_name": "Math",
+            "exam_date": "2025-06-03",
+            "exam_time": "03:00 PM",
+            "marks": 100
+        },
+        {
+            "exam_code": "EXAM066",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-11",
+            "exam_time": "09:00 AM",
+            "marks": 88
+        },
+        {
+            "exam_code": "EXAM067",
+            "subject_name": "History",
+            "exam_date": "2025-06-13",
+            "exam_time": "11:00 AM",
+            "marks": 66
+        },
+        {
+            "exam_code": "EXAM067",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-18",
+            "exam_time": "03:00 PM",
+            "marks": 75
+        },
+        {
+            "exam_code": "EXAM067",
+            "subject_name": "English",
+            "exam_date": "2025-06-30",
+            "exam_time": "09:00 AM",
+            "marks": 93
+        },
+        {
+            "exam_code": "EXAM068",
+            "subject_name": "English",
+            "exam_date": "2025-06-29",
+            "exam_time": "01:00 PM",
+            "marks": 82
+        },
+        {
+            "exam_code": "EXAM068",
+            "subject_name": "Math",
+            "exam_date": "2025-06-08",
+            "exam_time": "09:00 AM",
+            "marks": 74
+        },
+        {
+            "exam_code": "EXAM068",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-05",
+            "exam_time": "03:00 PM",
+            "marks": 66
+        },
+        {
+            "exam_code": "EXAM068",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-20",
+            "exam_time": "01:00 PM",
+            "marks": 73
+        },
+        {
+            "exam_code": "EXAM069",
+            "subject_name": "English",
+            "exam_date": "2025-06-09",
+            "exam_time": "09:00 AM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM069",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-30",
+            "exam_time": "01:00 PM",
+            "marks": 61
+        },
+        {
+            "exam_code": "EXAM069",
+            "subject_name": "History",
+            "exam_date": "2025-06-13",
+            "exam_time": "01:00 PM",
+            "marks": 72
+        },
+        {
+            "exam_code": "EXAM069",
+            "subject_name": "Math",
+            "exam_date": "2025-06-22",
+            "exam_time": "01:00 PM",
+            "marks": 65
+        },
+        {
+            "exam_code": "EXAM069",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-25",
+            "exam_time": "09:00 AM",
+            "marks": 81
+        },
+        {
+            "exam_code": "EXAM070",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-02",
+            "exam_time": "09:00 AM",
+            "marks": 80
+        },
+        {
+            "exam_code": "EXAM070",
+            "subject_name": "English",
+            "exam_date": "2025-06-16",
+            "exam_time": "09:00 AM",
+            "marks": 52
+        },
+        {
+            "exam_code": "EXAM070",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-22",
+            "exam_time": "03:00 PM",
+            "marks": 59
+        },
+        {
+            "exam_code": "EXAM071",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-15",
+            "exam_time": "03:00 PM",
+            "marks": 95
+        },
+        {
+            "exam_code": "EXAM071",
+            "subject_name": "English",
+            "exam_date": "2025-06-16",
+            "exam_time": "09:00 AM",
+            "marks": 85
+        },
+        {
+            "exam_code": "EXAM071",
+            "subject_name": "Science",
+            "exam_date": "2025-06-10",
+            "exam_time": "09:00 AM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM071",
+            "subject_name": "English",
+            "exam_date": "2025-06-10",
+            "exam_time": "09:00 AM",
+            "marks": 89
+        },
+        {
+            "exam_code": "EXAM071",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-04",
+            "exam_time": "01:00 PM",
+            "marks": 75
+        },
+        {
+            "exam_code": "EXAM072",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-22",
+            "exam_time": "09:00 AM",
+            "marks": 78
+        },
+        {
+            "exam_code": "EXAM072",
+            "subject_name": "History",
+            "exam_date": "2025-06-13",
+            "exam_time": "09:00 AM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM072",
+            "subject_name": "Science",
+            "exam_date": "2025-06-12",
+            "exam_time": "03:00 PM",
+            "marks": 60
+        },
+        {
+            "exam_code": "EXAM072",
+            "subject_name": "Science",
+            "exam_date": "2025-06-19",
+            "exam_time": "09:00 AM",
+            "marks": 50
+        },
+        {
+            "exam_code": "EXAM073",
+            "subject_name": "History",
+            "exam_date": "2025-06-26",
+            "exam_time": "03:00 PM",
+            "marks": 51
+        },
+        {
+            "exam_code": "EXAM073",
+            "subject_name": "Science",
+            "exam_date": "2025-06-25",
+            "exam_time": "01:00 PM",
+            "marks": 82
+        },
+        {
+            "exam_code": "EXAM073",
+            "subject_name": "History",
+            "exam_date": "2025-06-03",
+            "exam_time": "09:00 AM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM074",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-13",
+            "exam_time": "03:00 PM",
+            "marks": 60
+        },
+        {
+            "exam_code": "EXAM074",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-02",
+            "exam_time": "03:00 PM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM074",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-09",
+            "exam_time": "09:00 AM",
+            "marks": 61
+        },
+        {
+            "exam_code": "EXAM074",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-06",
+            "exam_time": "09:00 AM",
+            "marks": 56
+        },
+        {
+            "exam_code": "EXAM074",
+            "subject_name": "Geography",
+            "exam_date": "2025-07-01",
+            "exam_time": "01:00 PM",
+            "marks": 61
+        },
+        {
+            "exam_code": "EXAM075",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-05",
+            "exam_time": "11:00 AM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM075",
+            "subject_name": "English",
+            "exam_date": "2025-06-09",
+            "exam_time": "01:00 PM",
+            "marks": 72
+        },
+        {
+            "exam_code": "EXAM075",
+            "subject_name": "Math",
+            "exam_date": "2025-06-30",
+            "exam_time": "03:00 PM",
+            "marks": 81
+        },
+        {
+            "exam_code": "EXAM075",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-09",
+            "exam_time": "11:00 AM",
+            "marks": 98
+        },
+        {
+            "exam_code": "EXAM076",
+            "subject_name": "Math",
+            "exam_date": "2025-06-07",
+            "exam_time": "09:00 AM",
+            "marks": 67
+        },
+        {
+            "exam_code": "EXAM076",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-05",
+            "exam_time": "03:00 PM",
+            "marks": 72
+        },
+        {
+            "exam_code": "EXAM076",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-26",
+            "exam_time": "11:00 AM",
+            "marks": 78
+        },
+        {
+            "exam_code": "EXAM077",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-16",
+            "exam_time": "01:00 PM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM077",
+            "subject_name": "English",
+            "exam_date": "2025-06-19",
+            "exam_time": "01:00 PM",
+            "marks": 56
+        },
+        {
+            "exam_code": "EXAM077",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-05",
+            "exam_time": "11:00 AM",
+            "marks": 60
+        },
+        {
+            "exam_code": "EXAM077",
+            "subject_name": "Science",
+            "exam_date": "2025-06-02",
+            "exam_time": "01:00 PM",
+            "marks": 66
+        },
+        {
+            "exam_code": "EXAM077",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-10",
+            "exam_time": "11:00 AM",
+            "marks": 70
+        },
+        {
+            "exam_code": "EXAM078",
+            "subject_name": "Math",
+            "exam_date": "2025-06-30",
+            "exam_time": "09:00 AM",
+            "marks": 90
+        },
+        {
+            "exam_code": "EXAM078",
+            "subject_name": "History",
+            "exam_date": "2025-06-07",
+            "exam_time": "03:00 PM",
+            "marks": 99
+        },
+        {
+            "exam_code": "EXAM078",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-01",
+            "exam_time": "11:00 AM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM078",
+            "subject_name": "Math",
+            "exam_date": "2025-06-19",
+            "exam_time": "09:00 AM",
+            "marks": 73
+        },
+        {
+            "exam_code": "EXAM079",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-07",
+            "exam_time": "11:00 AM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM079",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-23",
+            "exam_time": "09:00 AM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM079",
+            "subject_name": "English",
+            "exam_date": "2025-06-13",
+            "exam_time": "01:00 PM",
+            "marks": 72
+        },
+        {
+            "exam_code": "EXAM079",
+            "subject_name": "English",
+            "exam_date": "2025-06-25",
+            "exam_time": "09:00 AM",
+            "marks": 98
+        },
+        {
+            "exam_code": "EXAM079",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-26",
+            "exam_time": "03:00 PM",
+            "marks": 62
+        },
+        {
+            "exam_code": "EXAM080",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-14",
+            "exam_time": "09:00 AM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM080",
+            "subject_name": "Science",
+            "exam_date": "2025-06-27",
+            "exam_time": "11:00 AM",
+            "marks": 88
+        },
+        {
+            "exam_code": "EXAM080",
+            "subject_name": "Math",
+            "exam_date": "2025-06-08",
+            "exam_time": "03:00 PM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM080",
+            "subject_name": "History",
+            "exam_date": "2025-06-11",
+            "exam_time": "01:00 PM",
+            "marks": 88
+        },
+        {
+            "exam_code": "EXAM081",
+            "subject_name": "Math",
+            "exam_date": "2025-06-14",
+            "exam_time": "01:00 PM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM081",
+            "subject_name": "History",
+            "exam_date": "2025-06-19",
+            "exam_time": "03:00 PM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM081",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-18",
+            "exam_time": "09:00 AM",
+            "marks": 99
+        },
+        {
+            "exam_code": "EXAM082",
+            "subject_name": "Science",
+            "exam_date": "2025-06-25",
+            "exam_time": "01:00 PM",
+            "marks": 95
+        },
+        {
+            "exam_code": "EXAM082",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-10",
+            "exam_time": "09:00 AM",
+            "marks": 56
+        },
+        {
+            "exam_code": "EXAM082",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-19",
+            "exam_time": "11:00 AM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM082",
+            "subject_name": "History",
+            "exam_date": "2025-06-28",
+            "exam_time": "01:00 PM",
+            "marks": 58
+        },
+        {
+            "exam_code": "EXAM082",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-22",
+            "exam_time": "03:00 PM",
+            "marks": 51
+        },
+        {
+            "exam_code": "EXAM083",
+            "subject_name": "Math",
+            "exam_date": "2025-06-01",
+            "exam_time": "09:00 AM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM083",
+            "subject_name": "History",
+            "exam_date": "2025-06-15",
+            "exam_time": "03:00 PM",
+            "marks": 50
+        },
+        {
+            "exam_code": "EXAM083",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-04",
+            "exam_time": "01:00 PM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM083",
+            "subject_name": "Math",
+            "exam_date": "2025-06-05",
+            "exam_time": "11:00 AM",
+            "marks": 90
+        },
+        {
+            "exam_code": "EXAM084",
+            "subject_name": "English",
+            "exam_date": "2025-06-22",
+            "exam_time": "09:00 AM",
+            "marks": 99
+        },
+        {
+            "exam_code": "EXAM084",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-04",
+            "exam_time": "11:00 AM",
+            "marks": 77
+        },
+        {
+            "exam_code": "EXAM084",
+            "subject_name": "Math",
+            "exam_date": "2025-06-16",
+            "exam_time": "03:00 PM",
+            "marks": 51
+        },
+        {
+            "exam_code": "EXAM084",
+            "subject_name": "History",
+            "exam_date": "2025-06-17",
+            "exam_time": "01:00 PM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM084",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-12",
+            "exam_time": "01:00 PM",
+            "marks": 80
+        },
+        {
+            "exam_code": "EXAM085",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-18",
+            "exam_time": "03:00 PM",
+            "marks": 52
+        },
+        {
+            "exam_code": "EXAM085",
+            "subject_name": "Math",
+            "exam_date": "2025-06-02",
+            "exam_time": "11:00 AM",
+            "marks": 80
+        },
+        {
+            "exam_code": "EXAM085",
+            "subject_name": "Math",
+            "exam_date": "2025-06-28",
+            "exam_time": "09:00 AM",
+            "marks": 52
+        },
+        {
+            "exam_code": "EXAM085",
+            "subject_name": "Science",
+            "exam_date": "2025-06-01",
+            "exam_time": "03:00 PM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM086",
+            "subject_name": "Science",
+            "exam_date": "2025-06-22",
+            "exam_time": "09:00 AM",
+            "marks": 77
+        },
+        {
+            "exam_code": "EXAM086",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-30",
+            "exam_time": "01:00 PM",
+            "marks": 86
+        },
+        {
+            "exam_code": "EXAM086",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-14",
+            "exam_time": "01:00 PM",
+            "marks": 97
+        },
+        {
+            "exam_code": "EXAM086",
+            "subject_name": "Math",
+            "exam_date": "2025-06-01",
+            "exam_time": "09:00 AM",
+            "marks": 68
+        },
+        {
+            "exam_code": "EXAM087",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-03",
+            "exam_time": "09:00 AM",
+            "marks": 93
+        },
+        {
+            "exam_code": "EXAM087",
+            "subject_name": "Science",
+            "exam_date": "2025-07-01",
+            "exam_time": "09:00 AM",
+            "marks": 76
+        },
+        {
+            "exam_code": "EXAM087",
+            "subject_name": "Math",
+            "exam_date": "2025-06-27",
+            "exam_time": "03:00 PM",
+            "marks": 54
+        },
+        {
+            "exam_code": "EXAM088",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-15",
+            "exam_time": "03:00 PM",
+            "marks": 78
+        },
+        {
+            "exam_code": "EXAM088",
+            "subject_name": "Math",
+            "exam_date": "2025-06-21",
+            "exam_time": "09:00 AM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM088",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-19",
+            "exam_time": "01:00 PM",
+            "marks": 88
+        },
+        {
+            "exam_code": "EXAM088",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-06",
+            "exam_time": "03:00 PM",
+            "marks": 76
+        },
+        {
+            "exam_code": "EXAM088",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-11",
+            "exam_time": "01:00 PM",
+            "marks": 89
+        },
+        {
+            "exam_code": "EXAM089",
+            "subject_name": "English",
+            "exam_date": "2025-06-30",
+            "exam_time": "11:00 AM",
+            "marks": 93
+        },
+        {
+            "exam_code": "EXAM089",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-04",
+            "exam_time": "09:00 AM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM089",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-11",
+            "exam_time": "11:00 AM",
+            "marks": 63
+        },
+        {
+            "exam_code": "EXAM089",
+            "subject_name": "English",
+            "exam_date": "2025-06-18",
+            "exam_time": "01:00 PM",
+            "marks": 90
+        },
+        {
+            "exam_code": "EXAM090",
+            "subject_name": "Science",
+            "exam_date": "2025-06-12",
+            "exam_time": "03:00 PM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM090",
+            "subject_name": "Science",
+            "exam_date": "2025-06-26",
+            "exam_time": "03:00 PM",
+            "marks": 72
+        },
+        {
+            "exam_code": "EXAM090",
+            "subject_name": "English",
+            "exam_date": "2025-06-21",
+            "exam_time": "01:00 PM",
+            "marks": 68
+        },
+        {
+            "exam_code": "EXAM091",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-29",
+            "exam_time": "03:00 PM",
+            "marks": 96
+        },
+        {
+            "exam_code": "EXAM091",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-07",
+            "exam_time": "09:00 AM",
+            "marks": 52
+        },
+        {
+            "exam_code": "EXAM091",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-02",
+            "exam_time": "01:00 PM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM091",
+            "subject_name": "Science",
+            "exam_date": "2025-07-01",
+            "exam_time": "11:00 AM",
+            "marks": 75
+        },
+        {
+            "exam_code": "EXAM092",
+            "subject_name": "Science",
+            "exam_date": "2025-06-30",
+            "exam_time": "01:00 PM",
+            "marks": 64
+        },
+        {
+            "exam_code": "EXAM092",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-14",
+            "exam_time": "01:00 PM",
+            "marks": 95
+        },
+        {
+            "exam_code": "EXAM092",
+            "subject_name": "History",
+            "exam_date": "2025-06-20",
+            "exam_time": "03:00 PM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM093",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-18",
+            "exam_time": "03:00 PM",
+            "marks": 87
+        },
+        {
+            "exam_code": "EXAM093",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-11",
+            "exam_time": "11:00 AM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM093",
+            "subject_name": "English",
+            "exam_date": "2025-06-22",
+            "exam_time": "03:00 PM",
+            "marks": 54
+        },
+        {
+            "exam_code": "EXAM093",
+            "subject_name": "Math",
+            "exam_date": "2025-06-09",
+            "exam_time": "11:00 AM",
+            "marks": 63
+        },
+        {
+            "exam_code": "EXAM093",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-20",
+            "exam_time": "11:00 AM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM094",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-27",
+            "exam_time": "03:00 PM",
+            "marks": 92
+        },
+        {
+            "exam_code": "EXAM094",
+            "subject_name": "Science",
+            "exam_date": "2025-06-06",
+            "exam_time": "03:00 PM",
+            "marks": 100
+        },
+        {
+            "exam_code": "EXAM094",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-29",
+            "exam_time": "01:00 PM",
+            "marks": 84
+        },
+        {
+            "exam_code": "EXAM094",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-20",
+            "exam_time": "03:00 PM",
+            "marks": 51
+        },
+        {
+            "exam_code": "EXAM095",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-25",
+            "exam_time": "03:00 PM",
+            "marks": 59
+        },
+        {
+            "exam_code": "EXAM095",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-22",
+            "exam_time": "03:00 PM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM095",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-13",
+            "exam_time": "01:00 PM",
+            "marks": 78
+        },
+        {
+            "exam_code": "EXAM095",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-07-01",
+            "exam_time": "01:00 PM",
+            "marks": 76
+        },
+        {
+            "exam_code": "EXAM095",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-25",
+            "exam_time": "01:00 PM",
+            "marks": 64
+        },
+        {
+            "exam_code": "EXAM096",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-16",
+            "exam_time": "01:00 PM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM096",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-13",
+            "exam_time": "11:00 AM",
+            "marks": 61
+        },
+        {
+            "exam_code": "EXAM096",
+            "subject_name": "Science",
+            "exam_date": "2025-06-23",
+            "exam_time": "03:00 PM",
+            "marks": 90
+        },
+        {
+            "exam_code": "EXAM096",
+            "subject_name": "History",
+            "exam_date": "2025-06-17",
+            "exam_time": "09:00 AM",
+            "marks": 72
+        },
+        {
+            "exam_code": "EXAM096",
+            "subject_name": "English",
+            "exam_date": "2025-06-28",
+            "exam_time": "01:00 PM",
+            "marks": 89
+        },
+        {
+            "exam_code": "EXAM097",
+            "subject_name": "English",
+            "exam_date": "2025-06-01",
+            "exam_time": "11:00 AM",
+            "marks": 71
+        },
+        {
+            "exam_code": "EXAM097",
+            "subject_name": "Science",
+            "exam_date": "2025-06-07",
+            "exam_time": "11:00 AM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM097",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-20",
+            "exam_time": "01:00 PM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM097",
+            "subject_name": "Science",
+            "exam_date": "2025-06-30",
+            "exam_time": "03:00 PM",
+            "marks": 61
+        },
+        {
+            "exam_code": "EXAM097",
+            "subject_name": "English",
+            "exam_date": "2025-06-23",
+            "exam_time": "11:00 AM",
+            "marks": 99
+        },
+        {
+            "exam_code": "EXAM098",
+            "subject_name": "English",
+            "exam_date": "2025-07-01",
+            "exam_time": "03:00 PM",
+            "marks": 53
+        },
+        {
+            "exam_code": "EXAM098",
+            "subject_name": "English",
+            "exam_date": "2025-06-24",
+            "exam_time": "01:00 PM",
+            "marks": 61
+        },
+        {
+            "exam_code": "EXAM098",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-25",
+            "exam_time": "03:00 PM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM098",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-07",
+            "exam_time": "03:00 PM",
+            "marks": 69
+        },
+        {
+            "exam_code": "EXAM098",
+            "subject_name": "Biology",
+            "exam_date": "2025-06-20",
+            "exam_time": "09:00 AM",
+            "marks": 77
+        },
+        {
+            "exam_code": "EXAM099",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-07",
+            "exam_time": "01:00 PM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM099",
+            "subject_name": "Chemistry",
+            "exam_date": "2025-06-08",
+            "exam_time": "01:00 PM",
+            "marks": 94
+        },
+        {
+            "exam_code": "EXAM099",
+            "subject_name": "English",
+            "exam_date": "2025-06-06",
+            "exam_time": "03:00 PM",
+            "marks": 59
+        },
+        {
+            "exam_code": "EXAM099",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-13",
+            "exam_time": "01:00 PM",
+            "marks": 95
+        },
+        {
+            "exam_code": "EXAM099",
+            "subject_name": "Physics",
+            "exam_date": "2025-06-09",
+            "exam_time": "03:00 PM",
+            "marks": 95
+        },
+        {
+            "exam_code": "EXAM100",
+            "subject_name": "Geography",
+            "exam_date": "2025-06-15",
+            "exam_time": "03:00 PM",
+            "marks": 83
+        },
+        {
+            "exam_code": "EXAM100",
+            "subject_name": "Science",
+            "exam_date": "2025-06-27",
+            "exam_time": "03:00 PM",
+            "marks": 91
+        },
+        {
+            "exam_code": "EXAM100",
+            "subject_name": "Science",
+            "exam_date": "2025-06-18",
+            "exam_time": "11:00 AM",
+            "marks": 94
+        }
+    ]
+}
