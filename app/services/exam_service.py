@@ -1,9 +1,20 @@
-from app.repositories.exam_repository import get_all_exams_from_db,get_all_subjects_from_db,publish_details,load_all_exams_record_from_db
+from app.repositories.exam_repository import(
+    get_all_subjects_from_db,
+    publish_details,
+    load_all_exams_record_from_db,
+    get_pagination_exams_from_db
+    )
 from flask import request
 
-def get_all_exams():
-    return get_all_exams_from_db()
 
+def get_paginated_exams():
+    page = int(request.args.get("page", 1))
+    per_page = 5
+    offset = (page-1)*per_page
+    exams, grouped_subjects ,total_pages  = get_pagination_exams_from_db(per_page,offset)
+    return  exams,grouped_subjects,page,total_pages 
+    
+    
 def get_all_subjects():
     return get_all_subjects_from_db()
 

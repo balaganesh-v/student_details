@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Exam Schedule</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
     <style>
         body {
             background-color: #e8f1fc;
@@ -48,13 +49,11 @@
         .status-badge {
             font-size: 0.85rem;
             min-width: 130px;
-            /* or adjust as needed */
             display: inline-block;
             text-align: center;
             padding: 0.35em 0.6em;
             border-radius: 0.375rem;
         }
-
 
         .table td,
         .table th {
@@ -70,6 +69,12 @@
                 max-height: 85vh;
             }
         }
+
+        .card:hover {
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+            transform: scale(1.01);
+            transition: 0.2s ease-in-out;
+        }
     </style>
 </head>
 
@@ -79,27 +84,33 @@
             <!-- Left Section -->
             <div class="col-md-6">
                 <div class="page-wrapper">
-                    <h2 class="text-center mb-4">Exam Schedule</h2>
+                    <h2 class="text-center mb-4"><i class="bi bi-calendar2-week me-2"></i>Exam Schedule</h2>
                     <form action="/publish_now" method="POST" id="publishForm">
                         <!-- Exam Info -->
                         <div class="form-section">
                             <div class="mb-3">
-                                <label for="examName" class="form-label">Exam Name</label>
-                                <input type="text" name="examName" id="examName" class="form-control" required />
+                                <label for="examName" class="form-label"><i class="bi bi-card-text me-2"></i>Exam
+                                    Name</label>
+                                <input type="text" name="examName" id="examName" class="form-control"
+                                    placeholder="Mid Term 2025" required />
                             </div>
                             <div class="mb-3">
-                                <label for="examCode" class="form-label">Exam Code</label>
-                                <input type="text" name="examCode" id="examCode" class="form-control" required />
+                                <label for="examCode" class="form-label"><i class="bi bi-upc-scan me-2"></i>Exam
+                                    Code</label>
+                                <input type="text" name="examCode" id="examCode" class="form-control"
+                                    placeholder="EXM2025" required />
                             </div>
                             <div class="mb-3">
-                                <label for="className" class="form-label">Class</label>
-                                <input type="text" name="className" id="className" class="form-control" required />
+                                <label for="className" class="form-label"><i
+                                        class="bi bi-people-fill me-2"></i>Class</label>
+                                <input type="text" name="className" id="className" class="form-control"
+                                    placeholder="Class 10A" required />
                             </div>
                         </div>
 
                         <!-- Exam Details -->
                         <div class="form-section">
-                            <h3 class="text-center">Exam Details</h3>
+                            <h3 class="text-center"><i class="bi bi-book me-2"></i>Exam Details</h3>
                             <div class="table-responsive">
                                 <table class="table table-bordered mb-4">
                                     <thead>
@@ -127,15 +138,17 @@
 
                                 <!-- Dynamic rows added -->
                                 <table class="table table-bordered">
-                                    <tbody id="exam-details-body">
-                                        
-                                    </tbody>
+                                    <tbody id="exam-details-body"></tbody>
                                 </table>
                             </div>
 
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary me-3" id="addExamBtn">Add</button>
-                                <button type="button" class="btn btn-success" id="publishBtn">Publish Now</button>
+                                <button type="button" class="btn btn-outline-primary me-3" id="addExamBtn">
+                                    <i class="bi bi-plus-circle me-1"></i>Add
+                                </button>
+                                <button type="button" class="btn btn-outline-success" id="publishBtn">
+                                    <i class="bi bi-upload me-1"></i>Publish Now
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -145,28 +158,30 @@
             <!-- Right Section -->
             <div class="col-md-6">
                 <div class="page-wrapper" style="max-height: 85vh; overflow-y: auto;">
-                    <h3 class="text-center mb-4">Scheduled Exams</h3>
+                    <h3 class="text-center mb-4">
+                        <i class="bi bi-list-ul me-2"></i>Scheduled Exams
+                    </h3>
+
                     {% if schedule_exams %}
-                    {% for exam in schedule_exams %}
+                    {% for exam, subjects in zip(schedule_exams,grouped_subjects) %}
                     <div class="card shadow-sm mb-4 border-0">
                         <div class="card-body bg-light rounded">
-                            <h5 class="card-title text-primary mb-2">{{ exam['exam_name'] }}</h5>
-                            <p class="mb-1"><strong>Exam Code:</strong> {{ exam['exam_code'] }}</p>
-                            <p><strong>Class:</strong> {{ exam['class_name'] }}</p>
+                            <p><strong>Exam Name:</strong> {{ exam.exam_name }}</p>
+                            <p><strong>Class:</strong> {{ exam.class_name }}</p>
+                            <p><strong>Exam Code:</strong> {{ exam.exam_code }}</p>
                             <hr>
-                            {% for subjects in schedule_subjects %}
-                            {% if subjects.exam_code == exam.exam_code %}
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span>{{ subjects['subject_name'] }}</span>
-                                {% if subjects['exam_date'] < today_date %} <span class="badge bg-primary status-badge">
-                                    Exam Completed</span>
-                                    {% elif subjects['exam_date'] == today_date %}
-                                    <span class="badge bg-warning text-dark status-badge">Exam Today</span>
+
+                            {% for subject in subjects %}
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>{{ loop.index }}. {{ subject.subject_name }}</span>
+                                {% if subject.exam_date and subject.exam_date < today_date %} <span
+                                    class="badge bg-primary">Exam Completed</span>
+                                    {% elif subject.exam_date == today_date %}
+                                    <span class="badge bg-warning text-dark">Exam Today</span>
                                     {% else %}
-                                    <span class="badge bg-success status-badge">Upcoming Exam</span>
+                                    <span class="badge bg-success">Upcoming Exam</span>
                                     {% endif %}
                             </div>
-                            {% endif %}
                             {% endfor %}
                         </div>
                     </div>
@@ -174,10 +189,30 @@
                     {% else %}
                     <p class="text-muted text-center">No exams scheduled.</p>
                     {% endif %}
+
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-center align-items-center mt-4 gap-3">
+                        {% if page > 1 %}
+                        <a href="{{ url_for('exam.exam_page', page=page-1) }}"
+                            class="btn btn-outline-primary btn-sm">&laquo; Previous</a>
+                        {% else %}
+                        <button class="btn btn-outline-secondary btn-sm" disabled>&laquo; Previous</button>
+                        {% endif %}
+
+                        <span class="text-muted">Page {{ page }} of {{ total_pages }}</span>
+
+                        {% if page < total_pages %} <a href="{{ url_for('exam.exam_page', page=page+1) }}"
+                            class="btn btn-outline-primary btn-sm">Next &raquo;</a>
+                            {% else %}
+                            <button class="btn btn-outline-secondary btn-sm" disabled>Next &raquo;</button>
+                            {% endif %}
+                    </div>
                 </div>
             </div>
 
+
         </div>
+    </div>
     </div>
 
     <script>
@@ -212,7 +247,6 @@
                 return;
             }
 
-            // Create and append the new row directly without fetch
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${subject}</td>
@@ -222,7 +256,6 @@
             `;
             document.getElementById('exam-details-body').appendChild(row);
 
-            // Clear input fields
             document.getElementById('subjectsDropDown').value = '';
             document.getElementById('examDate').value = '';
             document.getElementById('examTime').value = '';
@@ -274,7 +307,6 @@
                     alert("Something went wrong while publishing.");
                 });
         });
-
     </script>
 </body>
 

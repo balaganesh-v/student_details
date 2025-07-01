@@ -1,23 +1,56 @@
+
 from config.db_config import db_connection
 
-def get_all_exams_from_db():
+
+
+def get_pagination_exams_from_db(per_page,offset):
     try:
-        with db_connection() as connection:
-            with connection.cursor() as cursor:
-                query=""" SELECT * FROM exam_table ; """
-                cursor.execute(query)
-                dict_exams=cursor.fetchall()
-                print(dict_exams)
+        connection = db_connection()
+        cursor = connection.cursor()
 
-                query=""" SELECT * FROM exam_subjects_table;"""
-                cursor.execute(query)
-                dict_subjects=cursor.fetchall()
-                print(dict_subjects)
+        # Calculating the total
+        cursor.execute(""" SELECT  COUNT(DISTINCT exam_code) AS total 
+                       FROM exam_table;""")
+        result = cursor.fetchone()
+        total_students = result['total']
 
-                return dict_exams,dict_subjects
+        
+        total_pages = (total_students + per_page - 1) // per_page
+        cursor.execute( """
+                       SELECT exam_name, exam_code, class_name 
+                       FROM exam_table 
+                       LIMIT %s OFFSET %s;
+                    """, (per_page, offset))
+        exams = cursor.fetchall()
+
+        exam_codes = [exam['exam_code'] for exam in exams]
+        subjects_grouped = [[] for _ in exams] 
+        if exam_codes:
+            placeholders = ','.join(['%s'] * len(exam_codes))
+            cursor.execute(f"""
+                           SELECT exam_code, subject_name, exam_date
+                           FROM exam_subjects_table
+                           WHERE exam_code IN ({placeholders})
+                           ORDER BY exam_code;
+                        """, tuple(exam_codes))
+            all_subjects = cursor.fetchall()
+            
+             # Group subjects by exam (same order as exams list)
+            for subject in all_subjects:
+                for i, exam in enumerate(exams):
+                    if subject['exam_code'] == exam['exam_code']:
+                        subjects_grouped[i].append(subject)
+                        break
+        
+        
+
+        return exams, subjects_grouped, total_pages
 
     except Exception as e:
         print(f"Error : {e}")
+        return [], [], 0
+
+
 
 
 def get_all_subjects_from_db():
