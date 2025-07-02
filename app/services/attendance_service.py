@@ -1,4 +1,8 @@
-from app.repositories.attendance_repository import get_student_name_id_from_db,get_today_attendance_from_db,register_students_attendance_to_db,students_attendance_average_from_db
+from app.repositories.attendance_repository import (get_student_name_id_from_db,
+                                                    get_today_attendance_from_db,
+                                                    register_students_attendance_to_db,
+                                                    students_attendance_average_from_db,
+                                                    load_all_attendance_records_from_db)
 from datetime import date
 
 today_date = date.today().strftime("%Y-%m-%d")
