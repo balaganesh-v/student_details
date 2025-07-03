@@ -35,7 +35,7 @@
             <div class="col-md-8 col-lg-6">
                 <div class="equal-section">
                     <h4 class="text-primary mb-4">📋 Register Student</h4>
-                    <form action="/register" method="POST" enctype="multipart/form-data">
+                    <form id="saveForm" action="/register" method="POST" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="studentPhoto" class="form-label">Student Photo</label>
                             <input type="file" name="studentPhoto" class="form-control" placeholder="Upload Photo" required />
@@ -63,12 +63,12 @@
 
                         <div class="mb-3">
                             <label for="age" class="form-label">Age</label>
-                            <input type="number" id="age" name="age" class="form-control" min="1" />
+                            <input type="number" id="age" name="studentAge" class="form-control" min="1" />
                         </div>
 
                         <div class="mb-3">
                             <label for="place" class="form-label">Place</label>
-                            <input type="text" id="place" name="place" class="form-control" />
+                            <input type="text" id="place" name="studentPlace" class="form-control" />
                         </div>
 
                         <div class="mb-3">
@@ -83,17 +83,42 @@
 
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
-                            <textarea id="address" name="address" class="form-control" rows="3"></textarea>
+                            <textarea id="studentAddress" name="studentAddress" class="form-control" rows="3"></textarea>
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-success fw-bold">✅ Save Student</button>
+                            <button type="submit" class="btn btn-success fw-bold" onclick="saveStudentDatas()">✅ Save Student</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function saveStudentDatas(){
+            const form = document.getElementById('saveForm')
+            const formData = new FormData(form);
+            
+            fetch(`/register`, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("❌ Error saving student");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    }
+                })
+                .catch(error => console.error('Error saving student:', error));
+        }
+        
+
+    </script>
 </body>
 
 </html>

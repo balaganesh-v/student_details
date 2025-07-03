@@ -1,6 +1,6 @@
 from config.db_config import db_connection
 
-def insert_student(student):
+def insert_student(data,image_url):
     try:
         with db_connection() as connection:
             with connection.cursor() as cursor:
@@ -13,16 +13,16 @@ def insert_student(student):
                 cursor.execute(
                     query,
                     (
-                        student["student_name"],
-                        student["student_id"],
-                        student["father_name"],
-                        student["mother_name"],
-                        student["student_age"],
-                        student["father_phone"],
-                        student["mother_phone"],
-                        student["address"],
-                        student["place"],
-                        student["image_url"],
+                        data.get("studentName"),
+                        data.get("studentId"),
+                        data.get("fatherName"),
+                        data.get("motherName"),
+                        data.get("studentAge"),
+                        data.get("fatherPhone"),
+                        data.get("motherPhone"),
+                        data.get("studentAddress"),
+                        data.get("studentPlace"),
+                        image_url,
                     ),
                 )
                 connection.commit()
@@ -82,7 +82,7 @@ def get_old_image_url(student_id):
         print(f"Error : {e}")
     return True
 
-def update_student_details(student):
+def update_student_details(data,student_id,image_url):
     try:
         connection = db_connection()  # Call the function to get a connection
         cursor = connection.cursor()
@@ -94,16 +94,16 @@ def update_student_details(student):
             WHERE student_id=%s
         """
         values = (
-            student['student_name'],
-            student['father_name'],
-            student['mother_name'],
-            student['student_age'],
-            student['fatherphone'],
-            student['motherphone'],
-            student['place'],
-            student['address'],
-            student['image_url'],
-            student['student_id']
+            data.get('studentName'),
+            data.get('fatherName'),
+            data.get('motherName'),
+            data.get('studentAge'),
+            data.get('fatherPhone'),
+            data.get('motherPhone'),
+            data.get('StudentPlace'),
+            data.get('studentAddress'),
+            image_url,
+            data.get('student_id')
         )
         cursor.execute(query, values)
         connection.commit()
@@ -116,7 +116,7 @@ def update_student_details(student):
         connection.close()
 
 
-def load_all_students_record_from_db(students):
+def load_all_students_record_from_db(students_data):
     try:
         with db_connection() as connection:
             with connection.cursor() as cursor:
@@ -139,7 +139,7 @@ def load_all_students_record_from_db(students):
                         student["place"],
                         student["image_url"],
                     )
-                    for student in students
+                    for student in students_data
                 ]
                 cursor.executemany(query, values)
                 connection.commit()

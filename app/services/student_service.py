@@ -1,34 +1,30 @@
 from flask import request
-from app.repositories.student_repository import insert_student,pagination,get_student_information,delete_detail,get_old_image_url,update_student_details,load_all_students_record_from_db
+from app.repositories.student_repository import (
+    insert_student,
+    pagination,
+    get_student_information,
+    delete_detail,get_old_image_url,
+    update_student_details,
+    load_all_students_record_from_db
+    )
 import cloudinary.uploader
 import os
 
-def getStudentDetails():
+def getUrlOfImage():
     image = request.files.get("studentPhoto")
     image_url = None
     if image:
         try:
             upload_result = cloudinary.uploader.upload(image)
             image_url = upload_result.get("secure_url")
+            return image_url
         except Exception as e:
             print(f"Image upload failed: {e}")
             image_url = None
-    student = {
-        "student_name": request.form.get("studentName"),
-        "student_id": request.form.get("studentId"),
-        "father_name": request.form.get("fatherName"),
-        "mother_name": request.form.get("motherName"),
-        "student_age": request.form.get("age"),
-        "father_phone": request.form.get("fatherPhone"),
-        "mother_phone": request.form.get("motherPhone"),
-        "address": request.form.get("address"),
-        "place": request.form.get("place"),
-        "image_url": image_url,
-    }
-    return student
+            return image_url
 
-def addStudentDetails(student):
-    insert_student(student)
+def addStudentDetails(data,student):
+    insert_student(data,student)
     return True
 
 def studentInfo():
@@ -44,6 +40,14 @@ def editStudent(student_id):
 
 def deleteStudent(student_id):
     return delete_detail(student_id)
+
+def studentPhotoUrl(student_id):
+    new_file,old_url=studentImages(student_id)
+    image_url = old_url
+    if new_file:
+       image_url = fileUpload(new_file,old_url=old_url)
+       return image_url
+    return image_url
 
 def studentImages(student_id):
     new_file = request.files.get('image')
@@ -62,25 +66,11 @@ def fileUpload(new_file,old_url):
             print(f"Error : {e}")
         return image_url
     
-def getEditStudentDetails(student_id,image_url):
-    data = request.form
-    student = {
-        "student_name": data.get("student_name"),
-        "student_id": student_id,
-        "father_name": data.get("father_name"),
-        "mother_name": data.get("mother_name"),
-        "student_age": data.get("student_age"),
-        "fatherphone": data.get("fatherphone"),
-        "motherphone": data.get("motherphone"),
-        "place": data.get("place"),
-        "address": data.get("address"),
-        "image_url": image_url
-    }
-    return student
 
-def updateEditStudentDetail(student):
-    return update_student_details(student)
 
-def load_all_students_record(students):
-    return load_all_students_record_from_db(students)
+def updateEditStudentDetail(data,student_id,image_url):
+    return update_student_details(data,student_id,image_url)
+
+def load_all_students_record(students_data):
+    return load_all_students_record_from_db(students_data)
     
