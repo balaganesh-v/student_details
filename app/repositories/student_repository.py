@@ -1,6 +1,6 @@
 from config.db_config import db_connection
 
-def insert_student(data,image_url):
+def insert_student(data):
     try:
         with db_connection() as connection:
             with connection.cursor() as cursor:
@@ -22,7 +22,7 @@ def insert_student(data,image_url):
                         data.get("motherPhone"),
                         data.get("studentAddress"),
                         data.get("studentPlace"),
-                        image_url,
+                        data.get("image_url"),
                     ),
                 )
                 connection.commit()
@@ -82,7 +82,7 @@ def get_old_image_url(student_id):
         print(f"Error : {e}")
     return True
 
-def update_student_details(data,student_id,image_url):
+def update_student_details(data):
     try:
         connection = db_connection()  # Call the function to get a connection
         cursor = connection.cursor()
@@ -100,9 +100,9 @@ def update_student_details(data,student_id,image_url):
             data.get('studentAge'),
             data.get('fatherPhone'),
             data.get('motherPhone'),
-            data.get('StudentPlace'),
+            data.get('studentPlace'),
             data.get('studentAddress'),
-            image_url,
+            data.get('image_url'),
             data.get('student_id')
         )
         cursor.execute(query, values)

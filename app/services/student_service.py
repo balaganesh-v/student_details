@@ -1,4 +1,4 @@
-from flask import request
+from flask import request,jsonify
 from app.repositories.student_repository import (
     insert_student,
     pagination,
@@ -7,6 +7,7 @@ from app.repositories.student_repository import (
     update_student_details,
     load_all_students_record_from_db
     )
+from app.validators.student_validator import StudentRegistrationSchema,StudentIdSchema
 import cloudinary.uploader
 import os
 
@@ -22,17 +23,44 @@ def getUrlOfImage():
             print(f"Image upload failed: {e}")
             image_url = None
             return image_url
+        
+def datas_with_image_url(data):
+    image_url=getUrlOfImage()
+    data["image_url"] = image_url
+    return data
+    
+def validate_datas(datas):
+    validated_data=StudentRegistrationSchema(**datas).dict()
+    return validated_data
 
-def addStudentDetails(data,student):
-    insert_student(data,student)
+def validate_student_id(studentId):
+    datas = {"studentId": studentId}
+    student_id_datas = StudentIdSchema(**datas).dict()
+    return student_id_datas["studentId"]
+
+    
+def register_student_details():
+    data=request.form.to_dict()
+    datas=datas_with_image_url(data)
+    validated_data=validate_datas(datas)
+    addStudentDetails(validated_data)
+    return True
+
+def addStudentDetails(validated_data):
+    insert_student(validated_data)
     return True
 
 def studentInfo():
-    page = request.args.get('page',1,type=int)
-    per_page = 10
-    offset = (page-1)*per_page
-    students,page,total_page= pagination(per_page,offset,page)
-    return students,page,total_page
+    page = get_current_page()
+    offset = calculate_offset(page)
+    return pagination(per_page=10, offset=offset, page=page)
+
+def get_current_page():
+    return request.args.get("page", 1, type=int)
+
+def calculate_offset(page, per_page=10):
+    return (page - 1) * per_page
+
 
 def editStudent(student_id):
     selected_students_info = get_student_information(student_id)
@@ -66,10 +94,17 @@ def fileUpload(new_file,old_url):
             print(f"Error : {e}")
         return image_url
     
+def update_edit_student_details(valid_student_id):
+    data = request.form.to_dict()
+    image_url = studentPhotoUrl(valid_student_id)
+    data["student_id"] = valid_student_id
+    data["image_url"] = image_url
+    updateEditStudentDetail(data)
+    
 
-
-def updateEditStudentDetail(data,student_id,image_url):
-    return update_student_details(data,student_id,image_url)
+def updateEditStudentDetail(data):
+    update_student_details(data)
+    
 
 def load_all_students_record(students_data):
     return load_all_students_record_from_db(students_data)
