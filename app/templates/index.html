@@ -1,115 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Student Registration Page</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+{% block title %}Index Page{% endblock %}
 
-  <style>
-    html,
-    body {
-      width:100%;
-      height: 100%;
-      margin: 0;
-    }
+{% block style %}
+<style>
+  body {
+    position: relative;
+    background-image: url("{{ url_for('static', filename='images/bachelor.jpg') }}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
 
-    body {
-      position: relative;
-      background-image: url("/static/images/bachelor.jpg");
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
-    }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+  }
 
-    /* Optional overlay for better readability */
-    body::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.4); /* dark overlay */
-      z-index: 0;
-    }
+  .welcome-container {
+    position: relative;
+    z-index: 1;
+    margin-top: 140px;
+    margin-left: 30px;
+    /* ⬅️ Move closer to the left */
+    max-width: 500px;
+    /* ⬅️ Reduce horizontal width */
+  }
 
-    .navbar {
-      background-color: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      z-index: 1;
-    }
 
-    .nav-link {
-      color: #333 !important;
-      font-weight: 500;
-    }
+  .card.bg-transparent {
+    background-color: rgba(255, 255, 255, 0.61) !important;
+    border: none;
+  }
 
-    .nav-link:hover {
-      color: #0d6efd !important;
-    }
+  .card-body {
+    padding: 2rem;
+    padding-right: 10px;
+    /* ✅ Add space on the right inside the welcome box */
+    color: #000000;
+  }
 
-    .main-content {
-      flex-grow: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 1; /* appear above overlay */
-    }
+  .welcome-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0d6efd;
+  }
 
-    .content-box {
-      background-color: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      max-width: 500px;
-      width: 100%;
-      text-align: center;
-    }
-  </style>
-</head>
+  .welcome-subtext {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #000000;
+  }
 
-<body class="d-flex flex-column">
+  .section-heading {
+    margin-top: 1.8rem;
+    font-weight: bold;
+    color: #000000;
+    font-size: 1.25rem;
+  }
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="#">Student Portal</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="/students_reg">Student Registration</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/students_info">Student Info</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/exam">Exam Registration</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/attendance">Attendance</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/attendance_result">Attendance Result</a>
-          </li>
-        </ul>
-      </div>
+  ul.feature-list {
+    padding-left: 1.2rem;
+    color: #000000;
+  }
+
+  ul.feature-list li {
+    margin-bottom: 6px;
+  }
+
+  p.text-black {
+    color: #000000;
+  }
+</style>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container-fluid welcome-container">
+  <div class="card bg-transparent shadow-lg">
+    <div class="card-body">
+      <div class="welcome-title">Welcome to the School Website</div>
+      <div class="welcome-subtext">Empowering education through technology and innovation.</div>
+
+      <div class="section-heading">🔹 Key Features:</div>
+      <ul class="feature-list">
+        <li>Student Registration System</li>
+        <li>Exam Scheduling and Subject Assignment</li>
+        <li>Attendance Recording & Reports</li>
+        <li>Student Information Management</li>
+      </ul>
+
+      <div class="section-heading">🎓 Our Mission:</div>
+      <p class="text-black">
+        We aim to simplify school operations by integrating technology with learning and administration.
+      </p>
     </div>
-  </nav>
-
-  
-
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+  </div>
+</div>
+{% endblock %}

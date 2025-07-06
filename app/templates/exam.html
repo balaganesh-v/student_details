@@ -1,313 +1,318 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Exam Schedule</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-    <style>
-        body {
-            background-color: #e8f1fc;
+{% block title %}Exam Schedule{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        background-color: #e8f1fc;
+    }
+
+    .page-wrapper {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        margin-bottom: 40px;
+    }
+
+    h2,
+    h3 {
+        color: #264a7d;
+        font-weight: 600;
+    }
+
+    .form-label {
+        font-weight: 500;
+    }
+
+    .table th {
+        background-color: #f1f5f9;
+    }
+
+    .card-title {
+        font-weight: 600;
+    }
+
+    .form-section {
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        min-width: 120px;
+    }
+
+    .status-badge {
+        font-size: 0.85rem;
+        min-width: 130px;
+        display: inline-block;
+        text-align: center;
+        padding: 0.35em 0.6em;
+        border-radius: 0.375rem;
+    }
+
+    .table td,
+    .table th {
+        vertical-align: middle;
+    }
+
+    .page-wrapper {
+        height: 100%;
+    }
+
+    @media (min-height: 700px) {
+        .col-md-6 .page-wrapper {
+            max-height: 85vh;
         }
+    }
 
-        .page-wrapper {
-            background: #fff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-            margin-bottom: 40px;
-        }
+    .card:hover {
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        transform: scale(1.01);
+        transition: 0.2s ease-in-out;
+    }
+</style>
+{% endblock %}
 
-        h2,
-        h3 {
-            color: #264a7d;
-            font-weight: 600;
-        }
-
-        .form-label {
-            font-weight: 500;
-        }
-
-        .table th {
-            background-color: #f1f5f9;
-        }
-
-        .card-title {
-            font-weight: 600;
-        }
-
-        .form-section {
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            min-width: 120px;
-        }
-
-        .status-badge {
-            font-size: 0.85rem;
-            min-width: 130px;
-            display: inline-block;
-            text-align: center;
-            padding: 0.35em 0.6em;
-            border-radius: 0.375rem;
-        }
-
-        .table td,
-        .table th {
-            vertical-align: middle;
-        }
-
-        .page-wrapper {
-            height: 100%;
-        }
-
-        @media (min-height: 700px) {
-            .col-md-6 .page-wrapper {
-                max-height: 85vh;
-            }
-        }
-
-        .card:hover {
-            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-            transform: scale(1.01);
-            transition: 0.2s ease-in-out;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container my-5">
-        <div class="row">
-            <!-- Left Section -->
-            <div class="col-md-6">
-                <div class="page-wrapper">
-                    <h2 class="text-center mb-4"><i class="bi bi-calendar2-week me-2"></i>Exam Schedule</h2>
-                    <form action="/publish_now" method="POST" id="publishForm">
-                        <!-- Exam Info -->
-                        <div class="form-section">
-                            <div class="mb-3">
-                                <label for="examName" class="form-label"><i class="bi bi-card-text me-2"></i>Exam
-                                    Name</label>
-                                <input type="text" name="examName" id="examName" class="form-control"
-                                    placeholder="Mid Term 2025" required />
-                            </div>
-                            <div class="mb-3">
-                                <label for="examCode" class="form-label"><i class="bi bi-upc-scan me-2"></i>Exam
-                                    Code</label>
-                                <input type="text" name="examCode" id="examCode" class="form-control"
-                                    placeholder="EXM2025" required />
-                            </div>
-                            <div class="mb-3">
-                                <label for="className" class="form-label"><i
-                                        class="bi bi-people-fill me-2"></i>Class</label>
-                                <input type="text" name="className" id="className" class="form-control"
-                                    placeholder="Class 10A" required />
-                            </div>
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Left Section -->
+        <div class="col-md-6">
+            <div class="page-wrapper">
+                <h2 class="text-center mb-4"><i class="bi bi-calendar2-week me-2"></i>Exam Schedule</h2>
+                <form action="/publish_now" method="POST" id="publishForm">
+                    <div class="form-section">
+                        <div class="mb-3">
+                            <label for="examName" class="form-label"><i class="bi bi-card-text me-2"></i>Exam
+                                Name</label>
+                            <input type="text" name="examName" id="examName" class="form-control"
+                                placeholder="Mid Term 2025" required />
                         </div>
-
-                        <!-- Exam Details -->
-                        <div class="form-section">
-                            <h3 class="text-center"><i class="bi bi-book me-2"></i>Exam Details</h3>
-                            <div class="table-responsive">
-                                <table class="table table-bordered mb-4">
-                                    <thead>
-                                        <tr>
-                                            <th>Subject Name</th>
-                                            <th>Exam Date</th>
-                                            <th>Exam Time</th>
-                                            <th>Marks</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <select id="subjectsDropDown" class="form-select">
-                                                    <option value="">Select Subject</option>
-                                                </select>
-                                            </td>
-                                            <td><input type="date" id="examDate" class="form-control"></td>
-                                            <td><input type="time" id="examTime" class="form-control"></td>
-                                            <td><input type="number" id="examMarks" class="form-control"
-                                                    placeholder="100" min="0" max="100"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <!-- Dynamic rows added -->
-                                <table class="table table-bordered">
-                                    <tbody id="exam-details-body"></tbody>
-                                </table>
-                            </div>
-
-                            <div class="text-center">
-                                <button type="button" class="btn btn-outline-primary me-3" id="addExamBtn">
-                                    <i class="bi bi-plus-circle me-1"></i>Add
-                                </button>
-                                <button type="button" class="btn btn-outline-success" id="publishBtn">
-                                    <i class="bi bi-upload me-1"></i>Publish Now
-                                </button>
-                            </div>
+                        <div class="mb-3">
+                            <label for="examCode" class="form-label"><i class="bi bi-upc-scan me-2"></i>Exam
+                                Code</label>
+                            <input type="text" name="examCode" id="examCode" class="form-control" placeholder="EXM2025"
+                                required />
                         </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Right Section -->
-            <div class="col-md-6">
-                <div class="page-wrapper" style="max-height: 85vh; overflow-y: auto;">
-                    <h3 class="text-center mb-4">
-                        <i class="bi bi-list-ul me-2"></i>Scheduled Exams
-                    </h3>
-
-                    {% if schedule_exams %}
-                    {% for exam, subjects in zip(schedule_exams,grouped_subjects) %}
-                    <div class="card shadow-sm mb-4 border-0">
-                        <div class="card-body bg-light rounded">
-                            <p><strong>Exam Name:</strong> {{ exam.exam_name }}</p>
-                            <p><strong>Class:</strong> {{ exam.class_name }}</p>
-                            <p><strong>Exam Code:</strong> {{ exam.exam_code }}</p>
-                            <hr>
-
-                            {% for subject in subjects %}
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>{{ loop.index }}. {{ subject.subject_name }}</span>
-                                {% if subject.exam_date and subject.exam_date < today_date %} <span
-                                    class="badge bg-primary">Exam Completed</span>
-                                    {% elif subject.exam_date == today_date %}
-                                    <span class="badge bg-warning text-dark">Exam Today</span>
-                                    {% else %}
-                                    <span class="badge bg-success">Upcoming Exam</span>
-                                    {% endif %}
-                            </div>
-                            {% endfor %}
+                        <div class="mb-3">
+                            <label for="className" class="form-label"><i
+                                    class="bi bi-people-fill me-2"></i>Class</label>
+                            <input type="text" name="className" id="className" class="form-control"
+                                placeholder="Class 10A" required />
                         </div>
                     </div>
-                    {% endfor %}
+
+                    <div class="form-section">
+                        <h3 class="text-center"><i class="bi bi-book me-2"></i>Exam Details</h3>
+                        <div class="table-responsive">
+                            <table class="table table-bordered mb-4">
+                                <thead>
+                                    <tr>
+                                        <th>Subject Name</th>
+                                        <th>Exam Date</th>
+                                        <th>Exam Time</th>
+                                        <th>Marks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select id="subjectsDropDown" class="form-select">
+                                                <option value="">Select Subject</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="date" id="examDate" class="form-control"></td>
+                                        <td><input type="time" id="examTime" class="form-control"></td>
+                                        <td><input type="number" id="examMarks" class="form-control" placeholder="100"
+                                                min="0" max="100"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered">
+                                <tbody id="exam-details-body"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="button" class="btn btn-outline-primary me-3" id="addExamBtn">
+                                <i class="bi bi-plus-circle me-1"></i>Add
+                            </button>
+                            <button type="button" class="btn btn-outline-success" id="publishBtn">
+                                <i class="bi bi-upload me-1"></i>Publish Now
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="col-md-6">
+            <div class="page-wrapper" style="max-height: 85vh; overflow-y: auto;">
+                <h3 class="text-center mb-4">
+                    <i class="bi bi-list-ul me-2"></i>Scheduled Exams
+                </h3>
+
+                <div class="mb-3">
+                    <input type="text" id="examFilterInput" class="form-control" placeholder="Search by exam name...">
+                </div>
+
+                {% if schedule_exams %}
+                {% for exam, subjects in zip(schedule_exams, grouped_subjects) %}
+                <div class="card shadow-sm mb-4 border-0 exam-card" data-name="{{ exam.exam_name | lower }}">
+                    <div class="card-body bg-light rounded">
+                        <p><strong>Exam Name:</strong> {{ exam.exam_name }}</p>
+                        <p><strong>Class:</strong> {{ exam.class_name }}</p>
+                        <p><strong>Exam Code:</strong> {{ exam.exam_code }}</p>
+                        <hr>
+                        {% for subject in subjects %}
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ loop.index }}. {{ subject.subject_name }}</span>
+                            {% if subject.exam_date and subject.exam_date < today_date %} <span
+                                class="badge bg-primary">Exam Completed</span>
+                                {% elif subject.exam_date == today_date %}
+                                <span class="badge bg-warning text-dark">Exam Today</span>
+                                {% else %}
+                                <span class="badge bg-success">Upcoming Exam</span>
+                                {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p class="text-muted text-center">No exams scheduled.</p>
+                {% endif %}
+
+                <!-- Pagination -->
+                <div class="d-flex justify-content-center align-items-center mt-4 gap-3">
+                    {% if page > 1 %}
+                    <a href="{{ url_for('exam.exam_page', page=page-1) }}"
+                        class="btn btn-outline-primary btn-sm">&laquo; Previous</a>
                     {% else %}
-                    <p class="text-muted text-center">No exams scheduled.</p>
+                    <button class="btn btn-outline-secondary btn-sm" disabled>&laquo; Previous</button>
                     {% endif %}
-
-                    <!-- Pagination -->
-                    <div class="d-flex justify-content-center align-items-center mt-4 gap-3">
-                        {% if page > 1 %}
-                        <a href="{{ url_for('exam.exam_page', page=page-1) }}"
-                            class="btn btn-outline-primary btn-sm">&laquo; Previous</a>
+                    <span class="text-muted">Page {{ page }} of {{ total_pages }}</span>
+                    {% if page < total_pages %} <a href="{{ url_for('exam.exam_page', page=page+1) }}"
+                        class="btn btn-outline-primary btn-sm">Next &raquo;</a>
                         {% else %}
-                        <button class="btn btn-outline-secondary btn-sm" disabled>&laquo; Previous</button>
+                        <button class="btn btn-outline-secondary btn-sm" disabled>Next &raquo;</button>
                         {% endif %}
-
-                        <span class="text-muted">Page {{ page }} of {{ total_pages }}</span>
-
-                        {% if page < total_pages %} <a href="{{ url_for('exam.exam_page', page=page+1) }}"
-                            class="btn btn-outline-primary btn-sm">Next &raquo;</a>
-                            {% else %}
-                            <button class="btn btn-outline-secondary btn-sm" disabled>Next &raquo;</button>
-                            {% endif %}
-                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
-    </div>
+</div>
+{% endblock %}
 
-    <script>
-        window.onload = function () {
-            loadSubjects();
-        }
+{% block script %}
+<script>
+    window.onload = function () {
+        loadSubjects();
+    }
 
-        function loadSubjects() {
-            fetch('/subjects')
-                .then(response => response.json())
-                .then(data => {
-                    const dropdown = document.getElementById('subjectsDropDown');
-                    dropdown.innerHTML = '<option value="">Select Subject</option>';
-                    data.forEach(subject => {
-                        const option = document.createElement('option');
-                        option.value = subject;
-                        option.textContent = subject;
-                        dropdown.appendChild(option);
-                    });
-                })
-                .catch(error => console.error('Error loading subjects:', error));
-        }
-
-        document.getElementById('addExamBtn').addEventListener('click', function () {
-            const subject = document.getElementById('subjectsDropDown').value;
-            const examDate = document.getElementById('examDate').value;
-            const examTime = document.getElementById('examTime').value;
-            const marks = document.getElementById('examMarks').value;
-
-            if (!subject || !examDate || !examTime || !marks) {
-                alert("Please fill all fields before adding.");
-                return;
-            }
-
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${subject}</td>
-                <td>${examDate}</td>
-                <td>${examTime}</td>
-                <td>${marks}</td>
-            `;
-            document.getElementById('exam-details-body').appendChild(row);
-
-            document.getElementById('subjectsDropDown').value = '';
-            document.getElementById('examDate').value = '';
-            document.getElementById('examTime').value = '';
-            document.getElementById('examMarks').value = '';
-        });
-
-        document.getElementById('publishBtn').addEventListener('click', function () {
-            const examName = document.getElementById('examName').value;
-            const examCode = document.getElementById('examCode').value;
-            const className = document.getElementById('className').value;
-
-            const tableBody = document.getElementById('exam-details-body');
-            const rows = tableBody.getElementsByTagName('tr');
-            const exams = [];
-
-            for (let row of rows) {
-                const cells = row.getElementsByTagName('td');
-                exams.push({
-                    subject_name: cells[0].textContent,
-                    exam_date: cells[1].textContent,
-                    exam_time: cells[2].textContent,
-                    marks: cells[3].textContent
+    function loadSubjects() {
+        fetch('/subjects')
+            .then(response => response.json())
+            .then(data => {
+                const dropdown = document.getElementById('subjectsDropDown');
+                dropdown.innerHTML = '<option value="">Select Subject</option>';
+                data.forEach(subject => {
+                    const option = document.createElement('option');
+                    option.value = subject;
+                    option.textContent = subject;
+                    dropdown.appendChild(option);
                 });
-            }
-
-            if (!examName || !examCode || !className || exams.length === 0) {
-                alert("Please fill all exam info and add at least one subject.");
-                return;
-            }
-
-            fetch('/publish_now', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    exam_name: examName,
-                    exam_code: examCode,
-                    class_name: className,
-                    exam_details: exams
-                })
             })
-                .then(response => response.text())
-                .then(html => {
-                    document.open();
-                    document.write(html);
-                    document.close();
-                })
-                .catch(err => {
-                    console.error('Publish error:', err);
-                    alert("Something went wrong while publishing.");
-                });
-        });
-    </script>
-</body>
+            .catch(error => console.error('Error loading subjects:', error));
+    }
 
-</html>
+    document.getElementById('addExamBtn').addEventListener('click', function () {
+        const subject = document.getElementById('subjectsDropDown').value;
+        const examDate = document.getElementById('examDate').value;
+        const examTime = document.getElementById('examTime').value;
+        const marks = document.getElementById('examMarks').value;
+
+        if (!subject || !examDate || !examTime || !marks) {
+            alert("Please fill all fields before adding.");
+            return;
+        }
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${subject}</td>
+            <td>${examDate}</td>
+            <td>${examTime}</td>
+            <td>${marks}</td>
+        `;
+        document.getElementById('exam-details-body').appendChild(row);
+
+        document.getElementById('subjectsDropDown').value = '';
+        document.getElementById('examDate').value = '';
+        document.getElementById('examTime').value = '';
+        document.getElementById('examMarks').value = '';
+    });
+
+    document.getElementById('publishBtn').addEventListener('click', function () {
+        const examName = document.getElementById('examName').value;
+        const examCode = document.getElementById('examCode').value;
+        const className = document.getElementById('className').value;
+
+        const tableBody = document.getElementById('exam-details-body');
+        const rows = tableBody.getElementsByTagName('tr');
+        const exams = [];
+
+        for (let row of rows) {
+            const cells = row.getElementsByTagName('td');
+            exams.push({
+                subject_name: cells[0].textContent,
+                exam_date: cells[1].textContent,
+                exam_time: cells[2].textContent,
+                marks: cells[3].textContent
+            });
+        }
+
+        if (!examName || !examCode || !className || exams.length === 0) {
+            alert("Please fill all exam info and add at least one subject.");
+            return;
+        }
+
+        fetch('/publish_now', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                exam_name: examName,
+                exam_code: examCode,
+                class_name: className,
+                exam_details: exams
+            })
+        })
+            .then(response => response.text())
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch(err => {
+                console.error('Publish error:', err);
+                alert("Something went wrong while publishing.");
+            });
+    });
+
+    document.getElementById('examFilterInput').addEventListener('input', function () {
+        const filterValue = this.value.toLowerCase();
+        const cards = document.querySelectorAll('.exam-card');
+
+        cards.forEach(card => {
+            const name = card.getAttribute('data-name');
+            card.style.display = name.includes(filterValue) ? '' : 'none';
+        });
+    });
+
+    document.getElementById('examFilterInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') e.preventDefault();
+    });
+</script>
+{% endblock %}
