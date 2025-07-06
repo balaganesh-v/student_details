@@ -1,4 +1,4 @@
-from sample_record.load_test_record import load_all_records
+from app.sample_record.load_test_record import load_all_records
 from app import create_app
 
 app = create_app()
