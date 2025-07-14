@@ -1,4 +1,5 @@
-from pydantic import BaseModel, validator, HttpUrl
+from pydantic import BaseModel, HttpUrl, field_validator
+from pydantic_core.core_schema import FieldValidationInfo
 import re
 
 class StudentRegistrationSchema(BaseModel):
@@ -11,44 +12,50 @@ class StudentRegistrationSchema(BaseModel):
     fatherPhone: str
     motherPhone: str
     studentAddress: str
-    image_url: HttpUrl  # Validates that it's a proper URL
+    image_url: HttpUrl
 
-    @validator("studentName", "fatherName", "motherName", "studentPlace")
-    def validate_names(cls, value, field):
+    @field_validator("studentName", "fatherName", "motherName", "studentPlace")
+    @classmethod
+    def validate_names(cls, value: str, info: FieldValidationInfo) -> str:
         if not re.match(r"^[A-Za-z.\s]+$", value):
-            raise ValueError(f"{field.name} must contain only letters and spaces")
+            raise ValueError(f"{info.field_name} must contain only letters and spaces")
         return value
 
-    @validator("studentId")
-    def validate_student_id(cls, value):
+    @field_validator("studentId")
+    @classmethod
+    def validate_student_id(cls, value: int) -> int:
         if value < 0:
             raise ValueError("Student ID must be a positive integer")
         return value
 
-    @validator("studentAge")
-    def validate_age(cls, value):
+    @field_validator("studentAge")
+    @classmethod
+    def validate_age(cls, value: int) -> int:
         if value < 3 or value > 100:
             raise ValueError("Student age must be between 3 and 100")
         return value
 
-    @validator("fatherPhone", "motherPhone")
-    def validate_phone(cls, value, field):
+    @field_validator("fatherPhone", "motherPhone")
+    @classmethod
+    def validate_phone(cls, value: str, info: FieldValidationInfo) -> str:
         if not re.match(r"^\d{10}$", value):
-            raise ValueError(f"{field.name} must be a valid 10-digit number")
+            raise ValueError(f"{info.field_name} must be a valid 10-digit number")
         return value
 
-    @validator("studentAddress")
-    def validate_address(cls, value):
+    @field_validator("studentAddress")
+    @classmethod
+    def validate_address(cls, value: str) -> str:
         if len(value.strip()) < 5:
             raise ValueError("Student address must be at least 5 characters long")
         return value
 
 
 class StudentIdSchema(BaseModel):
-    studentId : int
+    studentId: int
 
-    @validator("studentId")
-    def validate_student_id(cls, value):
+    @field_validator("studentId")
+    @classmethod
+    def validate_student_id(cls, value: int) -> int:
         if value < 0:
             raise ValueError("Student ID must be a positive integer")
         return value
