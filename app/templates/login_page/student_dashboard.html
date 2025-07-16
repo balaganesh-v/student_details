@@ -1,154 +1,251 @@
-<!-- student_dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Student Dashboard</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudentHub Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f5f7fa;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+    }
 
-        .sidebar {
-            background-color: #343a40;
-            min-height: 100vh;
-            padding-top: 30px;
-        }
+    .sidebar {
+      background: linear-gradient(180deg, #007bff 0%, #0056b3 100%);
+      min-height: 100vh;
+      color: white;
+      position: fixed;
+      width: 260px;
+      padding: 1rem 0.5rem;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
 
-        .sidebar .nav-link {
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
+    .sidebar h4 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
 
-        .sidebar .nav-link.active {
-            background-color: #0d6efd;
-            border-radius: 6px;
-        }
+    .sidebar p {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
 
-        .topbar {
-            background-color: #ffffff;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-            padding: 10px 25px;
-        }
+    .sidebar .nav-link {
+      color: #e9ecef;
+      border-radius: 8px;
+      margin: 0.15rem 0;
+      padding: 0.4rem 0.75rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+    }
 
-        .form-box {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-        }
+    .sidebar .nav-link.active,
+    .sidebar .nav-link:hover {
+      background-color: #ffffff1a;
+      color: #ffffff;
+      transform: translateX(4px);
+    }
 
-        h4 {
-            color: #0d6efd;
-        }
+    .sidebar .nav-link i {
+      font-size: 1.1rem;
+    }
 
-        .profile-name {
-            font-weight: 600;
-        }
+    .main-content {
+      margin-left: 260px;
+      padding: 1.5rem;
+      min-height: 100vh;
+      background-color: #f5f7fa;
+    }
 
-        .logout-btn {
-            background: none;
-            border: none;
-            color: #dc3545;
-        }
+    .topbar {
+      background-color: #ffffff;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #e9ecef;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
 
-        .logout-btn:hover {
-            text-decoration: underline;
-        }
+    .user-info {
+      background: linear-gradient(90deg, #17b857 0%, #20c950 100%);
+      color: white;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
 
-        .tab-content {
-            margin-top: 20px;
-        }
-    </style>
+    .user-info h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .user-info p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin: 0;
+    }
+
+    .form-box {
+      background-color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1rem;
+    }
+
+    .tab-content h4 {
+      color: #2c3e50;
+      font-weight: 600;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.8rem;
+    }
+
+    .tab-content p {
+      color: #495057;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .tab-pane {
+      opacity: 0;
+      transition: opacity 0.5s ease-in;
+    }
+
+    .tab-pane.show {
+      opacity: 1;
+    }
+
+    .settings-section {
+      margin-top: auto;
+      padding-top: 0.5rem;
+    }
+
+    .logout-btn {
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .logout-btn:hover {
+      background-color: #c82333;
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 80px;
+      }
+
+      .sidebar h4,
+      .sidebar p,
+      .sidebar .nav-link span,
+      .settings-section span {
+        display: none;
+      }
+
+      .main-content {
+        margin-left: 80px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .main-content {
+        margin-left: 0;
+        padding: 1rem;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 1rem;
+      }
+
+      .sidebar .nav {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .sidebar .nav-link {
+        margin: 0;
+        padding: 0.5rem;
+      }
+
+      .settings-section {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container-fluid">
-        <div class="row">
-
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 sidebar d-flex flex-column">
-                <h4 class="text-white text-center mb-4"><i class="bi bi-speedometer2"></i> Student Panel</h4>
-                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist">
-                    <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#student-dashboard"
-                        type="button">
-                        <i class="bi bi-house"></i> Dashboard
-                    </button>
-                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#view-classes" type="button">
-                        <i class="bi bi-book"></i> My Classes
-                    </button>
-                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#exam-schedule" type="button">
-                        <i class="bi bi-calendar3"></i> Exam Schedule
-                    </button>
-                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#results" type="button">
-                        <i class="bi bi-bar-chart"></i> Results
-                    </button>
-                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#student-settings" type="button">
-                        <i class="bi bi-gear"></i> Settings
-                    </button>
-                </div>
-            </div>
-
-            <!-- Main Content -->
-            <div class="col-md-9 col-lg-10">
-                <div class="topbar d-flex justify-content-between align-items-center">
-                    <div>
-                        <h2 class="mb-2 fw-bold text-success">Welcome {{ user.user_name }}</h2>
-                        <p class="mb-0">Your email is {{ user.user_email }}</p>
-                    </div>
-
-                    <button class="logout-btn"><i class="bi bi-box-arrow-right"></i> Logout</button>
-                </div>
-
-                <div class="p-4 tab-content" id="v-pills-tabContent">
-
-                    <div class="tab-pane fade show active" id="student-dashboard" role="tabpanel">
-                        <div class="form-box">
-                            <h4><i class="bi bi-house"></i> Dashboard</h4>
-                            <p>Welcome to your dashboard. Use the side menu to check your classes, exams, and results.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="view-classes" role="tabpanel">
-                        <div class="form-box">
-                            <h4><i class="bi bi-book"></i> My Classes</h4>
-                            <p>Your enrolled class details will appear here.</p>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="exam-schedule" role="tabpanel">
-                        <div class="form-box">
-                            <h4><i class="bi bi-calendar3"></i> Exam Schedule</h4>
-                            <p>Upcoming exams and schedules will be displayed here.</p>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="results" role="tabpanel">
-                        <div class="form-box">
-                            <h4><i class="bi bi-bar-chart"></i> Results</h4>
-                            <p>Your results and grades will appear here.</p>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="student-settings" role="tabpanel">
-                        <div class="form-box">
-                            <h4><i class="bi bi-gear"></i> Settings</h4>
-                            <p>Change your password and update your profile.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
+  <div class="container-fluid p-0">
+    <div class="row g-0">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <h4>StudentHub</h4>
+        <p>Hello <strong>{{ user.user_name }}</strong></p>
+        <div class="nav flex-column nav-pills mb-auto">
+          <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#student-dashboard" href="#"><i class="bi bi-house-door"></i> <span>Dashboard</span></a>
+          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#courses" href="#"><i class="bi bi-book"></i> <span>Courses</span></a>
+          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#grades" href="#"><i class="bi bi-award"></i> <span>Grades</span></a>
+          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#timetable" href="#"><i class="bi bi-calendar2-week"></i> <span>Timetable</span></a>
+          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#messages" href="#"><i class="bi bi-envelope"></i> <span>Messages</span></a>
+          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#profile" href="#"><i class="bi bi-person-circle"></i> <span>Profile</span></a>
         </div>
+        <div class="settings-section">
+          <a class="logout-btn w-100" href="/logout"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a>
+          <a class="nav-link w-100" data-bs-toggle="pill" data-bs-target="#settings"><i class="bi bi-gear"></i> <span>Settings</span></a>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="topbar">
+          <div class="user-info">
+            <h2>Welcome {{ user.user_name }}</h2>
+            <p>Your email is {{ user.user_email }}</p>
+          </div>
+        </div>
+
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="student-dashboard" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-house-door"></i> Dashboard</h4>
+              <p>Welcome to your StudentHub dashboard. Access courses, view grades, check timetable, and communicate with instructors.</p>
+            </div>
+          </div>
+          <!-- Additional tab content like #courses, #grades, etc. -->
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

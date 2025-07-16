@@ -11,7 +11,7 @@ def login_into_website_using_data(data):
     is_valid = check_password(password,stored_hash)
     if is_valid:
         token = generate_token(current_user)
-        return {'success': True, 'token': token , 'user': current_user}
+        return {'success': True, 'token': token }
     else:
         return {'success': False, 'message': 'Incorrect password.'}
     

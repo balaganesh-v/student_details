@@ -54,7 +54,7 @@ def generate_token_with_code(user,code):
         payload = {
             'user_id': user['user_id'],
             'random_code':code,
-            'exp': datetime.utcnow() + timedelta(minutes=5)  
+            'exp': datetime.utcnow() + timedelta(minutes=7)  
         }
         token = jwt.encode(payload,current_app.config['SECRET_KEY'], algorithm='HS256')
         return token

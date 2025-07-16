@@ -8,7 +8,7 @@ def student_login():
     data = request.form.to_dict()
     result = login_into_website_using_data(data)
     if result.get("success"):
-        response = make_response(render_template("login_page/student_dashboard.html",user = result.get('user')))
+        response = make_response(redirect(url_for('admin.dashboard')))
         response.set_cookie("access_token", result["token"], httponly=True, secure=True,samesite='Lax')
         return response    
     return render_template("login_page/login.html")

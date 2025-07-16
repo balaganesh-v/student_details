@@ -16,12 +16,67 @@ def insert_datas_to_db(data):
         connection.close()
         cursor.close()
 
+def insert_datas_into_teachers(data):
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = """
+            INSERT INTO teachers 
+            (user_id,user_name,image_url,gender,qualification,age,year_of_experience,subject_specialization,salary_package,mobile_number,address,account_id)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+        """
+        values = (
+            data['user_id'],
+            data['user_name'],
+            data['image_url'],
+            data['gender'],
+            data['qualification'],
+            data['age'],
+            data['year_of_experience'],
+            data['subject_specialization'],
+            data['salary_package'],
+            data['mobile_number'],
+            data['address'],
+            data['account_number']
+            )
+        cursor.execute(query,values)
+        connection.commit()
+        return True
+    except Exception as e:
+        print(f"Error : {e}")
+        return False
+    finally:
+        connection.close()
+        cursor.close()
+
+
+def insert_datas_into_students():
+    pass
+
 def get_user_from_db_by_email(user_email):
     try:
         connection = db_connection()
         cursor = connection.cursor()
         query = "SELECT * FROM users WHERE user_email = %s "
         values = (user_email,)
+        cursor.execute(query,values)
+        user = cursor.fetchone()
+        return user
+    except Exception as e:
+        print(f"Error : {e}")
+        return False
+    finally:
+        connection.close()
+        cursor.close()
+
+
+
+def get_user_from_db_by_user_id(user_id):
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = "SELECT * FROM users WHERE user_id = %s "
+        values = (user_id,)
         cursor.execute(query,values)
         user = cursor.fetchone()
         return user
