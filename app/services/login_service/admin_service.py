@@ -23,9 +23,13 @@ def insert_datas(data,image_file):
         if data['user_role'] == 'Teacher':
             url_link = image_upload_cloudinary_and_get_url(image_file)
             data['image_url']  = url_link
-            return insert_datas_into_teachers(data)
+            insert_datas_into_teachers(data)
+            return ({'success':True})
         elif data['user_role'] == 'Student':
-            return insert_datas_into_students(data)
+            url_link = image_upload_cloudinary_and_get_url(image_file)
+            data['image_url']  = url_link
+            insert_datas_into_students(data)
+            return ({'success':True})
     except Exception as e:
         print("SERVICE ERROR:", e)
         return False

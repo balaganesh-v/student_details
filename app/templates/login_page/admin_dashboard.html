@@ -141,21 +141,92 @@
           <div class="tab-pane fade" id="add-student" role="tabpanel">
             <div class="form-box">
               <h4><i class="bi bi-person-plus"></i> Add Student</h4>
-              <form method="POST" action="{{ url_for('admin.add_student') }}">
+              <form method="POST" action="{{ url_for('admin.add_student') }}" enctype="multipart/form-data">
                 <input type="hidden" name="user_role" value="Student">
+
+                <!-- Basic Info -->
                 <div class="mb-3">
                   <label class="form-label">Name</label>
                   <input type="text" name="user_name" class="form-control" required>
                 </div>
+
                 <div class="mb-3">
                   <label class="form-label">Email</label>
-                  <input type="email" name="user_email" class="form-control">
+                  <input type="email" name="user_email" class="form-control" required>
                 </div>
+
                 <div class="mb-3">
                   <label class="form-label">Password</label>
                   <input type="password" name="user_password" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary"><i class="bi bi-person-plus"></i> Add Student</button>
+
+                <div class="mb-3">
+                  <label for="image_file" class="form-label">Profile Photo</label>
+                  <input type="file" name="image_file" id="image_file" class="form-control" accept="image/*">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Class</label>
+                  <input type="text" name="student_class" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Gender</label>
+                  <select name="gender" class="form-control">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Date of Birth</label>
+                  <input type="date" name="date_of_birth" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Roll Number</label>
+                  <input type="number" name="roll_no" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Age</label>
+                  <input type="number" name="age" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Father's Name</label>
+                  <input type="text" name="father_name" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Mother's Name</label>
+                  <input type="text" name="mother_name" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Father's Mobile Number</label>
+                  <input type="text" name="father_mobile_number" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Mother's Mobile Number</label>
+                  <input type="text" name="mother_mobile_number" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Address</label>
+                  <textarea name="address" class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Admission Date</label>
+                  <input type="date" name="admission_date" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                  <i class="bi bi-person-plus"></i> Add Student
+                </button>
               </form>
             </div>
           </div>

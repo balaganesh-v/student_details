@@ -50,8 +50,25 @@ def insert_datas_into_teachers(data):
         cursor.close()
 
 
-def insert_datas_into_students():
-    pass
+def insert_datas_into_students(data):
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = """ INSERT INTO students 
+                (user_id,student_name,image_url,class,gender,date_of_birth,roll_no,age,father_name,
+                mother_name,father_mobile_number,mother_mobile_number,address,admission_date) VALUES 
+                (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        values = (data['user_id'],data['user_name'],data['image_url'],data['student_class'],data['gender'],
+                data['date_of_birth'],data['roll_no'],data['age'],data['father_name'],data['mother_name'],
+                data['father_mobile_number'],data['mother_mobile_number'],data['address'],data['admission_date'])
+        cursor.execute(query,values)
+        connection.commit()
+    except Exception as e:
+        print(f" Error : {e} ")
+    finally:
+        connection.close()
+        cursor.close()
+
 
 def get_user_from_db_by_email(user_email):
     try:

@@ -47,9 +47,10 @@ def dashboard():
 @admin_bp.route('/add_student',methods=['POST'])
 def add_student():
     data=request.form.to_dict()
+    print(data)
     image_file = request.files.get('image_file')
-    success = insert_datas(data,image_file)
-    if success :
+    result = insert_datas(data,image_file)
+    if result.get('success'):
         send_login_email(data)
         print("Student added and login email sent successfully.")
     else:
@@ -60,8 +61,8 @@ def add_student():
 def add_teacher():
     data=request.form.to_dict()
     image_file = request.files.get('image_file')
-    success = insert_datas(data,image_file)
-    if success :
+    result = insert_datas(data,image_file)
+    if result.get('success'):
         send_login_email(data)
         print("Student added and login email sent successfully.")
     else:
