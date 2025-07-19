@@ -83,6 +83,18 @@ def insert_datas_into_students(data):
         connection.close()
         cursor.close()
 
+def insert_students_into_attendance_db(data):
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = "INSERT INTO students_attendance (user_id,student_name) VALUES (%s,%s) " 
+        values = (data ['user_id'],data['user_name'],)
+        cursor.execute(query,values)
+        connection.commit()
+    except Exception as e:
+        print(f"Error : {e}")
+        return None
+
 
 def get_user_from_db_by_email(user_email):
     try:
@@ -142,10 +154,6 @@ def get_teacher_datas_from_db(user_id):
         values = (user_id,)
         cursor.execute(query,values)
         result = cursor.fetchone()
-        if result:
-            print("✅ Teacher data found:", result)
-        else:
-            print("⚠️ No teacher found with user_id:", user_id)
         return result
     except Exception as e:
         print(f"Error : {e}")

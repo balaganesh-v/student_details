@@ -120,6 +120,23 @@
       font-size: 0.95rem;
     }
 
+    .table td,
+    .table th {
+      vertical-align: middle;
+    }
+
+    .btn-check:checked+.btn-outline-success {
+      background-color: #198754;
+      color: white;
+      border-color: #198754;
+    }
+
+    .btn-check:checked+.btn-outline-danger {
+      background-color: #dc3545;
+      color: white;
+      border-color: #dc3545;
+    }
+
     @media (max-width: 768px) {
       .sidebar {
         width: 80px;
@@ -181,18 +198,34 @@
         <h4>TeacherHub</h4>
         <p>Welcome <strong>{{ user.user_name }}</strong></p>
         <div class="nav flex-column nav-pills" id="sidebar-tabs" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" data-bs-toggle="pill" href="#dashboard" role="tab"><i class="bi bi-house"></i> <span>Dashboard</span></a>
-          <a class="nav-link" data-bs-toggle="pill" href="#students" role="tab"><i class="bi bi-people-fill"></i> <span>Students</span></a>
-          <a class="nav-link" data-bs-toggle="pill" href="#assignments" role="tab"><i class="bi bi-journal-text"></i> <span>Assignments</span></a>
-          <a class="nav-link" data-bs-toggle="pill" href="#calendar" role="tab"><i class="bi bi-calendar-week"></i> <span>Calendar</span></a>
-          <a class="nav-link" data-bs-toggle="pill" href="#analytics" role="tab"><i class="bi bi-bar-chart-line"></i> <span>Analytics</span></a>
-          <a class="nav-link" data-bs-toggle="pill" href="#messages" role="tab"><i class="bi bi-chat-dots"></i> <span>Messages</span></a>
-          <a class="nav-link" data-bs-toggle="pill" href="#resources" role="tab"><i class="bi bi-folder2-open"></i> <span>Resources</span></a>
-          <a class="nav-link" data-bs-toggle="pill" href="#profile" role="tab"><i class="bi bi-person-circle"></i> <span>Profile</span></a>
+          <a class="nav-link active" id="dashboard-tab" data-bs-toggle="pill" href="#dashboard" role="tab"
+            aria-controls="dashboard" aria-selected="true"><i class="bi bi-house"></i> <span>Dashboard</span></a>
+          <a class="nav-link" id="students-tab" data-bs-toggle="pill" href="#students" role="tab"
+            aria-controls="students" aria-selected="false"><i class="bi bi-people-fill"></i> <span>Students</span></a>
+          <a class="nav-link" id="attendance-tab" data-bs-toggle="pill" href="#attendance" role="tab"
+            aria-controls="attendance" aria-selected="false"><i class="bi bi-calendar-check"></i>
+            <span>Attendance</span></a>
+          <a class="nav-link" id="assignments-tab" data-bs-toggle="pill" href="#assignments" role="tab"
+            aria-controls="assignments" aria-selected="false"><i class="bi bi-journal-text"></i>
+            <span>Assignments</span></a>
+          <a class="nav-link" id="calendar-tab" data-bs-toggle="pill" href="#calendar" role="tab"
+            aria-controls="calendar" aria-selected="false"><i class="bi bi-calendar-week"></i> <span>Calendar</span></a>
+          <a class="nav-link" id="analytics-tab" data-bs-toggle="pill" href="#analytics" role="tab"
+            aria-controls="analytics" aria-selected="false"><i class="bi bi-bar-chart-line"></i>
+            <span>Analytics</span></a>
+          <a class="nav-link" id="messages-tab" data-bs-toggle="pill" href="#messages" role="tab"
+            aria-controls="messages" aria-selected="false"><i class="bi bi-chat-dots"></i> <span>Messages</span></a>
+          <a class="nav-link" id="resources-tab" data-bs-toggle="pill" href="#resources" role="tab"
+            aria-controls="resources" aria-selected="false"><i class="bi bi-folder2-open"></i>
+            <span>Resources</span></a>
+          <a class="nav-link" id="profile-tab" data-bs-toggle="pill" href="#profile" role="tab" aria-controls="profile"
+            aria-selected="false"><i class="bi bi-person-circle"></i> <span>Profile</span></a>
         </div>
+
         <div class="settings-section mt-3">
           <a href="/logout" class="logout-btn"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a>
-          <a class="nav-link" data-bs-toggle="pill" href="#settings" role="tab"><i class="bi bi-gear"></i> <span>Settings</span></a>
+          <a class="nav-link" data-bs-toggle="pill" href="#settings" role="tab"><i class="bi bi-gear"></i>
+            <span>Settings</span></a>
         </div>
       </div>
 
@@ -210,7 +243,8 @@
           <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
             <div class="form-box">
               <h4><i class="bi bi-house"></i> Dashboard</h4>
-              <p>Welcome to your TeacherHub dashboard. Monitor teaching activities, track student progress, and manage your classroom efficiently.</p>
+              <p>Welcome to your TeacherHub dashboard. Monitor teaching activities, track student progress, and manage
+                your classroom efficiently.</p>
             </div>
           </div>
 
@@ -225,7 +259,8 @@
               <div class="btn-group mb-3" role="group">
                 {% for class_name in teacher.class_ids.split(',') %}
                 {% if class_name.strip() %}
-                <button type="button" onclick="view_students_list('{{ class_name.strip() }}')" class="btn btn-outline-primary m-1">Class {{ class_name.strip() }}</button>
+                <button type="button" onclick="view_students_list('{{ class_name.strip() }}')"
+                  class="btn btn-outline-primary m-1">Class {{ class_name.strip() }}</button>
                 {% endif %}
                 {% endfor %}
               </div>
@@ -235,27 +270,70 @@
             </div>
           </div>
 
+          <!-- Attendance -->
+          <div class="tab-pane fade" id="attendance" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-people-fill"></i> Attendance</h4>
+              {% if teacher.class_ids %}
+              <label>Classes</label>
+              <div class="btn-group mb-3" role="group">
+                {% for class_name in teacher.class_ids.split(',') %}
+                {% if class_name.strip() %}
+                <button type="button" onclick="view_students_attendance_list('{{ class_name.strip() }}')"
+                  class="btn btn-outline-primary m-1">Class {{ class_name.strip() }}</button>
+                {% endif %}
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              <div class="container mt-5">
+                <div id="student-attendance-list-container" class="bg-white p-4 shadow-sm rounded"></div>
+              </div>
+            </div>
+          </div>
+
           <!-- Other sections -->
           <div class="tab-pane fade" id="assignments" role="tabpanel">
-            <div class="form-box"><h4><i class="bi bi-journal-text"></i> Assignments</h4><p>Create, assign, and track student assignments and submissions.</p></div>
+            <div class="form-box">
+              <h4><i class="bi bi-journal-text"></i> Assignments</h4>
+              <p>Create, assign, and track student assignments and submissions.</p>
+            </div>
           </div>
           <div class="tab-pane fade" id="calendar" role="tabpanel">
-            <div class="form-box"><h4><i class="bi bi-calendar-week"></i> Calendar</h4><p>Schedule classes, exams, and other important events.</p></div>
+            <div class="form-box">
+              <h4><i class="bi bi-calendar-week"></i> Calendar</h4>
+              <p>Schedule classes, exams, and other important events.</p>
+            </div>
           </div>
           <div class="tab-pane fade" id="analytics" role="tabpanel">
-            <div class="form-box"><h4><i class="bi bi-bar-chart-line"></i> Analytics</h4><p>Analyze student performance, attendance trends, and other metrics.</p></div>
+            <div class="form-box">
+              <h4><i class="bi bi-bar-chart-line"></i> Analytics</h4>
+              <p>Analyze student performance, attendance trends, and other metrics.</p>
+            </div>
           </div>
           <div class="tab-pane fade" id="messages" role="tabpanel">
-            <div class="form-box"><h4><i class="bi bi-chat-dots"></i> Messages</h4><p>Communicate with students, parents, and other teachers.</p></div>
+            <div class="form-box">
+              <h4><i class="bi bi-chat-dots"></i> Messages</h4>
+              <p>Communicate with students, parents, and other teachers.</p>
+            </div>
           </div>
           <div class="tab-pane fade" id="resources" role="tabpanel">
-            <div class="form-box"><h4><i class="bi bi-folder2-open"></i> Resources</h4><p>Access and share teaching materials, lesson plans, and other resources.</p></div>
+            <div class="form-box">
+              <h4><i class="bi bi-folder2-open"></i> Resources</h4>
+              <p>Access and share teaching materials, lesson plans, and other resources.</p>
+            </div>
           </div>
           <div class="tab-pane fade" id="profile" role="tabpanel">
-            <div class="form-box"><h4><i class="bi bi-person-circle"></i> Profile</h4><p>Update your personal information, change password, and manage preferences.</p></div>
+            <div class="form-box">
+              <h4><i class="bi bi-person-circle"></i> Profile</h4>
+              <p>Update your personal information, change password, and manage preferences.</p>
+            </div>
           </div>
           <div class="tab-pane fade" id="settings" role="tabpanel">
-            <div class="form-box"><h4><i class="bi bi-gear"></i> Settings</h4><p>Adjust your dashboard settings and preferences.</p></div>
+            <div class="form-box">
+              <h4><i class="bi bi-gear"></i> Settings</h4>
+              <p>Adjust your dashboard settings and preferences.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -286,7 +364,7 @@
                   <strong>${student.student_name}</strong><br>
                   <small>Class: ${student.class}</small>
                 </div>
-                <button class="btn btn-sm btn-outline-info" onclick="view_student_detail(${student.id})">
+                <button class="btn btn-sm btn-outline-info" onclick="view_student_detail(${student.user_id})">
                   View Details
                 </button>
               </div>`;
@@ -300,9 +378,203 @@
         });
     }
 
-    function view_student_detail(id) {
-      alert("View student details for ID: " + id);
+
+    // ----------- Students Attendance ---------------- //
+
+    function view_students_attendance_list(class_name) {
+      fetch(`/get_student_datas/${class_name}`)
+        .then(response => response.json())
+        .then(data => {
+          const container = document.getElementById('student-attendance-list-container');
+          container.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="text-primary ">📋 Students Attendance - ${class_name}</h3>
+          <button class="btn btn-outline-secondary btn-sm" onclick="view_students_attendance_list('${class_name}')">Refresh</button>
+        </div>`;
+
+          if (data.length === 0) {
+            container.innerHTML += `<div class="alert alert-warning">No students found for Class <strong>${class_name}</strong>.</div>`;
+            return;
+          }
+
+          let content = `
+        <form id="attendance-form" class="needs-validation" novalidate>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">s.no</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col" class="text-center">Attendance</th>
+                </tr>
+              </thead>
+              <tbody>`;
+
+          data.forEach((student, index) => {
+            content += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${student.student_name}</td>
+            <td class="text-center">
+              <div class="btn-group" role="group" aria-label="Attendance Status">
+                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" required>
+                <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
+
+                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" required>
+                <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
+              </div>
+            </td>
+          </tr>`;
+          });
+
+          content += `
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
+          </div>
+        </form>`;
+
+          container.innerHTML += content;
+
+          // Handle form submission
+          document.getElementById("attendance-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const attendanceData = data.map(student => ({
+              user_id: student.user_id,
+              user_name: student.student_name,
+              status: formData.get(`status_${student.user_id}`)
+            }));
+
+            fetch(`/submit_attendance`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                class_name: class_name,
+                date: new Date().toISOString().split('T')[0],
+                attendance: attendanceData
+              })
+            })
+              .then(res => res.json())
+              .then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                  container.innerHTML = `
+                    <div class="alert alert-success text-center shadow-sm rounded p-4">
+                      ✅ Attendance successfully submitted for <strong>${class_name}</strong>!
+                    </div>`;
+                } else {
+                  container.innerHTML += `<div class="alert alert-danger mt-3">❌ Error: ${data.error}</div>`;
+                }
+              })
+
+              .catch(err => {
+                console.error("Error:", err);
+                container.innerHTML += `<div class="alert alert-danger mt-3">Something went wrong. Please try again.</div>`;
+              });
+          });
+        })
+        .catch(error => {
+          console.error("Fetch error:", error);
+          document.getElementById('student-attendance-list-container').innerHTML = `
+        <div class="alert alert-danger">Error fetching students for ${class_name}.</div>`;
+        });
+    }
+    // -----------   Finish Students Attendance ------------- //
+
+
+
+
+    function viewStudentDetail(id) {
+      fetch(`/get_student_detail/${id}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.error) {
+            alert("Error: " + data.error);
+            return;
+          }
+
+          const student = data.student;
+          const attendance = data.attendance;
+          const exams = data.exams || [];
+
+          let html = `
+          <div class="container">
+            <h4 class="mb-3 text-primary">${student.name}</h4>
+            <p><strong>Class:</strong> ${student.class}</p>
+            <p><strong>DOB:</strong> ${student.dob}</p>
+
+            <hr>
+            <h5 class="text-success">📅 Attendance</h5>
+            <table class="table table-bordered">
+              <thead class="table-light">
+                <tr>
+                  <th>Month</th>
+                  <th>Present Days</th>
+                  <th>Total Days</th>
+                  <th>Percentage</th>
+                </tr>
+              </thead>
+              <tbody>`;
+
+          attendance.forEach(a => {
+            const percentage = ((a.present / a.total_days) * 100).toFixed(2);
+            html += `
+            <tr>
+              <td>${a.month}</td>
+              <td>${a.present}</td>
+              <td>${a.total_days}</td>
+              <td>${percentage}%</td>
+            </tr>`;
+          });
+
+          html += `</tbody></table>`;
+
+          if (exams.length > 0) {
+            html += `
+            <hr>
+            <h5 class="text-info">📊 Exam Results</h5>
+            <table class="table table-striped">
+              <thead class="table-light">
+                <tr>
+                  <th>Exam</th>
+                  <th>Subject</th>
+                  <th>Marks Obtained</th>
+                  <th>Total Marks</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>`;
+
+            exams.forEach(result => {
+              html += `
+              <tr>
+                <td>${result.exam}</td>
+                <td>${result.subject}</td>
+                <td>${result.marks}</td>
+                <td>${result.total}</td>
+                <td>${result.grade}</td>
+              </tr>`;
+            });
+
+            html += `</tbody></table>`;
+          }
+
+          html += `</div>`;
+
+          document.getElementById('student-detail-body').innerHTML = html;
+          const modal = new bootstrap.Modal(document.getElementById('studentDetailModal'));
+          modal.show();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert("Something went wrong.");
+        });
     }
   </script>
 </body>
+
 </html>

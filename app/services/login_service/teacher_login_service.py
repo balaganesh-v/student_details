@@ -1,4 +1,4 @@
-from app.repositories.login_repository.teacher_login_repository import get_datas_from_db_by_email,get_user_from_db_by_user_id,get_students_datas_class_wise_from_db
+from app.repositories.login_repository.teacher_login_repository import get_datas_from_db_by_email,get_user_from_db_by_user_id,get_students_datas_class_wise_from_db,insert_students_attendance_datas_into_db
 from app.utils.token_utils import generate_token_with_code,decode_token
 from app.utils.email_utils import send_code_mail
 import random
@@ -24,3 +24,9 @@ def get_user_by_user_id(user_id):
 
 def get_students_datas_class_wise(class_name):
     return get_students_datas_class_wise_from_db(class_name) 
+
+def insert_students_attendance_datas(datas):
+    return insert_students_attendance_datas_into_db(datas)
+
+
+

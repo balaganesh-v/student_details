@@ -6,7 +6,8 @@ from app.repositories.login_repository.admin_repository import (
     insert_datas_into_students,
     insert_datas_into_teachers,
     get_student_datas_from_db,
-    get_teacher_datas_from_db
+    get_teacher_datas_from_db,
+    insert_students_into_attendance_db
     )
 from app.utils.hash_password_utils import check_password,generate_hash_password
 from app.utils.token_utils import generate_token_with_stored_secret_key
@@ -32,6 +33,7 @@ def insert_datas(data,image_file):
             data['image_url']  = url_link
             insert_datas_to_db(data)
             insert_datas_into_students(data)
+            insert_students_into_attendance_db(data)
             return ({'success':True})
     except Exception as e:
         print("SERVICE ERROR:", e)

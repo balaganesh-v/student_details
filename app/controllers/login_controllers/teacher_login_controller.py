@@ -1,5 +1,5 @@
 from flask import Blueprint,request,render_template,redirect,make_response,url_for,jsonify
-from app.services.login_service.teacher_login_service import send_code_for_teacher_login,verify_code_for_teacher_login,get_students_datas_class_wise
+from app.services.login_service.teacher_login_service import send_code_for_teacher_login,verify_code_for_teacher_login,get_students_datas_class_wise,insert_students_attendance_datas
 
 teacher_login_bp = Blueprint('teacher_login',__name__)
 
@@ -29,8 +29,22 @@ def teacher_login_verify_code():
 
 @teacher_login_bp.route('/get_student_datas/<class_name>')
 def get_student_datas(class_name):
-    students = get_students_datas_class_wise(class_name)  # returns a list of dicts
-    print(students)
+    students = get_students_datas_class_wise(class_name)
     return jsonify(students)
+
+@teacher_login_bp.route('/submit_attendance',methods=['POST'])
+def submit_students_attendance():
+    data = request.get_json()
+    if data:
+        attendance_list = data.get("attendance", [])
+        date = data.get("date")
+        formatted_data = [ 
+            {"attendance": {"user_id": entry["user_id"],"user_name":entry["user_name"], "status": entry["status"]}, "date": date}
+            for entry in attendance_list
+        ]
+        success = insert_students_attendance_datas(formatted_data)
+        return jsonify({'message': 'Attendance submitted successfully'}), 200
+    else:
+        return jsonify({'message':'Attendance has no data'})
 
 

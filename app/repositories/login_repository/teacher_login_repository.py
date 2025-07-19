@@ -47,3 +47,24 @@ def get_students_datas_class_wise_from_db(class_name):
         if connection:
             connection.close()
             cursor.close()
+
+
+def insert_students_attendance_datas_into_db(datas):
+    try:
+        connection=db_connection()
+        cursor = connection.cursor()
+        query = " UPDATE  students_attendance SET attendance_status = %s WHERE user_id = %s "
+        values = [
+            (data['attendance']['status'],data['attendance']['user_id'],)
+            for data in datas 
+            ]
+        cursor.executemany(query,values)
+        connection.commit()
+        return True
+    except Exception as e:
+        print(f"Error : {e}")
+        return None
+    finally:
+        if connection:
+            connection.close()
+            cursor.close()
