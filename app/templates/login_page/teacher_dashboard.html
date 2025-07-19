@@ -1,165 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TeacherHub Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
   <style>
     body {
-      background-color: #f5f7fa;
+      background-color: #f8f9fb;
       font-family: 'Inter', sans-serif;
       margin: 0;
       overflow-x: hidden;
     }
 
     .sidebar {
-      background: linear-gradient(180deg, #007bff 0%, #0056b3 100%);
+      background: linear-gradient(180deg, #0d6efd 0%, #0046a3 100%);
       min-height: 100vh;
       color: white;
       position: fixed;
       width: 260px;
       padding: 1rem 0.5rem;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.08);
+      z-index: 1000;
     }
 
     .sidebar h4 {
-      font-size: 1.3rem;
       font-weight: 700;
-      margin-bottom: 1rem;
       text-align: center;
+      margin-bottom: 0.25rem;
     }
 
     .sidebar p {
       font-size: 0.85rem;
-      opacity: 0.9;
       text-align: center;
       margin-bottom: 1rem;
+      opacity: 0.9;
     }
 
-    .sidebar .nav-link {
+    .nav-link {
       color: #e9ecef;
       border-radius: 8px;
-      margin: 0.2rem 0;
-      padding: 0.5rem 0.75rem;
-      transition: all 0.3s ease;
+      padding: 0.55rem 0.85rem;
+      margin-bottom: 5px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      transition: all 0.2s ease-in-out;
       font-size: 0.95rem;
     }
 
-    .sidebar .nav-link.active,
-    .sidebar .nav-link:hover {
-      background-color: #ffffff1a;
-      color: #ffffff;
-      transform: translateX(4px);
-    }
-
-    .sidebar .nav-link i {
-      font-size: 1.1rem;
+    .nav-link.active {
+      background-color: #ffffff;
+      color: #1c1a1a !important;
+      font-weight: 600;
     }
 
     .main-content {
       margin-left: 260px;
-      padding: 1.5rem;
-      min-height: 100vh;
-      background-color: #f5f7fa;
+      padding: 2rem;
     }
 
     .topbar {
       background-color: #ffffff;
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid #e9ecef;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      padding: 1rem;
+      border-bottom: 1px solid #dee2e6;
+      margin-bottom: 1.5rem;
+      border-radius: 10px;
     }
 
     .user-info {
-      background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+      background: linear-gradient(90deg, #198754 0%, #20c997 100%);
       color: white;
-      padding: 1rem;
+      padding: 1rem 1.25rem;
       border-radius: 12px;
-      margin-bottom: 1.5rem;
-    }
-
-    .user-info h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-    }
-
-    .user-info p {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      margin: 0;
     }
 
     .form-box {
-      background-color: #ffffff;
+      background: #ffffff;
       padding: 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      margin-bottom: 1rem;
-      min-height: 200px;
-      transition: transform 0.2s ease;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
     }
 
-    .form-box:hover {
-      transform: translateY(-2px);
-    }
-
-    .tab-content h4 {
-      color: #2c3e50;
+    .form-box h4 {
       font-weight: 600;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 0.8rem;
-    }
-
-    .tab-content p {
-      color: #495057;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    .tab-pane {
-      opacity: 0;
-      transition: opacity 0.5s ease-in;
-    }
-
-    .tab-pane.show {
-      opacity: 1;
+      margin-bottom: 0.75rem;
     }
 
     .settings-section {
       margin-top: auto;
-      padding-top: 0.5rem;
+      padding-top: 1rem;
     }
 
     .logout-btn {
-      color: #fff;
-      border: none;
+      background-color: #dc3545;
+      color: white;
       border-radius: 8px;
-      padding: 0.6rem 1rem;
-      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 0.95rem;
       text-decoration: none;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
     }
 
     .logout-btn:hover {
-      background-color: #c82333;
-      color: #ffffff;
-      transform: translateX(4px);
+      background-color: #bb2d3b;
+      transform: translateX(5px);
+    }
+
+    .settings-section .nav-link {
+      margin-top: 5px;
+      font-size: 0.95rem;
     }
 
     @media (max-width: 768px) {
@@ -169,7 +127,7 @@
 
       .sidebar h4,
       .sidebar p,
-      .sidebar .nav-link span,
+      .nav-link span,
       .settings-section span {
         display: none;
       }
@@ -180,27 +138,30 @@
     }
 
     @media (max-width: 576px) {
+      .sidebar {
+        width: 100%;
+        position: relative;
+        min-height: auto;
+        padding: 1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .nav {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .nav-link {
+        padding: 0.6rem 0.8rem;
+        justify-content: center;
+      }
+
       .main-content {
         margin-left: 0;
         padding: 1rem;
-      }
-
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 1rem;
-      }
-
-      .sidebar .nav {
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
-      }
-
-      .sidebar .nav-link {
-        margin: 0;
-        padding: 0.5rem;
       }
 
       .settings-section {
@@ -211,31 +172,32 @@
     }
   </style>
 </head>
+
 <body>
   <div class="container-fluid p-0">
     <div class="row g-0">
       <!-- Sidebar -->
-      <div class="sidebar">
+      <div class="sidebar col-auto">
         <h4>TeacherHub</h4>
         <p>Welcome <strong>{{ user.user_name }}</strong></p>
-        <div class="nav flex-column nav-pills mb-auto">
-          <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#teacher-dashboard" href="#"><i class="bi bi-house"></i> <span>Dashboard</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#students" href="#"><i class="bi bi-people-fill"></i> <span>Students</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#assignments" href="#"><i class="bi bi-journal-text"></i> <span>Assignments</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#calendar" href="#"><i class="bi bi-calendar-week"></i> <span>Calendar</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#analytics" href="#"><i class="bi bi-bar-chart-line"></i> <span>Analytics</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#messages" href="#"><i class="bi bi-chat-dots"></i> <span>Messages</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#resources" href="#"><i class="bi bi-folder2-open"></i> <span>Resources</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#profile" href="#"><i class="bi bi-person-circle"></i> <span>Profile</span></a>
+        <div class="nav flex-column nav-pills" id="sidebar-tabs" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" data-bs-toggle="pill" href="#dashboard" role="tab"><i class="bi bi-house"></i> <span>Dashboard</span></a>
+          <a class="nav-link" data-bs-toggle="pill" href="#students" role="tab"><i class="bi bi-people-fill"></i> <span>Students</span></a>
+          <a class="nav-link" data-bs-toggle="pill" href="#assignments" role="tab"><i class="bi bi-journal-text"></i> <span>Assignments</span></a>
+          <a class="nav-link" data-bs-toggle="pill" href="#calendar" role="tab"><i class="bi bi-calendar-week"></i> <span>Calendar</span></a>
+          <a class="nav-link" data-bs-toggle="pill" href="#analytics" role="tab"><i class="bi bi-bar-chart-line"></i> <span>Analytics</span></a>
+          <a class="nav-link" data-bs-toggle="pill" href="#messages" role="tab"><i class="bi bi-chat-dots"></i> <span>Messages</span></a>
+          <a class="nav-link" data-bs-toggle="pill" href="#resources" role="tab"><i class="bi bi-folder2-open"></i> <span>Resources</span></a>
+          <a class="nav-link" data-bs-toggle="pill" href="#profile" role="tab"><i class="bi bi-person-circle"></i> <span>Profile</span></a>
         </div>
-        <div class="settings-section">
-          <a class="logout-btn w-100" href="/logout" title="Logout"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a>
-          <a class="nav-link w-100" data-bs-toggle="pill" data-bs-target="#settings" href="#"><i class="bi bi-gear"></i> <span>Settings</span></a>
+        <div class="settings-section mt-3">
+          <a href="/logout" class="logout-btn"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a>
+          <a class="nav-link" data-bs-toggle="pill" href="#settings" role="tab"><i class="bi bi-gear"></i> <span>Settings</span></a>
         </div>
       </div>
 
       <!-- Main Content -->
-      <div class="main-content">
+      <div class="main-content col">
         <div class="topbar">
           <div class="user-info">
             <h2>Welcome {{ user.user_name }}</h2>
@@ -243,19 +205,104 @@
           </div>
         </div>
 
-        <div class="tab-content">
-          <div class="tab-pane fade show active" id="teacher-dashboard" role="tabpanel">
+        <div class="tab-content" id="tabContent">
+          <!-- Dashboard -->
+          <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
             <div class="form-box">
               <h4><i class="bi bi-house"></i> Dashboard</h4>
               <p>Welcome to your TeacherHub dashboard. Monitor teaching activities, track student progress, and manage your classroom efficiently.</p>
             </div>
           </div>
-          <!-- Add other tab-pane sections similarly -->
+
+          <!-- Students -->
+          <div class="tab-pane fade" id="students" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-people-fill"></i> Students</h4>
+              <p>View and manage student records, including attendance, grades, and personal details.</p>
+
+              {% if teacher.class_ids %}
+              <label>Classes</label>
+              <div class="btn-group mb-3" role="group">
+                {% for class_name in teacher.class_ids.split(',') %}
+                {% if class_name.strip() %}
+                <button type="button" onclick="view_students_list('{{ class_name.strip() }}')" class="btn btn-outline-primary m-1">Class {{ class_name.strip() }}</button>
+                {% endif %}
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              <div id="student-list-container"></div>
+            </div>
+          </div>
+
+          <!-- Other sections -->
+          <div class="tab-pane fade" id="assignments" role="tabpanel">
+            <div class="form-box"><h4><i class="bi bi-journal-text"></i> Assignments</h4><p>Create, assign, and track student assignments and submissions.</p></div>
+          </div>
+          <div class="tab-pane fade" id="calendar" role="tabpanel">
+            <div class="form-box"><h4><i class="bi bi-calendar-week"></i> Calendar</h4><p>Schedule classes, exams, and other important events.</p></div>
+          </div>
+          <div class="tab-pane fade" id="analytics" role="tabpanel">
+            <div class="form-box"><h4><i class="bi bi-bar-chart-line"></i> Analytics</h4><p>Analyze student performance, attendance trends, and other metrics.</p></div>
+          </div>
+          <div class="tab-pane fade" id="messages" role="tabpanel">
+            <div class="form-box"><h4><i class="bi bi-chat-dots"></i> Messages</h4><p>Communicate with students, parents, and other teachers.</p></div>
+          </div>
+          <div class="tab-pane fade" id="resources" role="tabpanel">
+            <div class="form-box"><h4><i class="bi bi-folder2-open"></i> Resources</h4><p>Access and share teaching materials, lesson plans, and other resources.</p></div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel">
+            <div class="form-box"><h4><i class="bi bi-person-circle"></i> Profile</h4><p>Update your personal information, change password, and manage preferences.</p></div>
+          </div>
+          <div class="tab-pane fade" id="settings" role="tabpanel">
+            <div class="form-box"><h4><i class="bi bi-gear"></i> Settings</h4><p>Adjust your dashboard settings and preferences.</p></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Bootstrap JS + Custom JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function view_students_list(class_name) {
+      fetch(`/get_student_datas/${class_name}`)
+        .then(response => response.json())
+        .then(data => {
+          const container = document.getElementById('student-list-container');
+          container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
+
+          if (data.length === 0) {
+            container.innerHTML += `<p>No students found for Class ${class_name}.</p>`;
+            return;
+          }
+
+          let content = `<div class="list-group">`;
+
+          data.forEach(student => {
+            content += `
+              <div class="d-flex justify-content-between align-items-center border p-2 mb-2 rounded">
+                <div>
+                  <strong>${student.student_name}</strong><br>
+                  <small>Class: ${student.class}</small>
+                </div>
+                <button class="btn btn-sm btn-outline-info" onclick="view_student_detail(${student.id})">
+                  View Details
+                </button>
+              </div>`;
+          });
+
+          content += `</div>`;
+          container.innerHTML += content;
+        })
+        .catch(error => {
+          console.error("Error fetching student data:", error);
+        });
+    }
+
+    function view_student_detail(id) {
+      alert("View student details for ID: " + id);
+    }
+  </script>
 </body>
 </html>

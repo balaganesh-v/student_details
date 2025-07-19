@@ -4,7 +4,9 @@ from app.repositories.login_repository.admin_repository import (
     store_user_potp_secret_to_db,
     get_user_from_db_by_user_id,
     insert_datas_into_students,
-    insert_datas_into_teachers
+    insert_datas_into_teachers,
+    get_student_datas_from_db,
+    get_teacher_datas_from_db
     )
 from app.utils.hash_password_utils import check_password,generate_hash_password
 from app.utils.token_utils import generate_token_with_stored_secret_key
@@ -19,15 +21,16 @@ def insert_datas(data,image_file):
         data['user_id'] = str(uuid.uuid4())
         password = data['user_password']
         data['hash_password'] = generate_hash_password(password)
-        insert_datas_to_db(data)
         if data['user_role'] == 'Teacher':
             url_link = image_upload_cloudinary_and_get_url(image_file)
             data['image_url']  = url_link
+            insert_datas_to_db(data)
             insert_datas_into_teachers(data)
             return ({'success':True})
         elif data['user_role'] == 'Student':
             url_link = image_upload_cloudinary_and_get_url(image_file)
             data['image_url']  = url_link
+            insert_datas_to_db(data)
             insert_datas_into_students(data)
             return ({'success':True})
     except Exception as e:
@@ -50,6 +53,12 @@ def admin_login_into_web_page(data):
             print("OTP are not equal")
     else:
         return ({ 'success':False , 'token': None})
+
+def get_teacher_datas(user_id):
+    return  get_teacher_datas_from_db(user_id)
+    
+def get_student_datas(user_id):
+    return get_student_datas_from_db(user_id)
 
 def get_user_by_user_id(user_id):
     return get_user_from_db_by_user_id(user_id)

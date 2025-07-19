@@ -1,5 +1,5 @@
-from flask import Blueprint,request,render_template,redirect,make_response,url_for,session
-from app.services.login_service.teacher_login_service import send_code_for_teacher_login,verify_code_for_teacher_login,get_user_by_user_id
+from flask import Blueprint,request,render_template,redirect,make_response,url_for,jsonify
+from app.services.login_service.teacher_login_service import send_code_for_teacher_login,verify_code_for_teacher_login,get_students_datas_class_wise
 
 teacher_login_bp = Blueprint('teacher_login',__name__)
 
@@ -26,4 +26,11 @@ def teacher_login_verify_code():
         else:
             return render_template("login_page/teacher_verify_code.html")
     return render_template("login_page/teacher_verify_code.html")
+
+@teacher_login_bp.route('/get_student_datas/<class_name>')
+def get_student_datas(class_name):
+    students = get_students_datas_class_wise(class_name)  # returns a list of dicts
+    print(students)
+    return jsonify(students)
+
 

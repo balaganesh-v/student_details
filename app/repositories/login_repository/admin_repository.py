@@ -22,8 +22,8 @@ def insert_datas_into_teachers(data):
         cursor = connection.cursor()
         query = """
             INSERT INTO teachers 
-            (user_id,user_name,image_url,gender,qualification,age,year_of_experience,subject_specialization,salary_package,mobile_number,address,account_id)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+            (user_id,user_name,image_url,gender,qualification,age,year_of_experience,subject_specialization,salary_package,mobile_number,address,account_id,class_ids)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         """
         values = (
             data['user_id'],
@@ -37,7 +37,8 @@ def insert_datas_into_teachers(data):
             data['salary_package'],
             data['mobile_number'],
             data['address'],
-            data['account_number']
+            data['account_number'],
+            data['specified_class']
             )
         cursor.execute(query,values)
         connection.commit()
@@ -58,9 +59,22 @@ def insert_datas_into_students(data):
                 (user_id,student_name,image_url,class,gender,date_of_birth,roll_no,age,father_name,
                 mother_name,father_mobile_number,mother_mobile_number,address,admission_date) VALUES 
                 (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        values = (data['user_id'],data['user_name'],data['image_url'],data['student_class'],data['gender'],
-                data['date_of_birth'],data['roll_no'],data['age'],data['father_name'],data['mother_name'],
-                data['father_mobile_number'],data['mother_mobile_number'],data['address'],data['admission_date'])
+        values = (
+            data['user_id'],
+            data['user_name'],
+            data['image_url'],
+            data['student_class'],
+            data['gender'],
+            data['date_of_birth'],
+            data['roll_no'],
+            data['age'],
+            data['father_name'],
+            data['mother_name'],
+            data['father_mobile_number'],
+            data['mother_mobile_number'],
+            data['address'],
+            data['admission_date']
+            )
         cursor.execute(query,values)
         connection.commit()
     except Exception as e:
@@ -120,4 +134,36 @@ def store_user_potp_secret_to_db(user_email, secret):
         cursor.close()
         connection.close()
 
+def get_teacher_datas_from_db(user_id):
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = """ SELECT * FROM teachers WHERE user_id = %s """
+        values = (user_id,)
+        cursor.execute(query,values)
+        result = cursor.fetchone()
+        if result:
+            print("✅ Teacher data found:", result)
+        else:
+            print("⚠️ No teacher found with user_id:", user_id)
+        return result
+    except Exception as e:
+        print(f"Error : {e}")
+    finally:
+        connection.close()
+        cursor.close()
 
+def get_student_datas_from_db(user_id):
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = """ SELECT * FROM students WHERE user_id = %s """
+        values = (user_id,)
+        cursor.execute(query,values)
+        result = cursor.fetchone()
+        return result
+    except Exception as e:
+        print(f"Error : {e}")
+    finally:
+        connection.close()
+        cursor.close()

@@ -1,5 +1,12 @@
 from flask import Blueprint,render_template,request,redirect,make_response,url_for
-from app.services.login_service.admin_service import insert_datas,admin_login_into_web_page,store_user_potp_secret,get_user_by_email,get_user_by_user_id
+from app.services.login_service.admin_service import (
+    insert_datas,
+    admin_login_into_web_page,
+    store_user_potp_secret,
+    get_user_by_email,
+    get_user_by_user_id,
+    get_student_datas,
+    get_teacher_datas)
 from app.utils.email_utils import send_login_email
 from app.utils.otp_utils import generate_qr_url,generate_secret
 from app.utils.token_utils import decode_token
@@ -40,8 +47,10 @@ def dashboard():
     if user["user_role"] == "Principal":
         return render_template("login_page/admin_dashboard.html",user = user)
     if user["user_role"] == "Teacher":
-        return render_template("login_page/teacher_dashboard.html",user = user)
+        teacher = get_teacher_datas(user_id)
+        return render_template("login_page/teacher_dashboard.html",user = user,teacher = teacher)
     if user["user_role"] == "Student":
+        student = get_student_datas(user_id)
         return render_template("login_page/student_dashboard.html",user = user)    
 
 @admin_bp.route('/add_student',methods=['POST'])
@@ -69,7 +78,9 @@ def add_teacher():
         print("Failed to add student. Email not sent.")
     return render_template('login_page/admin_dashboard.html')  
 
-
+@admin_bp.route('/update_teacher',methods=['get'])
+def update_teacher():
+    pass
     
 @admin_bp.route('/view_students',methods = ['POST'])
 def view_students():

@@ -31,3 +31,19 @@ def get_user_from_db_by_user_id(user_id):
     finally:
         if connection:
             connection.close()
+
+def get_students_datas_class_wise_from_db(class_name):
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = """ SELECT * FROM students WHERE class = %s """
+        values = (class_name,)
+        cursor.execute(query,values)
+        result = cursor.fetchall()
+        return result
+    except Exception as e:
+        print(f"Error : {e}")
+    finally:
+        if connection:
+            connection.close()
+            cursor.close()
