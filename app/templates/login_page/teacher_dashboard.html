@@ -397,17 +397,20 @@
 
     // ------------------------------------------- view students list for students section -------------------------------------//
     function view_students_list(class_name) {
+
+      //------------------ When the user wants to see the students details get datas from db using flask API----------------------//
       fetch(`/get_student_datas/${class_name}`)
         .then(response => { return response.json(); })
         .then(data => {
+            
           const container = document.getElementById('student-list-container');
-          container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
-
           if (!data || data.length === 0) {
             container.innerHTML += `<p>No students found for Class ${class_name}.</p>`;
             return;
           }
-
+      
+          // ---------------------------- HTML page for inside the student details section content ---------------------------------//
+          container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
           let content = `<div class="list-group">`;
           data.forEach(student => {
             content += `
@@ -423,13 +426,17 @@
           });
           content += `</div>`;
           container.innerHTML += content;
-
+          // ---------------------------- HTML page for inside the student details section content ---------------------------------//
         })
+        
 
+        // ---------------------------- Fix the error  ---------------------------------//
         .catch(error => {
           console.error("Error fetching student data:", error);
           document.getElementById('student-list-container').innerHTML = `<div class="alert alert-danger">Error fetching students for ${class_name}.</div>`;
         });
+        // ---------------------------- Fix the error  ---------------------------------//
+
     };
     // ------------------------------------------- view students list for students sectiion -------------------------------------//
 
@@ -437,11 +444,15 @@
 
     // ------------------------------------- Take Attendance for students in Attendance Section ----------------------------------//
     function view_students_attendance_list(class_name) {
+
+      //---------- Get the previously stored attendance records ----------------
       fetch(`/get_students_with_attendance/${class_name}`)
+
         .then(response => {
           if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
           return response.json();
         })
+
         .then(data => {
           const container = document.getElementById('student-attendance-list-container');
           if (!data || data.length === 0) {
@@ -449,27 +460,29 @@
             return;
           }
 
+          // ------------------------- HTML page Attendance Table ------------------------//
+          
           container.innerHTML = `
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h3 class="text-primary">📋 Students Attendance - ${class_name}</h3>
-          <div>
-            <input type="date" id="attendance-date" class="form-control d-inline-block me-2" style="width: auto;" required max="${new Date().toISOString().split('T')[0]}">
-            <button class="btn btn-outline-secondary btn-sm" onclick="view_students_attendance_list('${class_name}')">Refresh</button>
-          </div>
-        </div>`;
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="text-primary">📋 Students Attendance - ${class_name}</h3>
+                <div>
+                  <input type="date" id="attendance-date" class="form-control d-inline-block me-2" style="width: auto;" required max="${new Date().toISOString().split('T')[0]}">
+                  <button class="btn btn-outline-secondary btn-sm" onclick="view_students_attendance_list('${class_name}')">Refresh</button>
+                </div>
+              </div>`;
 
           let content = `
-        <form id="attendance-form" class="needs-validation" novalidate>
-          <div class="table-responsive">
-            <table class="table table-hover table-bordered align-middle">
-              <thead class="table-light">
-                <tr>
-                  <th scope="col">S.No</th>
-                  <th scope="col">Student Name</th>
-                  <th scope="col" class="text-center">Attendance</th>
-                </tr>
-              </thead>
-              <tbody>`;
+          <form id="attendance-form" class="needs-validation" novalidate>
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col" class="text-center">Attendance</th>
+                  </tr>
+                </thead>
+                <tbody>`;
 
           data.forEach((student, index) => {
             const status = student.attendance_status;
@@ -479,30 +492,32 @@
             const rowClass = status ? 'table-secondary' : '';
 
             content += `
-          <tr class="${rowClass}">
-            <td>${index + 1}</td>
-            <td>${student.student_name}</td>
-            <td class="text-center">
-              <div class="btn-group" role="group" aria-label="Attendance Status">
-                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${checkedPresent} ${disabled} required>
-                <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
-                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${checkedAbsent} ${disabled} required>
-                <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
-              </div>
-            </td>
-          </tr>`;
+            <tr class="${rowClass}">
+              <td>${index + 1}</td>
+              <td>${student.student_name}</td>
+              <td class="text-center">
+                <div class="btn-group" role="group" aria-label="Attendance Status">
+                  <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${checkedPresent} ${disabled} required>
+                  <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
+                  <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${checkedAbsent} ${disabled} required>
+                  <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
+                </div>
+              </td>
+            </tr>`;
           });
 
           content += `
-            </tbody>
-          </table>
-        </div>
-        <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
-        </div>
-      </form>`;
+                </tbody>
+              </table>
+            </div>
+            <div class="d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
+            </div>
+          </form>`;
           container.innerHTML += content;
-
+          // ------------------------- HTML page Attendance Table ------------------------//
+          
+          // ------------------------ When the user submits the attendance records --------------------------//
           document.getElementById("attendance-form").addEventListener("submit", function (e) {
             e.preventDefault();
             console.log("Form submission triggered");
@@ -575,6 +590,7 @@
                 errorDiv.scrollIntoView({ behavior: 'smooth' });
               });
           });
+          // ------------------------ When the user submits the attendance records --------------------------//
         })
         .catch(error => {
           console.error("Error fetching attendance data:", error);
