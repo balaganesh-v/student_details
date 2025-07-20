@@ -1,32 +1,68 @@
-from app.repositories.login_repository.teacher_login_repository import get_datas_from_db_by_email,get_user_from_db_by_user_id,get_students_datas_class_wise_from_db,insert_students_attendance_datas_into_db
-from app.utils.token_utils import generate_token_with_code,decode_token
+from app.repositories.login_repository.teacher_login_repository import (
+    get_datas_from_db_by_email,
+    get_user_from_db_by_user_id,
+    get_students_datas_class_wise_from_db,
+    get_students_with_attendance_from_db,
+    store_datas_in_students_attendance_table_db,
+    get_students_with_attendance_from_db
+)
+from app.utils.token_utils import generate_token_with_code, decode_token
 from app.utils.email_utils import send_code_mail
+from flask import jsonify
 import random
 
 def send_code_for_teacher_login(email):
-    user = get_datas_from_db_by_email(email)
-    code = str(random.randint(1000, 9999))
-    send_code_mail(user,code)
-    token = generate_token_with_code(user,code)
-    return token
+    try:
+        user = get_datas_from_db_by_email(email)
+        if not user:
+            print(f"No user found for email: {email}")
+            return None
+        
+        code = str(random.randint(1000, 9999))
+        if not send_code_mail(user, code):
+            print(f"Failed to send email to: {email}")
+            return None
+            
+        return generate_token_with_code(user, code)
+    except Exception as e:
+        print(f"Error in send_code_for_teacher_login: {e}")
+        return None
 
-def verify_code_for_teacher_login(user_code,token):
-    decoded = decode_token(token)
-    user_id = decoded.get("user_id")
-    random_code = decoded.get("random_code")
-    if random_code == user_code :
-        return user_id
-    else:
+def verify_code_for_teacher_login(user_code, token):
+    try:
+        decoded = decode_token(token)
+        if decoded.get("random_code") == user_code:
+            return decoded.get("user_id")
         return False
-    
+    except Exception as e:
+        print(f"Error in verify_code_for_teacher_login: {e}")
+        return False
+
 def get_user_by_user_id(user_id):
-    return get_user_from_db_by_user_id(user_id)
+    try:
+        return get_user_from_db_by_user_id(user_id)
+    except Exception as e:
+        print(f"Error in get_user_by_user_id: {e}")
+        return None
 
 def get_students_datas_class_wise(class_name):
-    return get_students_datas_class_wise_from_db(class_name) 
+    try:
+        return get_students_datas_class_wise_from_db(class_name)
+    except Exception as e:
+        print(f"Error in get_students_datas_class_wise: {e}")
+        return []
+    
+def get_students_with_today_attendance(class_name, date):
+    try:
+        return get_students_with_attendance_from_db(class_name, date)
+    except Exception as e:
+        print(f"Error in get_students_with_today_attendance: {e}")
+        return []
 
-def insert_students_attendance_datas(datas):
-    return insert_students_attendance_datas_into_db(datas)
-
-
+def store_datas_in_students_attendance_table(data):
+    try: 
+        return store_datas_in_students_attendance_table_db(data)
+    except Exception as e:
+        print(f"Error store_datas_in_students_attendance_table : {e}")
+        return []
 
