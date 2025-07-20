@@ -44,6 +44,44 @@ def get_students_datas_class_wise_from_db(class_name):
     finally:
         if connection:
             connection.close()
+        
+
+def get_students_with_attendance_from_db(class_name, date):
+    connection = None
+    try:
+        connection = db_connection()
+        with connection.cursor() as cursor:
+            query = """
+                SELECT s.user_id, s.student_name, s.class, a.attendance_status
+                FROM students s
+                LEFT JOIN students_attendance a
+                    ON s.user_id = a.user_id AND a.attendance_date = %s
+                WHERE s.class = %s
+            """
+            cursor.execute(query, (date, class_name))
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"DB Error in get_students_with_attendance_from_db: {e}")
+        return []
+    finally:
+        if connection:
+            connection.close()
+
+def get_student_names_with_suitable_class_from_db(class_name):
+    try:
+        connection = db_connection()
+        with connection.cursor() as cursor:
+            query = "SELECT * FROM students WHERE class = %s "
+            values = (class_name,)
+            cursor.execute(query,values)
+            students = cursor.fetchall()
+            return students
+    except Exception as e:
+        print(f" Error : {e} ")
+        return []
+    finally:
+        if connection:
+            connection.close()
 
 
 def store_datas_in_students_attendance_table_db(data):
@@ -68,34 +106,42 @@ def store_datas_in_students_attendance_table_db(data):
             """, (user_id, student_name, attendance_date, status))
 
         connection.commit()      
-
+        return True
+    
     except Exception as e:
         print("Error:", e)
-
+        return False
+    
     finally : 
         if connection:
             connection.close()
             cursor.close()
 
-        
 
-def get_students_with_attendance_from_db(class_name, date):
-    connection = None
+def store_students_modified_attendance_data_into_db(data):
     try:
+
+        attendance_date = data['date']
+        attendance_list = data['attendance']  # List of {user_id, user_name, status}
+
         connection = db_connection()
-        with connection.cursor() as cursor:
-            query = """
-                SELECT s.user_id, s.student_name, s.class, a.attendance_status
-                FROM students s
-                LEFT JOIN students_attendance a
-                    ON s.user_id = a.user_id AND a.attendance_date = %s
-                WHERE s.class = %s
-            """
-            cursor.execute(query, (date, class_name))
-            return cursor.fetchall()
+        cursor = connection.cursor()
+
+        for student in attendance_list:
+            user_id = student['user_id']
+            status = student['status']
+            
+            query = "UPDATE students_attendance SET attendance_status = %s  WHERE user_id = %s AND attendance_date = %s "
+            values = (status,user_id,attendance_date,)
+            cursor.execute(query,values)
+        connection.commit()      
+        return True
+    
     except Exception as e:
-        print(f"DB Error in get_students_with_attendance_from_db: {e}")
-        return []
-    finally:
+        print("Error:", e)
+        return False
+
+    finally : 
         if connection:
             connection.close()
+            cursor.close()

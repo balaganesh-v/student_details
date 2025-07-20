@@ -4,7 +4,9 @@ from app.services.login_service.teacher_login_service import (
     verify_code_for_teacher_login,
     get_students_datas_class_wise,
     store_datas_in_students_attendance_table,
-    get_students_with_today_attendance
+    get_students_with_today_attendance,
+    get_student_names_with_suitable_class,
+    store_students_modified_attendance_data
 )
 import datetime
 
@@ -75,6 +77,16 @@ def get_students_with_attendance(class_name):
     except Exception as e:
         print(f"Error in get_students_with_attendance: {e}")
         return jsonify({'error': 'Internal server error'}), 500
+    
+@teacher_login_bp.route('/get_students_names/<class_name>',methods=['GET'])
+def get_students_names(class_name):
+    try:
+        students = get_student_names_with_suitable_class(class_name)
+        print(students)
+        return jsonify(students)
+    except Exception as e:
+        print(f"Error : {e}")
+        return jsonify({'sucess':False})
 
 @teacher_login_bp.route('/submit_attendance', methods=['POST'])
 def submit_attendance():
@@ -83,6 +95,17 @@ def submit_attendance():
         print(data)
         store_datas_in_students_attendance_table(data)
         return jsonify({"success": True})
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"success": False})
+    
+@teacher_login_bp.route('/submit_modify_attendance',methods=['POST'])
+def submit_modified_attendance():
+    try:
+        data = request.get_json()
+        print(data)
+        store_students_modified_attendance_data(data)
+        return jsonify({'success': True})
     except Exception as e:
         print("Error:", e)
         return jsonify({"success": False})
