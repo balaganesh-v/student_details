@@ -6,7 +6,9 @@ from app.repositories.login_repository.teacher_login_repository import (
     store_datas_in_students_attendance_table_db,
     get_students_with_attendance_from_db,
     get_student_names_with_suitable_class_from_db,
-    store_students_modified_attendance_data_into_db
+    store_students_modified_attendance_data_into_db,
+    update_teachers_profile_data_into_db,
+    get_teacher_by_user_id_from_db
 )
 from app.utils.token_utils import generate_token_with_code, decode_token
 from app.utils.email_utils import send_code_mail
@@ -78,6 +80,20 @@ def store_datas_in_students_attendance_table(data):
 def store_students_modified_attendance_data(data):
     try: 
         return store_students_modified_attendance_data_into_db(data)
+    except Exception as e:
+        print(f"Error store_datas_in_students_attendance_table : {e}")
+        return []
+    
+def get_teacher_by_user_id(user_id):
+    try:
+        return get_teacher_by_user_id_from_db(user_id)
+    except Exception as e:
+        print(f"Error store_datas_in_students_attendance_table : {e}")
+        return []
+    
+def update_teacher_profile_datas(data,user_id):
+    try: 
+        return update_teachers_profile_data_into_db(data,user_id)
     except Exception as e:
         print(f"Error store_datas_in_students_attendance_table : {e}")
         return []

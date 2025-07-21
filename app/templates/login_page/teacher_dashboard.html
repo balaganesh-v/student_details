@@ -362,9 +362,54 @@
 
           <!------------------------------- Profile section ---------------------------------------------------->
           <div class="tab-pane fade" id="profile" role="tabpanel">
-            <div class="form-box">
-              <h4><i class="bi bi-person-circle"></i> Profile</h4>
-              <p>Update your personal information, change password, and manage preferences.</p>
+            <div class="form-box border rounded p-4 shadow-sm bg-white profile_page">
+              <h4 class="mb-3 text-primary"><i class="bi bi-person-badge"></i> Teacher Profile</h4>
+              <p class="text-muted mb-4">Below are your profile details.</p>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Name</label>
+                  <div class="form-control bg-light">{{ teacher.user_name }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Qualification</label>
+                  <div class="form-control bg-light">{{ teacher.qualification }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Gender</label>
+                  <div class="form-control bg-light">{{ teacher.gender }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Age</label>
+                  <div class="form-control bg-light">{{ teacher.age }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Experiences</label>
+                  <div class="form-control bg-light">{{ teacher.year_of_experience }} years</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Subject Specialization</label>
+                  <div class="form-control bg-light">{{ teacher.subject_specialization }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Classes Taken</label>
+                  <div class="form-control bg-light" style="min-height: 70px;">{{ teacher.class_ids }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Salary Package</label>
+                  <div class="form-control bg-light" style="min-height: 70px;">₹ {{ teacher.salary_package }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Account ID</label>
+                  <div class="form-control bg-light">{{ teacher.account_id }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Address</label>
+                  <div class="form-control bg-light" style="min-height: 70px;">{{ teacher.address }}</div>
+                </div>
+              </div>
+              <div class="mt-4 text-end">
+                <button class="btn btn-primary px-4 edit-btn" data-user-id="{{ teacher.user_id }}">Edit Profile</button>
+              </div>
             </div>
           </div>
           <!------------------------------- Profile section ----------------------------------------------------->
@@ -404,14 +449,14 @@
       </div>
     </div>
   </div>
-  <!------------------------------- Modal for Student Details ------------------------------->
+  <!------------------------------ Modal for Student Details ------------------------------->
 
   <!-- Bootstrap JS + Custom JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
   <script>
     //----------------------- View students list for students section------------------------//
     function view_students_list(class_name) {
-      //
       fetch(`/get_student_datas/${class_name}`)
         .then(response => {
           if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
@@ -554,7 +599,7 @@
                       ✅ Attendance successfully submitted for <strong>${class_name}</strong>!
                       <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
                     </div>`;
-                  setTimeout(() => view_students_attendance_list(class_name), 2000);
+                  setTimeout(() => location.reload(), 1500);
                 } else {
                   const errorDiv = document.createElement('div');
                   errorDiv.className = 'alert alert-danger mt-3';
@@ -580,7 +625,119 @@
     }
     //----------------- Take Attendance for students in Attendance Section ----------------------//
 
-    //------------------------------- Modify Students Attendance ---------------------------------//
+
+
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const userId = this.getAttribute('data-user-id');
+        edit_teacher_profile(userId);
+      });
+    });
+
+
+
+    //-------------------------- Edit the teacher's Profile -------------------------------------//
+    function edit_teacher_profile(user_id) {
+      fetch(`/get_user_by_user_id/${user_id}`)
+        .then(response => response.json())
+        .then(teacher => {
+
+          const container = document.getElementById('profile');
+
+          if (!container) {
+            console.error('Error: Profile container not found.');
+            alert('Cannot edit profile. Page section missing.');
+            return;
+          }
+
+          container.innerHTML = `
+        <form id="edit-teacher-form" class="form-box border rounded p-4 shadow-sm bg-white needs-validation" novalidate>
+          <h4 class="mb-3 text-primary"><i class="bi bi-pencil-square"></i> Edit Teacher Profile</h4>
+          <p class="text-muted mb-4">Update your profile details below.</p>
+          <div class="row g-4">
+            <div class="col-md-6">
+              <label for="edit_name" class="form-label fw-semibold">Name</label>
+              <input type="text" class="form-control" id="edit_name" name="user_name" value="${teacher.user_name || ''}" required>
+            </div>
+            <div class="col-md-6">
+              <label for="edit_age" class="form-label fw-semibold">Age</label>
+              <input type="number" class="form-control" id="edit_age" name="age" value="${teacher.age || ''}" required>
+            </div>
+            <div class="col-md-6">
+              <label for="edit_qualification" class="form-label fw-semibold">Qualification</label>
+              <input type="text" class="form-control" id="edit_qualification" name="qualification" value="${teacher.qualification || ''}" required>
+            </div>
+            <div class="col-md-6">
+              <label for="edit_gender" class="form-label fw-semibold">Gender</label>
+              <select class="form-select" id="edit_gender" name="gender" required>
+                <option value="Male" ${teacher.gender === 'Male' ? 'selected' : ''}>Male</option>
+                <option value="Female" ${teacher.gender === 'Female' ? 'selected' : ''}>Female</option>
+                <option value="Other" ${teacher.gender === 'Other' ? 'selected' : ''}>Other</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="edit_account" class="form-label fw-semibold">Account ID</label>
+              <input type="text" class="form-control" id="edit_account" name="account_id" value="${teacher.account_id || ''}">
+            </div>
+            <div class="col-md-6">
+              <label for="edit_address" class="form-label fw-semibold">Address</label>
+              <textarea class="form-control" id="edit_address" name="address" rows="3">${teacher.address || ''}</textarea>
+            </div>
+          </div>
+          <div class="mt-4 text-end">
+            <button type="submit" class="btn btn-success px-4"><i class="bi bi-save me-1"></i> Save Changes</button>
+          </div>
+        </form>
+      `;
+
+          // Submit handler
+          document.getElementById('edit-teacher-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const updatedData = {};
+
+            formData.forEach((value, key) => {
+              updatedData[key] = key === 'age' ? parseInt(value) || null : value;
+            });
+
+            fetch(`/update_teacher/${teacher.user_id}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(updatedData)
+            })
+              .then(response => response.json())
+              .then(result => {
+                if (result.success) {
+                  const container = document.getElementById('profile');
+                  container.innerHTML = `
+                  <div class="alert alert-success text-center fw-semibold">
+                    <i class="bi bi-check-circle-fill me-2"></i>Profile updated successfully!
+                  </div>`;
+                  setTimeout(() => location.reload(), 1500);
+                } else {
+                  alert("Failed to update profile: " + (result.error || "Unknown error"));
+                }
+              })
+              .catch(err => {
+                console.error('Update error:', err);
+                alert("An error occurred while updating the profile.");
+              });
+          });
+        })
+        .catch(error => {
+          console.error("Fetch error:", error);
+          const container = document.getElementById('profile_page');
+          if (container) {
+            container.innerHTML = `<div class="alert alert-danger">Error loading teacher details.</div>`;
+          }
+        });
+    }
+
+    //-------------------------- Edit the teacher's Profile -------------------------------------//
+
+
+    //------------------------------- Modify Students Attendance-----------------------------------//
     function modify_students_attendance(class_name) {
       fetch(`/get_students_names/${class_name}`)
         .then(response => {
@@ -681,7 +838,7 @@
                       ✅ Attendance successfully submitted for class <strong>${class_name}</strong>!
                       <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
                     </div>`;
-                    setTimeout(() => modify_students_attendance(class_name), 2000);
+                  setTimeout(() => modify_students_attendance(class_name), 2000);
                 } else {
                   const errorDiv = document.createElement('div');
                   errorDiv.className = 'alert alert-danger mt-3';
@@ -706,6 +863,7 @@
         });
     }
     //------------------------------- Modify Students Attendance ---------------------------------//
+
 
     //------------------------------- View single student Details --------------------------------//
     function view_student_detail(user_id) {

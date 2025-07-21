@@ -145,3 +145,57 @@ def store_students_modified_attendance_data_into_db(data):
         if connection:
             connection.close()
             cursor.close()
+
+def update_teachers_profile_data_into_db(data, user_id):
+    connection = None
+    try:
+        connection = db_connection()
+        with connection.cursor() as cursor:
+            query = """ 
+                UPDATE teachers 
+                SET 
+                    user_name = %s,
+                    age = %s,
+                    gender = %s,
+                    qualification = %s,
+                    account_id = %s,
+                    address = %s
+                WHERE user_id = %s;
+            """
+            values = (
+                data.get('user_name'),
+                data.get('age'),
+                data.get('gender'),
+                data.get('qualification'),
+                data.get('account_id'),
+                data.get('address'),
+                user_id
+            )
+            cursor.execute(query, values)
+            connection.commit()
+            return True
+    except Exception as e:
+        print("Error updating teacher profile:", e)
+        return False
+    finally:
+        if connection:
+            connection.close()
+
+
+
+def get_teacher_by_user_id_from_db(user_id):
+    try:
+        connection = db_connection()
+        with connection.cursor() as cursor:
+            query = " SELECT * FROM teachers WHERE user_id = %s "
+            values = (user_id,)
+            cursor.execute(query,values)
+            result = cursor.fetchone()
+            return result
+    except Exception as e:
+        print("Error:", e)
+        return False
+
+    finally : 
+        if connection:
+            connection.close()

@@ -6,7 +6,9 @@ from app.services.login_service.teacher_login_service import (
     store_datas_in_students_attendance_table,
     get_students_with_today_attendance,
     get_student_names_with_suitable_class,
-    store_students_modified_attendance_data
+    store_students_modified_attendance_data,
+    get_teacher_by_user_id,
+    update_teacher_profile_datas
 )
 import datetime
 
@@ -109,3 +111,31 @@ def submit_modified_attendance():
     except Exception as e:
         print("Error:", e)
         return jsonify({"success": False})
+    
+@teacher_login_bp.route('/get_user_by_user_id/<user_id>',methods=['GET'])
+def get_user_by_user_id(user_id):
+    try:
+        teacher = get_teacher_by_user_id(user_id)
+        return jsonify(teacher)
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"success": False})
+
+
+
+@teacher_login_bp.route('/update_teacher/<user_id>', methods=['POST'])
+def update_teacher_profile(user_id):
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'success': False, 'error': 'No data received'}), 400
+
+        success = update_teacher_profile_datas(data,user_id)
+        if success:
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'error': 'Failed to update teacher profile'}), 500
+
+    except Exception as e:
+        print("Error in route update_teacher_profile:", e)
+        return jsonify({'success': False, 'error': str(e)}), 500
