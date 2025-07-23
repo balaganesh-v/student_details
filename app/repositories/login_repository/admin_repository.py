@@ -157,6 +157,7 @@ def get_teacher_datas_from_db(user_id):
         return result
     except Exception as e:
         print(f"Error : {e}")
+        return False
     finally:
         connection.close()
         cursor.close()
@@ -172,6 +173,37 @@ def get_student_datas_from_db(user_id):
         return result
     except Exception as e:
         print(f"Error : {e}")
+        return False
+    finally:
+        connection.close()
+        cursor.close()
+    
+def get_all_teachers_from_db():
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = "SELECT * FROM teachers "
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+    except Exception as e:
+        print(f"Error : {e}")
+        return False
+    finally:
+        connection.close()
+        cursor.close()
+
+def get_all_subjects_from_db():
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = "SELECT * FROM subjects "
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+    except Exception as e:
+        print(f"Error : {e}")
+        return False
     finally:
         connection.close()
         cursor.close()

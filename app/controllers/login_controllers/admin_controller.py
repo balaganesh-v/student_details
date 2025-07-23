@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,request,redirect,make_response,url_for
+from flask import Blueprint,render_template,request,redirect,make_response,url_for,jsonify
 from app.services.login_service.admin_service import (
     insert_datas,
     admin_login_into_web_page,
@@ -6,7 +6,11 @@ from app.services.login_service.admin_service import (
     get_user_by_email,
     get_user_by_user_id,
     get_student_datas,
-    get_teacher_datas)
+    get_teacher_datas,
+    get_all_teachers,
+    get_all_subjects,
+    insert_datas_into_json_file
+    )
 from app.utils.email_utils import send_login_email
 from app.utils.otp_utils import generate_qr_url,generate_secret
 from app.utils.token_utils import decode_token
@@ -78,6 +82,42 @@ def add_teacher():
         print("Failed to add student. Email not sent.")
     return render_template('login_page/admin_dashboard.html')  
 
+@admin_bp.route('/subjects',methods = ['GET'])
+def get_subjects():
+    try:
+        subjects = get_all_subjects()
+        return jsonify(subjects)
+    except Exception as e:
+        print(f"Error in Get Subjects: {e}")
+        return jsonify({'Error': 'Internal server error'}), 500
+    
+@admin_bp.route('/teachers',methods = ['GET'])
+def get_teachers():
+    try:
+        teachers = get_all_teachers()
+        return jsonify(teachers)
+    except Exception as e:
+        print(f"Error in Get Subjects: {e}")
+        return jsonify({'Error': 'Internal server error'}), 500
+
+@admin_bp.route('/save_periods', methods=['POST'])
+def save_periods():
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'success': False, 'error': 'Invalid or missing JSON'}), 400
+        
+        success, error = insert_datas_into_json_file(data)
+        
+        if success:
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'error': error}), 400
+    except Exception as e:
+        print(f"Error in save_periods route: {e}")
+        return jsonify({'success': False, 'error': 'Internal server error'}), 500
+
+
 @admin_bp.route('/update_teacher',methods=['get'])
 def update_teacher():
     pass
@@ -93,3 +133,5 @@ def view_teachers():
 @admin_bp.route('/view_classes',methods = ['POST'])
 def view_classes():
     return True
+
+

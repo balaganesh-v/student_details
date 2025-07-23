@@ -263,24 +263,23 @@
               <h4><i class="bi bi-people-fill"></i> Students</h4>
               <p>View and manage student records, including attendance, grades, and personal details.</p>
               {% if teacher.class_ids %}
-              <label>Classes</label>
-              <div class="btn-group mb-3" role="group">
-                {% for class_name in teacher.class_ids.split(',') %}
-                {% if class_name.strip() %}
-                <button type="button" onclick="view_students_list('{{ class_name.strip() }}')"
-                  class="btn btn-outline-primary m-1">Class {{ class_name.strip() }}</button>
-                {% endif %}
-                {% endfor %}
-              </div>
+                <label>Classes</label>
+                <div class="btn-group mb-3" role="group">
+                  {% for class_name in teacher.class_ids.split(',') %}
+                    <button type="button" onclick="view_students_list('{{ class_name.strip() }}')" class="btn btn-outline-primary m-1">Class {{ class_name.strip() }}</button>              
+                  {% endfor %}
+                </div>
               {% endif %}
+
               <div id="student-list-container"></div>
+
             </div>
           </div>
           <!------------------------------ Students section ------------------------------------------->
 
           <!----------------------------- Attendance section ------------------------------------------>
           <div class="tab-pane fade" id="attendance" role="tabpanel">
-            <!--------------------------- Take Attendance ---------------------------------------------->
+            <!--------------------- Take Attendance --------------------------->
             <div class="form-box">
               <h4><i class="bi bi-calendar-check"></i> Take Attendance</h4>
               {% if teacher.class_ids %}
@@ -296,7 +295,7 @@
                 <div id="student-attendance-list-container" class="bg-white p-4 shadow-sm rounded"></div>
               </div>
             </div>
-            <!------------------------------ Modify Attendance ----------------------------------------->
+            <!----------- -------- Modify Attendance ------------------------->
             <div class="form-box">
               <h4><i class="bi bi-calendar-check"></i> Modify Attendance</h4>
               {% if teacher.class_ids %}
@@ -329,6 +328,7 @@
             <div class="form-box">
               <h4><i class="bi bi-calendar-week"></i> Calendar</h4>
               <p>Schedule classes, exams, and other important events.</p>
+              <div id="calendar"></div>
             </div>
           </div>
           <!------------------------------- Calendar section ------------------------------------------------>
@@ -492,6 +492,9 @@
     }
     //----------------------- View students list for students section --------------------------//
 
+
+
+
     //----------------- Take Attendance for students in Attendance Section ----------------------//
     function view_students_attendance_list(class_name) {
       fetch(`/get_students_with_attendance/${class_name}`)
@@ -633,9 +636,6 @@
         edit_teacher_profile(userId);
       });
     });
-
-
-
     //-------------------------- Edit the teacher's Profile -------------------------------------//
     function edit_teacher_profile(user_id) {
       fetch(`/get_user_by_user_id/${user_id}`)
@@ -733,8 +733,24 @@
           }
         });
     }
-
     //-------------------------- Edit the teacher's Profile -------------------------------------//
+     
+    document.addEventListener('DOMContentLoaded', function () {
+      const calendarEl = document.getElementById('calendar');
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          locale: 'en',
+          events: '/teacher/calendar/events',  // AJAX fetch
+          eventColor: '#0d6efd',
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,listWeek'
+        }
+      });
+      calendar.render();
+    });
+
 
 
     //------------------------------- Modify Students Attendance-----------------------------------//
