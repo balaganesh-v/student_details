@@ -8,7 +8,8 @@ from app.services.login_service.teacher_login_service import (
     get_student_names_with_suitable_class,
     store_students_modified_attendance_data,
     get_teacher_by_user_id,
-    update_teacher_profile_datas
+    update_teacher_profile_datas,
+    get_periods_from_stored_json_file
 )
 import datetime
 
@@ -139,3 +140,12 @@ def update_teacher_profile(user_id):
     except Exception as e:
         print("Error in route update_teacher_profile:", e)
         return jsonify({'success': False, 'error': str(e)}), 500
+    
+@teacher_login_bp.route('/teacher/calendar/events', methods=['GET'])
+def get_teacher_events():
+    try:
+        token = request.cookies.get('teacher_login_token')
+        periods = get_periods_from_stored_json_file(token)
+        return jsonify(periods)
+    except Exception as e:
+        return jsonify({'error': f'Failed to fetch events: {str(e)}'}), 500

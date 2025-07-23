@@ -12,8 +12,9 @@ from app.repositories.login_repository.teacher_login_repository import (
 )
 from app.utils.token_utils import generate_token_with_code, decode_token
 from app.utils.email_utils import send_code_mail
-from flask import jsonify
+from flask import jsonify,json
 import random
+import os
 
 def send_code_for_teacher_login(email):
     try:
@@ -31,6 +32,27 @@ def send_code_for_teacher_login(email):
     except Exception as e:
         print(f"Error in send_code_for_teacher_login: {e}")
         return None
+
+def get_periods_from_stored_json_file(token):
+    try:
+        decoded = decode_token(token)
+        teacher_id = decoded.get('user_id')
+
+        if teacher_id:
+            json_path = os.path.join('app','data','events.json')
+            if  os.path.exists(json_path):
+                with open(json_path, 'r') as file:
+                    data = json.load(file)
+                    periods = data.get(teacher_id, [])
+                    return periods
+            else:
+                return jsonify({'error': 'Events file not found'}), 404
+        else:
+            return jsonify({'error': 'Teacher ID not found'}), 404
+    except Exception as e:
+        print(f"Error in Get periods from JSON file: {e}")
+        return False
+    
 
 def verify_code_for_teacher_login(user_code, token):
     try:
@@ -97,3 +119,4 @@ def update_teacher_profile_datas(data,user_id):
     except Exception as e:
         print(f"Error store_datas_in_students_attendance_table : {e}")
         return []
+    

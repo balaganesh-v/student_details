@@ -2,22 +2,22 @@
   "1186720f-63a1-4a78-8a6f-c68e698fc443": [
     {
       "class": "Class 5",
-      "end_time": "04:00",
+      "end_time": "09:00",
       "start_time": "08:00",
       "subject": "Hindi"
     },
     {
       "class": "Class 6",
-      "end_time": "04:00",
-      "start_time": "08:00",
+      "end_time": "10:00",
+      "start_time": "09:00",
       "subject": "Chemistry"
     }
   ],
   "750bc9b6-f9f9-487d-8236-f9397c387aa3": [
     {
       "class": "Class 4",
-      "end_time": "04:00",
-      "start_time": "08:00",
+      "end_time": "11:00",
+      "start_time": "10:00",
       "subject": "Tamil"
     }
   ]
