@@ -25,12 +25,11 @@ def teacher_login_send_code():
         
         response = make_response(render_template('login_page/teacher_verify_code.html'))
         response.set_cookie(
-            "teacher_login_token",
+            "access_token",
             token,
             httponly=True,
             secure=True,
             samesite='Lax',
-            max_age=600  # 10-minute expiry
         )
         return response
     except Exception as e:
@@ -40,7 +39,7 @@ def teacher_login_send_code():
 @teacher_login_bp.route('/teacher_login/verify_code', methods=['POST'])
 def teacher_login_verify_code():
     user_code = request.form.get('user_code')
-    token = request.cookies.get('teacher_login_token')
+    token = request.cookies.get('access_token')
     try:
         user_id = verify_code_for_teacher_login(user_code.strip(), token)
         if user_id:
@@ -50,8 +49,7 @@ def teacher_login_verify_code():
                 token,
                 httponly=True,
                 secure=True,
-                samesite='Lax',
-                max_age=3600  # 1-hour expiry
+                samesite='Lax'
             )
             return response
         return render_template(
@@ -85,7 +83,6 @@ def get_students_with_attendance(class_name):
 def get_students_names(class_name):
     try:
         students = get_student_names_with_suitable_class(class_name)
-        print(students)
         return jsonify(students)
     except Exception as e:
         print(f"Error : {e}")
@@ -95,7 +92,6 @@ def get_students_names(class_name):
 def submit_attendance():
     try:
         data = request.get_json()
-        print(data)
         store_datas_in_students_attendance_table(data)
         return jsonify({"success": True})
     except Exception as e:
@@ -106,7 +102,6 @@ def submit_attendance():
 def submit_modified_attendance():
     try:
         data = request.get_json()
-        print(data)
         store_students_modified_attendance_data(data)
         return jsonify({'success': True})
     except Exception as e:
@@ -144,8 +139,9 @@ def update_teacher_profile(user_id):
 @teacher_login_bp.route('/teacher/calendar/events', methods=['GET'])
 def get_teacher_events():
     try:
-        token = request.cookies.get('teacher_login_token')
+        token = request.cookies.get('access_token')
         periods = get_periods_from_stored_json_file(token)
+        print(periods)
         return jsonify(periods)
     except Exception as e:
         return jsonify({'error': f'Failed to fetch events: {str(e)}'}), 500

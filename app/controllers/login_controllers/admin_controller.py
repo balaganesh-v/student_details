@@ -46,17 +46,25 @@ def admin_login():
 @admin_bp.route("/dashboard")
 def dashboard():
     token = request.cookies.get('access_token')
-    decoded = decode_token(token)
-    user_id = decoded.get("user_id")
-    user = get_user_by_user_id(user_id)
-    if user["user_role"] == "Principal":
-        return render_template("login_page/admin_dashboard.html",user = user)
-    if user["user_role"] == "Teacher":
-        teacher = get_teacher_datas(user_id)
-        return render_template("login_page/teacher_dashboard.html",user = user,teacher = teacher)
-    if user["user_role"] == "Student":
-        student = get_student_datas(user_id)
-        return render_template("login_page/student_dashboard.html",user = user)    
+    if not token:
+        return render_template("login_page/landing_page.html")
+    try:
+        decoded = decode_token(token)
+        user_id = decoded.get("user_id")
+        user = get_user_by_user_id(user_id)
+        role = user['user_role']
+        if role == "Principal":
+            return render_template("login_page/admin_dashboard.html",user = user) 
+        if role == "Teacher":
+            teacher = get_teacher_datas(user_id)
+            return render_template("login_page/teacher_dashboard.html",user = user,teacher = teacher)
+        if role == "Student":
+            student = get_student_datas(user_id)
+            return render_template("login_page/student_dashboard.html",user = user)
+        else:
+            return render_template("login_page/landing_page.html") 
+    except Exception as e:
+        return render_template("login_page/landing_page.html")
 
 @admin_bp.route('/add_student',methods=['POST'])
 def add_student():
