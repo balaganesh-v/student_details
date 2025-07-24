@@ -374,6 +374,7 @@
                         <tr>
                           <th>Class</th>
                           <th>Subject</th>
+                          <th>Day</th>
                           <th>Start Time</th>
                           <th>End Time</th>
                           <th>Action</th>
@@ -392,7 +393,11 @@
                         <td>
                           <select id="subjectsDropDown" class="form-select subject-input">
                             <option value="">Select Subject</option>
-                            <!-- Populate with subjects -->
+                          </select>
+                        </td>
+                        <td>
+                          <select id="daysDropDown" class="form-select day-input">
+                            <option value="">Select Day</option>
                           </select>
                         </td>
                         <td><input type="time" id="periodStartTime" class="form-control startTime-input" value="08:00"></td>
@@ -520,6 +525,7 @@
     window.onload = function () {
       loadSubjects();
       loadTeachers();
+      loadDays();
     }
 
     // ------------------Teachers DropDown-------------------------
@@ -539,6 +545,25 @@
         })
         .catch(error => console.error('Error loading subjects:', error));
     }
+
+    // ------------------- Days DropDown --------------------------
+    function loadDays() {
+      fetch(`/days`)
+        .then(response => response.json())
+        .then(data => {
+          const dropdown = document.getElementById('daysDropDown');
+          dropdown.innerHTML = '<option value="">Select Day</option>'; // Reset first
+
+          data.forEach(day => {
+            const option = document.createElement('option');
+            option.value = day.day_name;
+            option.textContent = day.day_name;
+            dropdown.appendChild(option);
+          });
+        })
+        .catch(error => console.error('Error loading subjects:', error));
+    }
+
 
     // ------------------Subjects DropDown-------------------------
     function loadSubjects() {
@@ -563,6 +588,7 @@
     document.getElementById('addPeriodBtn').addEventListener('click', function () {
       const classVal = document.getElementById('classesDropDown').value;
       const subjectVal = document.getElementById('subjectsDropDown').value;
+      const dayVal = document.getElementById('daysDropDown').value;
       const startTime = document.getElementById('periodStartTime').value;
       const endTime = document.getElementById('periodEndTime').value;
 
@@ -575,11 +601,12 @@
       newRow.innerHTML = `
       <td><input type="text" class="form-control form-control-sm class-input" value="${classVal}" readonly></td>
       <td><input type="text" class="form-control form-control-sm subject-input" value="${subjectVal}" readonly></td>
+      <td><input type="text" class="form-control form-control-sm day-input" value="${dayVal}" readonly></td>
       <td><input type="time" class="form-control form-control-sm startTime-input" value="${startTime}" readonly></td>
       <td><input type="time" class="form-control form-control-sm endTime-input" value="${endTime}" readonly></td>
       <td><button type="button" class="btn btn-outline-danger btn-sm remove-btn class="bi bi-trash"></i> Remove</button></td>`;
 
-      // Add remove functionality
+      //Remove functionality
       newRow.querySelector('.remove-btn').addEventListener('click', function () {
         newRow.remove();
       });
@@ -593,7 +620,7 @@
 
 
 
-    //--------------------- save the periods ------------------------
+    //--------------------- save the periods ------------------------ 
     document.getElementById('savePeriodsBtn').addEventListener('click', function () {
       const teacherId = document.getElementById('teachersDropDown').value;
       const rows = document.querySelectorAll('#period-details-body tr');
@@ -602,11 +629,12 @@
       rows.forEach(row => {
         const classVal = row.querySelector('.class-input')?.value;
         const subjectVal = row.querySelector('.subject-input')?.value;
+        const dayVal = row.querySelector('.day-input')?.value;
         const startTime = row.querySelector('.startTime-input')?.value;
         const endTime = row.querySelector('.endTime-input')?.value;
 
-        if (classVal && subjectVal && startTime && endTime) {
-          periods.push({ class: classVal, subject: subjectVal, start_time: startTime, end_time: endTime });
+        if (classVal && subjectVal && dayVal && startTime && endTime) {
+          periods.push({ class: classVal, day: dayVal , subject: subjectVal, start_time: startTime, end_time: endTime });
         }
       });
 

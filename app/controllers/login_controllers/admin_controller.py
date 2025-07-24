@@ -9,7 +9,8 @@ from app.services.login_service.admin_service import (
     get_teacher_datas,
     get_all_teachers,
     get_all_subjects,
-    insert_datas_into_json_file
+    insert_datas_into_json_file,
+    get_all_days
     )
 from app.utils.email_utils import send_login_email
 from app.utils.otp_utils import generate_qr_url,generate_secret
@@ -100,10 +101,22 @@ def get_teachers():
         print(f"Error in Get Subjects: {e}")
         return jsonify({'Error': 'Internal server error'}), 500
 
+
+@admin_bp.route('/days',methods = ['GET'])
+def get_days():
+    try:
+        days = get_all_days()
+        return jsonify(days)
+    except Exception as e:
+        print(f"Error in Get Subjects: {e}")
+        return jsonify({'Error': 'Internal server error'}), 500
+
+
 @admin_bp.route('/save_periods', methods=['POST'])
 def save_periods():
     try:
         data = request.get_json()
+        
         if not data:
             return jsonify({'success': False, 'error': 'Invalid or missing JSON'}), 400
         

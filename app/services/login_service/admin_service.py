@@ -8,7 +8,8 @@ from app.repositories.login_repository.admin_repository import (
     get_student_datas_from_db,
     get_teacher_datas_from_db,
     get_all_teachers_from_db,
-    get_all_subjects_from_db
+    get_all_subjects_from_db,
+    get_all_days_from_db
     )
 from app.utils.hash_password_utils import check_password,generate_hash_password
 from app.utils.token_utils import generate_token_with_stored_secret_key
@@ -103,6 +104,13 @@ def get_all_teachers():
 def get_all_subjects():
     try:
         return get_all_subjects_from_db()
+    except Exception as e:
+        print(f"Error : {e}")
+        return []
+
+def get_all_days():
+    try:
+        return get_all_days_from_db()
     except Exception as e:
         print(f"Error : {e}")
         return []

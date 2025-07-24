@@ -1,24 +1,34 @@
 {
   "1186720f-63a1-4a78-8a6f-c68e698fc443": [
     {
-      "class": "Class 5",
-      "end_time": "09:00",
+      "class": "Class 10",
+      "day": "Monday",
+      "end_time": "08:30",
       "start_time": "08:00",
-      "subject": "Hindi"
+      "subject": "Maths"
     },
     {
-      "class": "Class 6",
-      "end_time": "10:00",
-      "start_time": "09:00",
-      "subject": "Chemistry"
+      "class": "Class 11",
+      "day": "Monday",
+      "end_time": "09:00",
+      "start_time": "08:30",
+      "subject": "ComputerApplication"
     }
   ],
   "750bc9b6-f9f9-487d-8236-f9397c387aa3": [
     {
-      "class": "Class 4",
-      "end_time": "11:00",
-      "start_time": "10:00",
-      "subject": "Tamil"
+      "class": "Class 5",
+      "day": "Tuesday",
+      "end_time": "08:30",
+      "start_time": "08:00",
+      "subject": "Science"
+    },
+    {
+      "class": "Class 6",
+      "day": "Wednesday",
+      "end_time": "09:00",
+      "start_time": "08:30",
+      "subject": "Socialscience"
     }
   ]
 }
