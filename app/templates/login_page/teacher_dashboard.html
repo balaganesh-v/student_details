@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -457,8 +456,11 @@
   <!------------------------------ Modal for Student Details ------------------------------->
 
   <!-- Bootstrap JS and FullCalendar JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js" integrity="sha256-Zhz0vB5i3gS4Jlv3Q0ZOpK9qJ8U4xQ1KPc0Sy1T2GfM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"
+    integrity="sha256-Zhz0vB5i3gS4Jlv3Q0ZOpK9qJ8U4xQ1KPc0Sy1T2GfM=" crossorigin="anonymous"></script>
   <script>
     //----------------------- View students list for students section------------------------//
     function view_students_list(class_name) {
@@ -729,36 +731,64 @@
 
 
     //------------------------------- Periods on the calendar page -------------------------------------//
-    window.onload = function() {
+    window.onload = function () {
       if (typeof FullCalendar === 'undefined') {
         console.error('FullCalendar is not loaded. Please check the CDN or script inclusion.');
-        document.getElementById('calendar').innerHTML = `<div class="alert alert-danger">Error: Calendar library failed to load. Please try again later.</div>`;
+        document.getElementById('calendar').innerHTML = '<div class="alert alert-danger">Error: Calendar library failed to load. Please try again later.</div>';
         return;
       }
 
       const calendarEl = document.getElementById('calendar');
       const teacherId = '{{ user.user_id }}'; // Teacher UUID from backend
 
+      const subjectColors = {
+        'Hindi': '#ff5733',
+        'Chemistry': '#dc3545',
+        'Tamil': '#17a2b8',
+        'English': '#0d6efd',
+        'Maths': '#198754',
+        'Science': '#dc3545',
+        'Socialscience': '#ffc107',
+        'GeneralKnowledge': '#6f42c1',
+        'Physics': '#fd7e14',
+        'ComputerScience': '#20c997',
+        'Zoology': '#6610f2',
+        'Botany': '#28a745',
+        'Commerce': '#d63384',
+        'Accountancy': '#e83e8c',
+        'ComputerApplication': '#007bff'
+      };
+
+      const weekdayMap = {
+        'Sunday': 0,
+        'Monday': 1,
+        'Tuesday': 2,
+        'Wednesday': 3,
+        'Thursday': 4,
+        'Friday': 5,
+        'Saturday': 6
+      };
+
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'timeGridWeek',
-        initialDate:  new Date(), // Today's Date
+        initialDate: new Date(),
         locale: 'en',
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
           right: 'timeGridWeek,timeGridDay'
         },
-        slotMinTime: '01:00:00', // 1:00 AM
-        slotMaxTime: '12:00:00', // 12:00 PM
+        slotMinTime: '01:00:00',
+        slotMaxTime: '12:00:00',
         slotLabelFormat: {
           hour: 'numeric',
           minute: '2-digit',
-          meridiem: 'short' // Displays AM/PM
+          meridiem: 'short'
         },
         eventTimeFormat: {
           hour: 'numeric',
           minute: '2-digit',
-          meridiem: 'short' // Displays AM/PM
+          meridiem: 'short'
         },
         allDaySlot: false,
         events: function (fetchInfo, successCallback, failureCallback) {
@@ -768,40 +798,34 @@
               return response.json();
             })
             .then(periods => {
-              if (periods.error) throw new Error(periods.error);
-              if (periods.length === 0) {
-                console.warn(`No periods found for teacher ID: ${teacherId}`);
-              }
+              const today = new Date();
+              const currentWeekday = today.getDay();
+              const currentWeekStart = new Date(today);
+              currentWeekStart.setDate(today.getDate() - currentWeekday); // Set to Sunday
+
               const events = periods.map(period => {
-                const subjectColors = {
-                  'Hindi': '#ff5733',
-                  'Chemistry': '#dc3545',
-                  'Tamil': '#17a2b8',
-                  'English': '#0d6efd',
-                  'Maths': '#198754',
-                  'Science': '#dc3545',
-                  'Socialscience': '#ffc107',
-                  'GeneralKnowledge': '#6f42c1',
-                  'Physics': '#fd7e14',
-                  'ComputerScience': '#20c997',
-                  'Zoology': '#6610f2',
-                  'Botany': '#28a745',
-                  'Commerce': '#d63384',
-                  'Accountancy': '#e83e8c',
-                  'ComputerApplication': '#007bff'
-                };
+                const targetDay = weekdayMap[period.day];
+                if (targetDay === undefined) return null;
+
+                const eventDate = new Date(currentWeekStart);
+                eventDate.setDate(currentWeekStart.getDate() + targetDay);
+
+                const startDateTime = new Date(`${eventDate.toISOString().split('T')[0]}T${period.start_time}:00`);
+                const endDateTime = new Date(`${eventDate.toISOString().split('T')[0]}T${period.end_time}:00`);
+
                 return {
                   title: `${period.class} - ${period.subject}`,
-                  start: `2025-07-23T${period.start_time}:00`,
-                  end: `2025-07-23T${period.end_time}:00`,
-                  backgroundColor: subjectColors[period.subject],
-                  borderColor: subjectColors[period.subject],
+                  start: startDateTime.toISOString(),
+                  end: endDateTime.toISOString(),
+                  backgroundColor: subjectColors[period.subject] || '#0d6efd',
+                  borderColor: subjectColors[period.subject] || '#0d6efd',
                   extendedProps: {
                     class: period.class,
                     subject: period.subject
                   }
                 };
-              });
+              }).filter(e => e !== null);
+
               successCallback(events);
             })
             .catch(error => {
@@ -826,6 +850,7 @@
         height: 'auto',
         contentHeight: 600
       });
+
       calendar.render();
     };
     //------------------------------- Periods on the calendar page -------------------------------------//
