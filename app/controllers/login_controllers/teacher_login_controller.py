@@ -117,8 +117,6 @@ def get_user_by_user_id(user_id):
         print("Error:", e)
         return jsonify({"success": False})
 
-
-
 @teacher_login_bp.route('/update_teacher/<user_id>', methods=['POST'])
 def update_teacher_profile(user_id):
     try:
@@ -141,7 +139,23 @@ def get_teacher_events():
     try:
         token = request.cookies.get('access_token')
         periods = get_periods_from_stored_json_file(token)
-        print(periods)
         return jsonify(periods)
     except Exception as e:
         return jsonify({'error': f'Failed to fetch events: {str(e)}'}), 500
+
+
+@teacher_login_bp.route('/logout', methods=['POST'])
+def logout():
+    token = request.cookies.get('access_token')
+    print("Logging out token:", token)  # Optional for debug/logging
+
+    response = make_response(redirect('/'))  # Redirect to landing page
+    response.set_cookie(
+        key='access_token',
+        value='',
+        expires=0,                  # Expire immediately
+        httponly=True,
+        secure=True,
+        samesite='Lax'
+    )
+    return response

@@ -5,155 +5,189 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TeacherHub Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-  <!-- Add Bootstrap if using tooltips -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
   <style>
     body {
-      background-color: #f8f9fb;
-      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       overflow-x: hidden;
     }
 
     .sidebar {
-      background: linear-gradient(180deg, #0d6efd 0%, #0046a3 100%);
       min-height: 100vh;
-      color: white;
       position: fixed;
-      width: 260px;
-      padding: 1rem 0.5rem;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.08);
+      width: 250px;
       z-index: 1000;
+      transition: width 0.3s ease;
     }
 
-    .sidebar h4 {
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 0.25rem;
+    .sidebar .nav-link {
+      color: #adb5bd;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      margin: 0.2rem 0.5rem;
+      transition: all 0.3s ease;
     }
 
-    .sidebar p {
-      font-size: 0.85rem;
-      text-align: center;
-      margin-bottom: 1rem;
-      opacity: 0.9;
+    .sidebar .nav-link:hover {
+      background-color: #495057;
+      color: #ffffff;
     }
 
-    .nav-link {
-      color: #e9ecef;
-      border-radius: 8px;
-      padding: 0.55rem 0.85rem;
-      margin-bottom: 5px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      transition: all 0.2s ease-in-out;
-      font-size: 0.95rem;
-    }
-
-    .nav-link.active {
+    .sidebar .nav-link.active {
       background-color: #ffffff;
-      color: #1c1a1a !important;
+      color: #212529 !important;
       font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar .nav-link i {
+      font-size: 1.2rem;
+      margin-right: 1rem;
     }
 
     .main-content {
-      margin-left: 260px;
+      margin-left: 250px;
       padding: 2rem;
+      transition: margin-left 0.3s ease;
     }
 
     .topbar {
-      background-color: #ffffff;
-      padding: 1rem;
-      border-bottom: 1px solid #dee2e6;
-      margin-bottom: 1.5rem;
-      border-radius: 10px;
+      background: #ffffff;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
     }
 
     .user-info {
-      background: linear-gradient(90deg, #198754 0%, #20c997 100%);
+      background: linear-gradient(90deg, #22c55e 0%, #10b981 100%);
       color: white;
-      padding: 1rem 1.25rem;
-      border-radius: 12px;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .user-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+      opacity: 0.3;
     }
 
     .form-box {
       background: #ffffff;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-      margin-bottom: 1.5rem;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .form-box:hover {
+      transform: translateY(-5px);
     }
 
     .form-box h4 {
       font-weight: 600;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      color: #212529;
     }
 
-    .settings-section {
-      margin-top: auto;
-      padding-top: 1rem;
+    .table {
+      border-radius: 0.5rem;
+      overflow: hidden;
     }
 
-    .logout-btn {
-      background-color: #dc3545;
-      color: white;
-      border-radius: 8px;
-      padding: 0.5rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      font-size: 0.95rem;
-    }
-
-    .logout-btn:hover {
-      background-color: #bb2d3b;
-      transform: translateX(5px);
-    }
-
-    .settings-section .nav-link {
-      margin-top: 5px;
-      font-size: 0.95rem;
-    }
-
-    .table td,
     .table th {
+      background-color: #f8f9fa;
+      color: #212529;
+      font-weight: 600;
+    }
+
+    .table td {
       vertical-align: middle;
+      transition: background-color 0.3s ease;
+    }
+
+    .table tr:hover {
+      background-color: #f1f5f9;
     }
 
     .btn-check:checked+.btn-outline-success {
-      background-color: #198754;
+      background-color: #22c55e;
       color: white;
-      border-color: #198754;
+      border-color: #22c55e;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .btn-check:checked+.btn-outline-danger {
       background-color: #dc3545;
       color: white;
       border-color: #dc3545;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-outline-primary {
+      border-color: #0d6efd;
+      color: #0d6efd;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+      background-color: #0d6efd;
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-content {
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-header {
+      background: linear-gradient(90deg, #0d6efd 0%, #212529 100%);
+      color: white;
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
     }
 
     @media (max-width: 768px) {
       .sidebar {
-        width: 80px;
+        width: 70px;
       }
 
-      .sidebar h4,
-      .sidebar p,
-      .nav-link span,
-      .settings-section span {
+      .sidebar .brand-text,
+      .sidebar .nav-link span,
+      .sidebar .logout-btn span {
         display: none;
       }
 
+      .sidebar .nav-link i {
+        font-size: 1.4rem;
+        margin-right: 0;
+      }
+
+      .sidebar .nav-link {
+        justify-content: center;
+        padding: 0.75rem;
+      }
+
       .main-content {
-        margin-left: 80px;
+        margin-left: 70px;
+      }
+
+      .form-box {
+        padding: 1.5rem;
       }
     }
 
@@ -163,19 +197,11 @@
         position: relative;
         min-height: auto;
         padding: 1rem;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
       }
 
-      .nav {
+      .sidebar .nav {
         flex-direction: row;
-        justify-content: center;
         flex-wrap: wrap;
-      }
-
-      .nav-link {
-        padding: 0.6rem 0.8rem;
         justify-content: center;
       }
 
@@ -184,86 +210,73 @@
         padding: 1rem;
       }
 
-      .settings-section {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
+      .topbar {
+        padding: 1rem;
       }
     }
   </style>
 </head>
 
 <body>
-  <!--------------------------------- Teacher Dashboard ------------------------------------>
   <div class="container-fluid p-0">
-    <!--------------------------- Teacher Dashboard content --------------------------------->
     <div class="row g-0">
-      <!------------------------------ Sidebar content --------------------------------------->
-      <div class="sidebar col-auto">
-        <h4>TeacherHub</h4>
-        <p>Welcome <strong>{{ user.user_name }}</strong></p>
-        <div class="nav flex-column nav-pills" id="sidebar-tabs" role="tablist" aria-orientation="vertical">
+      <div class="sidebar col-auto bg-dark text-white">
+        <div class="p-3 text-center border-bottom border-secondary">
+          <h4 class="fw-bold mb-0 brand-text">TeacherHub</h4>
+          <p class="text-muted small mb-0 brand-text">Welcome <strong>{{ user.user_name }}</strong></p>
+        </div>
+        <div class="nav flex-column nav-pills p-2" id="sidebar-tabs" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="dashboard-tab" data-bs-toggle="pill" href="#dashboard" role="tab"
-            aria-controls="dashboard" aria-selected="true"><i class="bi bi-house"></i> <span>Dashboard</span></a>
+            aria-controls="dashboard" aria-selected="true"><i class="fas fa-home"></i> <span>Dashboard</span></a>
           <a class="nav-link" id="students-tab" data-bs-toggle="pill" href="#students" role="tab"
-            aria-controls="students" aria-selected="false"><i class="bi bi-people-fill"></i> <span>Students</span></a>
+            aria-controls="students" aria-selected="false"><i class="fas fa-users"></i> <span>Students</span></a>
           <a class="nav-link" id="attendance-tab" data-bs-toggle="pill" href="#attendance" role="tab"
-            aria-controls="attendance" aria-selected="false"><i class="bi bi-calendar-check"></i>
+            aria-controls="attendance" aria-selected="false"><i class="fas fa-calendar-check"></i>
             <span>Attendance</span></a>
           <a class="nav-link" id="assignments-tab" data-bs-toggle="pill" href="#assignments" role="tab"
-            aria-controls="assignments" aria-selected="false"><i class="bi bi-journal-text"></i>
+            aria-controls="assignments" aria-selected="false"><i class="fas fa-book"></i>
             <span>Assignments</span></a>
           <a class="nav-link" id="calendar-tab" data-bs-toggle="pill" href="#calendar" role="tab"
-            aria-controls="calendar" aria-selected="false"><i class="bi bi-calendar-week"></i> <span>Calendar</span></a>
+            aria-controls="calendar" aria-selected="false"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></a>
           <a class="nav-link" id="analytics-tab" data-bs-toggle="pill" href="#analytics" role="tab"
-            aria-controls="analytics" aria-selected="false"><i class="bi bi-bar-chart-line"></i>
+            aria-controls="analytics" aria-selected="false"><i class="fas fa-chart-bar"></i>
             <span>Analytics</span></a>
           <a class="nav-link" id="messages-tab" data-bs-toggle="pill" href="#messages" role="tab"
-            aria-controls="messages" aria-selected="false"><i class="bi bi-chat-dots"></i> <span>Messages</span></a>
+            aria-controls="messages" aria-selected="false"><i class="fas fa-comments"></i> <span>Messages</span></a>
           <a class="nav-link" id="resources-tab" data-bs-toggle="pill" href="#resources" role="tab"
-            aria-controls="resources" aria-selected="false"><i class="bi bi-folder2-open"></i>
+            aria-controls="resources" aria-selected="false"><i class="fas fa-folder-open"></i>
             <span>Resources</span></a>
           <a class="nav-link" id="profile-tab" data-bs-toggle="pill" href="#profile" role="tab" aria-controls="profile"
-            aria-selected="false"><i class="bi bi-person-circle"></i> <span>Profile</span></a>
+            aria-selected="false"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
+          <a class="nav-link" id="settings-tab" data-bs-toggle="pill" href="#settings" role="tab"
+            aria-controls="settings" aria-selected="false"><i class="fas fa-cog"></i> <span>Settings</span></a>
         </div>
-        <!----------------------------- Logout and settings ------------------------------------->
-        <div class="settings-section mt-3">
-          <a href="/logout" class="logout-btn"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a>
-          <a class="nav-link" data-bs-toggle="pill" href="#settings" role="tab"><i class="bi bi-gear"></i>
-            <span>Settings</span>
-          </a>
+        <div class="mt-auto p-2 border-top border-secondary">
+          <form action="/logout" method="POST" onsubmit="return confirm('Are you sure you want to logout?')">
+            <button type="submit" class="btn btn-danger w-100 logout-btn">
+              <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+            </button>
+          </form>
         </div>
-        <!----------------------------- Logout and settings ------------------------------------->
       </div>
-      <!-------------------------------- Sidebar content ----------------------------------------->
-
-      <!---------------------------------- Main Content ------------------------------------------>
       <div class="main-content col">
-        <!---------------------------------- Top bar ---------------------------------------------->
         <div class="topbar">
           <div class="user-info">
             <h2>Welcome {{ user.user_name }}</h2>
             <p>Your email is {{ user.user_email }}</p>
           </div>
         </div>
-        <!----------------------------------- Top bar ---------------------------------------------->
-
-        <!-------------------------------- Main Content -------------------------------------------->
         <div class="tab-content" id="tabContent">
-          <!--------------------------- Dashboard section ------------------------------------------>
           <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
             <div class="form-box">
-              <h4><i class="bi bi-house"></i> Dashboard</h4>
+              <h4><i class="fas fa-home"></i> Dashboard</h4>
               <p>Welcome to your TeacherHub dashboard. Monitor teaching activities, track student progress, and manage
                 your classroom efficiently.</p>
             </div>
           </div>
-          <!---------------------------- Dashboard section ------------------------------------------>
-
-          <!---------------------------- Students section -------------------------------------------->
           <div class="tab-pane fade" id="students" role="tabpanel">
             <div class="form-box">
-              <h4><i class="bi bi-people-fill"></i> Students</h4>
+              <h4><i class="fas fa-users"></i> Students</h4>
               <p>View and manage student records, including attendance, grades, and personal details.</p>
               {% if teacher.class_ids %}
               <label>Classes</label>
@@ -274,18 +287,12 @@
                 {% endfor %}
               </div>
               {% endif %}
-
               <div id="student-list-container"></div>
-
             </div>
           </div>
-          <!------------------------------ Students section ------------------------------------------->
-
-          <!----------------------------- Attendance section ------------------------------------------>
           <div class="tab-pane fade" id="attendance" role="tabpanel">
-            <!--------------------- Take Attendance --------------------------->
             <div class="form-box">
-              <h4><i class="bi bi-calendar-check"></i> Take Attendance</h4>
+              <h4><i class="fas fa-calendar-check"></i> Take Attendance</h4>
               {% if teacher.class_ids %}
               <label>Classes</label>
               <div class="btn-group mb-3" role="group">
@@ -299,9 +306,8 @@
                 <div id="student-attendance-list-container" class="bg-white p-4 shadow-sm rounded"></div>
               </div>
             </div>
-            <!----------- -------- Modify Attendance ------------------------->
             <div class="form-box">
-              <h4><i class="bi bi-calendar-check"></i> Modify Attendance</h4>
+              <h4><i class="fas fa-calendar-check"></i> Modify Attendance</h4>
               {% if teacher.class_ids %}
               <label>Classes</label>
               <div class="btn-group mb-3" role="group">
@@ -316,58 +322,40 @@
               </div>
             </div>
           </div>
-          <!------------------------------ Attendance section ---------------------------------------------->
-
-          <!------------------------------ Assignment section ---------------------------------------------->
           <div class="tab-pane fade" id="assignments" role="tabpanel">
             <div class="form-box">
-              <h4><i class="bi bi-journal-text"></i> Assignments</h4>
+              <h4><i class="fas fa-book"></i> Assignments</h4>
               <p>Create, assign, and track student assignments and submissions.</p>
             </div>
           </div>
-          <!------------------------------ Assignment section ----------------------------------------------->
-
-          <!------------------------------- Calendar section ------------------------------------------------>
           <div class="tab-pane fade" id="calendar" role="tabpanel">
             <div class="form-box">
-              <h4><i class="bi bi-calendar-week"></i> Calendar</h4>
+              <h4><i class="fas fa-calendar-alt"></i> Calendar</h4>
               <p>Schedule classes, exams, and other important events.</p>
               <div id="calendar"></div>
             </div>
           </div>
-          <!------------------------------- Calendar section ------------------------------------------------>
-
-          <!------------------------------ Analytics section ------------------------------------------------->
           <div class="tab-pane fade" id="analytics" role="tabpanel">
             <div class="form-box">
-              <h4><i class="bi bi-bar-chart-line"></i> Analytics</h4>
+              <h4><i class="fas fa-chart-bar"></i> Analytics</h4>
               <p>Analyze student performance, attendance trends, and other metrics.</p>
             </div>
           </div>
-          <!------------------------------ Analytics section -------------------------------------------------->
-
-          <!------------------------------- Messages section -------------------------------------------------->
           <div class="tab-pane fade" id="messages" role="tabpanel">
             <div class="form-box">
-              <h4><i class="bi bi-chat-dots"></i> Messages</h4>
+              <h4><i class="fas fa-comments"></i> Messages</h4>
               <p>Communicate with students, parents, and other teachers.</p>
             </div>
           </div>
-          <!------------------------------- Messages section -------------------------------------------------->
-
-          <!------------------------------ Resources section -------------------------------------------------->
           <div class="tab-pane fade" id="resources" role="tabpanel">
             <div class="form-box">
-              <h4><i class="bi bi-folder2-open"></i> Resources</h4>
+              <h4><i class="fas fa-folder-open"></i> Resources</h4>
               <p>Access and share teaching materials, lesson plans, and other resources.</p>
             </div>
           </div>
-          <!------------------------------ Resources section --------------------------------------------------->
-
-          <!------------------------------- Profile section ---------------------------------------------------->
           <div class="tab-pane fade" id="profile" role="tabpanel">
             <div class="form-box border rounded p-4 shadow-sm bg-white profile_page">
-              <h4 class="mb-3 text-primary"><i class="bi bi-person-badge"></i> Teacher Profile</h4>
+              <h4 class="mb-3 text-primary"><i class="fas fa-user"></i> Teacher Profile</h4>
               <p class="text-muted mb-4">Below are your profile details.</p>
               <div class="row g-4">
                 <div class="col-md-6">
@@ -416,26 +404,16 @@
               </div>
             </div>
           </div>
-          <!------------------------------- Profile section ----------------------------------------------------->
-
-          <!------------------------------- Settings section ---------------------------------------------------->
           <div class="tab-pane fade" id="settings" role="tabpanel">
             <div class="form-box">
-              <h4><i class="bi bi-gear"></i> Settings</h4>
+              <h4><i class="fas fa-cog"></i> Settings</h4>
               <p>Adjust your dashboard settings and preferences.</p>
             </div>
           </div>
-          <!------------------------------- Settings section ---------------------------------------------------->
         </div>
-        <!-------------------------------- Main Content -------------------------------------------->
       </div>
-      <!--------------------------------- Main Content --------------------------------------------->
     </div>
-    <!--------------------------- Teacher Dashboard content ---------------------------------->
   </div>
-  <!--------------------------------- Teacher Dashboard ------------------------------------->
-
-  <!------------------------------ Modal for Student Details -------------------------------->
   <div class="modal fade" id="studentDetailModal" tabindex="-1" aria-labelledby="studentDetailModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -444,25 +422,17 @@
           <h5 class="modal-title" id="studentDetailModalLabel">Student Details</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" id="student-detail-body">
-          <!------------- Student details will be dynamically inserted here ------------------>
-        </div>
+        <div class="modal-body" id="student-detail-body"></div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
-  <!------------------------------ Modal for Student Details ------------------------------->
-
-  <!-- Bootstrap JS and FullCalendar JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"
-    integrity="sha256-Zhz0vB5i3gS4Jlv3Q0ZOpK9qJ8U4xQ1KPc0Sy1T2GfM=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js" integrity="sha256-Zhz0vB5i3gS4Jlv3Q0ZOpK9qJ8U4xQ1KPc0Sy1T2GfM=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/fullcalendar@6.1.15/index.global.min.js"></script>
   <script>
-    //----------------------- View students list for students section------------------------//
     function view_students_list(class_name) {
       fetch(`/get_student_datas/${class_name}`)
         .then(response => {
@@ -497,9 +467,7 @@
           document.getElementById('student-list-container').innerHTML = `<div class="alert alert-danger">Error fetching students for ${class_name}.</div>`;
         });
     }
-    //----------------------- View students list for students section --------------------------//
 
-    //----------------- Take Attendance for students in Attendance Section ----------------------//
     function view_students_attendance_list(class_name) {
       fetch(`/get_students_with_attendance/${class_name}`)
         .then(response => {
@@ -513,25 +481,25 @@
             return;
           }
           container.innerHTML = `
-              <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="text-primary">📋 Students Attendance - ${class_name}</h3>
-                <div>
-                  <input type="date" id="attendance-date" class="form-control d-inline-block me-2" style="width: auto;" required max="${new Date().toISOString().split('T')[0]}">
-                  <button class="btn btn-outline-secondary btn-sm" onclick="view_students_attendance_list('${class_name}')">Refresh</button>
-                </div>
-              </div>`;
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h3 class="text-primary">📋 Students Attendance - ${class_name}</h3>
+              <div>
+                <input type="date" id="attendance-date" class="form-control d-inline-block me-2" style="width: auto;" required max="${new Date().toISOString().split('T')[0]}">
+                <button class="btn btn-outline-secondary btn-sm" onclick="view_students_attendance_list('${class_name}')">Refresh</button>
+              </div>
+            </div>`;
           let content = `
-          <form id="attendance-form" class="needs-validation" novalidate>
-            <div class="table-responsive">
-              <table class="table table-hover table-bordered align-middle">
-                <thead class="table-light">
-                  <tr>
-                    <th scope="col">S.No</th>
-                    <th scope="col">Student Name</th>
-                    <th scope="col" class="text-center">Attendance</th>
-                  </tr>
-                </thead>
-                <tbody>`;
+            <form id="attendance-form" class="needs-validation" novalidate>
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th scope="col">S.No</th>
+                      <th scope="col">Student Name</th>
+                      <th scope="col" class="text-center">Attendance</th>
+                    </tr>
+                  </thead>
+                  <tbody>`;
           data.forEach((student, index) => {
             const status = student.attendance_status;
             const checkedPresent = status === 'Present' ? 'checked' : '';
@@ -539,18 +507,18 @@
             const disabled = status ? 'disabled' : '';
             const rowClass = status ? 'table-secondary' : '';
             content += `
-            <tr class="${rowClass}">
-              <td>${index + 1}</td>
-              <td>${student.student_name}</td>
-              <td class="text-center">
-                <div class="btn-group" role="group" aria-label="Attendance Status">
-                  <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${checkedPresent} ${disabled} required>
-                  <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
-                  <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${checkedAbsent} ${disabled} required>
-                  <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
-                </div>
-              </td>
-            </tr>`;
+              <tr class="${rowClass}">
+                <td>${index + 1}</td>
+                <td>${student.student_name}</td>
+                <td class="text-center">
+                  <div class="btn-group" role="group" aria-label="Attendance Status">
+                    <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${checkedPresent} ${disabled} required>
+                    <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
+                    <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${checkedAbsent} ${disabled} required>
+                    <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
+                  </div>
+                </td>
+              </tr>`;
           });
           content += `
                 </tbody>
@@ -630,9 +598,7 @@
           document.getElementById('student-attendance-list-container').innerHTML = `<div class="alert alert-danger">Error fetching attendance for ${class_name}.</div>`;
         });
     }
-    //----------------- Take Attendance for students in Attendance Section ----------------------//
 
-    //-------------------------- Edit the teacher's Profile -------------------------------------//
     document.querySelectorAll('.edit-btn').forEach(btn => {
       btn.addEventListener('click', function () {
         const userId = this.getAttribute('data-user-id');
@@ -651,44 +617,44 @@
             return;
           }
           container.innerHTML = `
-        <form id="edit-teacher-form" class="form-box border rounded p-4 shadow-sm bg-white needs-validation" novalidate>
-          <h4 class="mb-3 text-primary"><i class="bi bi-pencil-square"></i> Edit Teacher Profile</h4>
-          <p class="text-muted mb-4">Update your profile details below.</p>
-          <div class="row g-4">
-            <div class="col-md-6">
-              <label for="edit_name" class="form-label fw-semibold">Name</label>
-              <input type="text" class="form-control" id="edit_name" name="user_name" value="${teacher.user_name || ''}" required>
-            </div>
-            <div class="col-md-6">
-              <label for="edit_age" class="form-label fw-semibold">Age</label>
-              <input type="number" class="form-control" id="edit_age" name="age" value="${teacher.age || ''}" required>
-            </div>
-            <div class="col-md-6">
-              <label for="edit_qualification" class="form-label fw-semibold">Qualification</label>
-              <input type="text" class="form-control" id="edit_qualification" name="qualification" value="${teacher.qualification || ''}" required>
-            </div>
-            <div class="col-md-6">
-              <label for="edit_gender" class="form-label fw-semibold">Gender</label>
-              <select class="form-select" id="edit_gender" name="gender" required>
-                <option value="Male" ${teacher.gender === 'Male' ? 'selected' : ''}>Male</option>
-                <option value="Female" ${teacher.gender === 'Female' ? 'selected' : ''}>Female</option>
-                <option value="Other" ${teacher.gender === 'Other' ? 'selected' : ''}>Other</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="edit_account" class="form-label fw-semibold">Account ID</label>
-              <input type="text" class="form-control" id="edit_account" name="account_id" value="${teacher.account_id || ''}">
-            </div>
-            <div class="col-md-6">
-              <label for="edit_address" class="form-label fw-semibold">Address</label>
-              <textarea class="form-control" id="edit_address" name="address" rows="3">${teacher.address || ''}</textarea>
-            </div>
-          </div>
-          <div class="mt-4 text-end">
-            <button type="submit" class="btn btn-success px-4"><i class="bi bi-save me-1"></i> Save Changes</button>
-          </div>
-        </form>
-      `;
+            <form id="edit-teacher-form" class="form-box border rounded p-4 shadow-sm bg-white needs-validation" novalidate>
+              <h4 class="mb-3 text-primary"><i class="fas fa-pencil-alt"></i> Edit Teacher Profile</h4>
+              <p class="text-muted mb-4">Update your profile details below.</p>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <label for="edit_name" class="form-label fw-semibold">Name</label>
+                  <input type="text" class="form-control" id="edit_name" name="user_name" value="${teacher.user_name || ''}" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="edit_age" class="form-label fw-semibold">Age</label>
+                  <input type="number" class="form-control" id="edit_age" name="age" value="${teacher.age || ''}" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="edit_qualification" class="form-label fw-semibold">Qualification</label>
+                  <input type="text" class="form-control" id="edit_qualification" name="qualification" value="${teacher.qualification || ''}" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="edit_gender" class="form-label fw-semibold">Gender</label>
+                  <select class="form-select" id="edit_gender" name="gender" required>
+                    <option value="Male" ${teacher.gender === 'Male' ? 'selected' : ''}>Male</option>
+                    <option value="Female" ${teacher.gender === 'Female' ? 'selected' : ''}>Female</option>
+                    <option value="Other" ${teacher.gender === 'Other' ? 'selected' : ''}>Other</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="edit_account" class="form-label fw-semibold">Account ID</label>
+                  <input type="text" class="form-control" id="edit_account" name="account_id" value="${teacher.account_id || ''}">
+                </div>
+                <div class="col-md-6">
+                  <label for="edit_address" class="form-label fw-semibold">Address</label>
+                  <textarea class="form-control" id="edit_address" name="address" rows="3">${teacher.address || ''}</textarea>
+                </div>
+              </div>
+              <div class="mt-4 text-end">
+                <button type="submit" class="btn btn-success px-4"><i class="fas fa-save me-1"></i> Save Changes</button>
+              </div>
+            </form>
+          `;
           document.getElementById('edit-teacher-form').addEventListener('submit', function (event) {
             event.preventDefault();
             const formData = new FormData(this);
@@ -705,9 +671,9 @@
               .then(result => {
                 if (result.success) {
                   container.innerHTML = `
-                  <div class="alert alert-success text-center fw-semibold">
-                    <i class="bi bi-check-circle-fill me-2"></i>Profile updated successfully!
-                  </div>`;
+                    <div class="alert alert-success text-center fw-semibold">
+                      <i class="fas fa-check-circle me-2"></i>Profile updated successfully!
+                    </div>`;
                   setTimeout(() => location.reload(), 1500);
                 } else {
                   alert("Failed to update profile: " + (result.error || "Unknown error"));
@@ -727,10 +693,7 @@
           }
         });
     }
-    //-------------------------- Edit the teacher's Profile -------------------------------------//
 
-
-    //------------------------------- Periods on the calendar page -------------------------------------//
     window.onload = function () {
       if (typeof FullCalendar === 'undefined') {
         console.error('FullCalendar is not loaded. Please check the CDN or script inclusion.');
@@ -739,7 +702,7 @@
       }
 
       const calendarEl = document.getElementById('calendar');
-      const teacherId = '{{ user.user_id }}'; // Teacher UUID from backend
+      const teacherId = '{{ user.user_id }}';
 
       const subjectColors = {
         'Hindi': '#ff5733',
@@ -801,7 +764,7 @@
               const today = new Date();
               const currentWeekday = today.getDay();
               const currentWeekStart = new Date(today);
-              currentWeekStart.setDate(today.getDate() - currentWeekday); // Set to Sunday
+              currentWeekStart.setDate(today.getDate() - currentWeekday);
 
               const events = periods.map(period => {
                 const targetDay = weekdayMap[period.day];
@@ -853,9 +816,7 @@
 
       calendar.render();
     };
-    //------------------------------- Periods on the calendar page -------------------------------------//
 
-    //------------------------------- Modify Students Attendance-----------------------------------//
     function modify_students_attendance(class_name) {
       fetch(`/get_students_names/${class_name}`)
         .then(response => {
@@ -869,39 +830,39 @@
             return;
           }
           container.innerHTML = `
-              <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="text-primary">📋 Modify Students Attendance - ${class_name}</h3>
-                <div>
-                  <input type="date" id="attendance-date" class="form-control d-inline-block me-2" style="width: auto;" required max="${new Date().toISOString().split('T')[0]}">
-                  <button class="btn btn-outline-secondary btn-sm" onclick="modify_students_attendance('${class_name}')">Refresh</button>
-                </div>
-              </div>`;
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h3 class="text-primary">📋 Modify Students Attendance - ${class_name}</h3>
+              <div>
+                <input type="date" id="attendance-date" class="form-control d-inline-block me-2" style="width: auto;" required max="${new Date().toISOString().split('T')[0]}">
+                <button class="btn btn-outline-secondary btn-sm" onclick="modify_students_attendance('${class_name}')">Refresh</button>
+              </div>
+            </div>`;
           let content = `
-          <form id="modify-attendance-form" class="needs-validation" novalidate>
-            <div class="table-responsive">
-              <table class="table table-hover table-bordered align-middle">
-                <thead class="table-light">
-                  <tr>
-                    <th scope="col">S.No</th>
-                    <th scope="col">Student Name</th>
-                    <th scope="col" class="text-center">Attendance</th>
-                  </tr>
-                </thead>
-                <tbody>`;
+            <form id="modify-attendance-form" class="needs-validation" novalidate>
+              <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th scope="col">S.No</th>
+                      <th scope="col">Student Name</th>
+                      <th scope="col" class="text-center">Attendance</th>
+                    </tr>
+                  </thead>
+                  <tbody>`;
           data.forEach((student, index) => {
             content += `
-            <tr>
-              <td>${index + 1}</td>
-              <td>${student.student_name}</td>
-              <td class="text-center">
-                <div class="btn-group" role="group" aria-label="Attendance Status">
-                  <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" required>
-                  <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
-                  <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" required>
-                  <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
-                </div>
-              </td>
-            </tr>`;
+              <tr>
+                <td>${index + 1}</td>
+                <td>${student.student_name}</td>
+                <td class="text-center">
+                  <div class="btn-group" role="group" aria-label="Attendance Status">
+                    <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" required>
+                    <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
+                    <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" required>
+                    <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
+                  </div>
+                </td>
+              </tr>`;
           });
           content += `
                 </tbody>
@@ -980,9 +941,7 @@
           document.getElementById('modify-student-attendance-list-container').innerHTML = `<div class="alert alert-danger">Error fetching students for ${class_name}.</div>`;
         });
     }
-    //------------------------------- Modify Students Attendance ---------------------------------//
 
-    //------------------------------- View single student Details --------------------------------//
     function view_student_detail(user_id) {
       fetch(`/get_student_detail/${user_id}`)
         .then(response => {
@@ -1071,9 +1030,7 @@
           alert("Something went wrong while fetching student details.");
         });
     }
-    //------------------------------- View single student Details --------------------------------//
   </script>
 </body>
 
 </html>
-```
