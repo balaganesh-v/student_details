@@ -9,6 +9,7 @@ from app.repositories.login_repository.teacher_login_repository import (
     store_students_modified_attendance_data_into_db,
     update_teachers_profile_data_into_db,
     get_teacher_by_user_id_from_db,
+    get_all_subjects_from_db
 )
 from app.utils.token_utils import generate_token_with_code, decode_token
 from app.utils.email_utils import send_code_mail
@@ -167,7 +168,13 @@ def get_assignments_from_json_file():
     except Exception as e:
         print(f"Error Getting to JSON: {e}")
         return False, str(e)
-
+    
+def get_all_subjects():
+    try:
+        return get_all_subjects_from_db()
+    except Exception as e:
+        print(f"Error : {e}")
+        return []
 
 def delete_selected_assignment_by_index_in_json_file(index):
     try:

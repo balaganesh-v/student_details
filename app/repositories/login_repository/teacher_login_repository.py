@@ -146,6 +146,22 @@ def store_students_modified_attendance_data_into_db(data):
             connection.close()
             cursor.close()
 
+def get_all_subjects_from_db():
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = "SELECT * FROM subjects "
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+    except Exception as e:
+        print(f"Error : {e}")
+        return False
+    finally:
+        connection.close()
+        cursor.close()
+
+
 def update_teachers_profile_data_into_db(data, user_id):
     connection = None
     try:
