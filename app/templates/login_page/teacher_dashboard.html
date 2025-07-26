@@ -5,10 +5,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TeacherHub Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link href="https://unpkg.com/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
     body {
       background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -223,7 +225,7 @@
       <div class="sidebar col-auto bg-dark text-white">
         <div class="p-3 text-center border-bottom border-secondary">
           <h4 class="fw-bold mb-0 brand-text">TeacherHub</h4>
-          <p class="text-muted small mb-0 brand-text">Welcome <strong>{{ user.user_name }}</strong></p>
+          <div class="text-muted fw-bold mb-0 brand-text">Welcome <strong>{{ teacher.user_name }}</strong></div>
         </div>
         <div class="nav flex-column nav-pills p-2" id="sidebar-tabs" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="dashboard-tab" data-bs-toggle="pill" href="#dashboard" role="tab"
@@ -234,13 +236,11 @@
             aria-controls="attendance" aria-selected="false"><i class="fas fa-calendar-check"></i>
             <span>Attendance</span></a>
           <a class="nav-link" id="assignments-tab" data-bs-toggle="pill" href="#assignments" role="tab"
-            aria-controls="assignments" aria-selected="false"><i class="fas fa-book"></i>
-            <span>Assignments</span></a>
+            aria-controls="assignments" aria-selected="false"><i class="fas fa-book"></i> <span>Assignments</span></a>
           <a class="nav-link" id="calendar-tab" data-bs-toggle="pill" href="#calendar" role="tab"
             aria-controls="calendar" aria-selected="false"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></a>
           <a class="nav-link" id="analytics-tab" data-bs-toggle="pill" href="#analytics" role="tab"
-            aria-controls="analytics" aria-selected="false"><i class="fas fa-chart-bar"></i>
-            <span>Analytics</span></a>
+            aria-controls="analytics" aria-selected="false"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a>
           <a class="nav-link" id="messages-tab" data-bs-toggle="pill" href="#messages" role="tab"
             aria-controls="messages" aria-selected="false"><i class="fas fa-comments"></i> <span>Messages</span></a>
           <a class="nav-link" id="resources-tab" data-bs-toggle="pill" href="#resources" role="tab"
@@ -322,12 +322,163 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="assignments" role="tabpanel">
-            <div class="form-box">
-              <h4><i class="fas fa-book"></i> Assignments</h4>
-              <p>Create, assign, and track student assignments and submissions.</p>
+
+
+
+          <div class="tab-pane fade" id="assignments" role="tabpanel" aria-labelledby="assignments-tab">
+            <div class="container py-8 px-6 bg-white rounded-xl shadow-md max-w-6xl mx-auto">
+              <div class="flex items-center mb-8">
+                <i class="fas fa-book text-4xl text-indigo-600 mr-4"></i>
+                <h3 class="text-3xl font-bold text-gray-900">Assignment Management</h3>
+              </div>
+              <div class="bg-gray-50 p-6 rounded-lg mb-8 shadow-sm">
+                <h4 class="text-xl font-semibold text-gray-800 mb-4"><i class="fas fa-plus-circle mr-2"></i>Create New
+                  Assignment</h4>
+                <form id="assignment-form" class="space-y-6">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label for="title" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-heading mr-2"></i>Title</label>
+                      <input type="text" id="title"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        placeholder="Enter assignment title" required>
+                    </div>
+                    <div>
+                      <label for="subject" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-book-open mr-2"></i>Subject</label>
+                      <input type="text" id="subject"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        placeholder="Enter subject" required>
+                    </div>
+                    <div>
+                      <label for="class" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-school mr-2"></i>Class</label>
+                      <input type="text" id="class"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        placeholder="e.g., 10A" required>
+                    </div>
+                    <div>
+                      <label for="start_date" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-calendar-day mr-2"></i>Start Date</label>
+                      <input type="date" id="start_date"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        required>
+                    </div>
+                    <div>
+                      <label for="end_date" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-calendar-check mr-2"></i>Due Date</label>
+                      <input type="date" id="end_date"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        required>
+                    </div>
+                    <div class="md:col-span-2">
+                      <label for="description" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-file-alt mr-2"></i>Description</label>
+                      <textarea id="description" rows="4"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        placeholder="Enter assignment description"></textarea>
+                    </div>
+                  </div>
+                  <div class="flex justify-end">
+                    <button type="submit"
+                      class="px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200">
+                      <i class="fas fa-plus mr-2"></i>Create Assignment
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="mt-8">
+                <h4 class="text-xl font-semibold text-gray-800 mb-4"><i class="fas fa-list mr-2"></i>Assignment List
+                </h4>
+                <div class="overflow-x-auto">
+                  <table class="w-full text-left border border-gray-200 rounded-lg">
+                    <thead class="bg-gray-100">
+                      <tr>
+                        <th class="px-6 py-3 text-sm font-medium text-gray-700">Title</th>
+                        <th class="px-6 py-3 text-sm font-medium text-gray-700">Class</th>
+                        <th class="px-6 py-3 text-sm font-medium text-gray-700">Subject</th>
+                        <th class="px-6 py-3 text-sm font-medium text-gray-700">Start Date</th>
+                        <th class="px-6 py-3 text-sm font-medium text-gray-700">Due Date</th>
+                        <th class="px-6 py-3 text-sm font-medium text-gray-700">Status</th>
+                        <th class="px-6 py-3 text-sm font-medium text-gray-700">Description</th>
+                        <th class="px-6 py-3 text-sm font-medium text-gray-700">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="assignment-body" class="divide-y divide-gray-200"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="editModal" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content rounded-lg">
+                  <div class="modal-header bg-indigo-600 text-white">
+                    <h5 class="modal-title">Edit Assignment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+                  <form id="edit-form" class="modal-body space-y-4 p-6">
+                    <input type="hidden" id="edit-index">
+                    <div>
+                      <label for="edit-title" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-heading mr-2"></i>Title</label>
+                      <input type="text" id="edit-title"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        placeholder="Enter title" required>
+                    </div>
+                    <div>
+                      <label for="edit-subject" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-book-open mr-2"></i>Subject</label>
+                      <input type="text" id="edit-subject"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        placeholder="Enter subject" required>
+                    </div>
+                    <div>
+                      <label for="edit-class" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-school mr-2"></i>Class</label>
+                      <input type="text" id="edit-class"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        placeholder="e.g., 10A" required>
+                    </div>
+                    <div>
+                      <label for="edit-start-date" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-calendar-day mr-2"></i>Start Date</label>
+                      <input type="date" id="edit-start-date"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        required>
+                    </div>
+                    <div>
+                      <label for="edit-end-date" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-calendar-check mr-2"></i>Due Date</label>
+                      <input type="date" id="edit-end-date"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        required>
+                    </div>
+                    <div>
+                      <label for="edit-description" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-file-alt mr-2"></i>Description</label>
+                      <textarea id="edit-description" rows="3"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+                        placeholder="Enter description"></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                      <button type="submit"
+                        class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200">
+                        <i class="fas fa-save mr-2"></i>Save
+                      </button>
+                      <button type="button"
+                        class="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200"
+                        data-bs-dismiss="modal">
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
+
+
+
           <div class="tab-pane fade" id="calendar" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-calendar-alt"></i> Calendar</h4>
@@ -429,10 +580,22 @@
       </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js" integrity="sha256-Zhz0vB5i3gS4Jlv3Q0ZOpK9qJ8U4xQ1KPc0Sy1T2GfM=" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/fullcalendar@6.1.15/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
   <script>
+    // Utility function for displaying alerts
+    function showAlert(container, message, type = 'danger') {
+      const alertDiv = document.createElement('div');
+      alertDiv.className = `alert alert-${type} mt-3`;
+      alertDiv.innerHTML = message;
+      container.appendChild(alertDiv);
+      alertDiv.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => alertDiv.remove(), 3000);
+    }
+
+    // Fetch and display student list for a class
     function view_students_list(class_name) {
       fetch(`/get_student_datas/${class_name}`)
         .then(response => {
@@ -441,11 +604,11 @@
         })
         .then(data => {
           const container = document.getElementById('student-list-container');
+          container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
           if (!data || data.length === 0) {
-            container.innerHTML = `<p>No students found for Class ${class_name}.</p>`;
+            container.innerHTML += `<p>No students found for Class ${class_name}.</p>`;
             return;
           }
-          container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
           let content = `<div class="list-group">`;
           data.forEach(student => {
             content += `
@@ -464,10 +627,11 @@
         })
         .catch(error => {
           console.error("Error fetching student data:", error);
-          document.getElementById('student-list-container').innerHTML = `<div class="alert alert-danger">Error fetching students for ${class_name}.</div>`;
+          showAlert(document.getElementById('student-list-container'), `Error fetching students for ${class_name}.`);
         });
     }
 
+    // Fetch and display attendance list for a class
     function view_students_attendance_list(class_name) {
       fetch(`/get_students_with_attendance/${class_name}`)
         .then(response => {
@@ -529,15 +693,12 @@
             </div>
           </form>`;
           container.innerHTML += content;
+
           document.getElementById("attendance-form").addEventListener("submit", function (e) {
             e.preventDefault();
             const selectedDate = document.getElementById('attendance-date').value;
             if (!selectedDate) {
-              const errorDiv = document.createElement('div');
-              errorDiv.className = 'alert alert-warning mt-3';
-              errorDiv.innerHTML = 'Please select a date for attendance.';
-              container.appendChild(errorDiv);
-              errorDiv.scrollIntoView({ behavior: 'smooth' });
+              showAlert(container, 'Please select a date for attendance.', 'warning');
               return;
             }
             const formData = new FormData(this);
@@ -550,11 +711,7 @@
               }))
               .filter(item => item.status);
             if (attendanceData.length === 0) {
-              const errorDiv = document.createElement('div');
-              errorDiv.className = 'alert alert-warning mt-3';
-              errorDiv.innerHTML = 'No attendance status selected or all students already marked.';
-              container.appendChild(errorDiv);
-              errorDiv.scrollIntoView({ behavior: 'smooth' });
+              showAlert(container, 'No attendance status selected or all students already marked.', 'warning');
               return;
             }
             fetch(`/submit_attendance`, {
@@ -567,8 +724,8 @@
               })
             })
               .then(response => response.json())
-              .then(data => {
-                if (data.success) {
+              .then(result => {
+                if (result.success) {
                   container.innerHTML = `
                     <div class="alert alert-success text-center shadow-sm rounded p-4">
                       ✅ Attendance successfully submitted for <strong>${class_name}</strong>!
@@ -576,29 +733,167 @@
                     </div>`;
                   setTimeout(() => location.reload(), 1500);
                 } else {
-                  const errorDiv = document.createElement('div');
-                  errorDiv.className = 'alert alert-danger mt-3';
-                  errorDiv.innerHTML = `❌ Error: ${data.error || 'Failed to submit attendance.'}`;
-                  container.appendChild(errorDiv);
-                  errorDiv.scrollIntoView({ behavior: 'smooth' });
+                  showAlert(container, `❌ Error: ${result.error || 'Failed to submit attendance.'}`);
                 }
               })
               .catch(err => {
                 console.error("Fetch Error:", err);
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'alert alert-danger mt-3';
-                errorDiv.innerHTML = 'Something went wrong. Please try again.';
-                container.appendChild(errorDiv);
-                errorDiv.scrollIntoView({ behavior: 'smooth' });
+                showAlert(container, 'Something went wrong. Please try again.');
               });
           });
         })
         .catch(error => {
           console.error("Error fetching attendance data:", error);
-          document.getElementById('student-attendance-list-container').innerHTML = `<div class="alert alert-danger">Error fetching attendance for ${class_name}.</div>`;
+          showAlert(document.getElementById('student-attendance-list-container'), `Error fetching attendance for ${class_name}.`);
         });
     }
 
+    //------------------------------------------ Assignment management -------------------------------------------------
+    let assignments = [];
+    function getAssignmentStatus(start_date, end_date) {
+      const today = new Date();
+      const start = new Date(start_date);
+      const end = new Date(end_date);
+      const diffDays = (end - today) / (1000 * 60 * 60 * 24);
+      if (today < start) return { text: 'Upcoming', color: 'bg-blue-100 text-blue-800' };
+      if (diffDays <= 2 && today <= end) return { text: 'Due Soon', color: 'bg-yellow-100 text-yellow-800' };
+      if (today > end) return { text: 'Past Due', color: 'bg-red-100 text-red-800' };
+      return { text: 'Active', color: 'bg-green-100 text-green-800' };
+    }
+
+    function renderAssignments() {
+      const tbody = document.getElementById('assignment-body');
+      tbody.innerHTML = '';
+      assignments.forEach((a, i) => {
+        const status = getAssignmentStatus(a.start_date, a.end_date);
+        tbody.innerHTML += `
+          <tr class="hover:bg-gray-50 transition duration-200">
+            <td class="px-6 py-4">${a.title}</td>
+            <td class="px-6 py-4">${a.className}</td>
+            <td class="px-6 py-4">${a.subject}</td>
+            <td class="px-6 py-4">${a.start_date}</td>
+            <td class="px-6 py-4">${a.end_date}</td>
+            <td class="px-6 py-4"><span class="inline-block px-3 py-1 rounded-full text-sm font-medium ${status.color}">${status.text}</span></td>
+            <td class="px-6 py-4">${a.description || 'N/A'}</td>
+            <td class="px-6 py-4">
+              <button class="px-3 py-1 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 mr-2" onclick="openEditModal(${i})">
+                <i class="fas fa-edit mr-1"></i>Edit
+              </button>
+              <button class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200" onclick="deleteAssignment(${i})">
+                <i class="fas fa-trash mr-1"></i>Delete
+              </button>
+            </td>
+          </tr>`;
+      });
+    }
+
+    document.getElementById('assignment-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const assignment = {
+        title: document.getElementById('title').value,
+        subject: document.getElementById('subject').value,
+        className: document.getElementById('class').value,
+        start_date: document.getElementById('start_date').value,
+        end_date: document.getElementById('end_date').value,
+        description: document.getElementById('description').value,
+      };
+      fetch('/add_assignment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ class_name: assignment.className , assignment: assignment })
+      })
+        .then(response => {
+          if (response.ok) return response.json();
+          throw new Error('Failed to add assignment: ' + response.statusText);
+        })
+        .then(() => {
+          assignments.push(assignment);
+          renderAssignments();
+          this.reset();
+        })
+        .catch(error => {
+          console.error('Error adding assignment:', error);
+          showAlert(document.getElementById('assignment-body'), 'Failed to add assignment. Please try again.');
+        });
+    });
+
+    function deleteAssignment(index) {
+      if (!confirm("Delete this assignment?")) return;
+      fetch(`/delete_assignment/${index}`, { method: 'DELETE' })
+        .then(responswe => {
+          if (response.ok) return response.json();
+          throw new Error('Failed to delete assignment: ' + response.statusText);
+        })
+        .then(() => {
+          assignments.splice(index, 1);
+          renderAssignments();
+        })
+        .catch(error => {
+          console.error('Error deleting assignment:', error);
+          showAlert(document.getElementById('assignment-body'), 'Failed to delete assignment. Please try again.');
+        });
+    }
+
+    function openEditModal(index) {
+      const a = assignments[index];
+      document.getElementById('edit-index').value = index;
+      document.getElementById('edit-title').value = a.title;
+      document.getElementById('edit-subject').value = a.subject;
+      document.getElementById('edit-class').value = a.className;
+      document.getElementById('edit-start-date').value = a.start_date;
+      document.getElementById('edit-end-date').value = a.end_date;
+      document.getElementById('edit-description').value = a.description || '';
+      new bootstrap.Modal(document.getElementById('editModal')).show();
+    }
+
+    document.getElementById('edit-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const index = document.getElementById('edit-index').value;
+      const updated = {
+        title: document.getElementById('edit-title').value,
+        subject: document.getElementById('edit-subject').value,
+        className: document.getElementById('edit-class').value,
+        start_date: document.getElementById('edit-start-date').value,
+        end_date: document.getElementById('edit-end-date').value,
+        description: document.getElementById('edit-description').value,
+      };
+      fetch(`/update_assignment/${index}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updated)
+      })
+        .then(response => {
+          if (response.ok) return response.json();
+          throw new Error('Failed to update assignment: ' + response.statusText);
+        })
+        .then(() => {
+          assignments[index] = updated;
+          renderAssignments();
+          bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
+        })
+        .catch(error => {
+          console.error('Error updating assignment:', error);
+          showAlert(document.getElementById('assignment-body'), 'Failed to update assignment. Please try again.');
+        });
+    });
+
+    function loadAssignments() {
+      fetch('/get_assignments')
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to fetch assignments');
+          return res.json();
+        })
+        .then(data => {
+          assignments = data;
+          renderAssignments();
+        })
+        .catch(error => {
+          console.error('Error loading assignments:', error);
+          showAlert(document.getElementById('assignment-body'), 'Error loading assignments. Please try again later.');
+        });
+    }
+
+    // Profile editing
     document.querySelectorAll('.edit-btn').forEach(btn => {
       btn.addEventListener('click', function () {
         const userId = this.getAttribute('data-user-id');
@@ -613,7 +908,7 @@
           const container = document.getElementById('profile');
           if (!container) {
             console.error('Error: Profile container not found.');
-            alert('Cannot edit profile. Page section missing.');
+            showAlert(document.querySelector('.profile_page'), 'Cannot edit profile. Page section missing.');
             return;
           }
           container.innerHTML = `
@@ -653,8 +948,7 @@
               <div class="mt-4 text-end">
                 <button type="submit" class="btn btn-success px-4"><i class="fas fa-save me-1"></i> Save Changes</button>
               </div>
-            </form>
-          `;
+            </form>`;
           document.getElementById('edit-teacher-form').addEventListener('submit', function (event) {
             event.preventDefault();
             const formData = new FormData(this);
@@ -676,34 +970,30 @@
                     </div>`;
                   setTimeout(() => location.reload(), 1500);
                 } else {
-                  alert("Failed to update profile: " + (result.error || "Unknown error"));
+                  showAlert(container, `Failed to update profile: ${result.error || 'Unknown error'}`);
                 }
               })
               .catch(err => {
                 console.error('Update error:', err);
-                alert("An error occurred while updating the profile.");
+                showAlert(container, 'An error occurred while updating the profile.');
               });
           });
         })
         .catch(error => {
           console.error("Fetch error:", error);
-          const container = document.getElementById('profile_page');
-          if (container) {
-            container.innerHTML = `<div class="alert alert-danger">Error loading teacher details.</div>`;
-          }
+          showAlert(document.querySelector('.profile_page'), 'Error loading teacher details.');
         });
     }
 
+    // Calendar initialization
     window.onload = function () {
       if (typeof FullCalendar === 'undefined') {
-        console.error('FullCalendar is not loaded. Please check the CDN or script inclusion.');
-        document.getElementById('calendar').innerHTML = '<div class="alert alert-danger">Error: Calendar library failed to load. Please try again later.</div>';
+        console.error('FullCalendar is not loaded.');
+        showAlert(document.getElementById('calendar'), 'Error: Calendar library failed to load. Please try again later.');
         return;
       }
 
       const calendarEl = document.getElementById('calendar');
-      const teacherId = '{{ user.user_id }}';
-
       const subjectColors = {
         'Hindi': '#ff5733',
         'Chemistry': '#dc3545',
@@ -769,31 +1059,24 @@
               const events = periods.map(period => {
                 const targetDay = weekdayMap[period.day];
                 if (targetDay === undefined) return null;
-
                 const eventDate = new Date(currentWeekStart);
                 eventDate.setDate(currentWeekStart.getDate() + targetDay);
-
                 const startDateTime = new Date(`${eventDate.toISOString().split('T')[0]}T${period.start_time}:00`);
                 const endDateTime = new Date(`${eventDate.toISOString().split('T')[0]}T${period.end_time}:00`);
-
                 return {
                   title: `${period.class} - ${period.subject}`,
                   start: startDateTime.toISOString(),
                   end: endDateTime.toISOString(),
                   backgroundColor: subjectColors[period.subject] || '#0d6efd',
                   borderColor: subjectColors[period.subject] || '#0d6efd',
-                  extendedProps: {
-                    class: period.class,
-                    subject: period.subject
-                  }
+                  extendedProps: { class: period.class, subject: period.subject }
                 };
               }).filter(e => e !== null);
-
               successCallback(events);
             })
             .catch(error => {
               console.error('Error fetching calendar events:', error);
-              document.getElementById('calendar').innerHTML = `<div class="alert alert-danger">Error loading calendar events: ${error.message}</div>`;
+              showAlert(document.getElementById('calendar'), `Error loading calendar events: ${error.message}`);
               failureCallback(error);
             });
         },
@@ -801,7 +1084,7 @@
           alert(`Class: ${info.event.extendedProps.class}\nSubject: ${info.event.extendedProps.subject}\nTime: ${info.event.start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })} - ${info.event.end.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}`);
         },
         eventDidMount: function (info) {
-          const tooltip = new bootstrap.Tooltip(info.el, {
+          new bootstrap.Tooltip(info.el, {
             title: `Class: ${info.event.extendedProps.class}<br>Subject: ${info.event.extendedProps.subject}<br>Time: ${info.event.start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })} - ${info.event.end.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}`,
             html: true,
             placement: 'top',
@@ -813,10 +1096,11 @@
         height: 'auto',
         contentHeight: 600
       });
-
       calendar.render();
+      loadAssignments();
     };
 
+    //------------------------------- Modify Students Attendance ---------------------------------//
     function modify_students_attendance(class_name) {
       fetch(`/get_students_names/${class_name}`)
         .then(response => {
@@ -830,39 +1114,39 @@
             return;
           }
           container.innerHTML = `
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <h3 class="text-primary">📋 Modify Students Attendance - ${class_name}</h3>
-              <div>
-                <input type="date" id="attendance-date" class="form-control d-inline-block me-2" style="width: auto;" required max="${new Date().toISOString().split('T')[0]}">
-                <button class="btn btn-outline-secondary btn-sm" onclick="modify_students_attendance('${class_name}')">Refresh</button>
-              </div>
-            </div>`;
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="text-primary">📋 Modify Students Attendance - ${class_name}</h3>
+                <div>
+                  <input type="date" id="attendance-date" class="form-control d-inline-block me-2" style="width: auto;" required max="${new Date().toISOString().split('T')[0]}">
+                  <button class="btn btn-outline-secondary btn-sm" onclick="modify_students_attendance('${class_name}')">Refresh</button>
+                </div>
+              </div>`;
           let content = `
-            <form id="modify-attendance-form" class="needs-validation" novalidate>
-              <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle">
-                  <thead class="table-light">
-                    <tr>
-                      <th scope="col">S.No</th>
-                      <th scope="col">Student Name</th>
-                      <th scope="col" class="text-center">Attendance</th>
-                    </tr>
-                  </thead>
-                  <tbody>`;
+          <form id="modify-attendance-form" class="needs-validation" novalidate>
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col" class="text-center">Attendance</th>
+                  </tr>
+                </thead>
+                <tbody>`;
           data.forEach((student, index) => {
             content += `
-              <tr>
-                <td>${index + 1}</td>
-                <td>${student.student_name}</td>
-                <td class="text-center">
-                  <div class="btn-group" role="group" aria-label="Attendance Status">
-                    <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" required>
-                    <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
-                    <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" required>
-                    <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
-                  </div>
-                </td>
-              </tr>`;
+            <tr>
+              <td>${index + 1}</td>
+              <td>${student.student_name}</td>
+              <td class="text-center">
+                <div class="btn-group" role="group" aria-label="Attendance Status">
+                  <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" required>
+                  <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
+                  <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" required>
+                  <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
+                </div>
+              </td>
+            </tr>`;
           });
           content += `
                 </tbody>
@@ -941,7 +1225,9 @@
           document.getElementById('modify-student-attendance-list-container').innerHTML = `<div class="alert alert-danger">Error fetching students for ${class_name}.</div>`;
         });
     }
+    //------------------------------- Modify Students Attendance ---------------------------------//
 
+    // View student details
     function view_student_detail(user_id) {
       fetch(`/get_student_detail/${user_id}`)
         .then(response => {
@@ -950,7 +1236,7 @@
         })
         .then(data => {
           if (data.error) {
-            alert(`Error: ${data.error}`);
+            showAlert(document.getElementById('student-detail-body'), `Error: ${data.error}`);
             return;
           }
           const student = data.student;
@@ -1027,7 +1313,7 @@
         })
         .catch(error => {
           console.error('Error fetching student details:', error);
-          alert("Something went wrong while fetching student details.");
+          showAlert(document.getElementById('student-detail-body'), 'Something went wrong while fetching student details.');
         });
     }
   </script>

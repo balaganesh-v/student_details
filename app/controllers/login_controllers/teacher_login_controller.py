@@ -9,7 +9,8 @@ from app.services.login_service.teacher_login_service import (
     store_students_modified_attendance_data,
     get_teacher_by_user_id,
     update_teacher_profile_datas,
-    get_periods_from_stored_json_file
+    get_periods_from_stored_json_file,
+    add_assignments_into_json_file
 )
 import datetime
 
@@ -143,6 +144,22 @@ def get_teacher_events():
     except Exception as e:
         return jsonify({'error': f'Failed to fetch events: {str(e)}'}), 500
 
+@teacher_login_bp.route('/add_assignment',methods = ['POST'] )
+def add_assignment():
+    try:
+        data = request.get_json()
+        print(data)
+        if not data:
+            return jsonify({'success': False, 'error': 'Invalid or missing JSON'}), 400
+        success, error = add_assignments_into_json_file(data)
+        if success:
+            return jsonify({'success': True})
+        else:
+            return jsonify({'success': False, 'error': error}), 400
+    except Exception as e:
+        print(f"Error in save_periods route: {e}")
+        return jsonify({'success': False, 'error': 'Internal server error'}), 500
+
 
 @teacher_login_bp.route('/logout', methods=['POST'])
 def logout():
@@ -159,3 +176,5 @@ def logout():
         samesite='Lax'
     )
     return response
+
+

@@ -123,7 +123,7 @@ def insert_datas_into_json_file(data):
         if not teacher_id or not periods:
             return False, 'Missing teacher ID or periods.'
 
-        file_path = 'app/data/events.json'
+        file_path = 'app/data/periods.json'
 
         all_data = {}
         if os.path.exists(file_path):

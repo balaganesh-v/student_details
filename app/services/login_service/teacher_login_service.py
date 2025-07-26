@@ -39,7 +39,7 @@ def get_periods_from_stored_json_file(token):
         teacher_id = decoded.get('user_id')
 
         if teacher_id:
-            json_path = os.path.join('app','data','events.json')
+            json_path = os.path.join('app','data','periods.json')
             if  os.path.exists(json_path):
                 with open(json_path, 'r') as file:
                     data = json.load(file)
@@ -120,3 +120,25 @@ def update_teacher_profile_datas(data,user_id):
         print(f"Error store_datas_in_students_attendance_table : {e}")
         return []
     
+
+def add_assignments_into_json_file(data):
+    try:
+        if data:
+            assignment = data.get('assignment')
+            class_name = data.get('class_name')
+            file_path = 'app/data/assignments.json'
+            if os.path.exists(file_path):
+                with open(file_path, 'w') as f:
+                    all_data={
+                        class_name : assignment
+                    }
+                    json.dump(all_data, f, indent=2)
+                return True, None
+        else:
+            print("⚠️ Warning: events.json was empty or invalid. Starting with empty dict.")
+            data = {}
+            return None
+    except Exception as e:
+        print(f"Error writing to JSON: {e}")
+        return False, str(e)
+        
