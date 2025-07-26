@@ -10,7 +10,9 @@ from app.services.login_service.teacher_login_service import (
     get_teacher_by_user_id,
     update_teacher_profile_datas,
     get_periods_from_stored_json_file,
-    add_assignments_into_json_file
+    add_assignments_into_json_file,
+    get_assignments_from_json_file,
+    delete_selected_assignment_by_index_in_json_file
 )
 import datetime
 
@@ -157,9 +159,27 @@ def add_assignment():
         else:
             return jsonify({'success': False, 'error': error}), 400
     except Exception as e:
-        print(f"Error in save_periods route: {e}")
+        print(f"Error in Create the Assignments route: {e}")
         return jsonify({'success': False, 'error': 'Internal server error'}), 500
 
+@teacher_login_bp.route('/get_assignments',methods = ['GET'] )
+def get_assignments():
+    try:
+        assignments = get_assignments_from_json_file()
+        return jsonify(assignments)
+    except Exception as e:
+        print(f"Error in Get Assignments route: {e}")
+        return jsonify({'success': False, 'error': 'Internal server error'}), 500
+  
+@teacher_login_bp.route('/delete_assignment/<int:index>', methods=['DELETE'])
+def delete_assignment(index):
+    try:
+        print(index)
+        delete_selected_assignment_by_index_in_json_file(index)
+        return jsonify({'success': True})
+    except Exception as e:
+        print(f"Error in Delete the selected Assignments route: {e}")
+        return jsonify({'success': False, 'error': 'Internal server error'}), 500
 
 @teacher_login_bp.route('/logout', methods=['POST'])
 def logout():

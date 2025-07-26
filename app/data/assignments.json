@@ -1,5 +1,5 @@
-{
-  "10": {
+[
+  {
     "className": "10",
     "description": "qwertyuioplkjhgfdsazxcvbnm",
     "end_date": "2025-07-31",
@@ -7,4 +7,4 @@
     "subject": "Social Science",
     "title": "Volacno"
   }
-}
+]

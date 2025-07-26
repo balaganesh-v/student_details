@@ -46,7 +46,7 @@ def get_periods_from_stored_json_file(token):
                     periods = data.get(teacher_id, [])
                     return periods
             else:
-                return jsonify({'error': 'Events file not found'}), 404
+                return jsonify({'error': 'Periods file not found'}), 404
         else:
             return jsonify({'error': 'Teacher ID not found'}), 404
     except Exception as e:
@@ -123,22 +123,50 @@ def update_teacher_profile_datas(data,user_id):
 
 def add_assignments_into_json_file(data):
     try:
-        if data:
-            assignment = data.get('assignment')
-            class_name = data.get('class_name')
-            file_path = 'app/data/assignments.json'
-            if os.path.exists(file_path):
-                with open(file_path, 'w') as f:
-                    all_data={
-                        class_name : assignment
-                    }
-                    json.dump(all_data, f, indent=2)
-                return True, None
+        file_path = 'app/data/assignments.json'
+
+        # Load existing assignments if file exists, otherwise use empty list
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as f:
+                try:
+                    assignments = json.load(f)
+                except json.JSONDecodeError:
+                    assignments = []
         else:
-            print("⚠️ Warning: events.json was empty or invalid. Starting with empty dict.")
-            data = {}
-            return None
+            assignments = []
+
+        # Append new assignment
+        assignments.append(data['assignment'])
+
+        # Save updated list back to file
+        with open(file_path, 'w') as f:
+            json.dump(assignments, f, indent=2)
+
+        return True, None
     except Exception as e:
         print(f"Error writing to JSON: {e}")
         return False, str(e)
         
+def get_assignments_from_json_file():
+    try:
+        with open('app/data/assignments.json', 'r') as file:
+            assignments = json.load(file)
+            print(assignments)
+            return assignments
+    except Exception as e:
+        print(f"Error Getting to JSON: {e}")
+        return False, str(e)
+
+def delete_selected_assignment_by_index_in_json_file(index):
+    try:
+        file_name = "app/data/assignments.json"
+        with open( file_name  ,'r') as file:
+            assignments = json.load(file)
+            assignments.pop(index)
+            with open( file_name , 'w') as f:
+                json.dump(assignments, f, indent=2)
+                return jsonify({"message": "Assignment deleted."}), 200
+            
+    except Exception as e:
+        print(f"Error in Deleting the data in assignments JSON: {e}")
+        return False, str(e)
