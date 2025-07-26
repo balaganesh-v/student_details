@@ -12,7 +12,8 @@ from app.services.login_service.teacher_login_service import (
     get_periods_from_stored_json_file,
     add_assignments_into_json_file,
     get_assignments_from_json_file,
-    delete_selected_assignment_by_index_in_json_file
+    delete_selected_assignment_by_index_in_json_file,
+    update_changes_in_assignment
 )
 import datetime
 
@@ -174,11 +175,20 @@ def get_assignments():
 @teacher_login_bp.route('/delete_assignment/<int:index>', methods=['DELETE'])
 def delete_assignment(index):
     try:
-        print(index)
         delete_selected_assignment_by_index_in_json_file(index)
         return jsonify({'success': True})
     except Exception as e:
         print(f"Error in Delete the selected Assignments route: {e}")
+        return jsonify({'success': False, 'error': 'Internal server error'}), 500
+    
+@teacher_login_bp.route('/update_assignment/<int:index>',methods = ['POST'])
+def update_assignment(index):
+    try:
+        updated_data = request.get_json()
+        update_changes_in_assignment(index,updated_data)
+        return jsonify({'success': True})
+    except Exception as e:
+        print(f"Error in Update the modify changes in the Assignment : {e}")
         return jsonify({'success': False, 'error': 'Internal server error'}), 500
 
 @teacher_login_bp.route('/logout', methods=['POST'])
