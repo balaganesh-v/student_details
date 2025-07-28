@@ -10,13 +10,16 @@ from app.controllers.main_controller import main_bp
 from config.cloudinary_config import init_cloudinary
 from config.db_config import db_connection
 from config.mail_config import mail_connection
-import os
 from dotenv import load_dotenv
+from flask_cors import CORS
+import os
+
 
 load_dotenv
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
 
     app.config["SECRET_KEY"] = os.getenv('SECRET_KEY')
 
