@@ -1,9 +1,7 @@
-# ✅ Monkey patch FIRST
-import eventlet
-eventlet.monkey_patch()
-
-from app import create_app, socketio
+from app import create_app
+from app.socketio_instance import socketio
 from app.sample_record.load_test_record import load_all_records
+
 
 app = create_app()
 

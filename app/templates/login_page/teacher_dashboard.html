@@ -233,8 +233,10 @@
           <a class="nav-link" id="students-tab" data-bs-toggle="pill" href="#students" role="tab"
             aria-controls="students" aria-selected="false"><i class="fas fa-users"></i> <span>Students</span></a>
           <a class="nav-link" id="attendance-tab" data-bs-toggle="pill" href="#attendance" role="tab"
-            aria-controls="attendance" aria-selected="false"><i class="fas fa-calendar-check"></i>
-            <span>Attendance</span></a>
+            aria-controls="attendance" aria-selected="false"><i
+              class="fas fa-calendar-check"></i><span>Attendance</span></a>
+          <a class="nav-link" id="resources-tab" data-bs-toggle="pill" href="#resources" role="tab"
+            aria-controls="resources" aria-selected="false"><i class="fas fa-folder-open"></i><span>Resources</span></a>
           <a class="nav-link" id="assignments-tab" data-bs-toggle="pill" href="#assignments" role="tab"
             aria-controls="assignments" aria-selected="false"><i class="fas fa-book"></i> <span>Assignments</span></a>
           <a class="nav-link" id="calendar-tab" data-bs-toggle="pill" href="#calendar" role="tab"
@@ -244,8 +246,7 @@
           <a class="nav-link" id="messages-tab" data-bs-toggle="pill" href="#messages" role="tab"
             aria-controls="messages" aria-selected="false"><i class="fas fa-comments"></i> <span>Messages</span></a>
           <a class="nav-link" id="resources-tab" data-bs-toggle="pill" href="#resources" role="tab"
-            aria-controls="resources" aria-selected="false"><i class="fas fa-folder-open"></i>
-            <span>Resources</span></a>
+            aria-controls="resources" aria-selected="false"><i class="fas fa-folder-open"></i><span>Resources</span></a>
           <a class="nav-link" id="profile-tab" data-bs-toggle="pill" href="#profile" role="tab" aria-controls="profile"
             aria-selected="false"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
           <a class="nav-link" id="settings-tab" data-bs-toggle="pill" href="#settings" role="tab"
@@ -260,13 +261,16 @@
         </div>
       </div>
       <div class="main-content col">
+
         <div class="topbar">
           <div class="user-info">
             <h2>Welcome {{ user.user_name }}</h2>
             <p>Your email is {{ user.user_email }}</p>
           </div>
         </div>
+
         <div class="tab-content" id="tabContent">
+
           <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-home"></i> Dashboard</h4>
@@ -274,6 +278,7 @@
                 your classroom efficiently.</p>
             </div>
           </div>
+
           <div class="tab-pane fade" id="students" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-users"></i> Students</h4>
@@ -290,6 +295,7 @@
               <div id="student-list-container"></div>
             </div>
           </div>
+
           <div class="tab-pane fade" id="attendance" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-calendar-check"></i> Take Attendance</h4>
@@ -322,8 +328,6 @@
               </div>
             </div>
           </div>
-
-
 
           <div class="tab-pane fade" id="assignments" role="tabpanel" aria-labelledby="assignments-tab">
             <div class="container py-8 px-6 bg-white rounded-xl shadow-md max-w-6xl mx-auto">
@@ -396,6 +400,7 @@
                   </div>
                 </form>
               </div>
+
               <div class="mt-8">
                 <h4 class="text-xl font-semibold text-gray-800 mb-4"><i class="fas fa-list mr-2"></i>Assignment List
                 </h4>
@@ -418,6 +423,7 @@
                 </div>
               </div>
             </div>
+
             <div class="modal fade" id="editModal" tabindex="-1">
               <div class="modal-dialog">
                 <div class="modal-content rounded-lg">
@@ -495,8 +501,6 @@
             </div>
           </div>
 
-
-
           <div class="tab-pane fade" id="calendar" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-calendar-alt"></i> Calendar</h4>
@@ -504,154 +508,388 @@
               <div id="calendar"></div>
             </div>
           </div>
+
           <div class="tab-pane fade" id="analytics" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-chart-bar"></i> Analytics</h4>
               <p>Analyze student performance, attendance trends, and other metrics.</p>
             </div>
           </div>
+
+          <!-- Teacher Dashboard: Messages Tab -->
           <div class="tab-pane fade" id="messages" role="tabpanel">
-            <div class="form-box">
-              <h4><i class="fas fa-comments"></i> Messages</h4>
-              <p>Communicate with students, parents, and other teachers.</p>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="resources" role="tabpanel">
-            <div class="form-box">
-              <h4><i class="fas fa-folder-open"></i> Resources</h4>
-              <p>Access and share teaching materials, lesson plans, and other resources.</p>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel">
-            <div class="form-box border rounded p-4 shadow-sm bg-white profile_page">
-              <h4 class="mb-3 text-primary"><i class="fas fa-user"></i> Teacher Profile</h4>
-              <p class="text-muted mb-4">Below are your profile details.</p>
-              <div class="row g-4">
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Name</label>
-                  <div class="form-control bg-light">{{ teacher.user_name }}</div>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Qualification</label>
-                  <div class="form-control bg-light">{{ teacher.qualification }}</div>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Gender</label>
-                  <div class="form-control bg-light">{{ teacher.gender }}</div>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Age</label>
-                  <div class="form-control bg-light">{{ teacher.age }}</div>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Experiences</label>
-                  <div class="form-control bg-light">{{ teacher.year_of_experience }} years</div>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Subject Specialization</label>
-                  <div class="form-control bg-light">{{ teacher.subject_specialization }}</div>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Classes Taken</label>
-                  <div class="form-control bg-light" style="min-height: 70px;">{{ teacher.class_ids }}</div>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Salary Package</label>
-                  <div class="form-control bg-light" style="min-height: 70px;">₹ {{ teacher.salary_package }}</div>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Account ID</label>
-                  <div class="form-control bg-light">{{ teacher.account_id }}</div>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label fw-semibold">Address</label>
-                  <div class="form-control bg-light" style="min-height: 70px;">{{ teacher.address }}</div>
+            <!-- Alert container (needed for showAlert to work) -->
+            <div id="alert-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1055;"></div>
+            <div class="container py-4">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <h4 class="mb-2"><i class="fas fa-comments text-primary me-2"></i>Messages</h4>
+                  <p class="text-muted mb-4">Chat with students from each class in real-time.</p>
+                  <!-- Remove the inline script in the Messages tab -->
+                  {% if teacher.class_ids %}
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Choose a Class</label>
+                    <div class="d-flex flex-wrap gap-2">
+                      {% for class_id in teacher.class_ids.split(',') %}
+                      <button onclick="joinClass('{{ class_id.strip() }}')" class="btn btn-outline-primary btn-sm px-3">
+                        Class {{ class_id.strip() }} </button>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  {% else %}
+                  <p class="text-muted">No classes assigned. Please contact the administrator.</p>
+                  {% endif %}
+                  <div class="border rounded bg-light p-3 mb-3" style="height: 400px; overflow-y: auto;" id="chat-box">
+                    <p class="text-muted mb-0">Please select a class to start chatting.</p>
+                  </div>
+                  <div id="input-container" class="input-group d-none">
+                    <input type="text" id="message-input" class="form-control border-end-0"
+                      placeholder="Type your message..." onkeypress="if(event.key === 'Enter') sendMessage();">
+                    <button class="btn btn-primary" onclick="sendMessage()" id="send-button">Send</button>
+                  </div>
                 </div>
               </div>
-              <div class="mt-4 text-end">
-                <button class="btn btn-primary px-4 edit-btn" data-user-id="{{ teacher.user_id }}">Edit Profile</button>
+            </div>
+
+
+            <div class="tab-pane fade" id="resources" role="tabpanel">
+              <div class="form-box">
+                <h4><i class="fas fa-folder-open"></i> Resources</h4>
+                <p>Access and share teaching materials, lesson plans, and other resources.</p>
               </div>
             </div>
-          </div>
-          <div class="tab-pane fade" id="settings" role="tabpanel">
-            <div class="form-box">
-              <h4><i class="fas fa-cog"></i> Settings</h4>
-              <p>Adjust your dashboard settings and preferences.</p>
+
+            <div class="tab-pane fade" id="profile" role="tabpanel">
+              <div class="form-box border rounded p-4 shadow-sm bg-white profile_page">
+                <h4 class="mb-3 text-primary"><i class="fas fa-user"></i> Teacher Profile</h4>
+                <p class="text-muted mb-4">Below are your profile details.</p>
+                <div class="row g-4">
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Name</label>
+                    <div class="form-control bg-light">{{ teacher.user_name }}</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Qualification</label>
+                    <div class="form-control bg-light">{{ teacher.qualification }}</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Gender</label>
+                    <div class="form-control bg-light">{{ teacher.gender }}</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Age</label>
+                    <div class="form-control bg-light">{{ teacher.age }}</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Experiences</label>
+                    <div class="form-control bg-light">{{ teacher.year_of_experience }} years</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Subject Specialization</label>
+                    <div class="form-control bg-light">{{ teacher.subject_specialization }}</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Classes Taken</label>
+                    <div class="form-control bg-light" style="min-height: 70px;">{{ teacher.class_ids }}</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Salary Package</label>
+                    <div class="form-control bg-light" style="min-height: 70px;">₹ {{ teacher.salary_package }}</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Account ID</label>
+                    <div class="form-control bg-light">{{ teacher.account_id }}</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Address</label>
+                    <div class="form-control bg-light" style="min-height: 70px;">{{ teacher.address }}</div>
+                  </div>
+                </div>
+                <div class="mt-4 text-end">
+                  <button class="btn btn-primary px-4 edit-btn" data-user-id="{{ teacher.user_id }}">Edit
+                    Profile</button>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="settings" role="tabpanel">
+              <div class="form-box">
+                <h4><i class="fas fa-cog"></i> Settings</h4>
+                <p>Adjust your dashboard settings and preferences.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="modal fade" id="studentDetailModal" tabindex="-1" aria-labelledby="studentDetailModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="studentDetailModalLabel">Student Details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="student-detail-body"></div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <div class="modal fade" id="studentDetailModal" tabindex="-1" aria-labelledby="studentDetailModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="studentDetailModalLabel">Student Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="student-detail-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
-  <script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+    <!-- v4 (Good with latest Flask-SocketIO) -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 
+    <script>
 
-    // ------------------Subjects DropDown-------------------------
-    function loadSubjects() {
-      fetch('/subjects')
-        .then(response => response.json())
-        .then(data => {
-          const dropdown = document.getElementById('subjectsDropDown');
-          dropdown.innerHTML = '<option value="">Select Subject</option>'; // Reset first
+      // Initialize Socket.IO connection
+      const socket = io('/', {
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000,
+      });
 
-          data.forEach(subject => {
-            const option = document.createElement('option');
-            option.value = subject.subject_name;
-            option.textContent = subject.subject_name;
-            dropdown.appendChild(option);
+      const sender_id = "{{ teacher.user_id }}"; // Injected from Flask
+      const sender_role = "Teacher";
+      let current_class = null;
+
+      // Wait for DOM to be fully loaded before manipulating elements
+      document.addEventListener('DOMContentLoaded', () => {
+
+        document.getElementById("send-button").addEventListener("click", sendMessage);
+        const inputContainer = document.getElementById("input-container");
+        const chatBox = document.getElementById("chat-box");
+
+        if (!inputContainer || !chatBox) {
+          console.error("Chat elements not found in DOM");
+          return;
+        }
+
+        // Initialize UI
+        inputContainer.classList.add("d-none");
+        chatBox.innerHTML = '<p class="text-muted mb-0">Connecting to chat server...</p>';
+
+        // Update UI on successful connection
+        socket.on("connect", () => {
+          console.log("Connected to chat server");
+          chatBox.innerHTML = '<p class="text-muted mb-0">Please select a class to start chatting.</p>';
+          showAlert("Connected to chat server!", "success", 3000);
+        });
+
+        socket.on("connect_error", (error) => {
+          console.error("Connection error:", error);
+          showAlert("Failed to connect to chat server. Retrying...", "danger", 5000);
+        });
+
+        socket.on("disconnect", () => {
+          showAlert("Disconnected from chat server. Attempting to reconnect...", "warning", 5000);
+        });
+
+        socket.on("error", (data) => {
+          showAlert(data.message || "An error occurred in the chat.", "danger", 5000);
+        });
+
+        const messageInput = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+
+        if (messageInput && sendButton) {
+          messageInput.addEventListener('input', function () {
+            const message = this.value.trim();
+            sendButton.disabled = !message || !current_class;
           });
+
+          sendButton.disabled = true;
+        }
+
+        if (sendButton) {
+          sendButton.addEventListener("click", sendMessage);
+        }
+      });
+
+      // Join class and fetch chat history
+      function joinClass(classId) {
+        current_class = classId;
+        const chatBox = document.getElementById("chat-box");
+        const inputContainer = document.getElementById("input-container");
+        const sendButton = document.getElementById('send-button');
+
+        if (!chatBox || !inputContainer || !sendButton) {
+          console.error("Chat elements not found");
+          showAlert("Chat interface error. Please refresh the page.", "danger", 5000);
+          return;
+        }
+
+        chatBox.innerHTML = '<p class="text-muted mb-0">Loading chat history...</p>';
+        inputContainer.classList.remove("d-none");
+        sendButton.disabled = !document.getElementById('message-input').value.trim();
+        socket.emit("join_class_room", { class_id: classId });
+
+        fetch(`/get_chats?class_id=${classId}`)
+
+          .then(response => {
+            if (!response.ok) throw new Error(`Failed to fetch chats: ${response.statusText}`);
+            return response.json();
+          })
+          .then(messages => {
+            chatBox.innerHTML = '';
+            messages.forEach(msg => {
+              appendMessage(msg.sender_role, msg.message, formatTime(msg.timestamp));
+            });
+          })
+          .catch(error => {
+            console.error("Error fetching messages:", error);
+            showAlert("Could not load chat history.", "danger", 5000);
+          });
+      }
+
+      function formatTime(ts) {
+        const date = new Date(ts);
+        return date.toUTCString().split(' ')[4]; // e.g., "13:47:00"
+      }
+
+      function sendMessage() {
+        const input_msg = document.getElementById("message-input");
+        const message = input_msg.value.trim();
+
+        if (!message || !current_class) {
+          showAlert("Please enter a valid message and select a class.", "warning", 3000);
+          return;
+        }
+
+        if (message.length > 500) {
+          showAlert("Message is too long. Maximum 500 characters.", "warning", 3000);
+          return;
+        }
+        
+        console.log("Sending message...", socket.connected); // Should be true
+        socket.emit("send_message", {
+          sender_id: sender_id,
+          sender_role: sender_role,
+          message: message,
+          class_id: current_class
+        });
+        console.log({
+          sender_id,
+          sender_role,
+          message,
+          current_class
         })
-        .catch(error => console.error('Error loading subjects:', error));
-    }
+        input_msg.value = '';
+      }
+
+      socket.on("receive_message", (data) => {
+        if (data.class_id === current_class) {
+          appendMessage(data.sender_role, data.message, formatTime(data.timestamp));
+        }
+      });
+
+      function appendMessage(role, message, time) {
+        const box = document.getElementById("chat-box");
+        if (!box) return;
+
+        const msgDiv = document.createElement("div");
+        msgDiv.className = `d-flex ${role === 'Teacher' ? 'justify-content-end' : 'justify-content-start'} mb-2`;
+
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `p-2 px-3 rounded ${role === 'Teacher' ? 'bg-primary text-white' : 'bg-white border'}`;
+
+        const messageText = document.createElement("div");
+        messageText.textContent = message;  // Safe
+
+        const timeText = document.createElement("small");
+        timeText.className = "text-muted d-block text-end";
+        timeText.style.fontSize = "0.75em";
+        timeText.textContent = time;
+
+        messageDiv.appendChild(messageText);
+        messageDiv.appendChild(timeText);
+        msgDiv.appendChild(messageDiv);
+        box.appendChild(msgDiv);
+
+        box.scrollTop = box.scrollHeight;
+      }
 
 
 
-    // Utility function for displaying alerts
-    function showAlert(container, message, type = 'danger') {
-      const alertDiv = document.createElement('div');
-      alertDiv.className = `alert alert-${type} mt-3`;
-      alertDiv.innerHTML = message;
-      container.appendChild(alertDiv);
-      alertDiv.scrollIntoView({ behavior: 'smooth' });
-      setTimeout(() => alertDiv.remove(), 3000);
-    }
+      function showAlert(message, type = "info", duration = 3000) {
+        const container = document.getElementById("alert-container");
 
-    // Fetch and display student list for a class
-    function view_students_list(class_name) {
-      fetch(`/get_student_datas/${class_name}`)
-        .then(response => {
-          if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
-          return response.json();
-        })
-        .then(data => {
-          const container = document.getElementById('student-list-container');
-          container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
-          if (!data || data.length === 0) {
-            container.innerHTML += `<p>No students found for Class ${class_name}.</p>`;
-            return;
-          }
-          let content = `<div class="list-group">`;
-          data.forEach(student => {
-            content += `
+        // ✅ Ensure container exists and is a real DOM element
+        if (!(container instanceof HTMLElement)) {
+          console.error("❌ alert-container not found or invalid:", container);
+          return;
+        }
+
+        const alert = document.createElement("div");
+        alert.className = `alert alert-${type} alert-dismissible fade show`;
+        alert.role = "alert";
+        alert.innerHTML = `
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          `;
+        container.appendChild(alert);
+
+        setTimeout(() => {
+          alert.classList.remove("show");
+          alert.classList.add("hide");
+          setTimeout(() => alert.remove(), 500);
+        }, duration);
+      }
+
+
+
+
+      // ------------------Subjects DropDown-------------------------
+      function loadSubjects() {
+        fetch('/subjects')
+          .then(response => response.json())
+          .then(data => {
+            const dropdown = document.getElementById('subjectsDropDown');
+            dropdown.innerHTML = '<option value="">Select Subject</option>'; // Reset first
+
+            data.forEach(subject => {
+              const option = document.createElement('option');
+              option.value = subject.subject_name;
+              option.textContent = subject.subject_name;
+              dropdown.appendChild(option);
+            });
+          })
+          .catch(error => console.error('Error loading subjects:', error));
+      }
+
+
+
+      // Utility function for displaying alerts
+      function showAlert(container, message, type = 'danger') {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} mt-3`;
+        alertDiv.innerHTML = message;
+        container.appendChild(alertDiv);
+        alertDiv.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => alertDiv.remove(), 3000);
+      }
+
+      // Fetch and display student list for a class
+      function view_students_list(class_name) {
+        fetch(`/get_student_datas/${class_name}`)
+          .then(response => {
+            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+            return response.json();
+          })
+          .then(data => {
+            const container = document.getElementById('student-list-container');
+            container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
+            if (!data || data.length === 0) {
+              container.innerHTML += `<p>No students found for Class ${class_name}.</p>`;
+              return;
+            }
+            let content = `<div class="list-group">`;
+            data.forEach(student => {
+              content += `
               <div class="d-flex justify-content-between align-items-center border p-2 mb-2 rounded">
                 <div>
                   <strong>${student.student_name}</strong><br>
@@ -661,30 +899,30 @@
                   View Details
                 </button>
               </div>`;
+            });
+            content += `</div>`;
+            container.innerHTML += content;
+          })
+          .catch(error => {
+            console.error("Error fetching student data:", error);
+            showAlert(document.getElementById('student-list-container'), `Error fetching students for ${class_name}.`);
           });
-          content += `</div>`;
-          container.innerHTML += content;
-        })
-        .catch(error => {
-          console.error("Error fetching student data:", error);
-          showAlert(document.getElementById('student-list-container'), `Error fetching students for ${class_name}.`);
-        });
-    }
+      }
 
-    // Fetch and display attendance list for a class
-    function view_students_attendance_list(class_name) {
-      fetch(`/get_students_with_attendance/${class_name}`)
-        .then(response => {
-          if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
-          return response.json();
-        })
-        .then(data => {
-          const container = document.getElementById('student-attendance-list-container');
-          if (!data || data.length === 0) {
-            container.innerHTML = `<div class="alert alert-warning">No students found for Class <strong>${class_name}</strong>.</div>`;
-            return;
-          }
-          container.innerHTML = `
+      // Fetch and display attendance list for a class
+      function view_students_attendance_list(class_name) {
+        fetch(`/get_students_with_attendance/${class_name}`)
+          .then(response => {
+            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+            return response.json();
+          })
+          .then(data => {
+            const container = document.getElementById('student-attendance-list-container');
+            if (!data || data.length === 0) {
+              container.innerHTML = `<div class="alert alert-warning">No students found for Class <strong>${class_name}</strong>.</div>`;
+              return;
+            }
+            container.innerHTML = `
             <div class="d-flex justify-content-between align-items-center mb-4">
               <h3 class="text-primary">📋 Students Attendance - ${class_name}</h3>
               <div>
@@ -692,7 +930,7 @@
                 <button class="btn btn-outline-secondary btn-sm" onclick="view_students_attendance_list('${class_name}')">Refresh</button>
               </div>
             </div>`;
-          let content = `
+            let content = `
             <form id="attendance-form" class="needs-validation" novalidate>
               <div class="table-responsive">
                 <table class="table table-hover table-bordered align-middle">
@@ -704,13 +942,13 @@
                     </tr>
                   </thead>
                   <tbody>`;
-          data.forEach((student, index) => {
-            const status = student.attendance_status;
-            const checkedPresent = status === 'Present' ? 'checked' : '';
-            const checkedAbsent = status === 'Absent' ? 'checked' : '';
-            const disabled = status ? 'disabled' : '';
-            const rowClass = status ? 'table-secondary' : '';
-            content += `
+            data.forEach((student, index) => {
+              const status = student.attendance_status;
+              const checkedPresent = status === 'Present' ? 'checked' : '';
+              const checkedAbsent = status === 'Absent' ? 'checked' : '';
+              const disabled = status ? 'disabled' : '';
+              const rowClass = status ? 'table-secondary' : '';
+              content += `
               <tr class="${rowClass}">
                 <td>${index + 1}</td>
                 <td>${student.student_name}</td>
@@ -723,8 +961,8 @@
                   </div>
                 </td>
               </tr>`;
-          });
-          content += `
+            });
+            content += `
                 </tbody>
               </table>
             </div>
@@ -732,81 +970,81 @@
               <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
             </div>
           </form>`;
-          container.innerHTML += content;
+            container.innerHTML += content;
 
-          document.getElementById("attendance-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const selectedDate = document.getElementById('attendance-date').value;
-            if (!selectedDate) {
-              showAlert(container, 'Please select a date for attendance.', 'warning');
-              return;
-            }
-            const formData = new FormData(this);
-            const attendanceData = data
-              .filter(student => !student.attendance_status)
-              .map(student => ({
-                user_id: student.user_id,
-                user_name: student.student_name,
-                status: formData.get(`status_${student.user_id}`)
-              }))
-              .filter(item => item.status);
-            if (attendanceData.length === 0) {
-              showAlert(container, 'No attendance status selected or all students already marked.', 'warning');
-              return;
-            }
-            fetch(`/submit_attendance`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                class_name: class_name,
-                date: selectedDate,
-                attendance: attendanceData
+            document.getElementById("attendance-form").addEventListener("submit", function (e) {
+              e.preventDefault();
+              const selectedDate = document.getElementById('attendance-date').value;
+              if (!selectedDate) {
+                showAlert(container, 'Please select a date for attendance.', 'warning');
+                return;
+              }
+              const formData = new FormData(this);
+              const attendanceData = data
+                .filter(student => !student.attendance_status)
+                .map(student => ({
+                  user_id: student.user_id,
+                  user_name: student.student_name,
+                  status: formData.get(`status_${student.user_id}`)
+                }))
+                .filter(item => item.status);
+              if (attendanceData.length === 0) {
+                showAlert(container, 'No attendance status selected or all students already marked.', 'warning');
+                return;
+              }
+              fetch(`/submit_attendance`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  class_name: class_name,
+                  date: selectedDate,
+                  attendance: attendanceData
+                })
               })
-            })
-              .then(response => response.json())
-              .then(result => {
-                if (result.success) {
-                  container.innerHTML = `
+                .then(response => response.json())
+                .then(result => {
+                  if (result.success) {
+                    container.innerHTML = `
                     <div class="alert alert-success text-center shadow-sm rounded p-4">
                       ✅ Attendance successfully submitted for <strong>${class_name}</strong>!
                       <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
                     </div>`;
-                  setTimeout(() => location.reload(), 1500);
-                } else {
-                  showAlert(container, `❌ Error: ${result.error || 'Failed to submit attendance.'}`);
-                }
-              })
-              .catch(err => {
-                console.error("Fetch Error:", err);
-                showAlert(container, 'Something went wrong. Please try again.');
-              });
+                    setTimeout(() => location.reload(), 1500);
+                  } else {
+                    showAlert(container, `❌ Error: ${result.error || 'Failed to submit attendance.'}`);
+                  }
+                })
+                .catch(err => {
+                  console.error("Fetch Error:", err);
+                  showAlert(container, 'Something went wrong. Please try again.');
+                });
+            });
+          })
+          .catch(error => {
+            console.error("Error fetching attendance data:", error);
+            showAlert(document.getElementById('student-attendance-list-container'), `Error fetching attendance for ${class_name}.`);
           });
-        })
-        .catch(error => {
-          console.error("Error fetching attendance data:", error);
-          showAlert(document.getElementById('student-attendance-list-container'), `Error fetching attendance for ${class_name}.`);
-        });
-    }
+      }
 
-    //------------------------------------------ Assignment management -------------------------------------------------
-    let assignments = [];
-    function getAssignmentStatus(start_date, end_date) {
-      const today = new Date();
-      const start = new Date(start_date);
-      const end = new Date(end_date);
-      const diffDays = (end - today) / (1000 * 60 * 60 * 24);
-      if (today < start) return { text: 'Upcoming', color: 'bg-blue-100 text-blue-800' };
-      if (diffDays <= 2 && today <= end) return { text: 'Due Soon', color: 'bg-yellow-100 text-yellow-800' };
-      if (today > end) return { text: 'Past Due', color: 'bg-red-100 text-red-800' };
-      return { text: 'Active', color: 'bg-green-100 text-green-800' };
-    }
+      //------------------------------------------ Assignment management -------------------------------------------------
+      let assignments = [];
+      function getAssignmentStatus(start_date, end_date) {
+        const today = new Date();
+        const start = new Date(start_date);
+        const end = new Date(end_date);
+        const diffDays = (end - today) / (1000 * 60 * 60 * 24);
+        if (today < start) return { text: 'Upcoming', color: 'bg-blue-100 text-blue-800' };
+        if (diffDays <= 2 && today <= end) return { text: 'Due Soon', color: 'bg-yellow-100 text-yellow-800' };
+        if (today > end) return { text: 'Past Due', color: 'bg-red-100 text-red-800' };
+        return { text: 'Active', color: 'bg-green-100 text-green-800' };
+      }
 
-    function renderAssignments() {
-      const tbody = document.getElementById('assignment-body');
-      tbody.innerHTML = '';
-      assignments.forEach((a, index) => {
-        const status = getAssignmentStatus(a.start_date, a.end_date);
-        tbody.innerHTML += `
+      function renderAssignments() {
+        const tbody = document.getElementById('assignment-body');
+        tbody.innerHTML = '';
+        assignments.forEach((a, index) => {
+          const status = getAssignmentStatus(a.start_date, a.end_date);
+          tbody.innerHTML += `
           <tr class="hover:bg-gray-50 transition duration-200">
             <td class="px-6 py-4">${a.title}</td>
             <td class="px-6 py-4">${a.className}</td>
@@ -824,134 +1062,134 @@
               </button>
             </td>
           </tr>`;
+        });
+      }
+
+      document.getElementById('assignment-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const assignment = {
+          title: document.getElementById('title').value,
+          subject: document.getElementById('subject').value,
+          className: document.getElementById('class').value,
+          start_date: document.getElementById('start_date').value,
+          end_date: document.getElementById('end_date').value,
+          description: document.getElementById('description').value,
+        };
+        fetch('/add_assignment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ assignment: assignment })
+        })
+          .then(response => {
+            if (response.ok) return response.json();
+            throw new Error('Failed to add assignment: ' + response.statusText);
+          })
+          .then(() => {
+            assignments.push(assignment);
+            renderAssignments();
+            this.reset();
+          })
+          .catch(error => {
+            console.error('Error adding assignment:', error);
+            showAlert(document.getElementById('assignment-body'), 'Failed to add assignment. Please try again.');
+          });
       });
-    }
 
-    document.getElementById('assignment-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const assignment = {
-        title: document.getElementById('title').value,
-        subject: document.getElementById('subject').value,
-        className: document.getElementById('class').value,
-        start_date: document.getElementById('start_date').value,
-        end_date: document.getElementById('end_date').value,
-        description: document.getElementById('description').value,
-      };
-      fetch('/add_assignment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ assignment: assignment })
-      })
-        .then(response => {
-          if (response.ok) return response.json();
-          throw new Error('Failed to add assignment: ' + response.statusText);
-        })
-        .then(() => {
-          assignments.push(assignment);
-          renderAssignments();
-          this.reset();
-        })
-        .catch(error => {
-          console.error('Error adding assignment:', error);
-          showAlert(document.getElementById('assignment-body'), 'Failed to add assignment. Please try again.');
-        });
-    });
+      function deleteAssignment(index) {
+        if (!confirm("Delete this assignment?")) return;
+        fetch(`/delete_assignment/${index}`, { method: 'DELETE' })
+          .then(response => {
+            if (response.ok) return response.json();
+            throw new Error('Failed to delete assignment: ' + response.statusText);
+          })
+          .then(() => {
+            assignments.splice(index, 1);
+            renderAssignments();
+          })
+          .catch(error => {
+            console.error('Error deleting assignment:', error);
+            showAlert(document.getElementById('assignment-body'), 'Failed to delete assignment. Please try again.');
+          });
+      }
 
-    function deleteAssignment(index) {
-      if (!confirm("Delete this assignment?")) return;
-      fetch(`/delete_assignment/${index}`, { method: 'DELETE' })
-        .then(response => {
-          if (response.ok) return response.json();
-          throw new Error('Failed to delete assignment: ' + response.statusText);
-        })
-        .then(() => {
-          assignments.splice(index, 1);
-          renderAssignments();
-        })
-        .catch(error => {
-          console.error('Error deleting assignment:', error);
-          showAlert(document.getElementById('assignment-body'), 'Failed to delete assignment. Please try again.');
-        });
-    }
+      function openEditModal(index) {
+        const a = assignments[index];
+        document.getElementById('edit-index').value = index;
+        document.getElementById('edit-title').value = a.title;
+        document.getElementById('edit-subject').value = a.subject;
+        document.getElementById('edit-class').value = a.className;
+        document.getElementById('edit-start-date').value = a.start_date;
+        document.getElementById('edit-end-date').value = a.end_date;
+        document.getElementById('edit-description').value = a.description || '';
+        new bootstrap.Modal(document.getElementById('editModal')).show();
+      }
 
-    function openEditModal(index) {
-      const a = assignments[index];
-      document.getElementById('edit-index').value = index;
-      document.getElementById('edit-title').value = a.title;
-      document.getElementById('edit-subject').value = a.subject;
-      document.getElementById('edit-class').value = a.className;
-      document.getElementById('edit-start-date').value = a.start_date;
-      document.getElementById('edit-end-date').value = a.end_date;
-      document.getElementById('edit-description').value = a.description || '';
-      new bootstrap.Modal(document.getElementById('editModal')).show();
-    }
-
-    document.getElementById('edit-form').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const index = document.getElementById('edit-index').value;
-      const updated = {
-        title: document.getElementById('edit-title').value,
-        subject: document.getElementById('edit-subject').value,
-        className: document.getElementById('edit-class').value,
-        start_date: document.getElementById('edit-start-date').value,
-        end_date: document.getElementById('edit-end-date').value,
-        description: document.getElementById('edit-description').value,
-      };
-      fetch(`/update_assignment/${index}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updated)
-      })
-        .then(response => {
-          if (response.ok) return response.json();
-          throw new Error('Failed to update assignment: ' + response.statusText);
+      document.getElementById('edit-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const index = document.getElementById('edit-index').value;
+        const updated = {
+          title: document.getElementById('edit-title').value,
+          subject: document.getElementById('edit-subject').value,
+          className: document.getElementById('edit-class').value,
+          start_date: document.getElementById('edit-start-date').value,
+          end_date: document.getElementById('edit-end-date').value,
+          description: document.getElementById('edit-description').value,
+        };
+        fetch(`/update_assignment/${index}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated)
         })
-        .then(() => {
-          assignments[index] = updated;
-          renderAssignments();
-          bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
-        })
-        .catch(error => {
-          console.error('Error updating assignment:', error);
-          showAlert(document.getElementById('assignment-body'), 'Failed to update assignment. Please try again.');
-        });
-    });
-
-    function loadAssignments() {
-      fetch('/get_assignments')
-        .then(response => {
-          if (!response.ok) throw new Error('Failed to fetch assignments');
-          else return response.json();
-        })
-        .then(data => {
-          assignments = data;
-          renderAssignments();
-        })
-        .catch(error => {
-          console.error('Error loading assignments:', error);
-          showAlert(document.getElementById('assignment-body'), 'Error loading assignments. Please try again later.');
-        });
-    }
-
-    // Profile editing
-    document.querySelectorAll('.edit-btn').forEach(btn => {
-      btn.addEventListener('click', function () {
-        const userId = this.getAttribute('data-user-id');
-        edit_teacher_profile(userId);
+          .then(response => {
+            if (response.ok) return response.json();
+            throw new Error('Failed to update assignment: ' + response.statusText);
+          })
+          .then(() => {
+            assignments[index] = updated;
+            renderAssignments();
+            bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
+          })
+          .catch(error => {
+            console.error('Error updating assignment:', error);
+            showAlert(document.getElementById('assignment-body'), 'Failed to update assignment. Please try again.');
+          });
       });
-    });
 
-    function edit_teacher_profile(user_id) {
-      fetch(`/get_user_by_user_id/${user_id}`)
-        .then(response => response.json())
-        .then(teacher => {
-          const container = document.getElementById('profile');
-          if (!container) {
-            console.error('Error: Profile container not found.');
-            showAlert(document.querySelector('.profile_page'), 'Cannot edit profile. Page section missing.');
-            return;
-          }
-          container.innerHTML = `
+      function loadAssignments() {
+        fetch('/get_assignments')
+          .then(response => {
+            if (!response.ok) throw new Error('Failed to fetch assignments');
+            else return response.json();
+          })
+          .then(data => {
+            assignments = data;
+            renderAssignments();
+          })
+          .catch(error => {
+            console.error('Error loading assignments:', error);
+            showAlert(document.getElementById('assignment-body'), 'Error loading assignments. Please try again later.');
+          });
+      }
+
+      // Profile editing
+      document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const userId = this.getAttribute('data-user-id');
+          edit_teacher_profile(userId);
+        });
+      });
+
+      function edit_teacher_profile(user_id) {
+        fetch(`/get_user_by_user_id/${user_id}`)
+          .then(response => response.json())
+          .then(teacher => {
+            const container = document.getElementById('profile');
+            if (!container) {
+              console.error('Error: Profile container not found.');
+              showAlert(document.querySelector('.profile_page'), 'Cannot edit profile. Page section missing.');
+              return;
+            }
+            container.innerHTML = `
             <form id="edit-teacher-form" class="form-box border rounded p-4 shadow-sm bg-white needs-validation" novalidate>
               <h4 class="mb-3 text-primary"><i class="fas fa-pencil-alt"></i> Edit Teacher Profile</h4>
               <p class="text-muted mb-4">Update your profile details below.</p>
@@ -989,171 +1227,171 @@
                 <button type="submit" class="btn btn-success px-4"><i class="fas fa-save me-1"></i> Save Changes</button>
               </div>
             </form>`;
-          document.getElementById('edit-teacher-form').addEventListener('submit', function (event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            const updatedData = {};
-            formData.forEach((value, key) => {
-              updatedData[key] = key === 'age' ? parseInt(value) || null : value;
-            });
-            fetch(`/update_teacher/${teacher.user_id}`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(updatedData)
-            })
-              .then(response => response.json())
-              .then(result => {
-                if (result.success) {
-                  container.innerHTML = `
+            document.getElementById('edit-teacher-form').addEventListener('submit', function (event) {
+              event.preventDefault();
+              const formData = new FormData(this);
+              const updatedData = {};
+              formData.forEach((value, key) => {
+                updatedData[key] = key === 'age' ? parseInt(value) || null : value;
+              });
+              fetch(`/update_teacher/${teacher.user_id}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedData)
+              })
+                .then(response => response.json())
+                .then(result => {
+                  if (result.success) {
+                    container.innerHTML = `
                     <div class="alert alert-success text-center fw-semibold">
                       <i class="fas fa-check-circle me-2"></i>Profile updated successfully!
                     </div>`;
-                  setTimeout(() => location.reload(), 1500);
-                } else {
-                  showAlert(container, `Failed to update profile: ${result.error || 'Unknown error'}`);
-                }
-              })
-              .catch(err => {
-                console.error('Update error:', err);
-                showAlert(container, 'An error occurred while updating the profile.');
-              });
+                    setTimeout(() => location.reload(), 1500);
+                  } else {
+                    showAlert(container, `Failed to update profile: ${result.error || 'Unknown error'}`);
+                  }
+                })
+                .catch(err => {
+                  console.error('Update error:', err);
+                  showAlert(container, 'An error occurred while updating the profile.');
+                });
+            });
+          })
+          .catch(error => {
+            console.error("Fetch error:", error);
+            showAlert(document.querySelector('.profile_page'), 'Error loading teacher details.');
           });
-        })
-        .catch(error => {
-          console.error("Fetch error:", error);
-          showAlert(document.querySelector('.profile_page'), 'Error loading teacher details.');
-        });
-    }
-
-    // Calendar initialization
-    window.onload = function () {
-      if (typeof FullCalendar === 'undefined') {
-        console.error('FullCalendar is not loaded.');
-        showAlert(document.getElementById('calendar'), 'Error: Calendar library failed to load. Please try again later.');
-        return;
       }
 
-      const calendarEl = document.getElementById('calendar');
-      const subjectColors = {
-        'Hindi': '#ff5733',
-        'Chemistry': '#dc3545',
-        'Tamil': '#17a2b8',
-        'English': '#0d6efd',
-        'Maths': '#198754',
-        'Science': '#dc3545',
-        'Socialscience': '#ffc107',
-        'GeneralKnowledge': '#6f42c1',
-        'Physics': '#fd7e14',
-        'ComputerScience': '#20c997',
-        'Zoology': '#6610f2',
-        'Botany': '#28a745',
-        'Commerce': '#d63384',
-        'Accountancy': '#e83e8c',
-        'ComputerApplication': '#007bff'
-      };
+      // Calendar initialization
+      window.onload = function () {
+        if (typeof FullCalendar === 'undefined') {
+          console.error('FullCalendar is not loaded.');
+          showAlert(document.getElementById('calendar'), 'Error: Calendar library failed to load. Please try again later.');
+          return;
+        }
 
-      const weekdayMap = {
-        'Sunday': 0,
-        'Monday': 1,
-        'Tuesday': 2,
-        'Wednesday': 3,
-        'Thursday': 4,
-        'Friday': 5,
-        'Saturday': 6
-      };
+        const calendarEl = document.getElementById('calendar');
+        const subjectColors = {
+          'Hindi': '#ff5733',
+          'Chemistry': '#dc3545',
+          'Tamil': '#17a2b8',
+          'English': '#0d6efd',
+          'Maths': '#198754',
+          'Science': '#dc3545',
+          'Socialscience': '#ffc107',
+          'GeneralKnowledge': '#6f42c1',
+          'Physics': '#fd7e14',
+          'ComputerScience': '#20c997',
+          'Zoology': '#6610f2',
+          'Botany': '#28a745',
+          'Commerce': '#d63384',
+          'Accountancy': '#e83e8c',
+          'ComputerApplication': '#007bff'
+        };
 
-      const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'timeGridWeek',
-        initialDate: new Date(),
-        locale: 'en',
-        headerToolbar: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'timeGridWeek,timeGridDay'
-        },
-        slotMinTime: '01:00:00',
-        slotMaxTime: '12:00:00',
-        slotLabelFormat: {
-          hour: 'numeric',
-          minute: '2-digit',
-          meridiem: 'short'
-        },
-        eventTimeFormat: {
-          hour: 'numeric',
-          minute: '2-digit',
-          meridiem: 'short'
-        },
-        allDaySlot: false,
-        events: function (fetchInfo, successCallback, failureCallback) {
-          fetch('/teacher/calendar/events')
-            .then(response => {
-              if (!response.ok) throw new Error('Failed to fetch events: ' + response.statusText);
-              return response.json();
-            })
-            .then(periods => {
-              const today = new Date();
-              const currentWeekday = today.getDay();
-              const currentWeekStart = new Date(today);
-              currentWeekStart.setDate(today.getDate() - currentWeekday);
+        const weekdayMap = {
+          'Sunday': 0,
+          'Monday': 1,
+          'Tuesday': 2,
+          'Wednesday': 3,
+          'Thursday': 4,
+          'Friday': 5,
+          'Saturday': 6
+        };
 
-              const events = periods.map(period => {
-                const targetDay = weekdayMap[period.day];
-                if (targetDay === undefined) return null;
-                const eventDate = new Date(currentWeekStart);
-                eventDate.setDate(currentWeekStart.getDate() + targetDay);
-                const startDateTime = new Date(`${eventDate.toISOString().split('T')[0]}T${period.start_time}:00`);
-                const endDateTime = new Date(`${eventDate.toISOString().split('T')[0]}T${period.end_time}:00`);
-                return {
-                  title: `${period.class} - ${period.subject}`,
-                  start: startDateTime.toISOString(),
-                  end: endDateTime.toISOString(),
-                  backgroundColor: subjectColors[period.subject] || '#0d6efd',
-                  borderColor: subjectColors[period.subject] || '#0d6efd',
-                  extendedProps: { class: period.class, subject: period.subject }
-                };
-              }).filter(e => e !== null);
-              successCallback(events);
-            })
-            .catch(error => {
-              console.error('Error fetching calendar events:', error);
-              showAlert(document.getElementById('calendar'), `Error loading calendar events: ${error.message}`);
-              failureCallback(error);
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'timeGridWeek',
+          initialDate: new Date(),
+          locale: 'en',
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'timeGridWeek,timeGridDay'
+          },
+          slotMinTime: '01:00:00',
+          slotMaxTime: '12:00:00',
+          slotLabelFormat: {
+            hour: 'numeric',
+            minute: '2-digit',
+            meridiem: 'short'
+          },
+          eventTimeFormat: {
+            hour: 'numeric',
+            minute: '2-digit',
+            meridiem: 'short'
+          },
+          allDaySlot: false,
+          events: function (fetchInfo, successCallback, failureCallback) {
+            fetch('/teacher/calendar/events')
+              .then(response => {
+                if (!response.ok) throw new Error('Failed to fetch events: ' + response.statusText);
+                return response.json();
+              })
+              .then(periods => {
+                const today = new Date();
+                const currentWeekday = today.getDay();
+                const currentWeekStart = new Date(today);
+                currentWeekStart.setDate(today.getDate() - currentWeekday);
+
+                const events = periods.map(period => {
+                  const targetDay = weekdayMap[period.day];
+                  if (targetDay === undefined) return null;
+                  const eventDate = new Date(currentWeekStart);
+                  eventDate.setDate(currentWeekStart.getDate() + targetDay);
+                  const startDateTime = new Date(`${eventDate.toISOString().split('T')[0]}T${period.start_time}:00`);
+                  const endDateTime = new Date(`${eventDate.toISOString().split('T')[0]}T${period.end_time}:00`);
+                  return {
+                    title: `${period.class} - ${period.subject}`,
+                    start: startDateTime.toISOString(),
+                    end: endDateTime.toISOString(),
+                    backgroundColor: subjectColors[period.subject] || '#0d6efd',
+                    borderColor: subjectColors[period.subject] || '#0d6efd',
+                    extendedProps: { class: period.class, subject: period.subject }
+                  };
+                }).filter(e => e !== null);
+                successCallback(events);
+              })
+              .catch(error => {
+                console.error('Error fetching calendar events:', error);
+                showAlert(document.getElementById('calendar'), `Error loading calendar events: ${error.message}`);
+                failureCallback(error);
+              });
+          },
+          eventClick: function (info) {
+            alert(`Class: ${info.event.extendedProps.class}\nSubject: ${info.event.extendedProps.subject}\nTime: ${info.event.start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })} - ${info.event.end.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}`);
+          },
+          eventDidMount: function (info) {
+            new bootstrap.Tooltip(info.el, {
+              title: `Class: ${info.event.extendedProps.class}<br>Subject: ${info.event.extendedProps.subject}<br>Time: ${info.event.start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })} - ${info.event.end.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}`,
+              html: true,
+              placement: 'top',
+              trigger: 'hover'
             });
-        },
-        eventClick: function (info) {
-          alert(`Class: ${info.event.extendedProps.class}\nSubject: ${info.event.extendedProps.subject}\nTime: ${info.event.start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })} - ${info.event.end.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}`);
-        },
-        eventDidMount: function (info) {
-          new bootstrap.Tooltip(info.el, {
-            title: `Class: ${info.event.extendedProps.class}<br>Subject: ${info.event.extendedProps.subject}<br>Time: ${info.event.start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })} - ${info.event.end.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}`,
-            html: true,
-            placement: 'top',
-            trigger: 'hover'
-          });
-        },
-        eventBackgroundColor: '#0d6efd',
-        eventBorderColor: '#0046a3',
-        height: 'auto',
-        contentHeight: 600
-      });
-      calendar.render();
-      loadAssignments();
-    };
+          },
+          eventBackgroundColor: '#0d6efd',
+          eventBorderColor: '#0046a3',
+          height: 'auto',
+          contentHeight: 600
+        });
+        calendar.render();
+        loadAssignments();
+      };
 
-    //------------------------------- Modify Students Attendance ---------------------------------//
-    function modify_students_attendance(class_name) {
-      fetch(`/get_students_names/${class_name}`)
-        .then(response => {
-          if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
-          return response.json();
-        })
-        .then(data => {
-          const container = document.getElementById('modify-student-attendance-list-container');
-          if (!data || data.length === 0) {
-            container.innerHTML = `<div class="alert alert-warning">No students found for Class <strong>${class_name}</strong>.</div>`;
-            return;
-          }
-          container.innerHTML = `
+      //------------------------------- Modify Students Attendance ---------------------------------//
+      function modify_students_attendance(class_name) {
+        fetch(`/get_students_names/${class_name}`)
+          .then(response => {
+            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+            return response.json();
+          })
+          .then(data => {
+            const container = document.getElementById('modify-student-attendance-list-container');
+            if (!data || data.length === 0) {
+              container.innerHTML = `<div class="alert alert-warning">No students found for Class <strong>${class_name}</strong>.</div>`;
+              return;
+            }
+            container.innerHTML = `
               <div class="d-flex justify-content-between align-items-center mb-4">
                 <h3 class="text-primary">📋 Modify Students Attendance - ${class_name}</h3>
                 <div>
@@ -1161,7 +1399,7 @@
                   <button class="btn btn-outline-secondary btn-sm" onclick="modify_students_attendance('${class_name}')">Refresh</button>
                 </div>
               </div>`;
-          let content = `
+            let content = `
           <form id="modify-attendance-form" class="needs-validation" novalidate>
             <div class="table-responsive">
               <table class="table table-hover table-bordered align-middle">
@@ -1173,8 +1411,8 @@
                   </tr>
                 </thead>
                 <tbody>`;
-          data.forEach((student, index) => {
-            content += `
+            data.forEach((student, index) => {
+              content += `
             <tr>
               <td>${index + 1}</td>
               <td>${student.student_name}</td>
@@ -1187,8 +1425,8 @@
                 </div>
               </td>
             </tr>`;
-          });
-          content += `
+            });
+            content += `
                 </tbody>
               </table>
             </div>
@@ -1196,93 +1434,93 @@
               <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
             </div>
           </form>`;
-          container.innerHTML += content;
-          document.getElementById("modify-attendance-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const selectedDate = document.getElementById('attendance-date').value;
-            if (!selectedDate) {
-              const errorDiv = document.createElement('div');
-              errorDiv.className = 'alert alert-warning mt-3';
-              errorDiv.innerHTML = 'Please select a date for attendance.';
-              container.appendChild(errorDiv);
-              errorDiv.scrollIntoView({ behavior: 'smooth' });
-              return;
-            }
-            const formData = new FormData(this);
-            const attendanceData = data
-              .map(student => ({
-                user_id: student.user_id,
-                user_name: student.student_name,
-                status: formData.get(`status_${student.user_id}`)
-              }))
-              .filter(item => item.status);
-            if (attendanceData.length === 0) {
-              const errorDiv = document.createElement('div');
-              errorDiv.className = 'alert alert-warning mt-3';
-              errorDiv.innerHTML = 'No attendance status selected.';
-              container.appendChild(errorDiv);
-              errorDiv.scrollIntoView({ behavior: 'smooth' });
-              return;
-            }
-            fetch(`/submit_modify_attendance`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                class_name: class_name,
-                date: selectedDate,
-                attendance: attendanceData
+            container.innerHTML += content;
+            document.getElementById("modify-attendance-form").addEventListener("submit", function (e) {
+              e.preventDefault();
+              const selectedDate = document.getElementById('attendance-date').value;
+              if (!selectedDate) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-warning mt-3';
+                errorDiv.innerHTML = 'Please select a date for attendance.';
+                container.appendChild(errorDiv);
+                errorDiv.scrollIntoView({ behavior: 'smooth' });
+                return;
+              }
+              const formData = new FormData(this);
+              const attendanceData = data
+                .map(student => ({
+                  user_id: student.user_id,
+                  user_name: student.student_name,
+                  status: formData.get(`status_${student.user_id}`)
+                }))
+                .filter(item => item.status);
+              if (attendanceData.length === 0) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-warning mt-3';
+                errorDiv.innerHTML = 'No attendance status selected.';
+                container.appendChild(errorDiv);
+                errorDiv.scrollIntoView({ behavior: 'smooth' });
+                return;
+              }
+              fetch(`/submit_modify_attendance`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  class_name: class_name,
+                  date: selectedDate,
+                  attendance: attendanceData
+                })
               })
-            })
-              .then(response => response.json())
-              .then(data => {
-                if (data.success) {
-                  container.innerHTML = `
+                .then(response => response.json())
+                .then(data => {
+                  if (data.success) {
+                    container.innerHTML = `
                     <div class="alert alert-success text-center shadow-sm rounded p-4">
                       ✅ Attendance successfully submitted for class <strong>${class_name}</strong>!
                       <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
                     </div>`;
-                  setTimeout(() => modify_students_attendance(class_name), 2000);
-                } else {
+                    setTimeout(() => modify_students_attendance(class_name), 2000);
+                  } else {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'alert alert-danger mt-3';
+                    errorDiv.innerHTML = `❌ Error: ${data.error || 'Failed to submit attendance.'}`;
+                    container.appendChild(errorDiv);
+                    errorDiv.scrollIntoView({ behavior: 'smooth' });
+                  }
+                })
+                .catch(err => {
+                  console.error("Fetch Error:", err);
                   const errorDiv = document.createElement('div');
                   errorDiv.className = 'alert alert-danger mt-3';
-                  errorDiv.innerHTML = `❌ Error: ${data.error || 'Failed to submit attendance.'}`;
+                  errorDiv.innerHTML = 'Something went wrong. Please try again.';
                   container.appendChild(errorDiv);
                   errorDiv.scrollIntoView({ behavior: 'smooth' });
-                }
-              })
-              .catch(err => {
-                console.error("Fetch Error:", err);
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'alert alert-danger mt-3';
-                errorDiv.innerHTML = 'Something went wrong. Please try again.';
-                container.appendChild(errorDiv);
-                errorDiv.scrollIntoView({ behavior: 'smooth' });
-              });
+                });
+            });
+          })
+          .catch(error => {
+            console.error("Error fetching student data:", error);
+            document.getElementById('modify-student-attendance-list-container').innerHTML = `<div class="alert alert-danger">Error fetching students for ${class_name}.</div>`;
           });
-        })
-        .catch(error => {
-          console.error("Error fetching student data:", error);
-          document.getElementById('modify-student-attendance-list-container').innerHTML = `<div class="alert alert-danger">Error fetching students for ${class_name}.</div>`;
-        });
-    }
-    //------------------------------- Modify Students Attendance ---------------------------------//
+      }
+      //------------------------------- Modify Students Attendance ---------------------------------//
 
-    // View student details
-    function view_student_detail(user_id) {
-      fetch(`/get_student_detail/${user_id}`)
-        .then(response => {
-          if (!response.ok) throw new Error('Failed to fetch student details');
-          return response.json();
-        })
-        .then(data => {
-          if (data.error) {
-            showAlert(document.getElementById('student-detail-body'), `Error: ${data.error}`);
-            return;
-          }
-          const student = data.student;
-          const attendance = data.attendance || [];
-          const exams = data.exams || [];
-          let html = `
+      // View student details
+      function view_student_detail(user_id) {
+        fetch(`/get_student_detail/${user_id}`)
+          .then(response => {
+            if (!response.ok) throw new Error('Failed to fetch student details');
+            return response.json();
+          })
+          .then(data => {
+            if (data.error) {
+              showAlert(document.getElementById('student-detail-body'), `Error: ${data.error}`);
+              return;
+            }
+            const student = data.student;
+            const attendance = data.attendance || [];
+            const exams = data.exams || [];
+            let html = `
             <div class="container">
               <h4 class="mb-3 text-primary">${student.student_name}</h4>
               <p><strong>Class:</strong> ${student.class}</p>
@@ -1304,23 +1542,23 @@
                   </tr>
                 </thead>
                 <tbody>`;
-          if (attendance.length === 0) {
-            html += `<tr><td colspan="4">No attendance data available.</td></tr>`;
-          } else {
-            attendance.forEach(a => {
-              const percentage = a.total_days ? ((a.present / a.total_days) * 100).toFixed(2) : 0;
-              html += `
+            if (attendance.length === 0) {
+              html += `<tr><td colspan="4">No attendance data available.</td></tr>`;
+            } else {
+              attendance.forEach(a => {
+                const percentage = a.total_days ? ((a.present / a.total_days) * 100).toFixed(2) : 0;
+                html += `
                 <tr>
                   <td>${a.month}</td>
                   <td>${a.present}</td>
                   <td>${a.total_days}</td>
                   <td>${percentage}%</td>
                 </tr>`;
-            });
-          }
-          html += `</tbody></table>`;
-          if (exams.length > 0) {
-            html += `
+              });
+            }
+            html += `</tbody></table>`;
+            if (exams.length > 0) {
+              html += `
               <hr>
               <h5 class="text-info">📊 Exam Results</h5>
               <table class="table table-striped">
@@ -1334,8 +1572,8 @@
                   </tr>
                 </thead>
                 <tbody>`;
-            exams.forEach(result => {
-              html += `
+              exams.forEach(result => {
+                html += `
                 <tr>
                   <td>${result.exam}</td>
                   <td>${result.subject}</td>
@@ -1343,20 +1581,20 @@
                   <td>${result.total}</td>
                   <td>${result.grade}</td>
                 </tr>`;
-            });
-            html += `</tbody></table>`;
-          }
-          html += `</div>`;
-          document.getElementById('student-detail-body').innerHTML = html;
-          const modal = new bootstrap.Modal(document.getElementById('studentDetailModal'));
-          modal.show();
-        })
-        .catch(error => {
-          console.error('Error fetching student details:', error);
-          showAlert(document.getElementById('student-detail-body'), 'Something went wrong while fetching student details.');
-        });
-    }
-  </script>
+              });
+              html += `</tbody></table>`;
+            }
+            html += `</div>`;
+            document.getElementById('student-detail-body').innerHTML = html;
+            const modal = new bootstrap.Modal(document.getElementById('studentDetailModal'));
+            modal.show();
+          })
+          .catch(error => {
+            console.error('Error fetching student details:', error);
+            showAlert(document.getElementById('student-detail-body'), 'Something went wrong while fetching student details.');
+          });
+      }
+    </script>
 </body>
 
 </html>
