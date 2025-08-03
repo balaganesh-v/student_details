@@ -27,7 +27,7 @@ def get_chats():
                     # Convert to string if timestamp is in another format
                     time_stamp = str(time_stamp)
                 formatted_messages.append({
-                    'sender_id': msg.get('sender_id', ''),Add the names 
+                    'sender_id': msg.get('sender_id', ''),
                     'sender_name': msg.get('sender_name', 'Unknown'),
                     'message': msg.get('message', ''),
                     'timestamp': time_stamp,
