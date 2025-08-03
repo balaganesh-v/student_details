@@ -216,6 +216,14 @@
         padding: 1rem;
       }
     }
+
+    #chat-box {
+      height: 400px;
+      overflow-y: auto;
+      padding: 1rem;
+      background-color: #f8f9fa;
+      border-radius: 0.5rem;
+    }
   </style>
 </head>
 
@@ -643,6 +651,9 @@
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
     <!-- v4 (Good with latest Flask-SocketIO) -->
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
 
     <script>
 
@@ -655,25 +666,25 @@
 
       const sender_id = "{{ teacher.user_id }}"; // Injected from Flask
       const sender_role = "Teacher";
+      const sender_name = "{{ teacher.user_name }}"; // e.g., "Mr. John"
       let current_class = null;
 
       // Wait for DOM to be fully loaded before manipulating elements
       document.addEventListener('DOMContentLoaded', () => {
-
-        document.getElementById("send-button").addEventListener("click", sendMessage);
+        const sendButton = document.getElementById("send-button");
         const inputContainer = document.getElementById("input-container");
         const chatBox = document.getElementById("chat-box");
 
-        if (!inputContainer || !chatBox) {
+        if (!inputContainer || !chatBox || !sendButton) {
           console.error("Chat elements not found in DOM");
+          showAlert("Chat interface error. Please refresh the page.", "danger", 5000);
           return;
         }
 
-        // Initialize UI
+        sendButton.addEventListener("click", sendMessage);
         inputContainer.classList.add("d-none");
         chatBox.innerHTML = '<p class="text-muted mb-0">Connecting to chat server...</p>';
 
-        // Update UI on successful connection
         socket.on("connect", () => {
           console.log("Connected to chat server");
           chatBox.innerHTML = '<p class="text-muted mb-0">Please select a class to start chatting.</p>';
@@ -694,8 +705,6 @@
         });
 
         const messageInput = document.getElementById('message-input');
-        const sendButton = document.getElementById('send-button');
-
         if (messageInput && sendButton) {
           messageInput.addEventListener('input', function () {
             const message = this.value.trim();
@@ -703,10 +712,6 @@
           });
 
           sendButton.disabled = true;
-        }
-
-        if (sendButton) {
-          sendButton.addEventListener("click", sendMessage);
         }
       });
 
@@ -729,26 +734,21 @@
         socket.emit("join_class_room", { class_id: classId });
 
         fetch(`/get_chats?class_id=${classId}`)
-
           .then(response => {
             if (!response.ok) throw new Error(`Failed to fetch chats: ${response.statusText}`);
             return response.json();
           })
           .then(messages => {
+            console.log("Fetched messages:", messages);
             chatBox.innerHTML = '';
             messages.forEach(msg => {
-              appendMessage(msg.sender_role, msg.message, formatTime(msg.timestamp));
+              appendMessage(msg.sender_name, msg.message, msg.timestamp, msg.sender_role);
             });
           })
           .catch(error => {
             console.error("Error fetching messages:", error);
             showAlert("Could not load chat history.", "danger", 5000);
           });
-      }
-
-      function formatTime(ts) {
-        const date = new Date(ts);
-        return date.toUTCString().split(' ')[4]; // e.g., "13:47:00"
       }
 
       function sendMessage() {
@@ -764,81 +764,145 @@
           showAlert("Message is too long. Maximum 500 characters.", "warning", 3000);
           return;
         }
-        
-        console.log("Sending message...", socket.connected); // Should be true
+
         socket.emit("send_message", {
           sender_id: sender_id,
           sender_role: sender_role,
+          sender_name: sender_name,
           message: message,
           class_id: current_class
         });
-        console.log({
-          sender_id,
-          sender_role,
-          message,
-          current_class
-        })
+
         input_msg.value = '';
       }
 
       socket.on("receive_message", (data) => {
+        console.log("Received message data:", data);
         if (data.class_id === current_class) {
-          appendMessage(data.sender_role, data.message, formatTime(data.timestamp));
+          appendMessage(data.sender_name, data.message, data.timestamp, data.sender_role);
         }
       });
 
-      function appendMessage(role, message, time) {
+      function appendMessage(senderName, message, timestamp, senderRole) {
+        console.log("appendMessage called with:", { senderName, message, timestamp, senderRole });
         const box = document.getElementById("chat-box");
-        if (!box) return;
+        if (!box) {
+          console.error("Chat box element not found");
+          return;
+        }
 
-        const msgDiv = document.createElement("div");
-        msgDiv.className = `d-flex ${role === 'Teacher' ? 'justify-content-end' : 'justify-content-start'} mb-2`;
+        senderName = senderName || 'Unknown';
+        message = message || '';
+
+        let time = '';
+        try {
+          if (!timestamp || typeof timestamp !== 'string') {
+            console.warn("Timestamp missing or invalid, using current IST time");
+            const now = new Date();
+            const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
+            const istTime = new Date(now.getTime() + istOffset);
+            const hours = istTime.getUTCHours();
+            const minutes = istTime.getUTCMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const formattedHours = ((hours + 11) % 12 + 1).toString().padStart(2, '0');
+            const formattedMinutes = minutes.toString().padStart(2, '0');
+            time = `${formattedHours}:${formattedMinutes} ${ampm}`;
+          } else {
+            // Parse UTC timestamp and convert to IST
+            const dateObj = new Date(timestamp.replace(' ', 'T') + 'Z');
+            if (isNaN(dateObj.getTime())) {
+              throw new Error("Invalid date format");
+            }
+            const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
+            const istTime = new Date(dateObj.getTime() + istOffset);
+            const hours = istTime.getUTCHours();
+            const minutes = istTime.getUTCMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const formattedHours = ((hours + 11) % 12 + 1).toString().padStart(2, '0');
+            const formattedMinutes = minutes.toString().padStart(2, '0');
+            time = `${formattedHours}:${formattedMinutes} ${ampm}`;
+          }
+        } catch (e) {
+          console.error("Error parsing timestamp:", e.message, "Original timestamp:", timestamp, "Full arguments:", { senderName, message, timestamp, senderRole });
+          const now = new Date();
+          const istOffset = 5.5 * 60 * 60 * 1000;
+          const istTime = new Date(now.getTime() + istOffset);
+          const hours = istTime.getUTCHours();
+          const minutes = istTime.getUTCMinutes();
+          const ampm = hours >= 12 ? 'PM' : 'AM';
+          const formattedHours = ((hours + 11) % 12 + 1).toString().padStart(2, '0');
+          const formattedMinutes = minutes.toString().padStart(2, '0');
+          time = `${formattedHours}:${formattedMinutes} ${ampm}`;
+        }
+
+        const msgWrapper = document.createElement("div");
+        msgWrapper.className = `mb-3 d-flex ${senderRole === 'Teacher' ? 'justify-content-end' : 'justify-content-start'}`;
+
+        const contentCol = document.createElement("div");
+        contentCol.className = "d-flex flex-column align-items-start";
+        contentCol.style.maxWidth = "70%";
+
+        const nameText = document.createElement("div");
+        nameText.textContent = senderName;
+        nameText.className = "text-muted mb-1 fw-semibold";
+        nameText.style.fontSize = "0.75rem";
 
         const messageDiv = document.createElement("div");
-        messageDiv.className = `p-2 px-3 rounded ${role === 'Teacher' ? 'bg-primary text-white' : 'bg-white border'}`;
+        messageDiv.className = `rounded-4 px-3 py-2 shadow-sm ${senderRole === 'Teacher' ? 'bg-primary text-white align-self-end' : 'bg-light text-dark'}`;
+        messageDiv.style.wordBreak = "break-word";
+        messageDiv.style.fontSize = "1rem";
+        messageDiv.style.lineHeight = "1.4";
+        messageDiv.style.width = "auto";
+        messageDiv.style.maxWidth = "100%";
 
         const messageText = document.createElement("div");
-        messageText.textContent = message;  // Safe
+        messageText.textContent = message;
+        messageText.className = "mb-1";
 
-        const timeText = document.createElement("small");
-        timeText.className = "text-muted d-block text-end";
-        timeText.style.fontSize = "0.75em";
+        const timeText = document.createElement("div");
         timeText.textContent = time;
+        timeText.className = "text-end";
+        timeText.style.fontSize = "0.7rem";
+        timeText.style.opacity = "0.7";
 
         messageDiv.appendChild(messageText);
         messageDiv.appendChild(timeText);
-        msgDiv.appendChild(messageDiv);
-        box.appendChild(msgDiv);
+        contentCol.appendChild(nameText);
+        contentCol.appendChild(messageDiv);
+        msgWrapper.appendChild(contentCol);
+        box.appendChild(msgWrapper);
 
         box.scrollTop = box.scrollHeight;
       }
 
-
-
-      function showAlert(message, type = "info", duration = 3000) {
-        const container = document.getElementById("alert-container");
-
-        // ✅ Ensure container exists and is a real DOM element
-        if (!(container instanceof HTMLElement)) {
-          console.error("❌ alert-container not found or invalid:", container);
+      function showAlert(message, type = 'danger', duration = 3000) {
+        const container = document.getElementById('alert-container');
+        if (!container) {
+          console.error("Alert container not found");
           return;
         }
 
-        const alert = document.createElement("div");
-        alert.className = `alert alert-${type} alert-dismissible fade show`;
-        alert.role = "alert";
-        alert.innerHTML = `
-          ${message}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          `;
-        container.appendChild(alert);
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
+        alertDiv.role = 'alert';
+        alertDiv.innerHTML = `
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+        container.appendChild(alertDiv);
+        alertDiv.scrollIntoView({ behavior: 'smooth' });
 
         setTimeout(() => {
-          alert.classList.remove("show");
-          alert.classList.add("hide");
-          setTimeout(() => alert.remove(), 500);
+          alertDiv.classList.remove('show');
+          alertDiv.classList.add('fade');
+          setTimeout(() => alertDiv.remove(), 150);
         }, duration);
       }
+
+
+
+
+
 
 
 

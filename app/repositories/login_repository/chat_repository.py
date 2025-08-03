@@ -9,7 +9,7 @@ def get_chats_from_class_by_db(class_id):
         cursor = connection.cursor()  # Ensures results are returned as dicts
 
         cursor.execute("""
-            SELECT sender_id, sender_role, message, time_stamp
+            SELECT sender_id, sender_role, sender_name, message, time_stamp
             FROM chat_messages
             WHERE class_name = %s
             ORDER BY time_stamp ASC
@@ -21,6 +21,7 @@ def get_chats_from_class_by_db(class_id):
             return [{
                 "sender_id": "System",
                 "sender_role": "system",
+                "sender_name":"Bot",
                 "message": "Newly started the group",
                 "time_stamp": None
             }]
@@ -32,6 +33,7 @@ def get_chats_from_class_by_db(class_id):
         return [{
             "sender_id": "System",
             "sender_role": "system",
+            "sender_name":"Bot",
             "message": "Error loading messages.",
             "time_stamp": None
         }]
@@ -52,14 +54,15 @@ def store_chats_in_class_wise_into_db(data, time_stamp):
 
         sender_id = data.get("sender_id")
         sender_role = data.get("sender_role")
+        sender_name = data.get("sender_name")
         message = data.get("message")
         class_name = data.get("class_id")
 
         query = """
-            INSERT INTO chat_messages (sender_id, sender_role, message, class_name, time_stamp)
-            VALUES (%s, %s, %s, %s, %s)
+            INSERT INTO chat_messages (sender_id, sender_role,sender_name, message, class_name, time_stamp)
+            VALUES (%s, %s, %s, %s, %s, %s)
         """
-        values = (sender_id, sender_role, message, class_name, time_stamp)
+        values = (sender_id, sender_role ,sender_name , message, class_name, time_stamp)
         cursor.execute(query, values)
         connection.commit()
 
