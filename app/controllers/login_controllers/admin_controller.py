@@ -48,23 +48,34 @@ def dashboard():
     token = request.cookies.get('access_token')
     if not token:
         return render_template("login_page/landing_page.html")
+
     try:
         decoded = decode_token(token)
         user_id = decoded.get("user_id")
         user = get_user_by_user_id(user_id)
         role = user['user_role']
+        print(role)
+
         if role == "Principal":
-            return render_template("login_page/admin_dashboard.html",user = user) 
-        if role == "Teacher":
+            return render_template("login_page/admin_dashboard.html", user=user)
+
+        elif role == "Teacher":
             teacher = get_teacher_datas(user_id)
-            return render_template("login_page/teacher_dashboard.html",user = user,teacher = teacher)
-        if role == "Student":
+            return render_template("login_page/teacher_dashboard.html", user=user, teacher=teacher)
+
+        elif role == "Student":
             student = get_student_datas(user_id)
-            return render_template("login_page/student_dashboard.html",user = user,student = student)
+            print(student)
+            print("Successfully opened student dashboard page")
+            return render_template("login_page/student_dashboard.html", user=user, student=student)
+
         else:
-            return render_template("login_page/landing_page.html") 
+            return render_template("login_page/landing_page.html")
+
     except Exception as e:
+        print("Error in dashboard route:", e)
         return render_template("login_page/landing_page.html")
+
 
 @admin_bp.route('/add_student',methods=['POST'])
 def add_student():

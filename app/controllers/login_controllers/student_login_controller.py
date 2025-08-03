@@ -7,7 +7,9 @@ student_login_bp = Blueprint('student_login',__name__)
 def student_login():
     data = request.form.to_dict()
     result = login_into_website_using_data(data)
-    if result.get("success"):
+    print(result)
+    print(result.get("success"))
+    if result.get("success") == True:
         response = make_response(redirect(url_for('admin.dashboard')))
         response.set_cookie("access_token", result["token"], httponly=True, secure=True,samesite='Lax')
         return response    

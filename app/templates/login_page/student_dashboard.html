@@ -126,28 +126,59 @@
                 with instructors.</p>
             </div>
           </div>
+
           <div class="tab-pane fade" id="courses" role="tabpanel">
             <div class="form-box">
               <h4><i class="bi bi-book"></i> Courses</h4>
               <p>Here you will see your enrolled courses.</p>
             </div>
           </div>
+
           <div class="tab-pane fade" id="grades" role="tabpanel">
             <div class="form-box">
               <h4><i class="bi bi-award"></i> Grades</h4>
               <p>View your academic performance and results.</p>
             </div>
           </div>
+
           <div class="tab-pane fade" id="timetable" role="tabpanel">
             <div class="form-box">
               <h4><i class="bi bi-calendar2-week"></i> Timetable</h4>
               <p>Your weekly class schedule will be shown here.</p>
             </div>
           </div>
+
+          <!-- Teacher Dashboard: Messages Tab -->
           <div class="tab-pane fade" id="messages" role="tabpanel">
-            <div class="form-box">
-              <h4><i class="bi bi-envelope"></i> Messages</h4>
-              <p>Chat with teachers and classmates here.</p>
+            <!-- Alert container (needed for showAlert to work) -->
+            <div id="alert-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1055;"></div>
+            <div class="container py-4">
+              <div class="card shadow-sm border-0">
+                <div class="card-body">
+                  <h4 class="mb-2"><i class="fas fa-comments text-primary me-2"></i>Messages</h4>
+                  <p class="text-muted mb-4">Chat with Teachers in real-time.</p>
+                  <!-- Remove the inline script in the Messages tab -->
+                  {% if student.class %}
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold"> Select and then use it </label>
+                    <div class="d-flex flex-wrap gap-2">
+                      <button onclick="joinClass('{{ student.class.strip() }}')" class="btn btn-outline-primary btn-sm px-3">
+                        Class {{ student.class.strip() }} </button>
+                    </div>
+                  </div>
+                  {% else %}
+                  <p class="text-muted">No classes assigned. Please contact the administrator.</p>
+                  {% endif %}
+                  <div class="border rounded bg-light p-3 mb-3" style="height: 400px; overflow-y: auto;" id="chat-box">
+                    <p class="text-muted mb-0">Please select a class to start chatting.</p>
+                  </div>
+                  <div id="input-container" class="input-group d-none">
+                    <input type="text" id="message-input" class="form-control border-end-0"
+                      placeholder="Type your message..." onkeypress="if(event.key === 'Enter') sendMessage();">
+                    <button class="btn btn-primary" onclick="sendMessage()" id="send-button">Send</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -231,20 +262,189 @@
             </div> <!-- /.form-box -->
           </div> <!-- /.tab-pane -->
 
-
           <div class="tab-pane fade" id="settings" role="tabpanel">
+
             <div class="form-box">
               <h4><i class="bi bi-gear"></i> Settings</h4>
               <p>Customize your dashboard preferences.</p>
             </div>
+
           </div>
+
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Bootstrap Bundle with Popper -->
+  <!-- Bootstrap JS for tab functionality -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    // Initialize Socket.IO connection
+    const socket = io('/', {
+      reconnection: true,
+      reconnectionAttempts: 10,
+      reconnectionDelay: 1000,
+    });
+
+    const sender_id = "{{ student.user_id }}"; // Injected from Flask
+    const sender_role = "Student";
+    let current_class = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById("send-button").addEventListener("click", sendMessage);
+      const inputContainer = document.getElementById("input-container");
+      const chatBox = document.getElementById("chat-box");
+
+      if (!inputContainer || !chatBox) {
+        console.error("Chat elements not found in DOM");
+        return;
+      }
+
+      inputContainer.classList.add("d-none");
+      chatBox.innerHTML = '<p class="text-muted mb-0">Connecting to chat server...</p>';
+
+      socket.on("connect", () => {
+        console.log("Connected to chat server");
+        chatBox.innerHTML = '<p class="text-muted mb-0">Please select a class to start chatting.</p>';
+        showAlert("Connected to chat server!", "success", 3000);
+      });
+
+      socket.on("connect_error", (error) => {
+        console.error("Connection error:", error);
+        showAlert("Failed to connect to chat server. Retrying...", "danger", 5000);
+      });
+
+      socket.on("disconnect", () => {
+        showAlert("Disconnected from chat server. Attempting to reconnect...", "warning", 5000);
+      });
+
+      socket.on("error", (data) => {
+        showAlert(data.message || "An error occurred in the chat.", "danger", 5000);
+      });
+
+      const messageInput = document.getElementById('message-input');
+      const sendButton = document.getElementById('send-button');
+
+      if (messageInput && sendButton) {
+        messageInput.addEventListener('input', function () {
+          const message = this.value.trim();
+          sendButton.disabled = !message || !current_class;
+        });
+
+        sendButton.disabled = true;
+      }
+
+      if (sendButton) {
+        sendButton.addEventListener("click", sendMessage);
+      }
+    });
+
+    function joinClass(classId) {
+      current_class = classId;
+      const chatBox = document.getElementById("chat-box");
+      const inputContainer = document.getElementById("input-container");
+      const sendButton = document.getElementById('send-button');
+
+      if (!chatBox || !inputContainer || !sendButton) {
+        console.error("Chat elements not found");
+        showAlert("Chat interface error. Please refresh the page.", "danger", 5000);
+        return;
+      }
+
+      chatBox.innerHTML = '<p class="text-muted mb-0">Loading chat history...</p>';
+      inputContainer.classList.remove("d-none");
+      sendButton.disabled = !document.getElementById('message-input').value.trim();
+      socket.emit("join_class_room", { class_id: classId });
+
+      fetch(`/get_chats?class_id=${classId}`)
+        .then(response => {
+          if (!response.ok) throw new Error(`Failed to fetch chats: ${response.statusText}`);
+          return response.json();
+        })
+        .then(messages => {
+          chatBox.innerHTML = '';
+          messages.forEach(msg => {
+            appendMessage(msg.sender_role, msg.message, formatTime(msg.timestamp));
+          });
+        })
+        .catch(error => {
+          console.error("Error fetching messages:", error);
+          showAlert("Could not load chat history.", "danger", 5000);
+        });
+    }
+
+    function formatTime(ts) {
+      const date = new Date(ts);
+      return date.toUTCString().split(' ')[4];
+    }
+
+    function sendMessage() {
+      const input_msg = document.getElementById("message-input");
+      const message = input_msg.value.trim();
+
+      if (!message || !current_class) {
+        showAlert("Please enter a valid message and select a class.", "warning", 3000);
+        return;
+      }
+
+      if (message.length > 500) {
+        showAlert("Message is too long. Maximum 500 characters.", "warning", 3000);
+        return;
+      }
+
+      socket.emit("send_message", {
+        sender_id: sender_id,
+        sender_role: sender_role,
+        message: message,
+        class_id: current_class
+      });
+
+      input_msg.value = '';
+    }
+
+    socket.on("receive_message", (data) => {
+      if (data.class_id === current_class) {
+        appendMessage(data.sender_role, data.message, formatTime(data.timestamp));
+      }
+    });
+
+    function appendMessage(role, message, time) {
+      const box = document.getElementById("chat-box");
+      if (!box) return;
+
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `d-flex ${role === 'Student' ? 'justify-content-end' : 'justify-content-start'} mb-2`;
+
+      const messageDiv = document.createElement("div");
+      messageDiv.className = `p-2 px-3 rounded ${role === 'Student' ? 'bg-primary text-white' : 'bg-white border'}`;
+
+      const messageText = document.createElement("div");
+      messageText.textContent = message;
+
+      const timeText = document.createElement("small");
+      timeText.className = "text-muted d-block text-end";
+      timeText.style.fontSize = "0.75em";
+      timeText.textContent = time;
+
+      messageDiv.appendChild(messageText);
+      messageDiv.appendChild(timeText);
+      msgDiv.appendChild(messageDiv);
+      box.appendChild(msgDiv);
+
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function showAlert(message, type, duration) {
+      const alert = document.createElement("div");
+      alert.className = `alert alert-${type}`;
+      alert.textContent = message;
+      document.body.appendChild(alert);
+      setTimeout(() => alert.remove(), duration || 3000);
+    }
+  </script>
+
+
 </body>
 
 </html>
