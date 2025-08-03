@@ -60,7 +60,7 @@ def dashboard():
             return render_template("login_page/teacher_dashboard.html",user = user,teacher = teacher)
         if role == "Student":
             student = get_student_datas(user_id)
-            return render_template("login_page/student_dashboard.html",user = user)
+            return render_template("login_page/student_dashboard.html",user = user,student = student)
         else:
             return render_template("login_page/landing_page.html") 
     except Exception as e:

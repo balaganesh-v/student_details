@@ -1,231 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>StudentHub Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     body {
-      background-color: #f5f7fa;
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      overflow-x: hidden;
+      background-color: #f8f9fa;
     }
 
     .sidebar {
-      background: linear-gradient(180deg, #007bff 0%, #0056b3 100%);
+      width: 240px;
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px;
       min-height: 100vh;
-      color: white;
-      position: fixed;
-      width: 260px;
-      padding: 1rem 0.5rem;
-      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
     }
 
     .sidebar h4 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      text-align: center;
-    }
-
-    .sidebar p {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      text-align: center;
-      margin-bottom: 0.5rem;
+      color: #ffc107;
+      margin-bottom: 20px;
     }
 
     .sidebar .nav-link {
-      color: #e9ecef;
-      border-radius: 8px;
-      margin: 0.15rem 0;
-      padding: 0.4rem 0.75rem;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
+      color: #adb5bd;
+      margin-bottom: 10px;
     }
 
     .sidebar .nav-link.active,
     .sidebar .nav-link:hover {
-      background-color: #ffffff1a;
-      color: #ffffff;
-      transform: translateX(4px);
+      background-color: #495057;
+      color: #fff;
     }
 
-    .sidebar .nav-link i {
-      font-size: 1.1rem;
+    .sidebar .logout-btn {
+      color: #fff;
+      margin-top: 20px;
+      background-color: #dc3545;
+      padding: 8px 12px;
+      border-radius: 5px;
+      text-align: center;
+      display: inline-block;
     }
 
     .main-content {
-      margin-left: 260px;
-      padding: 1.5rem;
-      min-height: 100vh;
-      background-color: #f5f7fa;
+      flex-grow: 1;
+      padding: 20px;
     }
 
     .topbar {
-      background-color: #ffffff;
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid #e9ecef;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    .user-info {
-      background: linear-gradient(90deg, #17b857 0%, #20c950 100%);
-      color: white;
-      padding: 1rem;
-      border-radius: 12px;
-      margin-bottom: 1.5rem;
-    }
-
-    .user-info h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-    }
-
-    .user-info p {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      margin: 0;
+      margin-bottom: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     }
 
     .form-box {
-      background-color: #ffffff;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      margin-bottom: 1rem;
-    }
-
-    .tab-content h4 {
-      color: #2c3e50;
-      font-weight: 600;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 0.8rem;
-    }
-
-    .tab-content p {
-      color: #495057;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    .tab-pane {
-      opacity: 0;
-      transition: opacity 0.5s ease-in;
-    }
-
-    .tab-pane.show {
-      opacity: 1;
-    }
-
-    .settings-section {
-      margin-top: auto;
-      padding-top: 0.5rem;
-    }
-
-    .logout-btn {
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 0.6rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.95rem;
-      text-decoration: none;
-    }
-
-    .logout-btn:hover {
-      background-color: #c82333;
-      transform: translateX(4px);
-    }
-
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 80px;
-      }
-
-      .sidebar h4,
-      .sidebar p,
-      .sidebar .nav-link span,
-      .settings-section span {
-        display: none;
-      }
-
-      .main-content {
-        margin-left: 80px;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .main-content {
-        margin-left: 0;
-        padding: 1rem;
-      }
-
-      .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-        padding: 1rem;
-      }
-
-      .sidebar .nav {
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
-      }
-
-      .sidebar .nav-link {
-        margin: 0;
-        padding: 0.5rem;
-      }
-
-      .settings-section {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-      }
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
+
 <body>
   <div class="container-fluid p-0">
     <div class="row g-0">
       <!-- Sidebar -->
-      <div class="sidebar">
-        <h4>StudentHub</h4>
-        <p>Hello <strong>{{ user.user_name }}</strong></p>
-        <div class="nav flex-column nav-pills mb-auto">
-          <a class="nav-link active" data-bs-toggle="pill" data-bs-target="#student-dashboard" href="#"><i class="bi bi-house-door"></i> <span>Dashboard</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#courses" href="#"><i class="bi bi-book"></i> <span>Courses</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#grades" href="#"><i class="bi bi-award"></i> <span>Grades</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#timetable" href="#"><i class="bi bi-calendar2-week"></i> <span>Timetable</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#messages" href="#"><i class="bi bi-envelope"></i> <span>Messages</span></a>
-          <a class="nav-link" data-bs-toggle="pill" data-bs-target="#profile" href="#"><i class="bi bi-person-circle"></i> <span>Profile</span></a>
+      <div class="col-md-3 col-lg-2 sidebar d-flex flex-column bg-dark text-white p-3">
+        <!-- Brand and Greeting -->
+        <div class="text-center border-bottom border-secondary pb-3 mb-3">
+          <h4 class="fw-bold">StudentHub</h4>
+          <p class="mb-0">Hello <strong>{{ user.user_name }}</strong></p>
         </div>
-        <div class="settings-section">
-          <a class="logout-btn w-100" href="/logout"><i class="bi bi-box-arrow-right"></i> <span>Logout</span></a>
-          <a class="nav-link w-100" data-bs-toggle="pill" data-bs-target="#settings"><i class="bi bi-gear"></i> <span>Settings</span></a>
+
+        <!-- Nav Links -->
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link text-white active" id="dashboard-tab" data-bs-toggle="pill" href="#student-dashboard"  role="tab"><i class="bi bi-house-door me-2"></i> Dashboard </a>
+          <a class="nav-link text-white" id="courses-tab" data-bs-toggle="pill" href="#courses" role="tab"><i class="bi bi-book me-2"></i> Courses </a>
+          <a class="nav-link text-white" id="grades-tab" data-bs-toggle="pill" href="#grades" role="tab"><i class="bi bi-award me-2"></i> Grades </a>
+          <a class="nav-link text-white" id="timetable-tab" data-bs-toggle="pill" href="#timetable" role="tab"><i class="bi bi-calendar2-week me-2"></i> Timetable </a>
+          <a class="nav-link text-white" id="messages-tab" data-bs-toggle="pill" href="#messages" role="tab"><i class="bi bi-envelope me-2"></i> Messages </a>
+          <a class="nav-link text-white" id="profile-tab" data-bs-toggle="pill" href="#profile" role="tab"><i class="bi bi-person-circle me-2"></i> Profile </a>
+          <a class="nav-link text-white" id="settings-tab" data-bs-toggle="pill" href="#settings" role="tab"><i class="bi bi-gear me-2"></i> Settings </a>
+        </div>
+
+        <!-- Logout -->
+        <div class="mt-auto pt-3 border-top border-secondary">
+          <form action="/logout" method="POST" onsubmit="return confirm('Are you sure you want to logout?')">
+            <button type="submit" class="btn btn-danger w-100 logout-btn">
+              <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+            </button>
+          </form>
         </div>
       </div>
 
+
       <!-- Main Content -->
-      <div class="main-content">
+      <div class="col-md-9 col-lg-10 main-content">
         <div class="topbar">
           <div class="user-info">
             <h2>Welcome {{ user.user_name }}</h2>
@@ -233,19 +109,57 @@
           </div>
         </div>
 
-        <div class="tab-content">
+        <div class="tab-content" id="v-pills-tabContent">
           <div class="tab-pane fade show active" id="student-dashboard" role="tabpanel">
             <div class="form-box">
               <h4><i class="bi bi-house-door"></i> Dashboard</h4>
-              <p>Welcome to your StudentHub dashboard. Access courses, view grades, check timetable, and communicate with instructors.</p>
+              <p>Welcome to your StudentHub dashboard. Access courses, view grades, check timetable, and communicate
+                with instructors.</p>
             </div>
           </div>
-          <!-- Additional tab content like #courses, #grades, etc. -->
+          <div class="tab-pane fade" id="courses" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-book"></i> Courses</h4>
+              <p>Here you will see your enrolled courses.</p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="grades" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-award"></i> Grades</h4>
+              <p>View your academic performance and results.</p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="timetable" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-calendar2-week"></i> Timetable</h4>
+              <p>Your weekly class schedule will be shown here.</p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="messages" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-envelope"></i> Messages</h4>
+              <p>Chat with teachers and classmates here.</p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-person-circle"></i> Profile</h4>
+              <p>Manage your personal information and account settings.</p>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="settings" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-gear"></i> Settings</h4>
+              <p>Customize your dashboard preferences.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

@@ -34,3 +34,19 @@ def reset_password(token):
         reset_password_to_login(data, token)
         return redirect(url_for('landing.student_login_page'))
     return render_template('login_page/reset_password.html',token = token)
+
+@student_login_bp.route('/logout', methods=['POST'])
+def logout():
+    token = request.cookies.get('access_token')
+    print("Logging out token:", token)  # Optional for debug/logging
+
+    response = make_response(redirect('/'))  # Redirect to landing page
+    response.set_cookie(
+        key='access_token',
+        value='',
+        expires=0,                  # Expire immediately
+        httponly=True,
+        secure=True,
+        samesite='Lax'
+    )
+    return response
