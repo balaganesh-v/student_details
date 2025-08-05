@@ -224,6 +224,18 @@
       background-color: #f8f9fa;
       border-radius: 0.5rem;
     }
+    .form-box {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .table td, .table th {
+      vertical-align: middle;
+    }
+    .btn-outline-primary, .btn-outline-success {
+      min-width: 150px;
+    }
+
   </style>
 </head>
 
@@ -237,28 +249,36 @@
         </div>
         <div class="nav flex-column nav-pills p-2" id="sidebar-tabs" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="dashboard-tab" data-bs-toggle="pill" href="#dashboard" role="tab"
-            aria-controls="dashboard" aria-selected="true"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            aria-controls="dashboard" aria-selected="true"><i class="fas fa-home"></i> <span>Dashboard</span>
+          </a>
           <a class="nav-link" id="students-tab" data-bs-toggle="pill" href="#students" role="tab"
-            aria-controls="students" aria-selected="false"><i class="fas fa-users"></i> <span>Students</span></a>
+            aria-controls="students" aria-selected="false"><i class="fas fa-users"></i> <span>Students</span>
+          </a>
           <a class="nav-link" id="attendance-tab" data-bs-toggle="pill" href="#attendance" role="tab"
             aria-controls="attendance" aria-selected="false"><i
-              class="fas fa-calendar-check"></i><span>Attendance</span></a>
+              class="fas fa-calendar-check"></i><span>Attendance</span>
+          </a>
           <a class="nav-link" id="resources-tab" data-bs-toggle="pill" href="#resources" role="tab"
-            aria-controls="resources" aria-selected="false"><i class="fas fa-folder-open"></i><span>Resources</span></a>
+            aria-controls="resources" aria-selected="false"><i class="fas fa-folder-open"></i><span>Resources</span>
+          </a>
           <a class="nav-link" id="assignments-tab" data-bs-toggle="pill" href="#assignments" role="tab"
-            aria-controls="assignments" aria-selected="false"><i class="fas fa-book"></i> <span>Assignments</span></a>
+            aria-controls="assignments" aria-selected="false"><i class="fas fa-book"></i> <span>Assignments</span>
+          </a>
           <a class="nav-link" id="calendar-tab" data-bs-toggle="pill" href="#calendar" role="tab"
-            aria-controls="calendar" aria-selected="false"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></a>
+            aria-controls="calendar" aria-selected="false"><i class="fas fa-calendar-alt"></i> <span>Calendar</span>
+          </a>
           <a class="nav-link" id="analytics-tab" data-bs-toggle="pill" href="#analytics" role="tab"
-            aria-controls="analytics" aria-selected="false"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a>
+            aria-controls="analytics" aria-selected="false"><i class="fas fa-chart-bar"></i> <span>Analytics</span>
+          </a>
           <a class="nav-link" id="messages-tab" data-bs-toggle="pill" href="#messages" role="tab"
-            aria-controls="messages" aria-selected="false"><i class="fas fa-comments"></i> <span>Messages</span></a>
-          <a class="nav-link" id="resources-tab" data-bs-toggle="pill" href="#resources" role="tab"
-            aria-controls="resources" aria-selected="false"><i class="fas fa-folder-open"></i><span>Resources</span></a>
+            aria-controls="messages" aria-selected="false"><i class="fas fa-comments"></i> <span>Messages</span>
+          </a>
           <a class="nav-link" id="profile-tab" data-bs-toggle="pill" href="#profile" role="tab" aria-controls="profile"
-            aria-selected="false"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
+            aria-selected="false"><i class="fas fa-user-circle"></i> <span>Profile</span>
+          </a>
           <a class="nav-link" id="settings-tab" data-bs-toggle="pill" href="#settings" role="tab"
-            aria-controls="settings" aria-selected="false"><i class="fas fa-cog"></i> <span>Settings</span></a>
+            aria-controls="settings" aria-selected="false"><i class="fas fa-cog"></i> <span>Settings</span>
+          </a>
         </div>
         <div class="mt-auto p-2 border-top border-secondary">
           <form action="/logout" method="POST" onsubmit="return confirm('Are you sure you want to logout?')">
@@ -337,6 +357,116 @@
             </div>
           </div>
 
+          <!-- Tab Pane -->
+          <div class="tab-pane fade" id="resources" role="tabpanel">
+            <div class="container py-5">
+              <div class="form-box p-4">
+                <h4 class="mb-3"><i class="fas fa-folder-open me-2"></i>Resources</h4>
+                <p>Access and share teaching materials, lesson plans, and other resources.</p>
+
+                <div class="page-wrapper mt-5">
+                  <h2 class="text-center mb-4"><i class="bi bi-calendar2-week me-2"></i>Exam Schedule</h2>
+
+                  <form action="/publish_now" method="POST" id="publishForm">
+                    <!-- Basic Exam Info -->
+                    <div class="row g-3 mb-4">
+                      <div class="col-md-4">
+                        <label for="examName" class="form-label">
+                          <i class="bi bi-card-text me-2"></i>Exam Name
+                        </label>
+                        <input type="text" name="examName" id="examName" class="form-control"
+                          placeholder="Mid Term 2025" required>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="examCode" class="form-label">
+                          <i class="bi bi-upc-scan me-2"></i>Exam Code
+                        </label>
+                        <input type="text" name="examCode" id="examCode" class="form-control" placeholder="EXM2025"
+                          required>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="className" class="form-label">
+                          <i class="bi bi-people-fill me-2"></i>Class
+                        </label>
+                        <input type="text" name="className" id="className" class="form-control" placeholder="Class 10A"
+                          required>
+                      </div>
+                    </div>
+
+                    <!-- Exam Details Entry -->
+                    <div class="form-section mt-5">
+                      <h4 class="text-center mb-3"><i class="bi bi-book me-2"></i>Exam Details</h4>
+
+                      <div class="table-responsive mb-4">
+                        <table class="table table-bordered align-middle">
+                          <thead class="table-light">
+                            <tr>
+                              <th>Subject Name</th>
+                              <th>Exam Date</th>
+                              <th>Start Time</th>
+                              <th>End Time</th>
+                              <th>Marks</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>
+                                <select id="subjectsDropDown" onclick="loadSubjects()" class="form-select">
+                                  <option value="">Select Subject</option>
+                                  <!-- Populate dynamically -->
+                                </select>
+                              </td>
+                              <td>
+                                <input type="date" id="examDate" class="form-control">
+                              </td>
+                              <td>
+                                <input type="time" id="startTime" class="form-control" placeholder="08:30" pattern="[0-9]{2}:[0-9]{2}">>
+                              </td>
+                              <td>
+                                <input type="time" id="endTime" class="form-control" placeholder="09:00" pattern="[0-9]{2}:[0-9]{2}">>
+                              </td>
+                              <td>
+                                <input type="number" id="examMarks" class="form-control" placeholder="100" min="0"
+                                  max="100">
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <!-- Added Exam Rows Will Appear Here -->
+                        <table class="table table-bordered">
+                          <thead class="table-secondary">
+                            <tr>
+                              <th>Subject</th>
+                              <th>Date</th>
+                              <th>Start Time</th>
+                              <th>End Time</th>
+                              <th>Marks</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody id="exam-details-body">
+                            <!-- Dynamically inserted rows -->
+                          </tbody>
+                        </table>
+                      </div>
+
+                      <!-- Action Buttons -->
+                      <div class="text-center">
+                        <button type="button" class="btn btn-outline-primary me-3" id="addExamBtn">
+                          <i class="bi bi-plus-circle me-1"></i>Add
+                        </button>
+                        <button type="submit" class="btn btn-outline-success" id="publishBtn">
+                          <i class="bi bi-upload me-1"></i>Publish Now
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="tab-pane fade" id="assignments" role="tabpanel" aria-labelledby="assignments-tab">
             <div class="container py-8 px-6 bg-white rounded-xl shadow-md max-w-6xl mx-auto">
               <div class="flex items-center mb-8">
@@ -408,7 +538,6 @@
                   </div>
                 </form>
               </div>
-
               <div class="mt-8">
                 <h4 class="text-xl font-semibold text-gray-800 mb-4"><i class="fas fa-list mr-2"></i>Assignment List
                 </h4>
@@ -559,13 +688,6 @@
               </div>
             </div>
 
-
-            <div class="tab-pane fade" id="resources" role="tabpanel">
-              <div class="form-box">
-                <h4><i class="fas fa-folder-open"></i> Resources</h4>
-                <p>Access and share teaching materials, lesson plans, and other resources.</p>
-              </div>
-            </div>
 
             <div class="tab-pane fade" id="profile" role="tabpanel">
               <div class="form-box border rounded p-4 shadow-sm bg-white profile_page">
