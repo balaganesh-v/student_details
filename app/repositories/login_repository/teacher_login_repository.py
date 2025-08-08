@@ -215,3 +215,49 @@ def get_teacher_by_user_id_from_db(user_id):
     finally : 
         if connection:
             connection.close()
+
+
+def publish_details_into_db(exam_details, exam_name, exam_code, class_name):
+    try:
+        with db_connection() as connection:
+            with connection.cursor() as cursor:
+                # Check for duplicate exam_code
+                cursor.execute("SELECT 1 FROM exam_table WHERE exam_code = %s", (exam_code,))
+                if cursor.fetchone():
+                    print(f"Error: Exam code {exam_code} already exists")
+                    return False
+                
+                # Insert into exam_table
+                cursor.execute(
+                    """ 
+                    INSERT INTO exam_table 
+                    (exam_name, exam_code, class_name) 
+                    VALUES (%s, %s, %s) 
+                    """,
+                    (exam_name, exam_code, class_name)
+                )
+                # Insert into exam_subjects_table (fixed placeholder count)
+                query_subjects = """ 
+                    INSERT INTO exam_subjects_table 
+                    (exam_code, subject_name, exam_date, start_time, end_time, marks) 
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                """
+                subjects_data = [
+                    (
+                        exam_code,
+                        item["subject_name"],
+                        item["exam_date"],
+                        item["start_time"],
+                        item["end_time"],
+                        int(item["marks"]),  # Ensure marks is an integer
+                    )
+                    for item in exam_details
+                ]
+                cursor.executemany(query_subjects, subjects_data)
+                connection.commit()
+                return True
+    except Exception as e:
+        print(f"Error inserting exam details: {e}")
+        connection.rollback()
+        return False
+    

@@ -9,11 +9,12 @@ from app.repositories.login_repository.teacher_login_repository import (
     store_students_modified_attendance_data_into_db,
     update_teachers_profile_data_into_db,
     get_teacher_by_user_id_from_db,
-    get_all_subjects_from_db
+    get_all_subjects_from_db,
+    publish_details_into_db
 )
 from app.utils.token_utils import generate_token_with_code, decode_token
 from app.utils.email_utils import send_code_mail
-from flask import jsonify, json
+from flask import jsonify, json , request
 import random
 import os
 
@@ -163,7 +164,6 @@ def get_assignments_from_json_file():
     try:
         with open("app/data/assignments.json", "r") as file:
             assignments = json.load(file)
-            print(assignments)
             return assignments
     except Exception as e:
         print(f"Error Getting to JSON: {e}")
@@ -202,3 +202,20 @@ def update_changes_in_assignment(index,updated_data):
     except Exception as e:
         print(f"Error in Update the changes in the assignments JSON: {e}")
         return False, str(e)
+
+def publish_details():
+    try:
+        exam_name, exam_code, class_name, exam_details = get_exam_details()
+        return publish_details_into_db(exam_details, exam_name, exam_code, class_name)
+    except Exception as e:
+        print(f"Error in publish_details: {e}")
+        return False
+
+def get_exam_details():
+    data = request.get_json() 
+    print(data)
+    exam_name = data.get("exam_name")
+    exam_code = data.get("exam_code")
+    class_name = data.get("class_name")
+    exam_details = data.get("exam_details", [])
+    return exam_name, exam_code, class_name, exam_details

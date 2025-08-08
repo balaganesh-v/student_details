@@ -14,7 +14,8 @@ from app.services.login_service.teacher_login_service import (
     get_assignments_from_json_file,
     delete_selected_assignment_by_index_in_json_file,
     update_changes_in_assignment,
-    get_all_subjects
+    get_all_subjects,
+    publish_details
 )
 import datetime
 
@@ -218,3 +219,13 @@ def logout():
     return response
 
 
+@teacher_login_bp.route("/subjects")
+def subjects():
+    return jsonify(get_all_subjects())
+
+@teacher_login_bp.route("/publish_now", methods=['POST'])
+def publish_now():
+    success = publish_details()
+    if not success:
+        return jsonify({"error": "Failed to publish exam schedule"}), 500
+    return jsonify({"status": "success", "redirect": url_for("admin.dashboard")}), 200

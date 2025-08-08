@@ -224,18 +224,22 @@
       background-color: #f8f9fa;
       border-radius: 0.5rem;
     }
+
     .form-box {
       background-color: #fff;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-    }
-    .table td, .table th {
-      vertical-align: middle;
-    }
-    .btn-outline-primary, .btn-outline-success {
-      min-width: 150px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     }
 
+    .table td,
+    .table th {
+      vertical-align: middle;
+    }
+
+    .btn-outline-primary,
+    .btn-outline-success {
+      min-width: 150px;
+    }
   </style>
 </head>
 
@@ -245,49 +249,39 @@
       <div class="sidebar col-auto bg-dark text-white">
         <div class="p-3 text-center border-bottom border-secondary">
           <h4 class="fw-bold mb-0 brand-text">TeacherHub</h4>
-          <div class="text-muted fw-bold mb-0 brand-text">Welcome <strong>{{ teacher.user_name }}</strong></div>
+          <div class="text-muted fw-bold mb-0 brand-text">Welcome <strong>{{ user.user_name }}</strong></div>
         </div>
         <div class="nav flex-column nav-pills p-2" id="sidebar-tabs" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="dashboard-tab" data-bs-toggle="pill" href="#dashboard" role="tab"
-            aria-controls="dashboard" aria-selected="true"><i class="fas fa-home"></i> <span>Dashboard</span>
-          </a>
+            aria-controls="dashboard" aria-selected="true"><i class="fas fa-home"></i> <span>Dashboard</span></a>
           <a class="nav-link" id="students-tab" data-bs-toggle="pill" href="#students" role="tab"
-            aria-controls="students" aria-selected="false"><i class="fas fa-users"></i> <span>Students</span>
-          </a>
+            aria-controls="students" aria-selected="false"><i class="fas fa-users"></i> <span>Students</span></a>
           <a class="nav-link" id="attendance-tab" data-bs-toggle="pill" href="#attendance" role="tab"
             aria-controls="attendance" aria-selected="false"><i
-              class="fas fa-calendar-check"></i><span>Attendance</span>
-          </a>
+              class="fas fa-calendar-check"></i><span>Attendance</span></a>
           <a class="nav-link" id="resources-tab" data-bs-toggle="pill" href="#resources" role="tab"
-            aria-controls="resources" aria-selected="false"><i class="fas fa-folder-open"></i><span>Resources</span>
-          </a>
+            aria-controls="resources" aria-selected="false"><i class="fas fa-folder-open"></i><span>Resources</span></a>
           <a class="nav-link" id="assignments-tab" data-bs-toggle="pill" href="#assignments" role="tab"
-            aria-controls="assignments" aria-selected="false"><i class="fas fa-book"></i> <span>Assignments</span>
-          </a>
+            aria-controls="assignments" aria-selected="false"><i class="fas fa-book"></i> <span>Assignments</span></a>
           <a class="nav-link" id="calendar-tab" data-bs-toggle="pill" href="#calendar" role="tab"
-            aria-controls="calendar" aria-selected="false"><i class="fas fa-calendar-alt"></i> <span>Calendar</span>
-          </a>
+            aria-controls="calendar" aria-selected="false"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></a>
           <a class="nav-link" id="analytics-tab" data-bs-toggle="pill" href="#analytics" role="tab"
-            aria-controls="analytics" aria-selected="false"><i class="fas fa-chart-bar"></i> <span>Analytics</span>
-          </a>
+            aria-controls="analytics" aria-selected="false"><i class="fas fa-chart-bar"></i> <span>Analytics</span></a>
           <a class="nav-link" id="messages-tab" data-bs-toggle="pill" href="#messages" role="tab"
-            aria-controls="messages" aria-selected="false"><i class="fas fa-comments"></i> <span>Messages</span>
-          </a>
+            aria-controls="messages" aria-selected="false"><i class="fas fa-comments"></i> <span>Messages</span></a>
           <a class="nav-link" id="profile-tab" data-bs-toggle="pill" href="#profile" role="tab" aria-controls="profile"
-            aria-selected="false"><i class="fas fa-user-circle"></i> <span>Profile</span>
-          </a>
+            aria-selected="false"><i class="fas fa-user-circle"></i> <span>Profile</span></a>
           <a class="nav-link" id="settings-tab" data-bs-toggle="pill" href="#settings" role="tab"
-            aria-controls="settings" aria-selected="false"><i class="fas fa-cog"></i> <span>Settings</span>
-          </a>
+            aria-controls="settings" aria-selected="false"><i class="fas fa-cog"></i> <span>Settings</span></a>
         </div>
         <div class="mt-auto p-2 border-top border-secondary">
           <form action="/logout" method="POST" onsubmit="return confirm('Are you sure you want to logout?')">
-            <button type="submit" class="btn btn-danger w-100 logout-btn">
-              <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
-            </button>
+            <button type="submit" class="btn btn-danger w-100 logout-btn"><i class="fas fa-sign-out-alt"></i>
+              <span>Logout</span></button>
           </form>
         </div>
       </div>
+
       <div class="main-content col">
 
         <div class="topbar">
@@ -357,47 +351,39 @@
             </div>
           </div>
 
-          <!-- Tab Pane -->
           <div class="tab-pane fade" id="resources" role="tabpanel">
             <div class="container py-5">
               <div class="form-box p-4">
                 <h4 class="mb-3"><i class="fas fa-folder-open me-2"></i>Resources</h4>
                 <p>Access and share teaching materials, lesson plans, and other resources.</p>
-
                 <div class="page-wrapper mt-5">
-                  <h2 class="text-center mb-4"><i class="bi bi-calendar2-week me-2"></i>Exam Schedule</h2>
-
+                  <h2 class="text-center mb-4"><i class="fas fa-calendar2-week me-2"></i>Exam Schedule</h2>
                   <form action="/publish_now" method="POST" id="publishForm">
-                    <!-- Basic Exam Info -->
-                    <div class="row g-3 mb-4">
-                      <div class="col-md-4">
-                        <label for="examName" class="form-label">
-                          <i class="bi bi-card-text me-2"></i>Exam Name
-                        </label>
-                        <input type="text" name="examName" id="examName" class="form-control"
-                          placeholder="Mid Term 2025" required>
+                    <div class="form-section mb-5">
+
+                      <h4 class="text-center mb-3"><i class="fas fa-pencil-square me-2"></i>Basic Exam Information</h4>
+                      <div class="mb-3">
+                        <label for="examName" class="form-label"><i class="fas fa-card-text me-2"></i>Exam Name</label>
+                        <input type="text" name="examName" id="examName" class="form-control" required>
                       </div>
-                      <div class="col-md-4">
-                        <label for="examCode" class="form-label">
-                          <i class="bi bi-upc-scan me-2"></i>Exam Code
-                        </label>
-                        <input type="text" name="examCode" id="examCode" class="form-control" placeholder="EXM2025"
-                          required>
+                      <div class="mb-3">
+                        <label for="examCode" class="form-label"><i class="fas fa-upc-scan me-2"></i>Exam Code</label>
+                        <input type="text" name="examCode" id="examCode" class="form-control" required>
                       </div>
-                      <div class="col-md-4">
-                        <label for="className" class="form-label">
-                          <i class="bi bi-people-fill me-2"></i>Class
-                        </label>
-                        <input type="text" name="className" id="className" class="form-control" placeholder="Class 10A"
-                          required>
+                      <div class="mb-3">
+                        <label for="className" class="form-label"><i class="fas fa-people-fill me-2"></i>Class</label>
+                        <select name="className" id="className" class="form-control" required>
+                          {% for class_name in teacher.class_ids.split(',') %}
+                          <option value="{{ class_name.strip() }}">Class {{ class_name.strip() }}</option>
+                          {% endfor %}
+                        </select>
                       </div>
+
                     </div>
-
-                    <!-- Exam Details Entry -->
-                    <div class="form-section mt-5">
-                      <h4 class="text-center mb-3"><i class="bi bi-book me-2"></i>Exam Details</h4>
-
+                    <div class="form-section mt-4">
+                      <h4 class="text-center mb-3"><i class="fas fa-book me-2"></i>Exam Details</h4>
                       <div class="table-responsive mb-4">
+
                         <table class="table table-bordered align-middle">
                           <thead class="table-light">
                             <tr>
@@ -411,29 +397,26 @@
                           <tbody>
                             <tr>
                               <td>
-                                <select id="subjectsDropDown" onclick="loadSubjects()" class="form-select">
+                                <select id="edit-allSubjectsDropDown" class="form-control" required>
                                   <option value="">Select Subject</option>
-                                  <!-- Populate dynamically -->
                                 </select>
                               </td>
                               <td>
-                                <input type="date" id="examDate" class="form-control">
+                                <input type="date" id="examDate" class="form-control" required>
                               </td>
                               <td>
-                                <input type="time" id="startTime" class="form-control" placeholder="08:30" pattern="[0-9]{2}:[0-9]{2}">>
+                                <input type="time" id="startTime" class="form-control" required>
                               </td>
                               <td>
-                                <input type="time" id="endTime" class="form-control" placeholder="09:00" pattern="[0-9]{2}:[0-9]{2}">>
+                                <input type="time" id="endTime" class="form-control" required>
                               </td>
                               <td>
                                 <input type="number" id="examMarks" class="form-control" placeholder="100" min="0"
-                                  max="100">
+                                  max="100" required>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-
-                        <!-- Added Exam Rows Will Appear Here -->
                         <table class="table table-bordered">
                           <thead class="table-secondary">
                             <tr>
@@ -446,20 +429,20 @@
                             </tr>
                           </thead>
                           <tbody id="exam-details-body">
-                            <!-- Dynamically inserted rows -->
                           </tbody>
                         </table>
+
                       </div>
 
-                      <!-- Action Buttons -->
                       <div class="text-center">
                         <button type="button" class="btn btn-outline-primary me-3" id="addExamBtn">
-                          <i class="bi bi-plus-circle me-1"></i>Add
+                          <i class="fas fa-plus-circle me-1"></i>Add
                         </button>
                         <button type="submit" class="btn btn-outline-success" id="publishBtn">
-                          <i class="bi bi-upload me-1"></i>Publish Now
+                          <i class="fas fa-upload me-1"></i>Publish Now
                         </button>
                       </div>
+
                     </div>
                   </form>
                 </div>
@@ -489,11 +472,10 @@
                       <label for="subjectsDropDown" class="block text-sm font-medium text-gray-700 mb-2">
                         <i class="fas fa-book-open mr-2"></i>Subject
                       </label>
-                      <select id="subjectsDropDown" onclick="loadSubjects()"
+                      <select id="subjectsDropDown"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
                         required>
                         <option value="">Select Subject</option>
-                        <!-- Options will be loaded by JS -->
                       </select>
                     </div>
                     <div>
@@ -560,7 +542,6 @@
                 </div>
               </div>
             </div>
-
             <div class="modal fade" id="editModal" tabindex="-1">
               <div class="modal-dialog">
                 <div class="modal-content rounded-lg">
@@ -578,21 +559,20 @@
                         placeholder="Enter title" required>
                     </div>
                     <div>
-                      <label for="subjectsDropDown" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="edit-subjectsDropDown" class="block text-sm font-medium text-gray-700 mb-2">
                         <i class="fas fa-book-open mr-2"></i>Subject
                       </label>
-                      <select id="subjectsDropDown" onclick="loadSubjects()"
+                      <select id="edit-subjectsDropDown"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
                         required>
                         <option value="">Select Subject</option>
-                        <!-- Options will be loaded by JS -->
                       </select>
                     </div>
                     <div>
-                      <label for="class" class="block text-sm font-medium text-gray-700 mb-2">
+                      <label for="edit-class" class="block text-sm font-medium text-gray-700 mb-2">
                         <i class="fas fa-school mr-2"></i>Class
                       </label>
-                      <select id="class"
+                      <select id="edit-class"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
                         required>
                         {% for class_name in teacher.class_ids.split(',') %}
@@ -653,16 +633,13 @@
             </div>
           </div>
 
-          <!-- Teacher Dashboard: Messages Tab -->
           <div class="tab-pane fade" id="messages" role="tabpanel">
-            <!-- Alert container (needed for showAlert to work) -->
             <div id="alert-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1055;"></div>
             <div class="container py-4">
               <div class="card shadow-sm border-0">
                 <div class="card-body">
                   <h4 class="mb-2"><i class="fas fa-comments text-primary me-2"></i>Messages</h4>
                   <p class="text-muted mb-4">Chat with students from each class in real-time.</p>
-                  <!-- Remove the inline script in the Messages tab -->
                   {% if teacher.class_ids %}
                   <div class="mb-3">
                     <label class="form-label fw-semibold">Choose a Class</label>
@@ -679,7 +656,7 @@
                   <div class="border rounded bg-light p-3 mb-3" style="height: 400px; overflow-y: auto;" id="chat-box">
                     <p class="text-muted mb-0">Please select a class to start chatting.</p>
                   </div>
-                  <div id="input-container" class="input-group d-none">
+                  <div id="input-container" class="input-group">
                     <input type="text" id="message-input" class="form-control border-end-0"
                       placeholder="Type your message..." onkeypress="if(event.key === 'Enter') sendMessage();">
                     <button class="btn btn-primary" onclick="sendMessage()" id="send-button">Send</button>
@@ -687,773 +664,89 @@
                 </div>
               </div>
             </div>
+          </div>
 
-
-            <div class="tab-pane fade" id="profile" role="tabpanel">
-              <div class="form-box border rounded p-4 shadow-sm bg-white profile_page">
-                <h4 class="mb-3 text-primary"><i class="fas fa-user"></i> Teacher Profile</h4>
-                <p class="text-muted mb-4">Below are your profile details.</p>
-                <div class="row g-4">
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Name</label>
-                    <div class="form-control bg-light">{{ teacher.user_name }}</div>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Qualification</label>
-                    <div class="form-control bg-light">{{ teacher.qualification }}</div>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Gender</label>
-                    <div class="form-control bg-light">{{ teacher.gender }}</div>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Age</label>
-                    <div class="form-control bg-light">{{ teacher.age }}</div>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Experiences</label>
-                    <div class="form-control bg-light">{{ teacher.year_of_experience }} years</div>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Subject Specialization</label>
-                    <div class="form-control bg-light">{{ teacher.subject_specialization }}</div>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Classes Taken</label>
-                    <div class="form-control bg-light" style="min-height: 70px;">{{ teacher.class_ids }}</div>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Salary Package</label>
-                    <div class="form-control bg-light" style="min-height: 70px;">₹ {{ teacher.salary_package }}</div>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Account ID</label>
-                    <div class="form-control bg-light">{{ teacher.account_id }}</div>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label fw-semibold">Address</label>
-                    <div class="form-control bg-light" style="min-height: 70px;">{{ teacher.address }}</div>
+          <div class="tab-pane fade" id="profile" role="tabpanel">
+            <div class="form-box border rounded p-4 shadow-sm bg-white">
+              <h4 class="mb-3 text-primary"><i class="fas fa-user"></i> Teacher Profile</h4>
+              <p class="text-muted mb-4">Below are your profile details.</p>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Name</label>
+                  <div class="form-control bg-light">{{ teacher.user_name|default('N/A') }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Qualification</label>
+                  <div class="form-control bg-light">{{ teacher.qualification|default('N/A') }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Gender</label>
+                  <div class="form-control bg-light">{{ teacher.gender|default('N/A') }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Age</label>
+                  <div class="form-control bg-light">{{ teacher.age|default('N/A') }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Experiences</label>
+                  <div class="form-control bg-light">{{ teacher.year_of_experience|default('N/A') }} years</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Subject Specialization</label>
+                  <div class="form-control bg-light">{{ teacher.subject_specialization|default('N/A') }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Classes Taken</label>
+                  <div class="form-control bg-light" style="min-height: 70px;">{{ teacher.class_ids|default('N/A') }}
                   </div>
                 </div>
-                <div class="mt-4 text-end">
-                  <button class="btn btn-primary px-4 edit-btn" data-user-id="{{ teacher.user_id }}">Edit
-                    Profile</button>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Salary Package</label>
+                  <div class="form-control bg-light" style="min-height: 70px;">₹ {{
+                    teacher.salary_package|default('N/A') }}</div>
                 </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Account ID</label>
+                  <div class="form-control bg-light">{{ teacher.account_id|default('N/A') }}</div>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">Address</label>
+                  <div class="form-control bg-light" style="min-height: 70px;">{{ teacher.address|default('N/A') }}
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4 text-end">
+                <button class="btn btn-primary px-4 edit-btn" data-user-id="{{ teacher.user_id|default('') }}">Edit
+                  Profile</button>
               </div>
             </div>
-            <div class="tab-pane fade" id="settings" role="tabpanel">
-              <div class="form-box">
-                <h4><i class="fas fa-cog"></i> Settings</h4>
-                <p>Adjust your dashboard settings and preferences.</p>
-              </div>
+          </div>
+
+          <div class="tab-pane fade" id="settings" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="fas fa-cog"></i> Settings</h4>
+              <p>Adjust your dashboard settings and preferences.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="modal fade" id="studentDetailModal" tabindex="-1" aria-labelledby="studentDetailModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="studentDetailModalLabel">Student Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" id="student-detail-body"></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
-    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
-    <!-- v4 (Good with latest Flask-SocketIO) -->
     <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
-
     <script>
 
-      // Initialize Socket.IO connection
-      const socket = io('/', {
-        reconnection: true,
-        reconnectionAttempts: 5,
-        reconnectionDelay: 1000,
-      });
-
-      const sender_id = "{{ teacher.user_id }}"; // Injected from Flask
-      const sender_role = "Teacher";
-      const sender_name = "{{ teacher.user_name }}"; // e.g., "Mr. John"
-      let current_class = null;
-
-      // Wait for DOM to be fully loaded before manipulating elements
-      document.addEventListener('DOMContentLoaded', () => {
-        const sendButton = document.getElementById("send-button");
-        const inputContainer = document.getElementById("input-container");
-        const chatBox = document.getElementById("chat-box");
-
-        if (!inputContainer || !chatBox || !sendButton) {
-          console.error("Chat elements not found in DOM");
-          showAlert("Chat interface error. Please refresh the page.", "danger", 5000);
-          return;
-        }
-
-        sendButton.addEventListener("click", sendMessage);
-        inputContainer.classList.add("d-none");
-        chatBox.innerHTML = '<p class="text-muted mb-0">Connecting to chat server...</p>';
-
-        socket.on("connect", () => {
-          console.log("Connected to chat server");
-          chatBox.innerHTML = '<p class="text-muted mb-0">Please select a class to start chatting.</p>';
-          showAlert("Connected to chat server!", "success", 3000);
-        });
-
-        socket.on("connect_error", (error) => {
-          console.error("Connection error:", error);
-          showAlert("Failed to connect to chat server. Retrying...", "danger", 5000);
-        });
-
-        socket.on("disconnect", () => {
-          showAlert("Disconnected from chat server. Attempting to reconnect...", "warning", 5000);
-        });
-
-        socket.on("error", (data) => {
-          showAlert(data.message || "An error occurred in the chat.", "danger", 5000);
-        });
-
-        const messageInput = document.getElementById('message-input');
-        if (messageInput && sendButton) {
-          messageInput.addEventListener('input', function () {
-            const message = this.value.trim();
-            sendButton.disabled = !message || !current_class;
-          });
-
-          sendButton.disabled = true;
-        }
-      });
-
-      // Join class and fetch chat history
-      function joinClass(classId) {
-        current_class = classId;
-        const chatBox = document.getElementById("chat-box");
-        const inputContainer = document.getElementById("input-container");
-        const sendButton = document.getElementById('send-button');
-
-        if (!chatBox || !inputContainer || !sendButton) {
-          console.error("Chat elements not found");
-          showAlert("Chat interface error. Please refresh the page.", "danger", 5000);
-          return;
-        }
-
-        chatBox.innerHTML = '<p class="text-muted mb-0">Loading chat history...</p>';
-        inputContainer.classList.remove("d-none");
-        sendButton.disabled = !document.getElementById('message-input').value.trim();
-        socket.emit("join_class_room", { class_id: classId });
-
-        fetch(`/get_chats?class_id=${classId}`)
-          .then(response => {
-            if (!response.ok) throw new Error(`Failed to fetch chats: ${response.statusText}`);
-            return response.json();
-          })
-          .then(messages => {
-            console.log("Fetched messages:", messages);
-            chatBox.innerHTML = '';
-            messages.forEach(msg => {
-              appendMessage(msg.sender_name, msg.message, msg.timestamp, msg.sender_role);
-            });
-          })
-          .catch(error => {
-            console.error("Error fetching messages:", error);
-            showAlert("Could not load chat history.", "danger", 5000);
-          });
-      }
-
-      function sendMessage() {
-        const input_msg = document.getElementById("message-input");
-        const message = input_msg.value.trim();
-
-        if (!message || !current_class) {
-          showAlert("Please enter a valid message and select a class.", "warning", 3000);
-          return;
-        }
-
-        if (message.length > 500) {
-          showAlert("Message is too long. Maximum 500 characters.", "warning", 3000);
-          return;
-        }
-
-        socket.emit("send_message", {
-          sender_id: sender_id,
-          sender_role: sender_role,
-          sender_name: sender_name,
-          message: message,
-          class_id: current_class
-        });
-
-        input_msg.value = '';
-      }
-
-      socket.on("receive_message", (data) => {
-        console.log("Received message data:", data);
-        if (data.class_id === current_class) {
-          appendMessage(data.sender_name, data.message, data.timestamp, data.sender_role);
-        }
-      });
-
-      function appendMessage(senderName, message, timestamp, senderRole) {
-        console.log("appendMessage called with:", { senderName, message, timestamp, senderRole });
-        const box = document.getElementById("chat-box");
-        if (!box) {
-          console.error("Chat box element not found");
-          return;
-        }
-
-        senderName = senderName || 'Unknown';
-        message = message || '';
-
-        let time = '';
-        try {
-          if (!timestamp || typeof timestamp !== 'string') {
-            console.warn("Timestamp missing or invalid, using current IST time");
-            const now = new Date();
-            const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
-            const istTime = new Date(now.getTime() + istOffset);
-            const hours = istTime.getUTCHours();
-            const minutes = istTime.getUTCMinutes();
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            const formattedHours = ((hours + 11) % 12 + 1).toString().padStart(2, '0');
-            const formattedMinutes = minutes.toString().padStart(2, '0');
-            time = `${formattedHours}:${formattedMinutes} ${ampm}`;
-          } else {
-            // Parse UTC timestamp and convert to IST
-            const dateObj = new Date(timestamp.replace(' ', 'T') + 'Z');
-            if (isNaN(dateObj.getTime())) {
-              throw new Error("Invalid date format");
-            }
-            const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30
-            const istTime = new Date(dateObj.getTime() + istOffset);
-            const hours = istTime.getUTCHours();
-            const minutes = istTime.getUTCMinutes();
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            const formattedHours = ((hours + 11) % 12 + 1).toString().padStart(2, '0');
-            const formattedMinutes = minutes.toString().padStart(2, '0');
-            time = `${formattedHours}:${formattedMinutes} ${ampm}`;
-          }
-        } catch (e) {
-          console.error("Error parsing timestamp:", e.message, "Original timestamp:", timestamp, "Full arguments:", { senderName, message, timestamp, senderRole });
-          const now = new Date();
-          const istOffset = 5.5 * 60 * 60 * 1000;
-          const istTime = new Date(now.getTime() + istOffset);
-          const hours = istTime.getUTCHours();
-          const minutes = istTime.getUTCMinutes();
-          const ampm = hours >= 12 ? 'PM' : 'AM';
-          const formattedHours = ((hours + 11) % 12 + 1).toString().padStart(2, '0');
-          const formattedMinutes = minutes.toString().padStart(2, '0');
-          time = `${formattedHours}:${formattedMinutes} ${ampm}`;
-        }
-
-        const msgWrapper = document.createElement("div");
-        msgWrapper.className = `mb-3 d-flex ${senderRole === 'Teacher' ? 'justify-content-end' : 'justify-content-start'}`;
-
-        const contentCol = document.createElement("div");
-        contentCol.className = "d-flex flex-column align-items-start";
-        contentCol.style.maxWidth = "70%";
-
-        const nameText = document.createElement("div");
-        nameText.textContent = senderName;
-        nameText.className = "text-muted mb-1 fw-semibold";
-        nameText.style.fontSize = "0.75rem";
-
-        const messageDiv = document.createElement("div");
-        messageDiv.className = `rounded-4 px-3 py-2 shadow-sm ${senderRole === 'Teacher' ? 'bg-primary text-white align-self-end' : 'bg-light text-dark'}`;
-        messageDiv.style.wordBreak = "break-word";
-        messageDiv.style.fontSize = "1rem";
-        messageDiv.style.lineHeight = "1.4";
-        messageDiv.style.width = "auto";
-        messageDiv.style.maxWidth = "100%";
-
-        const messageText = document.createElement("div");
-        messageText.textContent = message;
-        messageText.className = "mb-1";
-
-        const timeText = document.createElement("div");
-        timeText.textContent = time;
-        timeText.className = "text-end";
-        timeText.style.fontSize = "0.7rem";
-        timeText.style.opacity = "0.7";
-
-        messageDiv.appendChild(messageText);
-        messageDiv.appendChild(timeText);
-        contentCol.appendChild(nameText);
-        contentCol.appendChild(messageDiv);
-        msgWrapper.appendChild(contentCol);
-        box.appendChild(msgWrapper);
-
-        box.scrollTop = box.scrollHeight;
-      }
-
-      function showAlert(message, type = 'danger', duration = 3000) {
-        const container = document.getElementById('alert-container');
-        if (!container) {
-          console.error("Alert container not found");
-          return;
-        }
-
-        const alertDiv = document.createElement('div');
-        alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
-        alertDiv.role = 'alert';
-        alertDiv.innerHTML = `
-      ${message}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    `;
-        container.appendChild(alertDiv);
-        alertDiv.scrollIntoView({ behavior: 'smooth' });
-
-        setTimeout(() => {
-          alertDiv.classList.remove('show');
-          alertDiv.classList.add('fade');
-          setTimeout(() => alertDiv.remove(), 150);
-        }, duration);
-      }
-
-
-
-
-
-
-
-
-
-      // ------------------Subjects DropDown-------------------------
-      function loadSubjects() {
-        fetch('/subjects')
-          .then(response => response.json())
-          .then(data => {
-            const dropdown = document.getElementById('subjectsDropDown');
-            dropdown.innerHTML = '<option value="">Select Subject</option>'; // Reset first
-
-            data.forEach(subject => {
-              const option = document.createElement('option');
-              option.value = subject.subject_name;
-              option.textContent = subject.subject_name;
-              dropdown.appendChild(option);
-            });
-          })
-          .catch(error => console.error('Error loading subjects:', error));
-      }
-
-
-
-      // Utility function for displaying alerts
-      function showAlert(container, message, type = 'danger') {
-        const alertDiv = document.createElement('div');
-        alertDiv.className = `alert alert-${type} mt-3`;
-        alertDiv.innerHTML = message;
-        container.appendChild(alertDiv);
-        alertDiv.scrollIntoView({ behavior: 'smooth' });
-        setTimeout(() => alertDiv.remove(), 3000);
-      }
-
-      // Fetch and display student list for a class
-      function view_students_list(class_name) {
-        fetch(`/get_student_datas/${class_name}`)
-          .then(response => {
-            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
-            return response.json();
-          })
-          .then(data => {
-            const container = document.getElementById('student-list-container');
-            container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
-            if (!data || data.length === 0) {
-              container.innerHTML += `<p>No students found for Class ${class_name}.</p>`;
-              return;
-            }
-            let content = `<div class="list-group">`;
-            data.forEach(student => {
-              content += `
-              <div class="d-flex justify-content-between align-items-center border p-2 mb-2 rounded">
-                <div>
-                  <strong>${student.student_name}</strong><br>
-                  <small>Class: ${student.class}</small>
-                </div>
-                <button class="btn btn-sm btn-outline-info" onclick="view_student_detail('${student.user_id}')">
-                  View Details
-                </button>
-              </div>`;
-            });
-            content += `</div>`;
-            container.innerHTML += content;
-          })
-          .catch(error => {
-            console.error("Error fetching student data:", error);
-            showAlert(document.getElementById('student-list-container'), `Error fetching students for ${class_name}.`);
-          });
-      }
-
-      // Fetch and display attendance list for a class
-      function view_students_attendance_list(class_name) {
-        fetch(`/get_students_with_attendance/${class_name}`)
-          .then(response => {
-            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
-            return response.json();
-          })
-          .then(data => {
-            const container = document.getElementById('student-attendance-list-container');
-            if (!data || data.length === 0) {
-              container.innerHTML = `<div class="alert alert-warning">No students found for Class <strong>${class_name}</strong>.</div>`;
-              return;
-            }
-            container.innerHTML = `
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <h3 class="text-primary">📋 Students Attendance - ${class_name}</h3>
-              <div>
-                <input type="date" id="attendance-date" class="form-control d-inline-block me-2" style="width: auto;" required max="${new Date().toISOString().split('T')[0]}">
-                <button class="btn btn-outline-secondary btn-sm" onclick="view_students_attendance_list('${class_name}')">Refresh</button>
-              </div>
-            </div>`;
-            let content = `
-            <form id="attendance-form" class="needs-validation" novalidate>
-              <div class="table-responsive">
-                <table class="table table-hover table-bordered align-middle">
-                  <thead class="table-light">
-                    <tr>
-                      <th scope="col">S.No</th>
-                      <th scope="col">Student Name</th>
-                      <th scope="col" class="text-center">Attendance</th>
-                    </tr>
-                  </thead>
-                  <tbody>`;
-            data.forEach((student, index) => {
-              const status = student.attendance_status;
-              const checkedPresent = status === 'Present' ? 'checked' : '';
-              const checkedAbsent = status === 'Absent' ? 'checked' : '';
-              const disabled = status ? 'disabled' : '';
-              const rowClass = status ? 'table-secondary' : '';
-              content += `
-              <tr class="${rowClass}">
-                <td>${index + 1}</td>
-                <td>${student.student_name}</td>
-                <td class="text-center">
-                  <div class="btn-group" role="group" aria-label="Attendance Status">
-                    <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${checkedPresent} ${disabled} required>
-                    <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
-                    <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${checkedAbsent} ${disabled} required>
-                    <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
-                  </div>
-                </td>
-              </tr>`;
-            });
-            content += `
-                </tbody>
-              </table>
-            </div>
-            <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
-            </div>
-          </form>`;
-            container.innerHTML += content;
-
-            document.getElementById("attendance-form").addEventListener("submit", function (e) {
-              e.preventDefault();
-              const selectedDate = document.getElementById('attendance-date').value;
-              if (!selectedDate) {
-                showAlert(container, 'Please select a date for attendance.', 'warning');
-                return;
-              }
-              const formData = new FormData(this);
-              const attendanceData = data
-                .filter(student => !student.attendance_status)
-                .map(student => ({
-                  user_id: student.user_id,
-                  user_name: student.student_name,
-                  status: formData.get(`status_${student.user_id}`)
-                }))
-                .filter(item => item.status);
-              if (attendanceData.length === 0) {
-                showAlert(container, 'No attendance status selected or all students already marked.', 'warning');
-                return;
-              }
-              fetch(`/submit_attendance`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  class_name: class_name,
-                  date: selectedDate,
-                  attendance: attendanceData
-                })
-              })
-                .then(response => response.json())
-                .then(result => {
-                  if (result.success) {
-                    container.innerHTML = `
-                    <div class="alert alert-success text-center shadow-sm rounded p-4">
-                      ✅ Attendance successfully submitted for <strong>${class_name}</strong>!
-                      <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
-                    </div>`;
-                    setTimeout(() => location.reload(), 1500);
-                  } else {
-                    showAlert(container, `❌ Error: ${result.error || 'Failed to submit attendance.'}`);
-                  }
-                })
-                .catch(err => {
-                  console.error("Fetch Error:", err);
-                  showAlert(container, 'Something went wrong. Please try again.');
-                });
-            });
-          })
-          .catch(error => {
-            console.error("Error fetching attendance data:", error);
-            showAlert(document.getElementById('student-attendance-list-container'), `Error fetching attendance for ${class_name}.`);
-          });
-      }
-
-      //------------------------------------------ Assignment management -------------------------------------------------
-      let assignments = [];
-      function getAssignmentStatus(start_date, end_date) {
-        const today = new Date();
-        const start = new Date(start_date);
-        const end = new Date(end_date);
-        const diffDays = (end - today) / (1000 * 60 * 60 * 24);
-        if (today < start) return { text: 'Upcoming', color: 'bg-blue-100 text-blue-800' };
-        if (diffDays <= 2 && today <= end) return { text: 'Due Soon', color: 'bg-yellow-100 text-yellow-800' };
-        if (today > end) return { text: 'Past Due', color: 'bg-red-100 text-red-800' };
-        return { text: 'Active', color: 'bg-green-100 text-green-800' };
-      }
-
-      function renderAssignments() {
-        const tbody = document.getElementById('assignment-body');
-        tbody.innerHTML = '';
-        assignments.forEach((a, index) => {
-          const status = getAssignmentStatus(a.start_date, a.end_date);
-          tbody.innerHTML += `
-          <tr class="hover:bg-gray-50 transition duration-200">
-            <td class="px-6 py-4">${a.title}</td>
-            <td class="px-6 py-4">${a.className}</td>
-            <td class="px-6 py-4">${a.subject}</td>
-            <td class="px-6 py-4">${a.start_date}</td>
-            <td class="px-6 py-4">${a.end_date}</td>
-            <td class="px-6 py-4"><span class="inline-block px-3 py-1 rounded-full text-sm font-medium ${status.color}">${status.text}</span></td>
-            <td class="px-6 py-4">${a.description || 'N/A'}</td>
-            <td class="px-6 py-4">
-              <button class="px-3 py-1 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 mr-2" onclick="openEditModal(${index})">
-                <i class="fas fa-edit mr-1"></i>Edit
-              </button>
-              <button class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200" onclick="deleteAssignment(${index})">
-                <i class="fas fa-trash mr-1"></i>Delete
-              </button>
-            </td>
-          </tr>`;
-        });
-      }
-
-      document.getElementById('assignment-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        const assignment = {
-          title: document.getElementById('title').value,
-          subject: document.getElementById('subject').value,
-          className: document.getElementById('class').value,
-          start_date: document.getElementById('start_date').value,
-          end_date: document.getElementById('end_date').value,
-          description: document.getElementById('description').value,
-        };
-        fetch('/add_assignment', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ assignment: assignment })
-        })
-          .then(response => {
-            if (response.ok) return response.json();
-            throw new Error('Failed to add assignment: ' + response.statusText);
-          })
-          .then(() => {
-            assignments.push(assignment);
-            renderAssignments();
-            this.reset();
-          })
-          .catch(error => {
-            console.error('Error adding assignment:', error);
-            showAlert(document.getElementById('assignment-body'), 'Failed to add assignment. Please try again.');
-          });
-      });
-
-      function deleteAssignment(index) {
-        if (!confirm("Delete this assignment?")) return;
-        fetch(`/delete_assignment/${index}`, { method: 'DELETE' })
-          .then(response => {
-            if (response.ok) return response.json();
-            throw new Error('Failed to delete assignment: ' + response.statusText);
-          })
-          .then(() => {
-            assignments.splice(index, 1);
-            renderAssignments();
-          })
-          .catch(error => {
-            console.error('Error deleting assignment:', error);
-            showAlert(document.getElementById('assignment-body'), 'Failed to delete assignment. Please try again.');
-          });
-      }
-
-      function openEditModal(index) {
-        const a = assignments[index];
-        document.getElementById('edit-index').value = index;
-        document.getElementById('edit-title').value = a.title;
-        document.getElementById('edit-subject').value = a.subject;
-        document.getElementById('edit-class').value = a.className;
-        document.getElementById('edit-start-date').value = a.start_date;
-        document.getElementById('edit-end-date').value = a.end_date;
-        document.getElementById('edit-description').value = a.description || '';
-        new bootstrap.Modal(document.getElementById('editModal')).show();
-      }
-
-      document.getElementById('edit-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        const index = document.getElementById('edit-index').value;
-        const updated = {
-          title: document.getElementById('edit-title').value,
-          subject: document.getElementById('edit-subject').value,
-          className: document.getElementById('edit-class').value,
-          start_date: document.getElementById('edit-start-date').value,
-          end_date: document.getElementById('edit-end-date').value,
-          description: document.getElementById('edit-description').value,
-        };
-        fetch(`/update_assignment/${index}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updated)
-        })
-          .then(response => {
-            if (response.ok) return response.json();
-            throw new Error('Failed to update assignment: ' + response.statusText);
-          })
-          .then(() => {
-            assignments[index] = updated;
-            renderAssignments();
-            bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
-          })
-          .catch(error => {
-            console.error('Error updating assignment:', error);
-            showAlert(document.getElementById('assignment-body'), 'Failed to update assignment. Please try again.');
-          });
-      });
-
-      function loadAssignments() {
-        fetch('/get_assignments')
-          .then(response => {
-            if (!response.ok) throw new Error('Failed to fetch assignments');
-            else return response.json();
-          })
-          .then(data => {
-            assignments = data;
-            renderAssignments();
-          })
-          .catch(error => {
-            console.error('Error loading assignments:', error);
-            showAlert(document.getElementById('assignment-body'), 'Error loading assignments. Please try again later.');
-          });
-      }
-
-      // Profile editing
-      document.querySelectorAll('.edit-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-          const userId = this.getAttribute('data-user-id');
-          edit_teacher_profile(userId);
-        });
-      });
-
-      function edit_teacher_profile(user_id) {
-        fetch(`/get_user_by_user_id/${user_id}`)
-          .then(response => response.json())
-          .then(teacher => {
-            const container = document.getElementById('profile');
-            if (!container) {
-              console.error('Error: Profile container not found.');
-              showAlert(document.querySelector('.profile_page'), 'Cannot edit profile. Page section missing.');
-              return;
-            }
-            container.innerHTML = `
-            <form id="edit-teacher-form" class="form-box border rounded p-4 shadow-sm bg-white needs-validation" novalidate>
-              <h4 class="mb-3 text-primary"><i class="fas fa-pencil-alt"></i> Edit Teacher Profile</h4>
-              <p class="text-muted mb-4">Update your profile details below.</p>
-              <div class="row g-4">
-                <div class="col-md-6">
-                  <label for="edit_name" class="form-label fw-semibold">Name</label>
-                  <input type="text" class="form-control" id="edit_name" name="user_name" value="${teacher.user_name || ''}" required>
-                </div>
-                <div class="col-md-6">
-                  <label for="edit_age" class="form-label fw-semibold">Age</label>
-                  <input type="number" class="form-control" id="edit_age" name="age" value="${teacher.age || ''}" required>
-                </div>
-                <div class="col-md-6">
-                  <label for="edit_qualification" class="form-label fw-semibold">Qualification</label>
-                  <input type="text" class="form-control" id="edit_qualification" name="qualification" value="${teacher.qualification || ''}" required>
-                </div>
-                <div class="col-md-6">
-                  <label for="edit_gender" class="form-label fw-semibold">Gender</label>
-                  <select class="form-select" id="edit_gender" name="gender" required>
-                    <option value="Male" ${teacher.gender === 'Male' ? 'selected' : ''}>Male</option>
-                    <option value="Female" ${teacher.gender === 'Female' ? 'selected' : ''}>Female</option>
-                    <option value="Other" ${teacher.gender === 'Other' ? 'selected' : ''}>Other</option>
-                  </select>
-                </div>
-                <div class="col-md-6">
-                  <label for="edit_account" class="form-label fw-semibold">Account ID</label>
-                  <input type="text" class="form-control" id="edit_account" name="account_id" value="${teacher.account_id || ''}">
-                </div>
-                <div class="col-md-6">
-                  <label for="edit_address" class="form-label fw-semibold">Address</label>
-                  <textarea class="form-control" id="edit_address" name="address" rows="3">${teacher.address || ''}</textarea>
-                </div>
-              </div>
-              <div class="mt-4 text-end">
-                <button type="submit" class="btn btn-success px-4"><i class="fas fa-save me-1"></i> Save Changes</button>
-              </div>
-            </form>`;
-            document.getElementById('edit-teacher-form').addEventListener('submit', function (event) {
-              event.preventDefault();
-              const formData = new FormData(this);
-              const updatedData = {};
-              formData.forEach((value, key) => {
-                updatedData[key] = key === 'age' ? parseInt(value) || null : value;
-              });
-              fetch(`/update_teacher/${teacher.user_id}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedData)
-              })
-                .then(response => response.json())
-                .then(result => {
-                  if (result.success) {
-                    container.innerHTML = `
-                    <div class="alert alert-success text-center fw-semibold">
-                      <i class="fas fa-check-circle me-2"></i>Profile updated successfully!
-                    </div>`;
-                    setTimeout(() => location.reload(), 1500);
-                  } else {
-                    showAlert(container, `Failed to update profile: ${result.error || 'Unknown error'}`);
-                  }
-                })
-                .catch(err => {
-                  console.error('Update error:', err);
-                  showAlert(container, 'An error occurred while updating the profile.');
-                });
-            });
-          })
-          .catch(error => {
-            console.error("Fetch error:", error);
-            showAlert(document.querySelector('.profile_page'), 'Error loading teacher details.');
-          });
-      }
-
-      // Calendar initialization
+      // When the user Enter into the browser it loads automatically
       window.onload = function () {
         if (typeof FullCalendar === 'undefined') {
           console.error('FullCalendar is not loaded.');
-          showAlert(document.getElementById('calendar'), 'Error: Calendar library failed to load. Please try again later.');
+          showAlert('Error: Calendar library failed to load. Please try again later.', 'danger', 5000);
           return;
         }
 
@@ -1540,12 +833,12 @@
               })
               .catch(error => {
                 console.error('Error fetching calendar events:', error);
-                showAlert(document.getElementById('calendar'), `Error loading calendar events: ${error.message}`);
+                showAlert(`Error loading calendar events: ${error.message}`, 'danger', 5000);
                 failureCallback(error);
               });
           },
           eventClick: function (info) {
-            alert(`Class: ${info.event.extendedProps.class}\nSubject: ${info.event.extendedProps.subject}\nTime: ${info.event.start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })} - ${info.event.end.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}`);
+            showAlert(`Class: ${info.event.extendedProps.class}\nSubject: ${info.event.extendedProps.subject}\nTime: ${info.event.start.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })} - ${info.event.end.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}`, 'info', 5000);
           },
           eventDidMount: function (info) {
             new bootstrap.Tooltip(info.el, {
@@ -1562,11 +855,485 @@
         });
         calendar.render();
         loadAssignments();
+        loadSubjects();
+        loadSubjects('edit-subjectsDropDown');
+        allSubjectsDropDown();
       };
 
-      //------------------------------- Modify Students Attendance ---------------------------------//
-      function modify_students_attendance(class_name) {
-        fetch(`/get_students_names/${class_name}`)
+      // It's used in websockets for chat Integration
+      const socket = io('/', {
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000,
+      });
+      const sender_id = "{{ teacher.user_id|default('') }}";
+      const sender_role = "Teacher";
+      const sender_name = "{{ teacher.user_name|default('') }}";
+      let current_class = null;
+      document.addEventListener('DOMContentLoaded', () => {
+        const sendButton = document.getElementById("send-button");
+        const inputContainer = document.getElementById("input-container");
+        const chatBox = document.getElementById("chat-box");
+        if (!inputContainer || !chatBox || !sendButton) {
+          console.error("Chat elements not found in DOM");
+          showAlert("Chat interface error. Please refresh the page.", "danger", 5000);
+          return;
+        }
+        inputContainer.classList.remove("d-none");
+        sendButton.disabled = true;
+        chatBox.innerHTML = '<p class="text-muted mb-0">Please select a class to start chatting.</p>';
+        socket.on("connect", () => {
+          console.log("Connected to chat server");
+          showAlert("Connected to chat server!", "success", 3000);
+        });
+        socket.on("connect_error", (error) => {
+          console.error("Connection error:", error);
+          showAlert("Failed to connect to chat server. Retrying...", "danger", 5000);
+        });
+        socket.on("disconnect", () => {
+          showAlert("Disconnected from chat server. Attempting to reconnect...", "warning", 5000);
+        });
+        socket.on("error", (data) => {
+          showAlert(data.message || "An error occurred in the chat.", "danger", 5000);
+        });
+        const messageInput = document.getElementById('message-input');
+        if (messageInput && sendButton) {
+          messageInput.addEventListener('input', function () {
+            const message = this.value.trim();
+            sendButton.disabled = !message || !current_class;
+          });
+        }
+      });
+      function joinClass(classId) {
+        current_class = classId;
+        const chatBox = document.getElementById("chat-box");
+        const inputContainer = document.getElementById("input-container");
+        const sendButton = document.getElementById('send-button');
+        if (!chatBox || !inputContainer || !sendButton) {
+          console.error("Chat elements not found");
+          showAlert("Chat interface error. Please refresh the page.", "danger", 5000);
+          return;
+        }
+        chatBox.innerHTML = '<p class="text-muted mb-0">Loading chat history...</p>';
+        inputContainer.classList.remove("d-none");
+        sendButton.disabled = !document.getElementById('message-input').value.trim();
+        socket.emit("join_class_room", { class_id: classId });
+        fetch(`/get_chats?class_id=${classId}`)
+          .then(response => {
+            if (!response.ok) throw new Error(`Failed to fetch chats: ${response.statusText}`);
+            return response.json();
+          })
+          .then(messages => {
+            console.log("Fetched messages:", messages);
+            chatBox.innerHTML = '';
+            messages.forEach(msg => {
+              appendMessage(msg.sender_name, msg.message, msg.timestamp, msg.sender_role);
+            });
+          })
+          .catch(error => {
+            console.error("Error fetching messages:", error);
+            showAlert("Could not load chat history.", "danger", 5000);
+          });
+      }
+      function sendMessage() {
+        const input_msg = document.getElementById("message-input");
+        const message = input_msg.value.trim();
+        if (!message || !current_class) {
+          showAlert("Please enter a valid message and select a class.", "warning", 3000);
+          return;
+        }
+        if (message.length > 500) {
+          showAlert("Message is too long. Maximum 500 characters.", "warning", 3000);
+          return;
+        }
+        socket.emit("send_message", {
+          sender_id: sender_id,
+          sender_role: sender_role,
+          sender_name: sender_name,
+          message: message,
+          class_id: current_class
+        });
+        input_msg.value = '';
+      }
+      socket.on("receive_message", (data) => {
+        if (data.class_id === current_class) {
+          appendMessage(data.sender_name, data.message, data.timestamp, data.sender_role);
+        }
+      });
+      function appendMessage(senderName, message, timestamp, senderRole) {
+        const box = document.getElementById("chat-box");
+        if (!box) {
+          console.error("Chat box element not found");
+          return;
+        }
+        senderName = senderName || 'Unknown';
+        message = message || '';
+        let time = '';
+        try {
+          if (!timestamp || typeof timestamp !== 'string') {
+            const now = new Date();
+            const istOffset = 5.5 * 60 * 60 * 1000;
+            const istTime = new Date(now.getTime() + istOffset);
+            const hours = istTime.getUTCHours();
+            const minutes = istTime.getUTCMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const formattedHours = ((hours + 11) % 12 + 1).toString().padStart(2, '0');
+            const formattedMinutes = minutes.toString().padStart(2, '0');
+            time = `${formattedHours}:${formattedMinutes} ${ampm}`;
+          } else {
+            const dateObj = new Date(timestamp.replace(' ', 'T') + 'Z');
+            if (isNaN(dateObj.getTime())) {
+              throw new Error("Invalid date format");
+            }
+            const istOffset = 5.5 * 60 * 60 * 1000;
+            const istTime = new Date(dateObj.getTime() + istOffset);
+            const hours = istTime.getUTCHours();
+            const minutes = istTime.getUTCMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            const formattedHours = ((hours + 11) % 12 + 1).toString().padStart(2, '0');
+            const formattedMinutes = minutes.toString().padStart(2, '0');
+            time = `${formattedHours}:${formattedMinutes} ${ampm}`;
+          }
+        } catch (e) {
+          console.error("Error parsing timestamp:", e.message);
+          const now = new Date();
+          const istOffset = 5.5 * 60 * 60 * 1000;
+          const istTime = new Date(now.getTime() + istOffset);
+          const hours = istTime.getUTCHours();
+          const minutes = istTime.getUTCMinutes();
+          const ampm = hours >= 12 ? 'PM' : 'AM';
+          const formattedHours = ((hours + 11) % 12 + 1).toString().padStart(2, '0');
+          const formattedMinutes = minutes.toString().padStart(2, '0');
+          time = `${formattedHours}:${formattedMinutes} ${ampm}`;
+        }
+        const msgWrapper = document.createElement("div");
+        msgWrapper.className = `mb-3 d-flex ${senderRole === 'Teacher' ? 'justify-content-end' : 'justify-content-start'}`;
+        const contentCol = document.createElement("div");
+        contentCol.className = "d-flex flex-column align-items-start";
+        contentCol.style.maxWidth = "70%";
+        const nameText = document.createElement("div");
+        nameText.textContent = senderName;
+        nameText.className = "text-muted mb-1 fw-semibold";
+        nameText.style.fontSize = "0.75rem";
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `rounded-4 px-3 py-2 shadow-sm ${senderRole === 'Teacher' ? 'bg-primary text-white align-self-end' : 'bg-light text-dark'}`;
+        messageDiv.style.wordBreak = "break-word";
+        messageDiv.style.fontSize = "1rem";
+        messageDiv.style.lineHeight = "1.4";
+        messageDiv.style.width = "auto";
+        messageDiv.style.maxWidth = "100%";
+        const messageText = document.createElement("div");
+        messageText.textContent = message;
+        messageText.className = "mb-1";
+        const timeText = document.createElement("div");
+        timeText.textContent = time;
+        timeText.className = "text-end";
+        timeText.style.fontSize = "0.7rem";
+        timeText.style.opacity = "0.7";
+        messageDiv.appendChild(messageText);
+        messageDiv.appendChild(timeText);
+        contentCol.appendChild(nameText);
+        contentCol.appendChild(messageDiv);
+        msgWrapper.appendChild(contentCol);
+        box.appendChild(msgWrapper);
+        box.scrollTop = box.scrollHeight;
+      }
+      function showAlert(message, type = 'danger', duration = 3000) {
+        const container = document.getElementById('alert-container');
+        if (!container) {
+          console.error("Alert container not found");
+          return;
+        }
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type} alert-dismissible fade show mt-3`;
+        alertDiv.role = 'alert';
+        alertDiv.innerHTML = `
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        container.appendChild(alertDiv);
+        alertDiv.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          alertDiv.classList.remove('show');
+          alertDiv.classList.add('fade');
+          setTimeout(() => alertDiv.remove(), 150);
+        }, duration);
+      }
+
+
+      // Load subjects
+      function loadSubjects(dropdownId = 'subjectsDropDown') {
+        fetch('/subjects')
+          .then(response => {
+            if (!response.ok) throw new Error('Failed to fetch subjects');
+            return response.json();
+          })
+          .then(data => {
+            const dropdown = document.getElementById(dropdownId);
+            if (!dropdown) {
+              console.error(`Dropdown with ID ${dropdownId} not found`);
+              showAlert(`Error: Subject dropdown not found.`, 'danger', 5000);
+              return;
+            }
+            dropdown.innerHTML = '<option value="">Select Subject</option>';
+            data.forEach(subject => {
+              const option = document.createElement('option');
+              option.value = subject.subject_name;
+              option.textContent = subject.subject_name;
+              dropdown.appendChild(option);
+            });
+          })
+          .catch(error => {
+            console.error('Error loading subjects:', error);
+            showAlert(`Error loading subjects: ${error.message}`, 'danger', 5000);
+          });
+      }
+      function allSubjectsDropDown(dropdownId = "edit-allSubjectsDropDown") {
+        loadSubjects(dropdownId);
+      }
+
+      // Add the single Exams in the page
+      document.getElementById('addExamBtn').addEventListener('click', function () {
+        const subject = document.getElementById('edit-allSubjectsDropDown').value;
+        const examDate = document.getElementById('examDate').value;
+        const startTime = document.getElementById('startTime').value;
+        const endTime = document.getElementById('endTime').value;
+        const marks = document.getElementById('examMarks').value;
+        if (!subject || !examDate || !startTime || !endTime || !marks) {
+          showAlert("Please fill all fields before adding.", "warning", 3000);
+          return;
+        }
+        const tbody = document.getElementById('exam-details-body');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${subject}</td>
+          <td>${examDate}</td>
+          <td>${startTime}</td>
+          <td>${endTime}</td>
+          <td>${marks}</td>
+          <td>
+            <button type="button" class="btn btn-sm btn-danger delete-btn">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </td>
+        `;
+        row.querySelector('.delete-btn').addEventListener('click', function () {
+          row.remove();
+        });
+        tbody.appendChild(row);
+        document.getElementById('edit-allSubjectsDropDown').value = '';
+        document.getElementById('examDate').value = '';
+        document.getElementById('startTime').value = '';
+        document.getElementById('endTime').value = '';
+        document.getElementById('examMarks').value = '';
+      });
+
+      // Submit All the Exams in the Exam page
+      document.getElementById('publishBtn').addEventListener('click', function (e) {
+        e.preventDefault();
+        const examName = document.getElementById('examName').value;
+        const examCode = document.getElementById('examCode').value;
+        const className = document.getElementById('className').value;
+        const tableBody = document.getElementById('exam-details-body');
+        const rows = tableBody.getElementsByTagName('tr');
+        const exams = [];
+        for (let row of rows) {
+          const cells = row.getElementsByTagName('td');
+          exams.push({
+            subject_name: cells[0].textContent,
+            exam_date: cells[1].textContent,
+            start_time: cells[2].textContent,
+            end_time: cells[3].textContent,
+            marks: cells[4].textContent
+          });
+        }
+        if (!examName || !examCode || !className || exams.length === 0) {
+          showAlert("Please fill all exam info and add at least one subject.", "warning", 3000);
+          return;
+        }
+        fetch('/publish_now', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            exam_name: examName,
+            exam_code: examCode,
+            class_name: className,
+            exam_details: exams
+          })
+        })
+          .then(response => {
+            if (!response.ok) throw new Error("Network response was not ok");
+            return response.json();
+          })
+          .then(data => {
+            if (data.redirect) {
+              window.location.href = data.redirect;
+            }
+          })
+          .catch(error => {
+            console.error("Publish error:", error);
+            showAlert("Failed to publish exam schedule.", "danger", 5000);
+          });
+      });
+
+      // View students with class wise
+      function view_students_list(class_name) {
+        fetch(`/get_student_datas/${class_name}`)
+          .then(response => {
+            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+            return response.json();
+          })
+          .then(data => {
+            const container = document.getElementById('student-list-container');
+            container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
+            if (!data || data.length === 0) {
+              container.innerHTML += `<p>No students found for Class ${class_name}.</p>`;
+              return;
+            }
+            let content = `<div class="list-group">`;
+            data.forEach(student => {
+              content += `
+              <div class="d-flex justify-content-between align-items-center border p-2 mb-2 rounded">
+                <div>
+                  <strong>${student.student_name}</strong><br>
+                  <small>Class: ${student.class}</small>
+                </div>
+                <button class="btn btn-sm btn-outline-info" onclick="view_student_detail('${student.user_id}')">
+                  View Details
+                </button>
+              </div>`;
+            });
+            content += `</div>`;
+            container.innerHTML += content;
+          })
+          .catch(error => {
+            console.error("Error fetching student data:", error);
+            showAlert("Error fetching students for " + class_name, "danger", 5000);
+          });
+      }
+
+      // View students attendance
+      function view_students_attendance_list(class_name) {
+        const selectedDate = document.getElementById('attendance-date-take')?.value || new Date().toISOString().split('T')[0];
+        fetch(`/get_students_with_attendance/${class_name}?date=${selectedDate}`)
+          .then(response => {
+            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+            return response.json();
+          })
+          .then(data => {
+            const container = document.getElementById('student-attendance-list-container');
+            if (!data || data.length === 0) {
+              container.innerHTML = `<div class="alert alert-warning">No students found for Class <strong>${class_name}</strong>.</div>`;
+              return;
+            }
+            container.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="text-primary">📋 Students Attendance - ${class_name}</h3>
+          <div>
+            <input type="date" id="attendance-date-take" class="form-control d-inline-block me-2" style="width: auto;" value="${selectedDate}" required max="${new Date().toISOString().split('T')[0]}">
+            <button class="btn btn-outline-secondary btn-sm" onclick="view_students_attendance_list('${class_name}')">Refresh</button>
+          </div>
+        </div>`;
+            let content = `
+        <form id="attendance-form" class="needs-validation" novalidate>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">S.No</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col" class="text-center">Attendance</th>
+                </tr>
+              </thead>
+              <tbody>`;
+            data.forEach((student, index) => {
+              const status = student.attendance_status;
+              const checkedPresent = status === 'Present' ? 'checked' : '';
+              const checkedAbsent = status === 'Absent' ? 'checked' : '';
+              const disabled = status ? 'disabled' : '';
+              const rowClass = status ? 'table-secondary' : '';
+              content += `
+          <tr class="${rowClass}">
+            <td>${index + 1}</td>
+            <td>${student.student_name}</td>
+            <td class="text-center">
+              <div class="btn-group" role="group" aria-label="Attendance Status">
+                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${checkedPresent} ${disabled} required>
+                <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
+                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${checkedAbsent} ${disabled} required>
+                <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
+              </div>
+            </td>
+          </tr>`;
+            });
+            content += `
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
+        </div>
+      </form>`;
+            container.innerHTML += content;
+
+            document.getElementById("attendance-form").addEventListener("submit", function (e) {
+              e.preventDefault();
+              const selectedDate = document.getElementById('attendance-date-take').value;
+              if (!selectedDate) {
+                showAlert("Please select a date for attendance.", "warning", 3000);
+                return;
+              }
+              const formData = new FormData(this);
+              const attendanceData = data
+                .filter(student => !student.attendance_status)
+                .map(student => ({
+                  user_id: student.user_id,
+                  user_name: student.student_name,
+                  status: formData.get(`status_${student.user_id}`)
+                }))
+                .filter(item => item.status);
+              if (attendanceData.length === 0) {
+                showAlert("No attendance status selected or all students already marked.", "warning", 3000);
+                return;
+              }
+              fetch(`/submit_attendance`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  class_name: class_name,
+                  date: selectedDate,
+                  attendance: attendanceData
+                })
+              })
+                .then(response => response.json())
+                .then(result => {
+                  if (result.success) {
+                    container.innerHTML = `
+                <div class="alert alert-success text-center shadow-sm rounded p-4">
+                  ✅ Attendance successfully submitted for <strong>${class_name}</strong>!
+                  <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
+                </div>`;
+                    setTimeout(() => view_students_attendance_list(class_name), 1500);
+                  } else {
+                    showAlert(`❌ Error: ${result.error || 'Failed to submit attendance.'}`, "danger", 5000);
+                  }
+                })
+                .catch(err => {
+                  console.error("Fetch Error:", err);
+                  showAlert("Something went wrong. Please try again.", "danger", 5000);
+                });
+            });
+          })
+          .catch(error => {
+            console.error("Error fetching attendance data:", error);
+            showAlert(`Error fetching attendance for ${class_name}.`, "danger", 5000);
+          });
+      }
+
+      // Modify Students Attendance
+      function modify_students_attendance(class_name, selectedDate) {
+        selectedDate = selectedDate || document.getElementById('attendance-date-modify')?.value || new Date().toISOString().split('T')[0];
+        fetch(`/get_students_with_attendance/${class_name}?date=${selectedDate}`)
           .then(response => {
             if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
             return response.json();
@@ -1578,58 +1345,57 @@
               return;
             }
             container.innerHTML = `
-              <div class="d-flex justify-content-between align-items-center mb-4">
-                <h3 class="text-primary">📋 Modify Students Attendance - ${class_name}</h3>
-                <div>
-                  <input type="date" id="attendance-date" class="form-control d-inline-block me-2" style="width: auto;" required max="${new Date().toISOString().split('T')[0]}">
-                  <button class="btn btn-outline-secondary btn-sm" onclick="modify_students_attendance('${class_name}')">Refresh</button>
-                </div>
-              </div>`;
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="text-primary">📋 Modify Students Attendance - ${class_name}</h3>
+          <div>
+            <input type="date" id="attendance-date-modify" class="form-control d-inline-block me-2" style="width: auto;" value="${selectedDate}" required max="${new Date().toISOString().split('T')[0]}">
+            <button class="btn btn-outline-secondary btn-sm" onclick="modify_students_attendance('${class_name}', document.getElementById('attendance-date-modify').value)">Refresh</button>
+          </div>
+        </div>`;
             let content = `
-          <form id="modify-attendance-form" class="needs-validation" novalidate>
-            <div class="table-responsive">
-              <table class="table table-hover table-bordered align-middle">
-                <thead class="table-light">
-                  <tr>
-                    <th scope="col">S.No</th>
-                    <th scope="col">Student Name</th>
-                    <th scope="col" class="text-center">Attendance</th>
-                  </tr>
-                </thead>
-                <tbody>`;
+        <form id="modify-attendance-form" class="needs-validation" novalidate>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">S.No</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col" class="text-center">Attendance</th>
+                </tr>
+              </thead>
+              <tbody>`;
             data.forEach((student, index) => {
+              const status = student.attendance_status || '';
+              const checkedPresent = status === 'Present' ? 'checked' : '';
+              const checkedAbsent = status === 'Absent' ? 'checked' : '';
               content += `
-            <tr>
-              <td>${index + 1}</td>
-              <td>${student.student_name}</td>
-              <td class="text-center">
-                <div class="btn-group" role="group" aria-label="Attendance Status">
-                  <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" required>
-                  <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
-                  <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" required>
-                  <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
-                </div>
-              </td>
-            </tr>`;
+          <tr>
+            <td>${index + 1}</td>
+            <td>${student.student_name}</td>
+            <td class="text-center">
+              <div class="btn-group" role="group" aria-label="Attendance Status">
+                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${checkedPresent} required>
+                <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
+                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${checkedAbsent} required>
+                <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
+              </div>
+            </td>
+          </tr>`;
             });
             content += `
-                </tbody>
-              </table>
-            </div>
-            <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
-            </div>
-          </form>`;
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
+        </div>
+      </form>`;
             container.innerHTML += content;
             document.getElementById("modify-attendance-form").addEventListener("submit", function (e) {
               e.preventDefault();
-              const selectedDate = document.getElementById('attendance-date').value;
+              const selectedDate = document.getElementById('attendance-date-modify').value;
               if (!selectedDate) {
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'alert alert-warning mt-3';
-                errorDiv.innerHTML = 'Please select a date for attendance.';
-                container.appendChild(errorDiv);
-                errorDiv.scrollIntoView({ behavior: 'smooth' });
+                showAlert("Please select a date for attendance.", "warning", 3000);
                 return;
               }
               const formData = new FormData(this);
@@ -1639,13 +1405,9 @@
                   user_name: student.student_name,
                   status: formData.get(`status_${student.user_id}`)
                 }))
-                .filter(item => item.status);
+                .filter(item => item.status && item.status !== data.find(s => s.user_id === item.user_id).attendance_status);
               if (attendanceData.length === 0) {
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'alert alert-warning mt-3';
-                errorDiv.innerHTML = 'No attendance status selected.';
-                container.appendChild(errorDiv);
-                errorDiv.scrollIntoView({ behavior: 'smooth' });
+                showAlert("No changes made to attendance.", "info", 3000);
                 return;
               }
               fetch(`/submit_modify_attendance`, {
@@ -1661,26 +1423,18 @@
                 .then(data => {
                   if (data.success) {
                     container.innerHTML = `
-                    <div class="alert alert-success text-center shadow-sm rounded p-4">
-                      ✅ Attendance successfully submitted for class <strong>${class_name}</strong>!
-                      <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
-                    </div>`;
+                <div class="alert alert-success text-center shadow-sm rounded p-4">
+                  ✅ Attendance successfully submitted for class <strong>${class_name}</strong>!
+                  <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
+                </div>`;
                     setTimeout(() => modify_students_attendance(class_name), 2000);
                   } else {
-                    const errorDiv = document.createElement('div');
-                    errorDiv.className = 'alert alert-danger mt-3';
-                    errorDiv.innerHTML = `❌ Error: ${data.error || 'Failed to submit attendance.'}`;
-                    container.appendChild(errorDiv);
-                    errorDiv.scrollIntoView({ behavior: 'smooth' });
+                    showAlert(`❌ Error: ${data.error || 'Failed to submit attendance.'}`, 'danger', 5000);
                   }
                 })
                 .catch(err => {
                   console.error("Fetch Error:", err);
-                  const errorDiv = document.createElement('div');
-                  errorDiv.className = 'alert alert-danger mt-3';
-                  errorDiv.innerHTML = 'Something went wrong. Please try again.';
-                  container.appendChild(errorDiv);
-                  errorDiv.scrollIntoView({ behavior: 'smooth' });
+                  showAlert(`Network error: ${err.message}. Please try again.`, 'danger', 5000);
                 });
             });
           })
@@ -1689,7 +1443,254 @@
             document.getElementById('modify-student-attendance-list-container').innerHTML = `<div class="alert alert-danger">Error fetching students for ${class_name}.</div>`;
           });
       }
-      //------------------------------- Modify Students Attendance ---------------------------------//
+
+      let assignments = [];
+      function getAssignmentStatus(start_date, end_date) {
+        const today = new Date();
+        const start = new Date(start_date);
+        const end = new Date(end_date);
+        const diffDays = (end - today) / (1000 * 60 * 60 * 24);
+        if (today < start) return { text: 'Upcoming', color: 'bg-blue-100 text-blue-800' };
+        if (diffDays <= 2 && today <= end) return { text: 'Due Soon', color: 'bg-yellow-100 text-yellow-800' };
+        if (today > end) return { text: 'Past Due', color: 'bg-red-100 text-red-800' };
+        return { text: 'Active', color: 'bg-green-100 text-green-800' };
+      }
+
+      function renderAssignments() {
+        const tbody = document.getElementById('assignment-body');
+        tbody.innerHTML = '';
+        assignments.forEach((a, index) => {
+          const status = getAssignmentStatus(a.start_date, a.end_date);
+          tbody.innerHTML += `
+          <tr class="hover:bg-gray-50 transition duration-200">
+            <td class="px-6 py-4">${a.title}</td>
+            <td class="px-6 py-4">${a.className}</td>
+            <td class="px-6 py-4">${a.subject}</td>
+            <td class="px-6 py-4">${a.start_date}</td>
+            <td class="px-6 py-4">${a.end_date}</td>
+            <td class="px-6 py-4"><span class="inline-block px-3 py-1 rounded-full text-sm font-medium ${status.color}">${status.text}</span></td>
+            <td class="px-6 py-4">${a.description || 'N/A'}</td>
+            <td class="px-6 py-4">
+              <button class="px-3 py-1 bg-indigo-500 text-white rounded-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-200 mr-2" onclick="openEditModal(${index})">
+                <i class="fas fa-edit mr-1"></i>Edit
+              </button>
+              <button class="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-200" onclick="deleteAssignment(${index})">
+                <i class="fas fa-trash mr-1"></i>Delete
+              </button>
+            </td>
+          </tr>`;
+        });
+      }
+
+      document.getElementById('assignment-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const assignment = {
+          title: document.getElementById('title').value,
+          subject: document.getElementById('subjectsDropDown').value,
+          className: document.getElementById('class').value,
+          start_date: document.getElementById('start_date').value,
+          end_date: document.getElementById('end_date').value,
+          description: document.getElementById('description').value,
+        };
+        fetch('/add_assignment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ assignment: assignment })
+        })
+          .then(response => {
+            if (response.ok) return response.json();
+            throw new Error('Failed to add assignment: ' + response.statusText);
+          })
+          .then(() => {
+            assignments.push(assignment);
+            renderAssignments();
+            this.reset();
+            loadSubjects();
+          })
+          .catch(error => {
+            console.error('Error adding assignment:', error);
+            showAlert('Failed to add assignment. Please try again.', 'danger', 5000);
+          });
+      });
+
+      function deleteAssignment(index) {
+        if (!confirm("Delete this assignment?")) return;
+        fetch(`/delete_assignment/${index}`, { method: 'DELETE' })
+          .then(response => {
+            if (response.ok) return response.json();
+            throw new Error('Failed to delete assignment: ' + response.statusText);
+          })
+          .then(() => {
+            assignments.splice(index, 1);
+            renderAssignments();
+          })
+          .catch(error => {
+            console.error('Error deleting assignment:', error);
+            showAlert('Failed to delete assignment. Please try again.', 'danger', 5000);
+          });
+      }
+
+      function openEditModal(index) {
+        const a = assignments[index];
+        document.getElementById('edit-index').value = index;
+        document.getElementById('edit-title').value = a.title;
+        document.getElementById('edit-subjectsDropDown').value = a.subject;
+        document.getElementById('edit-class').value = a.className;
+        document.getElementById('edit-start-date').value = a.start_date;
+        document.getElementById('edit-end-date').value = a.end_date;
+        document.getElementById('edit-description').value = a.description || '';
+        loadSubjects('edit-subjectsDropDown');
+        new bootstrap.Modal(document.getElementById('editModal')).show();
+      }
+      document.getElementById('edit-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const index = document.getElementById('edit-index').value;
+        const updated = {
+          title: document.getElementById('edit-title').value,
+          subject: document.getElementById('edit-subjectsDropDown').value,
+          className: document.getElementById('edit-class').value,
+          start_date: document.getElementById('edit-start-date').value,
+          end_date: document.getElementById('edit-end-date').value,
+          description: document.getElementById('edit-description').value,
+        };
+        fetch(`/update_assignment/${index}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated)
+        })
+          .then(response => {
+            if (response.ok) return response.json();
+            throw new Error('Failed to update assignment: ' + response.statusText);
+          })
+          .then(() => {
+            assignments[index] = updated;
+            renderAssignments();
+            bootstrap.Modal.getInstance(document.getElementById('editModal')).hide();
+          })
+          .catch(error => {
+            console.error('Error updating assignment:', error);
+            showAlert('Failed to update assignment. Please try again.', 'danger', 5000);
+          });
+      });
+
+      function loadAssignments() {
+        fetch('/get_assignments')
+          .then(response => {
+            if (!response.ok) throw new Error('Failed to fetch assignments');
+            return response.json();
+          })
+          .then(data => {
+            assignments = data;
+            renderAssignments();
+          })
+          .catch(error => {
+            console.error('Error loading assignments:', error);
+            showAlert('Error loading assignments. Please try again later.', 'danger', 5000);
+          });
+      }
+
+      document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          const userId = this.getAttribute('data-user-id');
+          edit_teacher_profile(userId);
+        });
+      });
+
+      // Edit the Profile
+      function edit_teacher_profile(user_id) {
+        fetch(`/get_user_by_user_id/${user_id}`)
+          .then(response => response.json())
+          .then(teacher => {
+            const container = document.querySelector('#profile .form-box');
+            if (!container) {
+              console.error('Error: Profile container not found.');
+              showAlert('Cannot edit profile. Page section missing.', 'danger', 5000);
+              return;
+            }
+            container.innerHTML = `
+              <form id="edit-teacher-form" class="form-box border rounded p-4 shadow-sm bg-white needs-validation" novalidate>
+                <h4 class="mb-3 text-primary"><i class="fas fa-pencil-alt"></i> Edit Teacher Profile</h4>
+                <p class="text-muted mb-4">Update your profile details below.</p>
+                <div class="row g-4">
+                  <div class="col-md-6">
+                    <label for="edit_name" class="form-label fw-semibold">Name</label>
+                    <input type="text" class="form-control" id="edit_name" name="user_name" value="${teacher.user_name || ''}" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="edit_age" class="form-label fw-semibold">Age</label>
+                    <input type="number" class="form-control" id="edit_age" name="age" value="${teacher.age || ''}" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="edit_qualification" class="form-label fw-semibold">Qualification</label>
+                    <input type="text" class="form-control" id="edit_qualification" name="qualification" value="${teacher.qualification || ''}" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="edit_gender" class="form-label fw-semibold">Gender</label>
+                    <select class="form-select" id="edit_gender" name="gender" required>
+                      <option value="Male" ${teacher.gender === 'Male' ? 'selected' : ''}>Male</option>
+                      <option value="Female" ${teacher.gender === 'Female' ? 'selected' : ''}>Female</option>
+                      <option value="Other" ${teacher.gender === 'Other' ? 'selected' : ''}>Other</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="edit_account" class="form-label fw-semibold">Account ID</label>
+                    <input type="text" class="form-control" id="edit_account" name="account_id" value="${teacher.account_id || ''}">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="edit_address" class="form-label fw-semibold">Address</label>
+                    <textarea class="form-control" id="edit_address" name="address" rows="3">${teacher.address || ''}</textarea>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="edit_subject_specialization" class="form-label fw-semibold">Subject Specialization</label>
+                    <input type="text" class="form-control" id="edit_subject_specialization" name="subject_specialization" value="${teacher.subject_specialization || ''}">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="edit_year_of_experience" class="form-label fw-semibold">Years of Experience</label>
+                    <input type="number" class="form-control" id="edit_year_of_experience" name="year_of_experience" value="${teacher.year_of_experience || ''}">
+                  </div>
+                </div>
+                <div class="mt-4 text-end">
+                  <button type="submit" class="btn btn-success px-4"><i class="fas fa-save me-1"></i> Save Changes</button>
+                  <button type="button" class="btn btn-secondary px-4 ms-2" onclick="location.reload()">Cancel</button>
+                </div>
+              </form>`;
+            document.getElementById('edit-teacher-form').addEventListener('submit', function (event) {
+              event.preventDefault();
+              const formData = new FormData(this);
+              const updatedData = {};
+              formData.forEach((value, key) => {
+                updatedData[key] = key === 'age' || key === 'year_of_experience' ? parseInt(value) || null : value;
+              });
+              fetch(`/update_teacher/${teacher.user_id}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedData)
+              })
+                .then(response => response.json())
+                .then(result => {
+                  if (result.success) {
+                    container.innerHTML = `
+                    <div class="alert alert-success text-center fw-semibold">
+                      <i class="fas fa-check-circle me-2"></i>Profile updated successfully!
+                    </div>`;
+                    setTimeout(() => location.reload(), 1500);
+                  } else {
+                    showAlert(`Failed to update profile: ${result.error || 'Unknown error'}`, 'danger', 5000);
+                  }
+                })
+                .catch(err => {
+                  console.error('Update error:', err);
+                  showAlert('An error occurred while updating the profile.', 'danger', 5000);
+                });
+            });
+          })
+          .catch(error => {
+            console.error("Fetch error:", error);
+            showAlert('Error loading teacher details.', 'danger', 5000);
+          });
+      }
+
+
 
       // View student details
       function view_student_detail(user_id) {
