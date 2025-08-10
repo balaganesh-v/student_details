@@ -1365,10 +1365,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4 text-center mb-3">
-                            ${data.image_url ? 
-                              `<img src="${data.image_url}" alt="Profile Photo" class="img-fluid rounded-circle border" style="max-width: 150px; height: 150px; object-fit: cover;">` : 
-                              `<div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 150px; height: 150px; margin: 0 auto;"><i class="fas fa-user fa-3x text-muted"></i></div>`
-                           }
+                            ${data.image_url ?
+              `<img src="${data.image_url}" alt="Profile Photo" class="img-fluid rounded-circle border" style="max-width: 150px; height: 150px; object-fit: cover;">` :
+              `<div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 150px; height: 150px; margin: 0 auto;"><i class="fas fa-user fa-3x text-muted"></i></div>`
+            }
                         </div>
                         <div class="col-md-8">
                             <table class="table table-borderless">
@@ -1412,18 +1412,18 @@
                                     <td><strong>Father's Mobile:</strong></td>
                                     <td>
                                         ${data.father_mobile_number && data.father_mobile_number !== 'N/A' ?
-                                          `<a href="tel:${data.father_mobile_number}" class="text-decoration-none">${formatPhoneNumber(data.father_mobile_number)}</a>` :
-                                           'N/A'
-                                        }
+              `<a href="tel:${data.father_mobile_number}" class="text-decoration-none">${formatPhoneNumber(data.father_mobile_number)}</a>` :
+              'N/A'
+            }
                                     </td>
                                 </tr>
                                 <tr>
                                     <td><strong>Mother's Mobile:</strong></td>
                                     <td>
                                         ${data.mother_mobile_number && data.mother_mobile_number !== 'N/A' ?
-                                          `<a href="tel:${data.mother_mobile_number}" class="text-decoration-none">${formatPhoneNumber(data.mother_mobile_number)}</a>` :
-                                          'N/A'
-                                        }
+              `<a href="tel:${data.mother_mobile_number}" class="text-decoration-none">${formatPhoneNumber(data.mother_mobile_number)}</a>` :
+              'N/A'
+            }
                                     </td>
                                 </tr>
                                 <tr>
@@ -1441,7 +1441,6 @@
                 </div>
             </div>
         `;
-
         } catch (error) {
           console.error('Error in view_student_details:', error);
           showAlert('Failed to load student details. Please try again.', 'danger', 5000);
@@ -1449,78 +1448,96 @@
         }
       }
 
-      // View students attendance
       function view_students_attendance_list(class_name) {
         const selectedDate = document.getElementById('attendance-date-take')?.value || new Date().toISOString().split('T')[0];
+
+        const container = document.getElementById('student-attendance-list-container');
+        container.innerHTML = '<div class="text-center p-3"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+
         fetch(`/get_students_with_attendance/${class_name}?date=${selectedDate}`)
           .then(response => {
             if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
             return response.json();
           })
           .then(data => {
-            const container = document.getElementById('student-attendance-list-container');
             if (!data || data.length === 0) {
-              container.innerHTML = `<div class="alert alert-warning">No students found for Class <strong>${class_name}</strong>.</div>`;
+              container.innerHTML = `<div class="alert alert-warning text-center">No students found for Class <strong>${class_name}</strong>.</div>`;
               return;
             }
+
             container.innerHTML = `
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h3 class="text-primary">📋 Students Attendance - ${class_name}</h3>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3><i class="fas fa-calendar-check me-2"></i>Take Attendance - ${class_name}</h3>
           <div>
-            <input type="date" id="attendance-date-take" class="form-control d-inline-block me-2" style="width: auto;" value="${selectedDate}" required max="${new Date().toISOString().split('T')[0]}">
-            <button class="btn btn-outline-secondary btn-sm" onclick="view_students_attendance_list('${class_name}')">Refresh</button>
+            <input type="date" id="attendance-date-take" class="form-control d-inline-block me-2" style="width: auto;" value="${selectedDate}" max="${new Date().toISOString().split('T')[0]}">
+            <button class="btn btn-outline-secondary btn-sm" onclick="view_students_attendance_list('${class_name}')"><i class="fas fa-sync-alt me-1"></i>Refresh</button>
           </div>
-        </div>`;
-            let content = `
-        <form id="attendance-form" class="needs-validation" novalidate>
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-outline-success btn-sm me-2" onclick="markAllAttendance('Present')"><i class="fas fa-check-circle me-1"></i>Mark All Present</button>
+          <button class="btn btn-outline-danger btn-sm" onclick="markAllAttendance('Absent')"><i class="fas fa-times-circle me-1"></i>Mark All Absent</button>
+        </div>
+        <form id="attendance-form">
           <div class="table-responsive">
             <table class="table table-hover table-bordered align-middle">
               <thead class="table-light">
                 <tr>
-                  <th scope="col">S.No</th>
-                  <th scope="col">Student Name</th>
-                  <th scope="col" class="text-center">Attendance</th>
+                  <th>S.No</th>
+                  <th>Student Name</th>
+                  <th class="text-center">Attendance</th>
                 </tr>
               </thead>
-              <tbody>`;
-            data.forEach((student, index) => {
+              <tbody>
+                ${data.map((student, index) => {
               const status = student.attendance_status;
               const checkedPresent = status === 'Present' ? 'checked' : '';
               const checkedAbsent = status === 'Absent' ? 'checked' : '';
               const disabled = status ? 'disabled' : '';
               const rowClass = status ? 'table-secondary' : '';
-              content += `
-          <tr class="${rowClass}">
-            <td>${index + 1}</td>
-            <td>${student.student_name}</td>
-            <td class="text-center">
-              <div class="btn-group" role="group" aria-label="Attendance Status">
-                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${checkedPresent} ${disabled} required>
-                <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
-                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${checkedAbsent} ${disabled} required>
-                <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
-              </div>
-            </td>
-          </tr>`;
-            });
-            content += `
-            </tbody>
-          </table>
-        </div>
-        <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
-        </div>
-      </form>`;
-            container.innerHTML += content;
+              return `
+                    <tr class="${rowClass}">
+                      <td>${index + 1}</td>
+                      <td>${student.student_name}</td>
+                      <td class="text-center">
+                        <div class="btn-group">
+                          <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${checkedPresent} ${disabled}>
+                          <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
+                          <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${checkedAbsent} ${disabled}>
+                          <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
+                        </div>
+                      </td>
+                    </tr>`;
+            }).join('')}
+              </tbody>
+            </table>
+          </div>
+          <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-1"></i>Submit Attendance</button>
+          </div>
+        </form>
+      `;
 
-            document.getElementById("attendance-form").addEventListener("submit", function (e) {
+            window.markAllAttendance = function (status) {
+              document.querySelectorAll('#attendance-form input[type="radio"]:not([disabled])').forEach(radio => {
+                if (radio.value === status) {
+                  radio.checked = true;
+                }
+              });
+              showAlert(`Unmarked students set to ${status}.`, 'info', 2000);
+            };
+
+            const form = document.getElementById('attendance-form');
+            const newForm = form.cloneNode(true);
+            form.parentNode.replaceChild(newForm, form);
+
+            newForm.addEventListener('submit', function (e) {
               e.preventDefault();
               const selectedDate = document.getElementById('attendance-date-take').value;
               if (!selectedDate) {
-                showAlert("Please select a date for attendance.", "warning", 3000);
+                showAlert('Please select a date for attendance.', 'warning', 3000);
                 return;
               }
-              const formData = new FormData(this);
+              const formData = new FormData(newForm);
               const attendanceData = data
                 .filter(student => !student.attendance_status)
                 .map(student => ({
@@ -1530,12 +1547,12 @@
                 }))
                 .filter(item => item.status);
               if (attendanceData.length === 0) {
-                showAlert("No attendance status selected or all students already marked.", "warning", 3000);
+                showAlert('No attendance status selected or all students already marked.', 'warning', 3000);
                 return;
               }
               fetch(`/submit_attendance`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   class_name: class_name,
                   date: selectedDate,
@@ -1545,139 +1562,147 @@
                 .then(response => response.json())
                 .then(result => {
                   if (result.success) {
-                    container.innerHTML = `
-                <div class="alert alert-success text-center shadow-sm rounded p-4">
-                  ✅ Attendance successfully submitted for <strong>${class_name}</strong>!
-                  <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
-                </div>`;
+                    container.innerHTML = `<div class="alert alert-success text-center p-3">Attendance submitted for <strong>${class_name}</strong>!</div>`;
                     setTimeout(() => view_students_attendance_list(class_name), 1500);
                   } else {
-                    showAlert(`❌ Error: ${result.error || 'Failed to submit attendance.'}`, "danger", 5000);
+                    showAlert(`Error: ${result.error || 'Failed to submit attendance.'}`, 'danger', 5000);
                   }
                 })
                 .catch(err => {
-                  console.error("Fetch Error:", err);
-                  showAlert("Something went wrong. Please try again.", "danger", 5000);
+                  showAlert('Something went wrong. Please try again.', 'danger', 5000);
                 });
             });
           })
           .catch(error => {
-            console.error("Error fetching attendance data:", error);
-            showAlert(`Error fetching attendance for ${class_name}.`, "danger", 5000);
+            container.innerHTML = `<div class="alert alert-danger text-center">Error fetching students for ${class_name}.</div>`;
+            showAlert('Error fetching attendance.', 'danger', 5000);
           });
       }
 
       // Modify Students Attendance
       function modify_students_attendance(class_name, selectedDate) {
         selectedDate = selectedDate || document.getElementById('attendance-date-modify')?.value || new Date().toISOString().split('T')[0];
+
+        const container = document.getElementById('modify-student-attendance-list-container');
+        container.innerHTML = '<div class="text-center p-3"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+
         fetch(`/get_students_with_attendance/${class_name}?date=${selectedDate}`)
           .then(response => {
             if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
             return response.json();
           })
           .then(data => {
-            const container = document.getElementById('modify-student-attendance-list-container');
             if (!data || data.length === 0) {
-              container.innerHTML = `<div class="alert alert-warning">No students found for Class <strong>${class_name}</strong>.</div>`;
+              container.innerHTML = `<div class="alert alert-warning text-center">No students found for Class <strong>${class_name}</strong>.</div>`;
               return;
             }
+
             container.innerHTML = `
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h3 class="text-primary">📋 Modify Students Attendance - ${class_name}</h3>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h3><i class="fas fa-calendar-edit me-2"></i>Modify Attendance - ${class_name}</h3>
           <div>
-            <input type="date" id="attendance-date-modify" class="form-control d-inline-block me-2" style="width: auto;" value="${selectedDate}" required max="${new Date().toISOString().split('T')[0]}">
-            <button class="btn btn-outline-secondary btn-sm" onclick="modify_students_attendance('${class_name}', document.getElementById('attendance-date-modify').value)">Refresh</button>
+            <input type="date" id="attendance-date-modify" class="form-control d-inline-block me-2" style="width: auto;" value="${selectedDate}" max="${new Date().toISOString().split('T')[0]}">
+            <button class="btn btn-outline-secondary btn-sm" onclick="modify_students_attendance('${class_name}', document.getElementById('attendance-date-modify').value)"><i class="fas fa-sync-alt me-1"></i>Refresh</button>
           </div>
-        </div>`;
-            let content = `
-        <form id="modify-attendance-form" class="needs-validation" novalidate>
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-outline-success btn-sm me-2" onclick="markAllAttendance('Present')"><i class="fas fa-check-circle me-1"></i>Mark All Present</button>
+          <button class="btn btn-outline-danger btn-sm" onclick="markAllAttendance('Absent')"><i class="fas fa-times-circle me-1"></i>Mark All Absent</button>
+        </div>
+        <form id="modify-attendance-form">
           <div class="table-responsive">
             <table class="table table-hover table-bordered align-middle">
               <thead class="table-light">
                 <tr>
-                  <th scope="col">S.No</th>
-                  <th scope="col">Student Name</th>
-                  <th scope="col" class="text-center">Attendance</th>
+                  <th>S.No</th>
+                  <th>Student Name</th>
+                  <th class="text-center">Attendance</th>
                 </tr>
               </thead>
-              <tbody>`;
-            data.forEach((student, index) => {
-              const status = student.attendance_status || '';
-              const checkedPresent = status === 'Present' ? 'checked' : '';
-              const checkedAbsent = status === 'Absent' ? 'checked' : '';
-              content += `
-          <tr>
-            <td>${index + 1}</td>
-            <td>${student.student_name}</td>
-            <td class="text-center">
-              <div class="btn-group" role="group" aria-label="Attendance Status">
-                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${checkedPresent} required>
-                <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
-                <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${checkedAbsent} required>
-                <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
-              </div>
-            </td>
-          </tr>`;
-            });
-            content += `
-            </tbody>
-          </table>
-        </div>
-        <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary px-4 mt-3">✅ Submit Attendance</button>
-        </div>
-      </form>`;
-            container.innerHTML += content;
-            document.getElementById("modify-attendance-form").addEventListener("submit", function (e) {
+              <tbody>
+                ${data.map((student, index) => `
+                  <tr>
+                    <td>${index + 1}</td>
+                    <td>${student.student_name}</td>
+                    <td class="text-center">
+                      <div class="btn-group">
+                        <input type="radio" class="btn-check" name="status_${student.user_id}" value="Present" id="present_${student.user_id}" ${student.attendance_status === 'Present' ? 'checked' : ''}>
+                        <label class="btn btn-outline-success btn-sm" for="present_${student.user_id}">Present</label>
+                        <input type="radio" class="btn-check" name="status_${student.user_id}" value="Absent" id="absent_${student.user_id}" ${student.attendance_status === 'Absent' ? 'checked' : ''}>
+                        <label class="btn btn-outline-danger btn-sm" for="absent_${student.user_id}">Absent</label>
+                      </div>
+                    </td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+          <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-1"></i>Submit Changes</button>
+          </div>
+        </form>
+      `;
+
+            window.markAllAttendance = function (status) {
+              document.querySelectorAll('#modify-attendance-form input[type="radio"]').forEach(radio => {
+                if (radio.value === status) {
+                  radio.checked = true;
+                }
+              });
+              showAlert(`All students marked as ${status}.`, 'info', 2000);
+            };
+
+            const form = document.getElementById('modify-attendance-form');
+            const newForm = form.cloneNode(true);
+            form.parentNode.replaceChild(newForm, form);
+
+            newForm.addEventListener('submit', function (e) {
               e.preventDefault();
-              const selectedDate = document.getElementById('attendance-date-modify').value;
-              if (!selectedDate) {
-                showAlert("Please select a date for attendance.", "warning", 3000);
+              const formData = new FormData(newForm);
+              const attendanceData = data.map(student => ({
+                user_id: student.user_id,
+                user_name: student.student_name,
+                status: formData.get(`status_${student.user_id}`) || student.attendance_status
+              }));
+
+              if (!attendanceData.some(item => item.status)) {
+                showAlert('Please set attendance for all students.', 'warning', 3000);
                 return;
               }
-              const formData = new FormData(this);
-              const attendanceData = data
-                .map(student => ({
-                  user_id: student.user_id,
-                  user_name: student.student_name,
-                  status: formData.get(`status_${student.user_id}`)
-                }))
-                .filter(item => item.status && item.status !== data.find(s => s.user_id === item.user_id).attendance_status);
-              if (attendanceData.length === 0) {
-                showAlert("No changes made to attendance.", "info", 3000);
+
+              const changedData = attendanceData.filter(item => item.status !== data.find(s => s.user_id === item.user_id).attendance_status);
+
+              if (changedData.length === 0) {
+                showAlert('No changes made to attendance.', 'info', 3000);
                 return;
               }
-              fetch(`/submit_modify_attendance`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+
+              fetch('/submit_modify_attendance', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   class_name: class_name,
                   date: selectedDate,
-                  attendance: attendanceData
+                  attendance: changedData
                 })
               })
                 .then(response => response.json())
-                .then(data => {
-                  if (data.success) {
-                    container.innerHTML = `
-                <div class="alert alert-success text-center shadow-sm rounded p-4">
-                  ✅ Attendance successfully submitted for class <strong>${class_name}</strong>!
-                  <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
-                </div>`;
-                    setTimeout(() => modify_students_attendance(class_name), 2000);
+                .then(result => {
+                  if (result.success) {
+                    container.innerHTML = `<div class="alert alert-success text-center p-3">Attendance updated for <strong>${class_name}</strong>!</div>`;
+                    setTimeout(() => modify_students_attendance(class_name, selectedDate), 1500);
                   } else {
-                    showAlert(`❌ Error: ${data.error || 'Failed to submit attendance.'}`, 'danger', 5000);
+                    showAlert(`Error: ${result.error || 'Failed to update attendance.'}`, 'danger', 5000);
                   }
                 })
                 .catch(err => {
-                  console.error("Fetch Error:", err);
-                  showAlert(`Network error: ${err.message}. Please try again.`, 'danger', 5000);
+                  showAlert(`Network error: ${err.message}.`, 'danger', 5000);
                 });
             });
           })
           .catch(error => {
-            console.error("Error fetching student data:", error);
-            document.getElementById('modify-student-attendance-list-container').innerHTML = `<div class="alert alert-danger">Error fetching students for ${class_name}.</div>`;
+            container.innerHTML = `<div class="alert alert-danger text-center">Error fetching students for ${class_name}.</div>`;
+            showAlert('Error fetching attendance.', 'danger', 5000);
           });
       }
 
