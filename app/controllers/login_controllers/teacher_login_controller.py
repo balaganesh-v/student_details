@@ -15,8 +15,10 @@ from app.services.login_service.teacher_login_service import (
     delete_selected_assignment_by_index_in_json_file,
     update_changes_in_assignment,
     get_all_subjects,
-    publish_details
+    publish_details,
+    store_student_datas
 )
+from app.utils.email_utils import send_login_email
 import datetime
 
 teacher_login_bp = Blueprint('teacher_login', __name__)
@@ -229,3 +231,15 @@ def publish_now():
     if not success:
         return jsonify({"error": "Failed to publish exam schedule"}), 500
     return jsonify({"status": "success", "redirect": url_for("admin.dashboard")}), 200
+
+@teacher_login_bp.route('/add_student',methods = ['POST'])
+def add_student():
+    data=request.form.to_dict()
+    image_file = request.files.get('image_file')
+    result = store_student_datas(data,image_file)
+    if result.get('success'):
+        send_login_email(data)
+        print("Student added and login email sent successfully.")
+    else:
+        print("Failed to add student. Email not sent.")
+    return render_template('login_page/teacher_dashboard.html')   

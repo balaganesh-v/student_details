@@ -10,12 +10,17 @@ from app.repositories.login_repository.teacher_login_repository import (
     update_teachers_profile_data_into_db,
     get_teacher_by_user_id_from_db,
     get_all_subjects_from_db,
-    publish_details_into_db
+    publish_details_into_db,
+    store_datas_in_users,
+    store_datas_into_students_db
 )
 from app.utils.token_utils import generate_token_with_code, decode_token
+from app.utils.hash_password_utils import generate_hash_password
+from app.utils.cloudinary_utils import image_upload_cloudinary_and_get_url
 from app.utils.email_utils import send_code_mail
 from flask import jsonify, json , request
 import random
+import uuid
 import os
 
 
@@ -219,3 +224,17 @@ def get_exam_details():
     class_name = data.get("class_name")
     exam_details = data.get("exam_details", [])
     return exam_name, exam_code, class_name, exam_details
+
+def store_student_datas(data,image_file):
+    try:
+        data['user_id'] = str(uuid.uuid4())
+        password = data['user_password']
+        data['hash_password'] = generate_hash_password(password)
+        if data['user_role'] == 'Student':
+            url_link = image_upload_cloudinary_and_get_url(image_file)
+            data['image_url']  = url_link
+            store_datas_in_users(data)
+            store_datas_into_students_db(data)
+            return ({'success':True})
+    except Exception as e:
+        print(f" Error in Add the Student : {e} ")

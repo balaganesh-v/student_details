@@ -276,14 +276,13 @@
         </div>
         <div class="mt-auto p-2 border-top border-secondary">
           <form action="/logout" method="POST" onsubmit="return confirm('Are you sure you want to logout?')">
-            <button type="submit" class="btn btn-danger w-100 logout-btn"><i class="fas fa-sign-out-alt"></i>
-              <span>Logout</span></button>
+            <button type="submit" class="btn btn-danger w-100 logout-btn"><i
+                class="fas fa-sign-out-alt"></i><span>Logout</span></button>
           </form>
         </div>
       </div>
 
       <div class="main-content col">
-
         <div class="topbar">
           <div class="user-info">
             <h2>Welcome {{ user.user_name }}</h2>
@@ -292,7 +291,7 @@
         </div>
 
         <div class="tab-content" id="tabContent">
-
+          <!-- DashBoard section -->
           <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-home"></i> Dashboard</h4>
@@ -300,7 +299,7 @@
                 your classroom efficiently.</p>
             </div>
           </div>
-
+          <!-- Students Section -->
           <div class="tab-pane fade" id="students" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-users"></i> Students</h4>
@@ -314,10 +313,17 @@
                 {% endfor %}
               </div>
               {% endif %}
+              <!-- Add Student Button -->
+              <div class="mb-3">
+                <button type="button" class="btn btn-success" onclick="openAddStudentForm()">
+                  <i class="fas fa-user-plus"></i> Add Student
+                </button>
+              </div>
+              <!-- Student list display -->
               <div id="student-list-container"></div>
             </div>
           </div>
-
+          <!-- Attendance Section -->
           <div class="tab-pane fade" id="attendance" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-calendar-check"></i> Take Attendance</h4>
@@ -350,7 +356,7 @@
               </div>
             </div>
           </div>
-
+          <!-- Resources Section -->
           <div class="tab-pane fade" id="resources" role="tabpanel">
             <div class="container py-5">
               <div class="form-box p-4">
@@ -360,7 +366,6 @@
                   <h2 class="text-center mb-4"><i class="fas fa-calendar2-week me-2"></i>Exam Schedule</h2>
                   <form action="/publish_now" method="POST" id="publishForm">
                     <div class="form-section mb-5">
-
                       <h4 class="text-center mb-3"><i class="fas fa-pencil-square me-2"></i>Basic Exam Information</h4>
                       <div class="mb-3">
                         <label for="examName" class="form-label"><i class="fas fa-card-text me-2"></i>Exam Name</label>
@@ -378,12 +383,10 @@
                           {% endfor %}
                         </select>
                       </div>
-
                     </div>
                     <div class="form-section mt-4">
                       <h4 class="text-center mb-3"><i class="fas fa-book me-2"></i>Exam Details</h4>
                       <div class="table-responsive mb-4">
-
                         <table class="table table-bordered align-middle">
                           <thead class="table-light">
                             <tr>
@@ -431,9 +434,7 @@
                           <tbody id="exam-details-body">
                           </tbody>
                         </table>
-
                       </div>
-
                       <div class="text-center">
                         <button type="button" class="btn btn-outline-primary me-3" id="addExamBtn">
                           <i class="fas fa-plus-circle me-1"></i>Add
@@ -442,14 +443,13 @@
                           <i class="fas fa-upload me-1"></i>Publish Now
                         </button>
                       </div>
-
                     </div>
                   </form>
                 </div>
               </div>
             </div>
           </div>
-
+          <!-- Assignment Section -->
           <div class="tab-pane fade" id="assignments" role="tabpanel" aria-labelledby="assignments-tab">
             <div class="container py-8 px-6 bg-white rounded-xl shadow-md max-w-6xl mx-auto">
               <div class="flex items-center mb-8">
@@ -469,9 +469,8 @@
                         placeholder="Enter assignment title" required>
                     </div>
                     <div>
-                      <label for="subjectsDropDown" class="block text-sm font-medium text-gray-700 mb-2">
-                        <i class="fas fa-book-open mr-2"></i>Subject
-                      </label>
+                      <label for="subjectsDropDown" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-book-open mr-2"></i>Subject</label>
                       <select id="subjectsDropDown"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
                         required>
@@ -479,9 +478,8 @@
                       </select>
                     </div>
                     <div>
-                      <label for="class" class="block text-sm font-medium text-gray-700 mb-2">
-                        <i class="fas fa-school mr-2"></i>Class
-                      </label>
+                      <label for="class" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-school mr-2"></i>Class</label>
                       <select id="class"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
                         required>
@@ -559,9 +557,8 @@
                         placeholder="Enter title" required>
                     </div>
                     <div>
-                      <label for="edit-subjectsDropDown" class="block text-sm font-medium text-gray-700 mb-2">
-                        <i class="fas fa-book-open mr-2"></i>Subject
-                      </label>
+                      <label for="edit-subjectsDropDown" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-book-open mr-2"></i>Subject</label>
                       <select id="edit-subjectsDropDown"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
                         required>
@@ -569,9 +566,8 @@
                       </select>
                     </div>
                     <div>
-                      <label for="edit-class" class="block text-sm font-medium text-gray-700 mb-2">
-                        <i class="fas fa-school mr-2"></i>Class
-                      </label>
+                      <label for="edit-class" class="block text-sm font-medium text-gray-700 mb-2"><i
+                          class="fas fa-school mr-2"></i>Class</label>
                       <select id="edit-class"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
                         required>
@@ -617,7 +613,7 @@
               </div>
             </div>
           </div>
-
+          <!-- calendar Section -->
           <div class="tab-pane fade" id="calendar" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-calendar-alt"></i> Calendar</h4>
@@ -625,14 +621,14 @@
               <div id="calendar"></div>
             </div>
           </div>
-
+          <!-- Analytics Section -->
           <div class="tab-pane fade" id="analytics" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-chart-bar"></i> Analytics</h4>
               <p>Analyze student performance, attendance trends, and other metrics.</p>
             </div>
           </div>
-
+          <!-- Messages Section -->
           <div class="tab-pane fade" id="messages" role="tabpanel">
             <div id="alert-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1055;"></div>
             <div class="container py-4">
@@ -665,7 +661,7 @@
               </div>
             </div>
           </div>
-
+          <!-- Teacher Profile -->
           <div class="tab-pane fade" id="profile" role="tabpanel">
             <div class="form-box border rounded p-4 shadow-sm bg-white">
               <h4 class="mb-3 text-primary"><i class="fas fa-user"></i> Teacher Profile</h4>
@@ -721,7 +717,7 @@
               </div>
             </div>
           </div>
-
+          <!-- Settings -->
           <div class="tab-pane fade" id="settings" role="tabpanel">
             <div class="form-box">
               <h4><i class="fas fa-cog"></i> Settings</h4>
@@ -1177,39 +1173,135 @@
       });
 
       // View students with class wise
-      function view_students_list(class_name) {
-        fetch(`/get_student_datas/${class_name}`)
-          .then(response => {
-            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
-            return response.json();
-          })
-          .then(data => {
-            const container = document.getElementById('student-list-container');
-            container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
-            if (!data || data.length === 0) {
-              container.innerHTML += `<p>No students found for Class ${class_name}.</p>`;
-              return;
-            }
-            let content = `<div class="list-group">`;
-            data.forEach(student => {
-              content += `
-              <div class="d-flex justify-content-between align-items-center border p-2 mb-2 rounded">
-                <div>
-                  <strong>${student.student_name}</strong><br>
-                  <small>Class: ${student.class}</small>
-                </div>
-                <button class="btn btn-sm btn-outline-info" onclick="view_student_detail('${student.user_id}')">
-                  View Details
-                </button>
-              </div>`;
-            });
-            content += `</div>`;
-            container.innerHTML += content;
-          })
-          .catch(error => {
-            console.error("Error fetching student data:", error);
-            showAlert("Error fetching students for " + class_name, "danger", 5000);
+      async function view_students_list(class_name) {
+        try {
+          const response = await fetch(`/get_student_datas/${class_name}`);
+          if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+          const data = await response.json();
+
+          const container = document.getElementById('student-list-container');
+          container.innerHTML = `<h5>Students in Class ${class_name}</h5>`;
+
+          if (!data || data.length === 0) {
+            container.innerHTML += `<p>No students found for Class ${class_name}.</p>`;
+            return;
+          }
+
+          let content = `<div class="list-group">`;
+          data.forEach(student => {
+            content += `
+            <div class="d-flex justify-content-between align-items-center border p-2 mb-2 rounded">
+              <div>
+                <strong>${student.student_name}</strong><br>
+                <small>Class: ${student.class}</small>
+              </div>
+              <button class="btn btn-sm btn-outline-info" onclick="view_student_detail('${student}')">View Details</button>
+            </div>`;
           });
+          content += `</div>`;
+          container.innerHTML += content;
+        } catch (error) {
+          console.error("Error fetching student data:", error);
+          showAlert("Error fetching students for " + class_name, "danger", 5000);
+        }
+      }
+
+      function openAddStudentForm() {
+        const container = document.getElementById('student-list-container');
+        container.innerHTML = `
+          <h4><i class="bi bi-person-plus"></i> Add Student</h4>
+          <form method="POST" action="{{ url_for('teacher_login.add_student') }}" enctype="multipart/form-data">
+            <input type="hidden" name="user_role" value="Student">
+
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" name="user_name" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" name="user_email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" name="user_password" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="image_file" class="form-label">Profile Photo</label>
+              <input type="file" name="image_file" id="image_file" class="form-control" accept="image/*">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Class</label>
+              <input type="text" name="student_class" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Gender</label>
+              <select name="gender" class="form-control">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Date of Birth</label>
+              <input type="date" name="date_of_birth" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Roll Number</label>
+              <input type="number" name="roll_no" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Age</label>
+              <input type="number" name="age" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Father's Name</label>
+              <input type="text" name="father_name" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Mother's Name</label>
+              <input type="text" name="mother_name" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Father's Mobile Number</label>
+              <input type="text" name="father_mobile_number" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Mother's Mobile Number</label>
+              <input type="text" name="mother_mobile_number" class="form-control">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Address</label>
+              <textarea name="address" class="form-control"></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Admission Date</label>
+              <input type="date" name="admission_date" class="form-control">
+            </div>
+
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary flex-fill"><i class="bi bi-person-plus"></i>
+                Add Student
+              </button>
+              <button type="button" class="btn btn-secondary flex-fill" onclick="document.getElementById('student-list-container').innerHTML=''">
+                Cancel
+              </button>
+            </div>
+          </form>
+        `;
       }
 
       // View students attendance
