@@ -16,7 +16,8 @@ from app.services.login_service.teacher_login_service import (
     update_changes_in_assignment,
     get_all_subjects,
     publish_details,
-    store_student_datas
+    store_student_datas,
+    get_student_by_user_id
 )
 from app.utils.email_utils import send_login_email
 import datetime
@@ -240,6 +241,18 @@ def add_student():
     if result.get('success'):
         send_login_email(data)
         print("Student added and login email sent successfully.")
+        return render_template('login_page/teacher_dashboard.html')
     else:
         print("Failed to add student. Email not sent.")
-    return render_template('login_page/teacher_dashboard.html')   
+        return render_template('login_page/teacher_dashboard.html')  
+
+@teacher_login_bp.route('/teacher_login/get_user_by_user_id/<user_id>', methods=['GET'])
+def get_student_user_by_user_id(user_id):
+    try:
+        print(user_id)
+        student = get_student_by_user_id(user_id)
+        print(student)
+        return jsonify(student)
+    except Exception as e:
+        print("Error:", e)
+        return jsonify({"success": False, "error": str(e)})

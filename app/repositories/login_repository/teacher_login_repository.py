@@ -324,3 +324,18 @@ def store_datas_into_students_db(data):
     finally:
         connection.close()
         cursor.close()
+
+def get_student_by_user_id_from_db(user_id):
+    try:
+        connection = db_connection()
+        cursor = connection.cursor()
+        query = " SELECT * FROM students WHERE user_id = %s "
+        values = (user_id,)
+        cursor.execute(query,values)
+        student = cursor.fetchone()
+        return student
+    except Exception as e:
+        print(f" Error in Get Student: {e} ")
+    finally:
+        connection.close()
+        cursor.close()

@@ -1195,7 +1195,7 @@
                 <strong>${student.student_name}</strong><br>
                 <small>Class: ${student.class}</small>
               </div>
-              <button class="btn btn-sm btn-outline-info" onclick="view_student_detail('${student}')">View Details</button>
+              <button class="btn btn-sm btn-outline-info" onclick="view_student_details('${student.user_id}')">View Details</button>
             </div>`;
           });
           content += `</div>`;
@@ -1302,6 +1302,151 @@
             </div>
           </form>
         `;
+      }
+
+      // Helper functions for formatting
+      // Format Date
+      function formatDate(dateString) {
+        if (!dateString || dateString === 'N/A') return 'N/A';
+        try {
+          const date = new Date(dateString);
+          return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+        } catch (error) {
+          return dateString;
+        }
+      }
+      // Format Phone Number
+      function formatPhoneNumber(phoneString) {
+        if (!phoneString || phoneString === 'N/A') return 'N/A';
+        const cleaned = phoneString.replace(/\D/g, '');
+        if (cleaned.length === 10) {
+          return `+91 ${cleaned.slice(0, 5)} ${cleaned.slice(5)}`;
+        }
+        return phoneString;
+      }
+      //Format Name
+      function formatName(nameString) {
+        if (!nameString || nameString === 'N/A') return 'N/A';
+        return nameString.split(' ')
+          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+          .join(' ');
+      }
+      // Main function
+      async function view_student_details(user_id) {
+        try {
+          const container = document.getElementById('student-list-container');
+          container.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>';
+
+          console.log(user_id);
+
+          const response = await fetch(`/teacher_login/get_user_by_user_id/${user_id}`, {
+            method: 'GET',
+            credentials: 'include'
+          });
+
+          if (!response.ok) throw new Error('Failed to fetch student details');
+          const data = await response.json();
+
+          if (data.success === false) {
+            showAlert(`Error: ${data.error || 'Failed to fetch student details'}`, 'danger', 5000);
+            container.innerHTML = '';
+            return;
+          }
+
+          container.innerHTML = `
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4><i class="fas fa-user "></i> Student Details</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-3">
+                            ${data.image_url ? 
+                              `<img src="${data.image_url}" alt="Profile Photo" class="img-fluid rounded-circle border" style="max-width: 150px; height: 150px; object-fit: cover;">` : 
+                              `<div class="bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 150px; height: 150px; margin: 0 auto;"><i class="fas fa-user fa-3x text-muted"></i></div>`
+                           }
+                        </div>
+                        <div class="col-md-8">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>Name:</strong></td>
+                                    <td>${formatName(data.student_name) || 'N/A'}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Class:</strong></td>
+                                    <td>${data.class || 'N/A'}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Roll Number:</strong></td>
+                                    <td>${data.roll_no || 'N/A'}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Gender:</strong></td>
+                                    <td>${formatName(data.gender) || 'N/A'}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Age:</strong></td>
+                                    <td>${data.age || 'N/A'} years</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Date of Birth:</strong></td>
+                                    <td>${formatDate(data.date_of_birth)}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Admission Date:</strong></td>
+                                    <td>${formatDate(data.admission_date)}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Father's Name:</strong></td>
+                                    <td>${formatName(data.father_name) || 'N/A'}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mother's Name:</strong></td>
+                                    <td>${formatName(data.mother_name) || 'N/A'}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Father's Mobile:</strong></td>
+                                    <td>
+                                        ${data.father_mobile_number && data.father_mobile_number !== 'N/A' ?
+                                          `<a href="tel:${data.father_mobile_number}" class="text-decoration-none">${formatPhoneNumber(data.father_mobile_number)}</a>` :
+                                           'N/A'
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mother's Mobile:</strong></td>
+                                    <td>
+                                        ${data.mother_mobile_number && data.mother_mobile_number !== 'N/A' ?
+                                          `<a href="tel:${data.mother_mobile_number}" class="text-decoration-none">${formatPhoneNumber(data.mother_mobile_number)}</a>` :
+                                          'N/A'
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Address:</strong></td>
+                                    <td>${data.address || 'N/A'}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <button type="button" class="btn btn-secondary" onclick="view_students_list('${data.class || ''}')">
+                            <i class="fas fa-arrow-left"></i> Back to Student List
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        } catch (error) {
+          console.error('Error in view_student_details:', error);
+          showAlert('Failed to load student details. Please try again.', 'danger', 5000);
+          document.getElementById('student-list-container').innerHTML = '';
+        }
       }
 
       // View students attendance
@@ -1779,98 +1924,6 @@
           .catch(error => {
             console.error("Fetch error:", error);
             showAlert('Error loading teacher details.', 'danger', 5000);
-          });
-      }
-
-
-
-      // View student details
-      function view_student_detail(user_id) {
-        fetch(`/get_student_detail/${user_id}`)
-          .then(response => {
-            if (!response.ok) throw new Error('Failed to fetch student details');
-            return response.json();
-          })
-          .then(data => {
-            if (data.error) {
-              showAlert(document.getElementById('student-detail-body'), `Error: ${data.error}`);
-              return;
-            }
-            const student = data.student;
-            const attendance = data.attendance || [];
-            const exams = data.exams || [];
-            let html = `
-            <div class="container">
-              <h4 class="mb-3 text-primary">${student.student_name}</h4>
-              <p><strong>Class:</strong> ${student.class}</p>
-              <p><strong>DOB:</strong> ${student.date_of_birth || 'N/A'}</p>
-              <p><strong>Roll No:</strong> ${student.roll_no || 'N/A'}</p>
-              <p><strong>Gender:</strong> ${student.gender || 'N/A'}</p>
-              <p><strong>Father's Name:</strong> ${student.father_name || 'N/A'}</p>
-              <p><strong>Mother's Name:</strong> ${student.mother_name || 'N/A'}</p>
-              <p><strong>Address:</strong> ${student.address || 'N/A'}</p>
-              <hr>
-              <h5 class="text-success">📅 Attendance</h5>
-              <table class="table table-bordered">
-                <thead class="table-light">
-                  <tr>
-                    <th>Month</th>
-                    <th>Present Days</th>
-                    <th>Total Days</th>
-                    <th>Percentage</th>
-                  </tr>
-                </thead>
-                <tbody>`;
-            if (attendance.length === 0) {
-              html += `<tr><td colspan="4">No attendance data available.</td></tr>`;
-            } else {
-              attendance.forEach(a => {
-                const percentage = a.total_days ? ((a.present / a.total_days) * 100).toFixed(2) : 0;
-                html += `
-                <tr>
-                  <td>${a.month}</td>
-                  <td>${a.present}</td>
-                  <td>${a.total_days}</td>
-                  <td>${percentage}%</td>
-                </tr>`;
-              });
-            }
-            html += `</tbody></table>`;
-            if (exams.length > 0) {
-              html += `
-              <hr>
-              <h5 class="text-info">📊 Exam Results</h5>
-              <table class="table table-striped">
-                <thead class="table-light">
-                  <tr>
-                    <th>Exam</th>
-                    <th>Subject</th>
-                    <th>Marks Obtained</th>
-                    <th>Total Marks</th>
-                    <th>Grade</th>
-                  </tr>
-                </thead>
-                <tbody>`;
-              exams.forEach(result => {
-                html += `
-                <tr>
-                  <td>${result.exam}</td>
-                  <td>${result.subject}</td>
-                  <td>${result.marks}</td>
-                  <td>${result.total}</td>
-                  <td>${result.grade}</td>
-                </tr>`;
-              });
-              html += `</tbody></table>`;
-            }
-            html += `</div>`;
-            document.getElementById('student-detail-body').innerHTML = html;
-            const modal = new bootstrap.Modal(document.getElementById('studentDetailModal'));
-            modal.show();
-          })
-          .catch(error => {
-            console.error('Error fetching student details:', error);
-            showAlert(document.getElementById('student-detail-body'), 'Something went wrong while fetching student details.');
           });
       }
     </script>

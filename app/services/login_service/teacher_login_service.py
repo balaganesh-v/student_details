@@ -12,7 +12,8 @@ from app.repositories.login_repository.teacher_login_repository import (
     get_all_subjects_from_db,
     publish_details_into_db,
     store_datas_in_users,
-    store_datas_into_students_db
+    store_datas_into_students_db,
+    get_student_by_user_id_from_db
 )
 from app.utils.token_utils import generate_token_with_code, decode_token
 from app.utils.hash_password_utils import generate_hash_password
@@ -238,3 +239,10 @@ def store_student_datas(data,image_file):
             return ({'success':True})
     except Exception as e:
         print(f" Error in Add the Student : {e} ")
+
+def get_student_by_user_id(user_id):
+    try:
+        return get_student_by_user_id_from_db(user_id)
+    except Exception as e:
+        print(f" Error in get the Student : {e} ")
+        return []
