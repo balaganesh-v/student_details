@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Student Attendance Page{% endblock %}
+
+{% block style %}
+<style>
+    body {
+        background: linear-gradient(135deg, #f0faff, #ffffff);
+        min-height: 100vh;
+        padding: 40px 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .attendance-container {
+        max-width: 95%;
+        margin: auto;
+    }
+
+    .attendance-box {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        font-weight: 700;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #0d6efd;
+    }
+
+    table {
+        width: 100%;
+        border: 2px solid #0d6efd;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th,
+    td {
+        vertical-align: middle !important;
+        border: 1px solid #0d6efd !important;
+    }
+
+    tr:hover {
+        background-color: #f5faff;
+    }
+
+    input[type="radio"] {
+        width: 20px;
+        height: 20px;
+        accent-color: #0d6efd;
+        cursor: pointer;
+    }
+
+    .btn-submit {
+        font-size: 1.1rem;
+        padding: 12px 32px;
+        border-radius: 30px;
+        background-color: #0d6efd;
+        color: white;
+        box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-submit:hover {
+        background-color: #0b5ed7;
+        transform: scale(1.03);
+    }
+
+    @media (max-width: 768px) {
+        .btn-submit {
+            width: 100%;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="attendance-container">
+    <h2 class="text-center text-primary m-5"><i class="bi bi-clipboard-check"></i> Student Attendance</h2>
+    
+
+    <form method="post" action="/register_attendance">
+        <div class="table-responsive">
+            <table class="table table-bordered text-center align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Present</th>
+                        <th scope="col">Absent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    {% set status = attendance.get(student.student_id) %}
+                    <tr>
+                        <td class="text-capitalize fw-medium">{{ student.student_name }}</td>
+                        <td>
+                            <input type="radio" name="attendance_{{ student.student_id }}" value="Present" {% if
+                                status=='Present' %} checked disabled {% elif status=='Absent' %} disabled {% endif %}>
+                        </td>
+                        <td>
+                            <input type="radio" name="attendance_{{ student.student_id }}" value="Absent" {% if
+                                status=='Absent' %} checked disabled {% elif status=='Present' %} disabled {% endif %}>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-success w-100 py-2 fs-5 shadow ">
+                <i class="bi bi-check-circle-fill me-2"></i> Submit Attendance
+            </button>
+        </div>
+
+
+    </form>
+</div>
+</div>
+{% endblock %}

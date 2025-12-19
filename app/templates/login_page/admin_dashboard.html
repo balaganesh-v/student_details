@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Principal Admin Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .sidebar {
+      background-color: #343a40;
+      min-height: 100vh;
+      padding-top: 30px;
+    }
+
+    .sidebar .nav-link {
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .sidebar .nav-link.active {
+      background-color: #0d6efd;
+      border-radius: 6px;
+    }
+
+    .topbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      padding: 10px 25px;
+    }
+
+    .form-box,
+    .table-box {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .table th {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    h4 {
+      color: #0d6efd;
+    }
+
+    .profile-name {
+      font-weight: 600;
+    }
+
+    .nav-icon {
+      width: 18px;
+      margin-right: 8px;
+    }
+
+    .logout-btn {
+      background: none;
+      border: none;
+      color: #dc3545;
+    }
+
+    .logout-btn:hover {
+      text-decoration: underline;
+    }
+
+    .period-card {
+      background: #ffffff;
+      border: 1px solid #dee2e6;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .remove-btn {
+      margin-top: 2.2rem;
+    }
+
+    .tab-content {
+      margin-top: 20px;
+    }
+
+    #calendar-area {
+      min-height: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+
+      <!----------------------------------------------------------- Sidebar --------------------------------------------------------->
+      <div class="col-md-3 col-lg-2 sidebar d-flex flex-column">
+        <h4 class="text-white text-center mb-4"><i class="bi bi-speedometer2"></i> Admin Panel</h4>
+
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+
+          <a class="nav-link active" id="dashboard-tab" data-bs-toggle="pill" href="#dashboard" role="tab">
+            <i class="bi bi-house-door-fill"></i> Dashboard
+          </a>
+
+          <a class="nav-link" id="add-student-tab" data-bs-toggle="pill" href="#add-student" role="tab">
+            <i class="bi bi-person-plus"></i> Add Student
+          </a>
+
+          <a class="nav-link" id="add-teacher-tab" data-bs-toggle="pill" href="#add-teacher" role="tab">
+            <i class="bi bi-person-plus-fill"></i> Add Teacher
+          </a>
+
+          <a class="nav-link" id="calendar-tab" data-bs-toggle="pill" href="#assign-periods" role="tab">
+            <i class="bi bi-calendar-week"></i> Assign Periods
+          </a>
+
+          <a class="nav-link" id="view-students-tab" data-bs-toggle="pill" href="#view-students" role="tab">
+            <i class="bi bi-people"></i> View Students
+          </a>
+
+          <a class="nav-link" id="view-teachers-tab" data-bs-toggle="pill" href="#view-teachers" role="tab">
+            <i class="bi bi-person-lines-fill"></i> View Teachers
+          </a>
+
+          <a class="nav-link" id="view-classes-tab" data-bs-toggle="pill" href="#view-classes" role="tab">
+            <i class="bi bi-building"></i> View Classes
+          </a>
+
+          <a class="nav-link" id="settings-tab" data-bs-toggle="pill" href="#settings" role="tab">
+            <i class="bi bi-gear-fill"></i> Settings
+          </a>
+
+        </div>
+      </div>
+      <!----------------------------------------------------------- Sidebar --------------------------------------------------------->
+
+      <!----------------------- Main content --------------------->
+      <div class="col-md-9 col-lg-10">
+
+        <!------------------- Top Navbar ----->
+        <div class="topbar d-flex justify-content-between align-items-center">
+          <div>
+            <h5>Welcome, <span class="profile-name">Principal</span></h5>
+          </div>
+          <button type="submit" class="logout-btn"><i class="bi bi-box-arrow-right"></i> Logout</button>
+        </div>
+        <!------------------- Top Navbar ----->
+
+        <!----- Page Content ---->
+        <div class="p-4 tab-content" id="v-pills-tabContent">
+
+          <!-- Dashboard -->
+          <div class="tab-pane fade show active" id="dashboard" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-house-door-fill"></i> Dashboard</h4>
+              <p>Use the sidebar to manage students, teachers, and settings.</p>
+            </div>
+          </div>
+          <!-- Dashboard -->
+
+          <!-- Add Student -->
+          <div class="tab-pane fade" id="add-student" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-person-plus"></i> Add Student</h4>
+              <form method="POST" action="{{ url_for('admin.add_student') }}" enctype="multipart/form-data">
+                <input type="hidden" name="user_role" value="Student">
+
+                <!-- Basic Info -->
+                <div class="mb-3">
+                  <label class="form-label">Name</label>
+                  <input type="text" name="user_name" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input type="email" name="user_email" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Password</label>
+                  <input type="password" name="user_password" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="image_file" class="form-label">Profile Photo</label>
+                  <input type="file" name="image_file" id="image_file" class="form-control" accept="image/*">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Class</label>
+                  <input type="text" name="student_class" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Gender</label>
+                  <select name="gender" class="form-control">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Date of Birth</label>
+                  <input type="date" name="date_of_birth" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Roll Number</label>
+                  <input type="number" name="roll_no" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Age</label>
+                  <input type="number" name="age" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Father's Name</label>
+                  <input type="text" name="father_name" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Mother's Name</label>
+                  <input type="text" name="mother_name" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Father's Mobile Number</label>
+                  <input type="text" name="father_mobile_number" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Mother's Mobile Number</label>
+                  <input type="text" name="mother_mobile_number" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Address</label>
+                  <textarea name="address" class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Admission Date</label>
+                  <input type="date" name="admission_date" class="form-control">
+                </div>
+
+
+                <button type="submit" class="btn btn-primary w-100">
+                  <i class="bi bi-person-plus"></i> Add Student
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- Add Student -->
+
+          <!-- Add Teacher & Profile -->
+          <div class="tab-pane fade" id="add-teacher" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-person-plus-fill"></i> Add Teacher & Profile</h4>
+              <form method="POST" action="{{ url_for('admin.add_teacher') }}" enctype="multipart/form-data">
+                <input type="hidden" name="user_role" value="Teacher">
+
+                <!-- Basic Info -->
+                <div class="mb-3">
+                  <label class="form-label">Name</label>
+                  <input type="text" name="user_name" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input type="email" name="user_email" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Password</label>
+                  <input type="password" name="user_password" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="image_file" class="form-label">Profile Photo</label>
+                  <input type="file" name="image_file" id="image_file" class="form-control" accept="image/*">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Gender</label>
+                  <select name="gender" class="form-control">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Qualification</label>
+                  <input type="text" name="qualification" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Age</label>
+                  <input type="number" name="age" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Experience (years)</label>
+                  <input type="number" name="year_of_experience" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Subject Specialization</label>
+                  <input type="text" name="subject_specialization" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Salary</label>
+                  <input type="number" step="0.01" name="salary_package" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Mobile Number</label>
+                  <input type="text" name="mobile_number" class="form-control">
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Address</label>
+                  <textarea name="address" class="form-control"></textarea>
+                </div>
+
+                <!-- Account Number -->
+                <div class="mb-3">
+                  <label class="form-label">Account Number</label>
+                  <input type="text" name="account_number" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Specified Class </label>
+                  <input type="text" name="specified_class" class="form-control">
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">
+                  <i class="bi bi-save2-fill"></i> Save
+                </button>
+              </form>
+            </div>
+          </div>
+          <!-- Add Teacher & Profile -->
+
+
+
+          <!-- Assign Periods -->
+          <div class="tab-pane fade" id="assign-periods" role="tabpanel">
+            <div class="table-box">
+              <div class="container" id="periods-section">
+                <h2 class="mb-4 text-primary">📘 Assign Periods to Teacher</h2>
+
+                <div class="mb-4">
+                  <label for="teachersDropDown" class="form-label">Select Teacher</label>
+                  <select id="teachersDropDown" class="form-select">
+                    <option value="">Select Teacher</option>
+                    <!-- Populate with teachers from Flask -->
+                  </select>
+                </div>
+
+                <div class="form-section">
+                  <div class="table-responsive">
+                    <table id="periodsTable" class="table table-bordered text-center align-middle">
+                      <thead class="table-primary">
+                        <tr>
+                          <th>Class</th>
+                          <th>Subject</th>
+                          <th>Day</th>
+                          <th>Start Time</th>
+                          <th>End Time</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+
+                      <tr>
+                        <td>
+                          <select id="classesDropDown" class="form-select class-input">
+                            <option value="">Select Class</option>
+                            {% for i in range(1, 13) %}
+                            <option value="Class {{ i }}">Class {{ i }}</option>
+                            {% endfor %}
+                          </select>
+                        </td>
+                        <td>
+                          <select id="subjectsDropDown" class="form-select subject-input">
+                            <option value="">Select Subject</option>
+                          </select>
+                        </td>
+                        <td>
+                          <select id="daysDropDown" class="form-select day-input">
+                            <option value="">Select Day</option>
+                          </select>
+                        </td>
+                        <td><input type="time" id="periodStartTime" class="form-control startTime-input" value="08:00"></td>
+                        <td><input type="time" id="periodEndTime" class="form-control endTime-input" value="04:00"></td>
+                        <td>
+                          <button type="button" class="btn btn-outline-primary me-3" id="addPeriodBtn">
+                            <i class="bi bi-plus-circle me-1"></i> Add
+                          </button>
+                        </td>
+                      </tr>
+
+                      <tbody id="period-details-body"></tbody>
+                    </table>
+                  </div>
+
+                  <div class="text-center">
+                    <button type="button" class="btn btn-outline-success" id="savePeriodsBtn">
+                      <i class="bi bi-upload me-1"></i> Save Periods
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- View Students -->
+          <div class="tab-pane fade" id="view-students" role="tabpanel">
+            <div class="table-box">
+              <h4><i class="bi bi-people"></i> Student List</h4>
+              <form method="GET" action="{{ url_for('admin.view_students') }}">
+                <table class="table table-bordered table-hover mt-3">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for student in students %}
+                    <tr>
+                      <td>{{ student.id }}</td>
+                      <td>{{ student.user_name }}</td>
+                      <td>{{ student.user_email }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
+          <!-- View Students -->
+
+          <!-- View Teachers -->
+          <div class="tab-pane fade" id="view-teachers" role="tabpanel">
+            <div class="table-box">
+              <h4><i class="bi bi-person-lines-fill"></i> Teacher List</h4>
+              <form method="GET" action="{{ url_for('admin.view_teachers') }}">
+                <table class="table table-bordered table-hover mt-3">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for teacher in teachers %}
+                    <tr>
+                      <td>{{ teacher.id }}</td>
+                      <td>{{ teacher.user_name }}</td>
+                      <td>{{ teacher.user_email }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
+          <!-- View Teachers -->
+
+          <!-- View Classes -->
+          <div class="tab-pane fade" id="view-classes" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-building"></i> View Classes</h4>
+              <div class="row g-3">
+                {% for i in range(1, 13) %}
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                  <form method="GET" action="{{ url_for('admin.view_classes', class_number=i) }}">
+                    <button type="submit" class="btn btn-outline-primary w-100">
+                      Class {{ i }}
+                    </button>
+                  </form>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <!-- View Classes -->
+
+          <!-- Settings -->
+          <div class="tab-pane fade" id="settings" role="tabpanel">
+            <div class="form-box">
+              <h4><i class="bi bi-gear-fill"></i> Settings</h4>
+              <p>Feature coming soon...</p>
+            </div>
+          </div>
+          <!-- Settings -->
+
+        </div>
+        <!----- Page Content ---->
+      </div>
+
+      <!----------------------- Main content --------------------->
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
+
+  <script>
+
+    window.onload = function () {
+      loadSubjects();
+      loadTeachers();
+      loadDays();
+    }
+
+    // ------------------Teachers DropDown-------------------------
+    function loadTeachers() {
+      fetch(`/teachers`)
+        .then(response => response.json())
+        .then(data => {
+          const dropdown = document.getElementById('teachersDropDown');
+          dropdown.innerHTML = '<option value="">Select Teacher</option>'; // Reset first
+
+          data.forEach(teacher => {
+            const option = document.createElement('option');
+            option.value = teacher.user_id;
+            option.textContent = teacher.user_name;
+            dropdown.appendChild(option);
+          });
+        })
+        .catch(error => console.error('Error loading subjects:', error));
+    }
+
+    // ------------------- Days DropDown --------------------------
+    function loadDays() {
+      fetch(`/days`)
+        .then(response => response.json())
+        .then(data => {
+          const dropdown = document.getElementById('daysDropDown');
+          dropdown.innerHTML = '<option value="">Select Day</option>'; // Reset first
+
+          data.forEach(day => {
+            const option = document.createElement('option');
+            option.value = day.day_name;
+            option.textContent = day.day_name;
+            dropdown.appendChild(option);
+          });
+        })
+        .catch(error => console.error('Error loading subjects:', error));
+    }
+
+
+    // ------------------Subjects DropDown-------------------------
+    function loadSubjects() {
+      fetch('/subjects')
+        .then(response => response.json())
+        .then(data => {
+          const dropdown = document.getElementById('subjectsDropDown');
+          dropdown.innerHTML = '<option value="">Select Subject</option>'; // Reset first
+
+          data.forEach(subject => {
+            const option = document.createElement('option');
+            option.value = subject.subject_name;
+            option.textContent = subject.subject_name;
+            dropdown.appendChild(option);
+          });
+        })
+        .catch(error => console.error('Error loading subjects:', error));
+    }
+
+
+    // ------------------Add the periods-------------------------
+    document.getElementById('addPeriodBtn').addEventListener('click', function () {
+      const classVal = document.getElementById('classesDropDown').value;
+      const subjectVal = document.getElementById('subjectsDropDown').value;
+      const dayVal = document.getElementById('daysDropDown').value;
+      const startTime = document.getElementById('periodStartTime').value;
+      const endTime = document.getElementById('periodEndTime').value;
+
+      if(!classVal || !subjectVal  || !startTime  || !endTime ){
+        alert("Please Fill all the Values");
+      };
+
+      const newRow = document.createElement('tr');
+      
+      newRow.innerHTML = `
+      <td><input type="text" class="form-control form-control-sm class-input" value="${classVal}" readonly></td>
+      <td><input type="text" class="form-control form-control-sm subject-input" value="${subjectVal}" readonly></td>
+      <td><input type="text" class="form-control form-control-sm day-input" value="${dayVal}" readonly></td>
+      <td><input type="time" class="form-control form-control-sm startTime-input" value="${startTime}" readonly></td>
+      <td><input type="time" class="form-control form-control-sm endTime-input" value="${endTime}" readonly></td>
+      <td><button type="button" class="btn btn-outline-danger btn-sm remove-btn class="bi bi-trash"></i> Remove</button></td>`;
+
+      //Remove functionality
+      newRow.querySelector('.remove-btn').addEventListener('click', function () {
+        newRow.remove();
+      });
+
+      document.getElementById('period-details-body').appendChild(newRow);
+
+      // Reset input fields
+      document.getElementById('classesDropDown').value = '';
+      document.getElementById('subjectsDropDown').value = '';
+    });
+
+
+
+    //--------------------- save the periods ------------------------ 
+    document.getElementById('savePeriodsBtn').addEventListener('click', function () {
+      const teacherId = document.getElementById('teachersDropDown').value;
+      const rows = document.querySelectorAll('#period-details-body tr');
+      const periods = [];
+
+      rows.forEach(row => {
+        const classVal = row.querySelector('.class-input')?.value;
+        const subjectVal = row.querySelector('.subject-input')?.value;
+        const dayVal = row.querySelector('.day-input')?.value;
+        const startTime = row.querySelector('.startTime-input')?.value;
+        const endTime = row.querySelector('.endTime-input')?.value;
+
+        if (classVal && subjectVal && dayVal && startTime && endTime) {
+          periods.push({ class: classVal, day: dayVal , subject: subjectVal, start_time: startTime, end_time: endTime });
+        }
+      });
+
+      if (!teacherId || periods.length === 0) {
+        alert("Please select a teacher and add at least one period.");
+        return;
+      }
+
+      fetch('/save_periods', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ teacher_id: teacherId, periods: periods })
+      })
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById('periods-section');
+          if (data.success) {
+            container.innerHTML = `
+        <div class="alert alert-success text-center shadow-sm rounded p-4">
+          ✅ Periods successfully saved!
+          <div class="spinner-border spinner-border-sm ms-2" role="status"></div>
+        </div>`;
+        setTimeout(() => location.reload(), 2000);
+          } else {
+            container.innerHTML = `
+        <div class="alert alert-danger text-center shadow-sm rounded p-4">
+          ❌ Error: ${data.error || 'Failed to save periods.'}
+        </div>`;
+          }
+        })
+        .catch(err => {
+          console.error("Error saving periods:", err);
+          document.getElementById('periods-section').innerHTML = `
+      <div class="alert alert-danger text-center shadow-sm rounded p-4">
+        ❌ Something went wrong while saving.
+      </div>`;
+        });
+    });
+  </script>
+
+
+
+
+</body>
+
+</html>

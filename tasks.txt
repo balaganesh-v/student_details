@@ -1,17 +1,7 @@
 
 <------- Daily Tasks to Complete this Work ------->
 
-1. Make it the students information box Neatly and work properly.
-
-2. Make it the Exam registration box Neatly and work properly.
-
-3. Add the Home page and look Nice.
-
-4. Make it the Students Registartion Box  and center the box.
-
-5. In the Edit page Update the photo(Get the url from database delete and Update the New photo ).
-
-6. Maintain the data structure clearly and properly.
-
-7. (Templates,controllers(routes),services(methods or Functions),Respository(database)) ,
+1. (Templates,controllers(routes),services(methods or Functions),Respository(database)) ,
     Make this folders to handle the Projects.
+
+2. Pagination

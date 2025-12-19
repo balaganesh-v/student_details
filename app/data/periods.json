@@ -1,0 +1,46 @@
+{
+  "1186720f-63a1-4a78-8a6f-c68e698fc443": [
+    {
+      "class": "Class 2",
+      "day": "Monday",
+      "end_time": "08:30",
+      "start_time": "08:00",
+      "subject": "English"
+    },
+    {
+      "class": "Class 3",
+      "day": "Tuesday",
+      "end_time": "08:30",
+      "start_time": "08:00",
+      "subject": "Maths"
+    },
+    {
+      "class": "Class 4",
+      "day": "Wednesday",
+      "end_time": "08:30",
+      "start_time": "08:00",
+      "subject": "Science"
+    },
+    {
+      "class": "Class 5",
+      "day": "Thursday",
+      "end_time": "08:30",
+      "start_time": "08:00",
+      "subject": "GeneralKnowledge"
+    },
+    {
+      "class": "Class 5",
+      "day": "Friday",
+      "end_time": "08:30",
+      "start_time": "08:00",
+      "subject": "Chemistry"
+    },
+    {
+      "class": "Class 10",
+      "day": "Saturday",
+      "end_time": "08:30",
+      "start_time": "08:00",
+      "subject": "Commerce"
+    }
+  ]
+}

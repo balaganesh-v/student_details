@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Index Page{% endblock %}
+
+{% block style %}
+<style>
+  body {
+    position: relative;
+    background-image: url("{{ url_for('static', filename='images/bachelor.jpg') }}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+  }
+
+  .welcome-container {
+    position: relative;
+    z-index: 1;
+    margin-top: 140px;
+    margin-left: 30px;
+    /* ⬅️ Move closer to the left */
+    max-width: 500px;
+    /* ⬅️ Reduce horizontal width */
+  }
+
+
+  .card.bg-transparent {
+    background-color: rgba(255, 255, 255, 0.61) !important;
+    border: none;
+  }
+
+  .card-body {
+    padding: 2rem;
+    padding-right: 10px;
+    /* ✅ Add space on the right inside the welcome box */
+    color: #000000;
+  }
+
+  .welcome-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0d6efd;
+  }
+
+  .welcome-subtext {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #000000;
+  }
+
+  .section-heading {
+    margin-top: 1.8rem;
+    font-weight: bold;
+    color: #000000;
+    font-size: 1.25rem;
+  }
+
+  ul.feature-list {
+    padding-left: 1.2rem;
+    color: #000000;
+  }
+
+  ul.feature-list li {
+    margin-bottom: 6px;
+  }
+
+  p.text-black {
+    color: #000000;
+  }
+</style>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container-fluid welcome-container">
+  <div class="card bg-transparent shadow-lg">
+    <div class="card-body">
+      <div class="welcome-title">Welcome to the School Website</div>
+      <div class="welcome-subtext">Empowering education through technology and innovation.</div>
+
+      <div class="section-heading">🔹 Key Features:</div>
+      <ul class="feature-list">
+        <li>Student Registration System</li>
+        <li>Exam Scheduling and Subject Assignment</li>
+        <li>Attendance Recording & Reports</li>
+        <li>Student Information Management</li>
+      </ul>
+
+      <div class="section-heading">🎓 Our Mission:</div>
+      <p class="text-black">
+        We aim to simplify school operations by integrating technology with learning and administration.
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %} Attendance Result Page {% endblock %}
+
+{% block style %}
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .report-container {
+        max-width: 900px;
+        margin: 50px auto;
+        background-color: #fff;
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    h2 {
+        font-weight: bold;
+    }
+
+    .form-label i {
+        color: #0d6efd;
+        margin-right: 5px;
+    }
+
+    .progress {
+        height: 22px;
+    }
+
+    .progress-bar {
+        font-weight: bold;
+    }
+
+    #loading-spinner {
+        display: none;
+    }
+
+    @media (max-width: 576px) {
+        .report-container {
+            padding: 25px 20px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container report-container">
+    <h2 class="text-center text-primary mb-5">📊 Monthly Attendance Report</h2>
+
+    <!-- Attendance Filter Form -->
+    <form method="POST" action="/attendance_report">
+        <div class="mb-4">
+            <label for="month" class="form-label">
+                <i class="fas fa-calendar-alt"></i> Select Month (YYYY-MM):
+            </label>
+            <input type="month" class="form-control" id="month" name="month" required>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary w-100" id="viewreport">
+                <i class="fas fa-search"></i> View Report
+            </button>
+        </div>
+    </form>
+
+    <!-- Loading Spinner -->
+    <div class="text-center mt-4" id="loading-spinner" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Generating report, please wait...</p>
+    </div>
+
+    <!-- Attendance Results -->
+    <div class="mt-5">
+        <h5 class="text-success text-center mb-4">
+            <i class="fas fa-chart-bar"></i> Attendance Summary
+        </h5>
+
+        {% if attendance_records %}
+        <table class="table table-bordered table-hover text-center align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Student ID</th>
+                    <th>Attendance %</th>
+                    <th>Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in attendance_records %}
+                    {% set percentage = report.attendance_percentage or 0 %}
+                    <tr>
+                        <td>{{ report.student_id }}</td>
+                        <td>{{ percentage }}%</td>
+                        <td>
+                            <div class="progress" title="Attendance is {{ percentage|float }}%">
+                                {% if percentage >= 75 %}
+                                    {% set progress_class = 'bg-success' %}
+                                {% elif percentage >= 50 %}
+                                    {% set progress_class = 'bg-warning' %}
+                                {% else %}
+                                    {% set progress_class = 'bg-danger' %}
+                                {% endif %}
+
+                                <div class="progress-bar {{ progress_class }}"style="width: {{ percentage }}%;"
+                                     role="progressbar"
+                                     aria-valuenow="{{ percentage }}"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                    {{ percentage }}%
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p class="text-muted text-center">No attendance data to display yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Spinner & Submit Delay Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+        const spinner = document.getElementById("loading-spinner");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Stop form from submitting immediately
+            spinner.style.display = "block";
+
+            setTimeout(() => {
+                spinner.style.display = "none";
+                form.submit(); // Now submit after 5 seconds
+            }, 5000);
+        });
+    });
+</script>
+{% endblock %}
